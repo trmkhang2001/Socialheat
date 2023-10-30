@@ -1,212 +1,149 @@
 <!DOCTYPE html>
 <html>
 
-
-
 <head>
     <!-- -------------- Meta and Title -------------- -->
     <meta charset="utf-8">
-    <title>Admin Dashboard </title>
+    <title>Admin Dashboard</title>
     <meta name="keywords" content="" />
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    main-->
 
-    <script src="../assets/backend/js/jquery/jquery-1.11.3.min.js"></script>
-    <script src="/assets/backend/js/jquery/jquery_ui/jquery-ui.min.js"></script>
-    <script src="/assets/plugins/moment/moment.min.js"></script>
-    <script src="/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="/assets/plugins/vuejs/vue.min.js"></script>
-    <script src="/assets/plugins/toastr/toastr.min.js"></script>
-    <link rel="stylesheet" href="/assets/plugins/toastr/toastr.min.css">
-    <script src="/assets/backend/plugins/tinymce/tinymce.min.js"></script>
-
-    <!-- -------------- Fonts -------------- -->
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-    <!-- -------------- CSS - theme -------------- -->
-    <link rel="stylesheet" href="/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" type="text/css" href="/assets/backend/skin/default_skin/css/theme.css">
+
+    <!-- -------------- CSS - allcp forms -------------- -->
     <link rel="stylesheet" type="text/css" href="/assets/backend/allcp/forms/css/forms.css">
-
-    <link rel="stylesheet" type="text/css" href="/assets/backend/plugins/flipclock/flipclock.css">
-    <script src="/assets/backend/plugins/flipclock/flipclock.js"></script>
-
-    <link rel="stylesheet" href="/assets/backend/css/style.css?v=<?= time() ?>" />
 
     <!-- -------------- Favicon -------------- -->
     <link rel="shortcut icon" href="/assets/images/favicon.png">
+
     <!-- -------------- IE8 HTML5 support  -------------- -->
     <style>
-        .table>thead>tr>td.active,
-        .table>tbody>tr>td.active,
-        .table>tfoot>tr>td.active,
-        .table>thead>tr>th.active,
-        .table>tbody>tr>th.active,
-        .table>tfoot>tr>th.active,
-        .table>thead>tr.active>td,
-        .table>tbody>tr.active>td,
-        .table>tfoot>tr.active>td,
-        .table>thead>tr.active>th,
-        .table>tbody>tr.active>th,
-        .table>tfoot>tr.active>th {
-            color: #0c0c0c;
-            border-color: #f5f5f5;
-            background-color: #f5f5f5;
-        }
-
-        .loading-bg {
-            background: rgba(0, 0, 0, 0.3);
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            z-index: 9999;
-            top: 0;
-        }
-
-        .has-error em {
-            font-size: 11px;
-        }
-
-        .allcp-form .select>select {
-            height: 36px;
-            padding: 6px 15px;
-        }
-
-        .has-error .form-control {
-            border-color: #f76a6d !important;
-        }
-
-        body.sb-l-o #sidebar_left .sidebar-menu>li.active>a,
-        body.sb-l-o #sidebar_left .sidebar-menu>li.active>a>span {
-            color: #67d3e0 !important;
+        #main {
+            background: url(/assets/images/login-register.jpg) no-repeat top center #2d494d !important;
         }
     </style>
-    <script>
-        toastr.options = {
-            'preventDuplicates': true,
-            'preventOpenDuplicates': true,
-        };
-        var setValueDefult = {
-            init: function(datas) {
-                $.each(datas, function(idx, el) {
-                    $('select[name=' + idx + ']').val(el).trigger('change');
-                    $('input[name=' + idx + '][type=input]').val(el).trigger('change');
-                });
-            },
-        };
-
-        function format_num(num) {
-            var n = parseInt(n);
-            if (n == 0) {
-                return num;
-            }
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        };
-        $('.num_format').each(function() {
-            var num = $(this).text().trim();
-            $(this).text(format_num(num));
-        });
-
-        $('.currency_format').each(function() {
-            var num = $(this).text().trim();
-            $(this).text(format_num(num) + ' đ');
-        });
-    </script>
 </head>
 
-<!--<body class="dashboard-page sb-l-o sb-r-c onload-check sb-l-m sb-l-disable-animation">-->
+<body class="utility-page sb-l-c sb-r-c">
 
-<body class="dashboard-page sb-l-o sb-r-c onload-check">
     <!-- -------------- Body Wrap  -------------- -->
-    <div id="main">
-        <div class="loading-bg hidden">
-            <44div class="loader_export " id="loader">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="lading"></div>
-                </ 44div>
-        </div>
-
-        <?php
-
-        /**
-         * @var $userInfo
-         * @var $data
-         * @var $breadcrumbs
-         */
-        $this->load->view("/backend/layout/admin_header_view", array('userInfo' => $userInfo));
-        $this->load->view("/backend/layout/admin_sidebar_view");
-        ?>
+    <div id="main" class="animated fadeIn">
 
         <!-- -------------- Main Wrapper -------------- -->
         <section id="content_wrapper">
-            <?php
-            $this->load->view("/backend/layout/admin_breadcrumb_view", array('breadcrumbs' => $breadcrumbs));
-            ?>
 
+            <div id="canvas-wrapper">
+                <canvas id="demo-canvas"></canvas>
+            </div>
 
             <!-- -------------- Content -------------- -->
-            <section id="content" class="animated fadeIn">
+            <section id="content">
 
-                <?php $this->load->view($template, $data); ?>
+                <!-- -------------- Login Form -------------- -->
+                <div class="allcp-form theme-primary mw320" style="margin-top: 0" id="login">
+                    <div class="text-center mb20">
+                        <img src="/assets/images/logo.png" width="100%" class="img-responsive" alt="Logo" />
+                    </div>
+                    <div class="panel mw320">
+                        <?php if ($msg != "") { ?>
+                            <div class="alert alert-danger dark alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <i class="fa fa-warning pr10"></i>
+                                <strong><?php echo $msg ?></strong>
+                            </div>
+                        <?php } ?>
+                        <form method="post" action="">
+                            <h3 style="text-align:center">Đăng nhập</h3>
+                            <div class="panel-body pn mv10">
+                                <div class="section">
+                                    <label for="username" class="field prepend-icon">
+                                        <input type="email" name="email" class="gui-input" placeholder="User name" required>
+                                        <label for="username" class="field-icon">
+                                            <i class="fa fa-user"></i>
+                                        </label>
+                                    </label>
+                                </div>
+                                <!-- -------------- /section -------------- -->
+
+                                <div class="section">
+                                    <label for="password" class="field prepend-icon">
+                                        <input type="password" name="password" class="gui-input" placeholder="Password" required>
+                                        <label for="password" class="field-icon">
+                                            <i class="fa fa-lock"></i>
+                                        </label>
+                                    </label>
+                                </div>
+                                <!-- -------------- /section -------------- -->
+
+                                <div class="section">
+                                    <!-- <div class="bs-component pull-left pt5">
+                                    <div class="radio-custom radio-primary mb5 lh25">
+                                        <input type="radio" id="remember" name="remember">
+                                        <label for="remember">Remember me</label>
+                                    </div>
+                                </div> -->
+
+                                    <button type="submit" class="btn btn-bordered btn-primary pull-right">Login</button>
+                                </div>
+                                <!-- -------------- /section -------------- -->
+
+                            </div>
+                            <!-- -------------- /Form -------------- -->
+                        </form>
+                    </div>
+                    <!-- -------------- /Panel -------------- -->
+                </div>
+                <!-- -------------- /Spec Form -------------- -->
 
             </section>
             <!-- -------------- /Content -------------- -->
+
         </section>
-        4
+        <!-- -------------- /Main Wrapper -------------- -->
+
     </div>
     <!-- -------------- /Body Wrap  -------------- -->
 
     <!-- -------------- Scripts -------------- -->
 
     <!-- -------------- jQuery -------------- -->
+    <script src="/assets/backend/js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/assets/backend/js/jquery/jquery_ui/jquery-ui.min.js"></script>
 
-    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- -------------- CanvasBG JS -------------- -->
+    <script src="/assets/backend/js/plugins/canvasbg/canvasbg.js"></script>
+
     <!-- -------------- Theme Scripts -------------- -->
     <script src="/assets/backend/js/utility/utility.js"></script>
-    <script src="/assets/backend/js/demo/demo.js"></script>
+    <!-- <script src="/assets/backend/js/demo/demo.js"></script> -->
     <script src="/assets/backend/js/main.js"></script>
-    <script src="/assets/backend/js/crud_manage.js"></script>
+
+    <!-- -------------- Page JS -------------- -->
     <script type="text/javascript">
         jQuery(document).ready(function() {
 
-            'use strict';
+            "use strict";
 
             // Init Theme Core
-            Core.init();
+            //Core.init();
 
-            // Init Theme Core
-            Demo.init();
 
-            var url = window.location.pathname;
 
-            $('#sidebar_left li').each(function(index, el) {
-                var href = $(this).find('a').attr('data-action');
-                var arr = url.split('/')
-                var parameter = arr[2];
-
-                if (parameter === href) {
-                    $(this).addClass('active');
-                    $(this).parents('li').find('.accordion-toggle').addClass('menu-open');
-
+            // Init CanvasBG
+            CanvasBG.init({
+                Loc: {
+                    x: window.innerWidth / 5,
+                    y: window.innerHeight / 10
                 }
-
             });
+
         });
     </script>
+
     <!-- -------------- /Scripts -------------- -->
-    <?php
-    $this->load->view('backend/layout/script');
-    ?>
+
 </body>
 
 </html>

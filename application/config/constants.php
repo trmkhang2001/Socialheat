@@ -89,4 +89,4 @@ define('ENABLE_QUERY_LOGS', TRUE);
 define('API_KEY_DAT_XANH', '880776db-89f5-data-8e18-675a56ce70c4');
 define('API_URL_DAT_XANH', 'http://data.nhadatmarketing.com/submit');
 
-define('JSON_THROW_ON_ERROR', 4194304);
+// define('JSON_THROW_ON_ERROR', 4194304);
