@@ -1,0 +1,10 @@
+application/config/database.php
+application/cache
+filemanager
+application/logs
+uploads
+thumbs
+source
+/images
+.idea
+

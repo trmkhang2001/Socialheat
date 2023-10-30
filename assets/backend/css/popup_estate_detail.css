@@ -1,0 +1,103 @@
+
+@media (min-width: 768px){
+    .modal-dialog {
+        width: 800px;
+        margin: 30px auto;
+    }
+/* Gallery styles */
+
+#gallery{
+    /* CSS3 Box Shadow */
+    -moz-box-shadow:0 0 3px #AAAAAA;
+    -webkit-box-shadow:0 0 3px #AAAAAA;
+    box-shadow:0 0 3px #AAAAAA;
+
+    /* CSS3 Rounded Corners */
+
+    -moz-border-radius-bottomleft:4px;
+    -webkit-border-bottom-left-radius:4px;
+    border-bottom-left-radius:4px;
+
+    -moz-border-radius-bottomright:4px;
+    -webkit-border-bottom-right-radius:4px;
+    border-bottom-right-radius:4px;
+
+    border:1px solid white;
+
+    background:url(img/panel.jpg) repeat-x bottom center #ffffff;
+
+    /* The width of the gallery */
+    width:350px;
+    overflow:hidden;
+    float:left;
+    padding:5px;
+    height:305px;
+    text-align:center;
+}
+
+#slides{
+    /* This is the slide area */
+    height:260px;
+
+    /* jQuery changes the width later on to the sum of the widths of all the slides. */
+    width:350px;
+    overflow:hidden;
+}
+
+.slide{
+    float:left;
+}
+
+#menugallery{
+    /* This is the container for the thumbnails */
+
+    height:100px;
+
+}
+
+#menugallery ul{
+    margin:0px;
+    padding:0px;
+}
+
+#menugallery li{
+    /* Every thumbnail is a li element */
+    width:60px;
+    display:inline-block;
+    list-style:none;
+    height:45px;
+    overflow:hidden;
+}
+
+#menugallery li.inact:hover{
+    /* The inactive state, highlighted on mouse over */
+    background:url(img/pic_bg.png) repeat;
+}
+
+#menugallery li.act,li.act:hover{
+    /* The active state of the thumb */
+    background:url(img/active_bg.png) no-repeat;
+}
+
+#menugallery li.act a{
+    cursor:default;
+}
+
+#menugallery .fbar{
+    /* The left-most vertical bar, next to the first thumbnail */
+    width:2px;
+    background:url(img/divider.png) no-repeat right;
+}
+
+#menugallery li a{
+    display:block;
+    background:url(img/divider.png) no-repeat right;
+    height:35px;
+    padding-top:10px;
+}
+
+#menugallery a img{
+    border:none;
+}
+
+

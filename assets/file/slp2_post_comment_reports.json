@@ -1,0 +1,29 @@
+﻿{
+  "AccessToken":"123@datalytis",
+  "Comments":[
+    {
+      "Id":2,
+      "Status":1,
+      "phone":"84916065670",
+      "CommentDate":"2021-09-15 08:51:24"
+    },
+    {
+      "Id":3,
+      "Status":2,
+      "phone":"84916065670",
+      "CommentDate":"2021-09-15 08:51:24"
+    },
+    {
+      "Id":5,
+      "Status":1,
+      "phone":"84916065670",
+      "CommentDate":"2021-09-15 08:51:24"
+    },
+    {
+      "Id":6,
+      "Status":1,
+      "phone":"84916065670",
+      "CommentDate":"2021-09-15 08:51:24"
+    }
+  ]
+}
