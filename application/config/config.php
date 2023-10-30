@@ -25,9 +25,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $port = $_SERVER['SERVER_PORT'];
 $ps = array(80, 443);
-$config['base_url'] = 'http://localhost/Socialheat/';
+$config['base_url'] = 'http://' . $_SERVER['SERVER_NAME'] . (!in_array($port, $ps) ? (':' . $port) : '') . '/';
 // $config['base_url'] = 'http://'. $_SERVER['SERVER_NAME'].(!in_array($port,$ps) ? (':'.$port):''). '/';
-//$config['base_url'] = 'http://'. $_SERVER['SERVER_NAME'].(!in_array($port,$ps) ? (':'.$port):''). '/';
 /*
 |--------------------------------------------------------------------------
 | Index File
