@@ -26,13 +26,13 @@ License: For each use you must have a valid license purchased only from above li
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="Https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/images/fav-icon.png" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="assets/demo1/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/demo1/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/demo3/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/demo3/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -44,7 +44,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Main-->
     <div class="__login m-15">
         <div class="text-center" style="margin-top: 50px;">
-            <img src="assets/images/logo.png" alt="">
+            <img src="/assets/images/logo.png" alt="">
         </div>
         <div class="mw-1920 d-flex flex-center" style="margin-top: 50px">
             <div class="d-flex flex-row">
@@ -52,14 +52,12 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="card card-flush w-md-400px w-lg-400px w-xl-400px w-325px py-5">
                     <div class="card-body">
                         <?php if ($msg != "") { ?>
-                            <div class="alert alert-danger dark alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <i class="fa fa-warning pr10"></i>
+                            <div class="alert alert-danger">
                                 <strong><?php echo $msg ?></strong>
                             </div>
                         <?php } ?>
                         <!--begin::Form-->
-                        <form class="form w-100 form_login" novalidate="novalidate" id="kt_sign_in_form" action="" method="post">
+                        <form class="form w-100 form_login" method="post" action="">
                             <!--begin::Input group=-->
                             <div class="fv-row mb-4">
                                 <!--begin::Email-->
@@ -112,9 +110,9 @@ License: For each use you must have a valid license purchased only from above li
             </div>
         </div>
     </div>
-    <script src="/assets/demo1/js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/assets/demo3/js/jquery/jquery-1.11.3.min.js"></script>
 
-    <script src="/assets/demo1/js/plugins/canvasbg/canvasbg.js"></script>
+    <script src="/assets/demo3/js/plugins/canvasbg/canvasbg.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
 
@@ -197,12 +195,12 @@ License: For each use you must have a valid license purchased only from above li
     </script>
     <!--end::Global Config-->
     <!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="/assets/demo1/plugins/global/plugins.bundle.js"></script>
-    <script src="/assets/demo1/plugins/custom/prismjs/prismjs.bundle.js"></script>
-    <script src="/assets/demo1/js/scripts.bundle.js"></script>
+    <script src="/assets/demo3/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/demo3/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="/assets/demo3/js/scripts.bundle.js"></script>
     <!--end::Global Theme Bundle-->
     <!--begin::Page Scripts(used by this page)-->
-    <script src="/assets/demo1/js/pages/custom/login/login-general.js"></script>
+    <script src="/assets/demo3/js/pages/custom/login/login-general.js"></script>
     <!--end::Page Scripts-->
 
 

@@ -1,212 +1,99 @@
 <!DOCTYPE html>
-<html>
-
-
+<!--
+Author: Keenthemes
+Product Name: Metronic
+Product Version: 8.1.8
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+<!--begin::Head-->
 
 <head>
-	<!-- -------------- Meta and Title -------------- -->
-	<meta charset="utf-8">
-	<title>Admin Dashboard </title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--    main-->
-
-	<script src="../assets/backend/js/jquery/jquery-1.11.3.min.js"></script>
-	<script src="/assets/backend/js/jquery/jquery_ui/jquery-ui.min.js"></script>
-	<script src="/assets/plugins/moment/moment.min.js"></script>
-	<script src="/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-	<script src="/assets/plugins/vuejs/vue.min.js"></script>
-	<script src="/assets/plugins/toastr/toastr.min.js"></script>
-	<link rel="stylesheet" href="/assets/plugins/toastr/toastr.min.css">
-	<script src="/assets/backend/plugins/tinymce/tinymce.min.js"></script>
-
-	<!-- -------------- Fonts -------------- -->
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-	<!-- -------------- CSS - theme -------------- -->
-	<link rel="stylesheet" href="/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
-	<link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="/assets/backend/skin/default_skin/css/theme.css">
-	<link rel="stylesheet" type="text/css" href="/assets/backend/allcp/forms/css/forms.css">
-
-	<link rel="stylesheet" type="text/css" href="/assets/backend/plugins/flipclock/flipclock.css">
-	<script src="/assets/backend/plugins/flipclock/flipclock.js"></script>
-
-	<link rel="stylesheet" href="/assets/backend/css/style.css?v=<?= time() ?>" />
-
-	<!-- -------------- Favicon -------------- -->
-	<link rel="shortcut icon" href="/assets/images/favicon.png">
-	<!-- -------------- IE8 HTML5 support  -------------- -->
-	<style>
-		.table>thead>tr>td.active,
-		.table>tbody>tr>td.active,
-		.table>tfoot>tr>td.active,
-		.table>thead>tr>th.active,
-		.table>tbody>tr>th.active,
-		.table>tfoot>tr>th.active,
-		.table>thead>tr.active>td,
-		.table>tbody>tr.active>td,
-		.table>tfoot>tr.active>td,
-		.table>thead>tr.active>th,
-		.table>tbody>tr.active>th,
-		.table>tfoot>tr.active>th {
-			color: #0c0c0c;
-			border-color: #f5f5f5;
-			background-color: #f5f5f5;
-		}
-
-		.loading-bg {
-			background: rgba(0, 0, 0, 0.3);
-			height: 100%;
-			width: 100%;
-			position: absolute;
-			z-index: 9999;
-			top: 0;
-		}
-
-		.has-error em {
-			font-size: 11px;
-		}
-
-		.allcp-form .select>select {
-			height: 36px;
-			padding: 6px 15px;
-		}
-
-		.has-error .form-control {
-			border-color: #f76a6d !important;
-		}
-
-		body.sb-l-o #sidebar_left .sidebar-menu>li.active>a,
-		body.sb-l-o #sidebar_left .sidebar-menu>li.active>a>span {
-			color: #67d3e0 !important;
-		}
-	</style>
-	<script>
-		toastr.options = {
-			'preventDuplicates': true,
-			'preventOpenDuplicates': true,
-		};
-		var setValueDefult = {
-			init: function(datas) {
-				$.each(datas, function(idx, el) {
-					$('select[name=' + idx + ']').val(el).trigger('change');
-					$('input[name=' + idx + '][type=input]').val(el).trigger('change');
-				});
-			},
-		};
-
-		function format_num(num) {
-			var n = parseInt(n);
-			if (n == 0) {
-				return num;
-			}
-			return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-		};
-		$('.num_format').each(function() {
-			var num = $(this).text().trim();
-			$(this).text(format_num(num));
-		});
-
-		$('.currency_format').each(function() {
-			var num = $(this).text().trim();
-			$(this).text(format_num(num) + ' đ');
-		});
-	</script>
+    <base href="" />
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Metronic - Bootstrap Admin Template, HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express.js, Node.js, Flask Admin Dashboard Theme & Template" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="/assets/demo3/media/logos/favicon.ico" />
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Vendor Stylesheets(used for this page only)-->
+    <link href="/assets/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/demo3/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Vendor Stylesheets-->
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="/assets/demo3/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/demo3/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
 </head>
+<!--end::Head-->
+<!--begin::Body-->
 
-<!--<body class="dashboard-page sb-l-o sb-r-c onload-check sb-l-m sb-l-disable-animation">-->
-
-<body class="dashboard-page sb-l-o sb-r-c onload-check">
-	<!-- -------------- Body Wrap  -------------- -->
-	<div id="main">
-		<div class="loading-bg hidden">
-			<44div class="loader_export " id="loader">
-				<div class="dot"></div>
-				<div class="dot"></div>
-				<div class="dot"></div>
-				<div class="dot"></div>
-				<div class="dot"></div>
-				<div class="dot"></div>
-				<div class="dot"></div>
-				<div class="dot"></div>
-				<div class="lading"></div>
-				</ 44div>
-		</div>
-
-		<?php
-
-		/**
-		 * @var $userInfo
-		 * @var $data
-		 * @var $breadcrumbs
-		 */
-		$this->load->view("/backend/layout/admin_header_view", array('userInfo' => $userInfo));
-		$this->load->view("/backend/layout/admin_sidebar_view");
-		?>
-
-		<!-- -------------- Main Wrapper -------------- -->
-		<section id="content_wrapper">
-			<?php
-			$this->load->view("/backend/layout/admin_breadcrumb_view", array('breadcrumbs' => $breadcrumbs));
-			?>
-
-
-			<!-- -------------- Content -------------- -->
-			<section id="content" class="animated fadeIn">
-
-				<?php $this->load->view($template, $data); ?>
-
-			</section>
-			<!-- -------------- /Content -------------- -->
-		</section>
-		4
-	</div>
-	<!-- -------------- /Body Wrap  -------------- -->
-
-	<!-- -------------- Scripts -------------- -->
-
-	<!-- -------------- jQuery -------------- -->
-
-	<script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
-	<!-- -------------- Theme Scripts -------------- -->
-	<script src="/assets/backend/js/utility/utility.js"></script>
-	<script src="/assets/backend/js/demo/demo.js"></script>
-	<script src="/assets/backend/js/main.js"></script>
-	<script src="/assets/backend/js/crud_manage.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function() {
-
-			'use strict';
-
-			// Init Theme Core
-			Core.init();
-
-			// Init Theme Core
-			Demo.init();
-
-			var url = window.location.pathname;
-
-			$('#sidebar_left li').each(function(index, el) {
-				var href = $(this).find('a').attr('data-action');
-				var arr = url.split('/')
-				var parameter = arr[2];
-
-				if (parameter === href) {
-					$(this).addClass('active');
-					$(this).parents('li').find('.accordion-toggle').addClass('menu-open');
-
-				}
-
-			});
-		});
-	</script>
-	<!-- -------------- /Scripts -------------- -->
-	<?php
-	$this->load->view('backend/layout/script');
-	?>
+<body id="kt_body" class="header-fixed sidebar-enabled">
+    <!--begin::Main-->
+    <!--begin::Root-->
+    <div class="wrapper d-flex flex-column flex-row-fluid" style="padding-right: 0px;">
+        <!--begin::Aside-->
+        <?php $this->load->view("backend/layout/admin_sidebar_view") ?>
+        <!--end::Aside-->
+        <!--begin::Wrapper-->
+        <div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
+            <!-- begin::Header -->
+            <?php $this->load->view("backend/layout/admin_header_view") ?>
+            <!-- end::Header -->
+            <!--begin::Content-->
+            <?php $this->load->view("backend/layout/admin_content_view") ?>
+            <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Root-->
+    <!--end::Main-->
+    <!--begin::Javascript-->
+    <script>
+        var hostUrl = "/assets/demo3/";
+    </script>
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="/assets/demo3/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/demo3/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Vendors Javascript(used for this page only)-->
+    <script src="/assets/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
+    <script src="/assets/demo3/plugins/custom/datatables/datatables.bundle.js"></script>
+    <!--end::Vendors Javascript-->
+    <!--begin::Custom Javascript(used for this page only)-->
+    <script src="/assets/demo3/js/widgets.bundle.js"></script>
+    <script src="/assets/demo3/js/custom/widgets.js"></script>
+    <script src="/assets/demo3/js/custom/apps/chat/chat.js"></script>
+    <script src="/assets/demo3/js/custom/utilities/modals/users-search.js"></script>
+    <!--end::Custom Javascript-->
+    <!--end::Javascript-->
 </body>
+<!--end::Body-->
 
 </html>
