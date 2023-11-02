@@ -91,6 +91,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="/assets/demo3/js/custom/widgets.js"></script>
     <script src="/assets/demo3/js/custom/apps/chat/chat.js"></script>
     <script src="/assets/demo3/js/custom/utilities/modals/users-search.js"></script>
+    <?php $this->load->view("backend/layout/script_chart.php") ?>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
 </body>
