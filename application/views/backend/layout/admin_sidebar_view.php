@@ -23,29 +23,41 @@
         <!--begin::Aside Menu-->
         <div class="w-100 hover-scroll-overlay-y d-flex pe-2" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu, #kt_aside_menu_wrapper" data-kt-scroll-offset="100">
             <!--begin::Menu-->
-            <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold px-1" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion hover-menu-item fw-bold mb-3">
-                    <!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-home-2 fs-2"></i></span><span class="menu-title">Dashboards</span></span><!--end:Menu link--><!--begin:Menu sub-->
-                </div><!--end:Menu item-->
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion hover-menu-item fw-bold mb-3">
-                    <!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-graph-up fs-2"></i></span><span class="menu-title">Monitoring</span></span><!--end:Menu link--><!--begin:Menu sub-->
-                </div><!--end:Menu item-->
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion hover-menu-item fw-bold mb-3">
-                    <!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-like fs-1"></i></span><span class="menu-title">Interaction</span></span><!--end:Menu link--><!--begin:Menu sub-->
-                </div><!--end:Menu item-->
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion hover-menu-item fw-bold mb-3">
-                    <!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-user fs-3"></i></span><span class="menu-title">Profile</span></span><!--end:Menu link--><!--begin:Menu sub-->
-                </div><!--end:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion fw-bold mb-3 hover showing"><!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-address-book fs-2"></i></span><span class="menu-title">Admin</span><span class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
+            <div class="menu menu-column menu-rounded fw-semibold px-1" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
+                <!-- begin::Menu item Dashboard -->
+                <div class="menu-item">
+                    <a href="/backend/dashboards" class="menu-link">
+                        <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-home-2 fs-2"></i></span><span class="menu-title">Dashboard</span><!--end:Menu link--><!--begin:Menu sub-->
+                    </a>
+                </div>
+                <!-- end -->
+                <!--begin:Menu item Monitoring-->
+                <div class="menu-item">
+                    <a href="/backend/monitoring" class="menu-link">
+                        <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-graph-up fs-2"></i></span><span class="menu-title">Monitoring</span><!--end:Menu link--><!--begin:Menu sub-->
+                    </a>
+                </div>
+                <!-- end -->
+                <!--begin:Menu item Interaction-->
+                <div class="menu-item">
+                    <a href="/backend/interactions" class="menu-link">
+                        <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-like fs-1"></i></span><span class="menu-title">Interaction</span><!--end:Menu link--><!--begin:Menu sub-->
+                    </a>
+                </div>
+                <!-- end -->
+                <!--begin:Menu item Monitoring-->
+                <div class="menu-item">
+                    <a href="/backend/profile" class="menu-link">
+                        <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-user fs-3"></i></span><span class="menu-title">Profile</span><!--end:Menu link--><!--begin:Menu sub-->
+                    </a>
+                </div>
+                <!-- end -->
+                <div data-kt-menu-trigger="click" class="menu-item fw-bold mb-3 hover showing"><!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-address-book fs-2"></i></span><span class="menu-title">Admin</span><span class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
                     <div class="menu-sub menu-sub-accordion"><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
+                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/groupkeys"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
                                     Group</span></a><!--end:Menu link--></div>
                         <!--end:Menu item--><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Keyword</span></a><!--end:Menu link-->
+                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/keywords"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Keyword</span></a><!--end:Menu link-->
                         </div><!--end:Menu item--><!--begin:Menu item-->
                         <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Social
                                     Audience</span></a><!--end:Menu link--></div>
@@ -123,7 +135,7 @@
                     <!--end::Menu separator-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-5">
-                        <a href="#" class="menu-link px-5">My
+                        <a href="/backend/profile" class="menu-link px-5">My
                             Profile</a>
                     </div>
                     <!--end::Menu item-->

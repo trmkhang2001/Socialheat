@@ -14,14 +14,14 @@ class Auth extends BackendController
         $data = array('msg' => NULL, 'email' => $post['email']);
         $is_post = $this->input->method();
         $loggerUser = BusinessUser::getInstance()->getUserSession();
-		if($loggerUser !== NULL){
-			$sessionUser = Role::getInstance()->getCache(BusinessSession::getName($loggerUser['id']));
-			if ($loggerUser['session_id'] === $sessionUser['session'] && $loggerUser && $sessionUser) {
-				$this->redirectSuccess($loggerUser['role_id']);
-			}
-		}
+        if ($loggerUser !== NULL) {
+            $sessionUser = Role::getInstance()->getCache(BusinessSession::getName($loggerUser['id']));
+            if ($loggerUser['session_id'] === $sessionUser['session'] && $loggerUser && $sessionUser) {
+                $this->redirectSuccess($loggerUser['role_id']);
+            }
+        }
         if ($is_post && !empty($post['email']) && !empty($post['password'])) {
-			$user = BusinessUser::getInstance()->checkAuth($post['email'], $post['password']);
+            $user = BusinessUser::getInstance()->checkAuth($post['email'], $post['password']);
 
             if (empty($user)) {
                 $data['msg'] = 'Email hoặc mật khẩu không đúng';
@@ -35,17 +35,16 @@ class Auth extends BackendController
             }
         }
         $this->load->view('backend/layout/admin_login_view', $data);
-
     }
 
     private function redirectSuccess($roleId)
     {
-        $link = '/backend/users';
-        if($roleId !== ROLE_ADMIN){
-        	$link = '/backend/clients';
-		}
+        $link = '/backend/dashboards';
+        if ($roleId !== ROLE_ADMIN) {
+            $link = '/backend/clients';
+        }
         $continueUrl = $this->input->get('continue', TRUE);
-        if ($continueUrl){
+        if ($continueUrl) {
             $link = $continueUrl;
         }
         redirect($link);
@@ -71,13 +70,10 @@ class Auth extends BackendController
         } else {
             echo "Admin is exit!! can use admin to login!!";
         }
-
-
     }
     function logOut()
     {
         $this->session->sess_destroy();
         redirect('/admin');
     }
-
 }

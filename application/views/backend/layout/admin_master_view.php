@@ -26,11 +26,24 @@ License: For each use you must have a valid license purchased only from above li
     <meta property="og:title" content="Metronic - Bootstrap Admin Template, HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express.js, Node.js, Flask Admin Dashboard Theme & Template" />
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <!-- Main -->
+    <script src="/assets/backend/js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/assets/backend/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+    <script src="/assets/plugins/moment/moment.min.js"></script>
+    <script src="/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/assets/plugins/vuejs/vue.min.js"></script>
+    <script src="/assets/plugins/toastr/toastr.min.js"></script>
+    <link rel="stylesheet" href="/assets/plugins/toastr/toastr.min.css">
+    <script src="/assets/backend/plugins/tinymce/tinymce.min.js"></script>
+    <!-- Demo3 -->
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="shortcut icon" href="/assets/demo3/media/logos/favicon.ico" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" />
     <!--end::Fonts-->
+    <!-- CSS-theme -->
     <!--begin::Vendor Stylesheets(used for this page only)-->
     <link href="/assets/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/demo3/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
@@ -41,6 +54,11 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
+<style>
+    .header {
+        left: 400px !important;
+    }
+</style>
 <!--begin::Body-->
 
 <body id="kt_body" class="header-fixed sidebar-enabled">
@@ -51,14 +69,25 @@ License: For each use you must have a valid license purchased only from above li
         <?php $this->load->view("backend/layout/admin_sidebar_view") ?>
         <!--end::Aside-->
         <!--begin::Wrapper-->
-        <div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
-            <!-- begin::Header -->
-            <?php $this->load->view("backend/layout/admin_header_view") ?>
-            <!-- end::Header -->
-            <!--begin::Content-->
-            <?php $this->load->view("backend/layout/admin_content_view") ?>
-            <!--end::Content-->
-        </div>
+        <section id="content" class="m-grid__item m-grid__item--fluid m-wrapper">
+            <div class="d-flex d-lg-none align-items-center ms-n3 me-2">
+                <!--begin::Aside mobile toggle-->
+                <div class="btn btn-icon btn-active-icon-primary" id="kt_aside_toggle">
+                    <i class="ki-duotone ki-abstract-14 fs-1 mt-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+                <!--end::Aside mobile toggle-->
+                <!--begin::Logo-->
+                <a href="#" class="d-flex align-items-center">
+                    <img alt="Logo" src="/assets/images/logo.png" class="theme-light-show h-20px" />
+                </a>
+                <!--end::Logo-->
+            </div>
+            <!--end::Wrapper-->
+            <?php $this->load->view($template, $data); ?>
+        </section>
         <!--end::Wrapper-->
     </div>
     <!--end::Root-->
@@ -91,7 +120,9 @@ License: For each use you must have a valid license purchased only from above li
     <script src="/assets/demo3/js/custom/widgets.js"></script>
     <script src="/assets/demo3/js/custom/apps/chat/chat.js"></script>
     <script src="/assets/demo3/js/custom/utilities/modals/users-search.js"></script>
-    <?php $this->load->view("backend/layout/script_chart.php") ?>
+    <!-- /Script -->
+    <?php $this->load->view('/backend/layout/script_chart'); ?>
+    <?php $this->load->view('/backend/layout/script'); ?>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
 </body>

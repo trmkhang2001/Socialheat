@@ -1,11 +1,16 @@
 <?php
+
 namespace app\common\utilities;
+
 use CI_Pagination;
-class Pagination {
+
+class Pagination
+{
 
 
-    public static function bootstrap($total_row, $base_url = '', $per_page = 20, $query_name = 'page', $num_links = 5){
-        if (empty($base_url)){
+    public static function bootstrap($total_row, $base_url = '', $per_page = 20, $query_name = 'page', $num_links = 5)
+    {
+        if (empty($base_url)) {
             $base_url = current_url();
         }
 
@@ -27,22 +32,21 @@ class Pagination {
 
         );
 
-        $config['cur_tag_open']     = '<li class="active"><a href="#">';
+        $config['cur_tag_open']     = '<li class=" page-item active"><a href="#">';
         $config['cur_tag_close']    = '</a></li>';
 
-        $config['num_tag_open']     = '<li>';
+        $config['num_tag_open']     = '<li class="page-item">';
         $config['num_tag_close']    = '</li>';
-        $config['next_tag_open']    = '<li>';
+        $config['next_tag_open']    = '<li class="page-item">';
         $config['next_tag_close']   = '</li>';
-        $config['prev_tag_open']    = '<li>';
+        $config['prev_tag_open']    = '<li class="page-item">';
         $config['prev_tag_close']   = '</li>';
-        $config['first_tag_open']   = '<li>';
+        $config['first_tag_open']   = '<li class="page-item">';
         $config['first_tag_close']  = '</li>';
-        $config['last_tag_open']    = '<li>';
+        $config['last_tag_open']    = '<li class="page-item">';
         $config['last_tag_close']   = '</li>';
         $pagination = new \CI_Pagination($config);
-        $page_link  = '<ul class="pagination">'.$pagination->create_links().'</ul>';
+        $page_link  = ' <nav aria-label="Page navigation example"><ul class="pagination pagination-sm">' . $pagination->create_links() . '</ul></nav>';
         return $page_link;
-
     }
 }

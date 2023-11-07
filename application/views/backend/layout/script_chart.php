@@ -35,4 +35,25 @@
             }
         });
     }
+    //doughnut
+    var ctxD = document.getElementById("doughnutChart").getContext('2d');
+    var myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["Fanpage", "Profile", "Group"],
+            datasets: [{
+                data: [64, 10, 26],
+                backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+                hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            responsive: true
+        }
+    });
 </script>
