@@ -6,29 +6,31 @@
  */
 
 ?>
-<div class="row" id='vue-form'>
-	<div class="col-md-12">
-		<div class="panel">
-			<div class="panel-body">
-				<form action="" method="POST" class="form-horizontal allcp-form  form-edit-item" role="form">
-					<label>
-						<input type="hidden" name="id" value="<?php echo $item->id ?>" />
-					</label>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">Từ khóa</label>
-						<div class="col-sm-9">
-							<textarea type="text" class="form-control" name="keyword" placeholder=""><?php echo $item->keyword ?></textarea>
+<div class="card mx-5 p-3">
+	<div class="row" id='vue-form'>
+		<div class="col-md-12">
+			<div class="panel">
+				<div class="panel-body">
+					<form action="" method="POST" class="form-horizontal allcp-form  form-edit-item" role="form">
+						<label>
+							<input type="hidden" name="id" value="<?php echo $item->id ?>" />
+						</label>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Từ khóa</label>
+							<div class="col-sm-9">
+								<textarea type="text" class="form-control" name="keyword" placeholder=""><?php echo $item->keyword ?></textarea>
+							</div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<div class="col-sm-9 col-sm-offset-3">
-							<button type="button" @click="saveComplete" class="btn btn-primary"><i class="fa fa-save"></i> SAVE
-							</button>
+						<div class="form-group mt-5">
+							<div class="col-sm-9 col-sm-offset-3">
+								<button type="button" @click="saveComplete" class="btn btn-primary"><i class="fa fa-save"></i> SAVE
+								</button>
+							</div>
 						</div>
-					</div>
-				</form>
+					</form>
 
+				</div>
 			</div>
 		</div>
 	</div>

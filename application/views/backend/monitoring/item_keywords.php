@@ -37,8 +37,8 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E']
             }
             ++$indexColor;
     ?>
-            <li class="list-inline-item text-lowercase bs-bg-opacity m-3 <?= $class ?>" data-color="<?= $bg_color ?>">
-                <label class="rounded-pill fw-bold p-3" style=" background: <?= $bg_color ?>; color: <?= $text_color ?>">
+            <li class="list-inline-item text-lowercase bs-bg-opacity m-1 <?= $class ?>" data-color="<?= $bg_color ?>">
+                <label class="rounded-pill fw-bold p-1" style=" background: <?= $bg_color ?>; color: <?= $text_color ?>">
                     <?= $keyword ?>
                 </label>
             </li>

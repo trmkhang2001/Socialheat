@@ -32,21 +32,21 @@ class Pagination
 
         );
 
-        $config['cur_tag_open']     = '<li class=" page-item active"><a href="#">';
+        $config['cur_tag_open']     = '<li class="paginate_button page-item previous disabled"><a href="#">';
         $config['cur_tag_close']    = '</a></li>';
 
-        $config['num_tag_open']     = '<li class="page-item">';
+        $config['num_tag_open']     = '<li class="paginate_button page-item">';
         $config['num_tag_close']    = '</li>';
-        $config['next_tag_open']    = '<li class="page-item">';
+        $config['next_tag_open']    = '<li class="paginate_button page-item">';
         $config['next_tag_close']   = '</li>';
-        $config['prev_tag_open']    = '<li class="page-item">';
+        $config['prev_tag_open']    = '<li class="paginate_button page-item">';
         $config['prev_tag_close']   = '</li>';
-        $config['first_tag_open']   = '<li class="page-item">';
+        $config['first_tag_open']   = '<li class="paginate_button page-item">';
         $config['first_tag_close']  = '</li>';
-        $config['last_tag_open']    = '<li class="page-item">';
+        $config['last_tag_open']    = '<li class="paginate_button page-item next">';
         $config['last_tag_close']   = '</li>';
         $pagination = new \CI_Pagination($config);
-        $page_link  = ' <nav aria-label="Page navigation example"><ul class="pagination pagination-sm">' . $pagination->create_links() . '</ul></nav>';
+        $page_link  = '<ul class="pagination pagination-lg">' . $pagination->create_links() . '</ul>';
         return $page_link;
     }
 }

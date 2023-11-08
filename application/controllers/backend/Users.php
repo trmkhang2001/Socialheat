@@ -50,8 +50,10 @@ class Users extends BackendController
 		$model = BusinessUser::getModel();
 		$item = Common::getFieldObj($model::$fields);
 		$item->id = 0;
+		$title = "ADD User";
 		$this->temp['data']['item'] = $item;
 		$this->setBreadcrumbs('Tạo mới', 'Quản lý');
+		$this->temp['data']['title'] = $title;
 		$this->temp['template'] = 'backend/user/update';
 		$this->render();
 	}
@@ -59,7 +61,9 @@ class Users extends BackendController
 	public function update($id)
 	{
 		$item = BusinessUser::getInstance()->findOne($id);
+		$title = "Update User";
 		$this->temp['data']['item'] = $item;
+		$this->temp['data']['title'] = $title;
 		$this->temp['template'] = 'backend/user/update';
 		$this->render();
 	}

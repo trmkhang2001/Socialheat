@@ -6,7 +6,8 @@ use app\controllers\backend\BackendController;
 use app\common\business\BusinessSocialItem;
 use app\common\components\Upload;
 
-class SocialItems extends BackendController {
+class SocialItems extends BackendController
+{
 
 
 	public function __construct()
@@ -33,18 +34,14 @@ class SocialItems extends BackendController {
 	private function getConditions()
 	{
 		$modelDbSetting = BusinessSocialItem::getModel();
-		$filterArr = array('social_id', 'type', 'keyword','status','channel_type');
+		$filterArr = array('social_id', 'type', 'keyword', 'status', 'channel_type');
 		$filterConditions = $this->input->get($filterArr, TRUE);
 		$conditions = array();
-		foreach ($filterConditions as $key => $condition)
-		{
-			if ($key === 'keyword')
-			{
+		foreach ($filterConditions as $key => $condition) {
+			if ($key === 'keyword') {
 				$conditions[] = $this->getSimpleSearchCondition($modelDbSetting::tableName() . '.name');
-			} elseif($condition === '0' || $condition)
-			{
+			} elseif ($condition === '0' || $condition) {
 				$conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), $key) => $condition);
-
 			}
 		}
 		return $conditions;
@@ -73,7 +70,7 @@ class SocialItems extends BackendController {
 	public function deactive($id)
 	{
 		$item = BusinessSocialItem::getInstance()->findOneCache($id);
-		if($item){
+		if ($item) {
 			BusinessSocialItem::getModel()->update($id, ['status' => STATUS_DEACTIVE], FALSE);
 			redirect('/backend/socialitems');
 		}
@@ -81,7 +78,7 @@ class SocialItems extends BackendController {
 	public function active($id)
 	{
 		$item = BusinessSocialItem::getInstance()->findOneCache($id);
-		if($item){
+		if ($item) {
 			BusinessSocialItem::getInstance()->update($id, ['status' => STATUS_ACTIVE], FALSE);
 			redirect('/backend/socialitems');
 		}
@@ -94,25 +91,22 @@ class SocialItems extends BackendController {
 		unset($data['status']);
 		$id = $this->input->post('id', TRUE);
 		$user = $this->userInfo;
-		if ($_POST && $data)
-		{
+		if ($_POST && $data) {
 			$objImage = Upload::isEmpty('image');
-			if(!$objImage){
+			if (!$objImage) {
 				$image = BusinessSocialItem::getInstance()->upload('image');
-				if(!empty($image['file_path'])){
+				if (!empty($image['file_path'])) {
 					$data['image'] = $image['file_path'];
-				}else{
+				} else {
 					$res['validation']['image'] = $image['error_message'];
 					$this->response($res);
 				}
 			}
-			if ($id > 0)
-			{
+			if ($id > 0) {
 				$data['updated_by'] = $user['id'];
 				$data['updated_date'] = date('Y-m-d H:i:s');
 				$res = BusinessSocialItem::getInstance()->update($id, $data, TRUE);
-			} else
-			{
+			} else {
 				$data['created_by'] = $user['id'];
 				$data['created_date'] = date('Y-m-d H:i:s');
 				$data['status'] = STATUS_ACTIVE;
@@ -126,21 +120,19 @@ class SocialItems extends BackendController {
 	public function delete($id)
 	{
 		$item = BusinessSocialItem::getInstance()->findOne($id);
-		if ($item)
-		{
+		if ($item) {
 			$res = BusinessSocialItem::getInstance()->delete($id, []);
 			$this->result = $res;
 			$this->response();
 		}
 	}
 
-	public function linkApi(){
+	public function linkApi()
+	{
 		$channelTypes = $this->config->config['params']['channel_types'];
 		$this->temp['data']['channelTypes'] = $channelTypes;
 		$this->temp['data']['types'] = $this->config->config['params']['types'];
 		$this->temp['template'] = 'backend/social_items/api';
 		$this->render();
 	}
-
-
 }

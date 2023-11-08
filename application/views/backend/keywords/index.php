@@ -15,7 +15,7 @@ $types = $params['types'];
 		margin-bottom: 10px;
 	}
 </style>
-<div class="container">
+<div class="card mx-5 p-3">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel">
@@ -42,7 +42,7 @@ $types = $params['types'];
 	</div>
 
 
-	<div class="row">
+	<div class="row mt-5">
 		<div class="col-md-12">
 			<div class="panel">
 				<div class="">
@@ -64,8 +64,8 @@ $types = $params['types'];
 									<td><?php echo $item->created_date ?></td>
 									<td class="actions">
 										<ul class="list-inline">
-											<li><a data-toggle="tooltip" data-title="Updated" href="/backend/keywords/update/<?php echo $item->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a></li>
-											<li><a data-toggle="tooltip" data-title="Deleted" href="/backend/keywords/delete/<?php echo $item->id ?>" class="btn btn-delete btn-danger"><i class="fa fa-trash-o"></i></a></li>
+											<li class="list-inline-item"><a data-toggle="tooltip" data-title="Updated" href="/backend/keywords/update/<?php echo $item->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a></li>
+											<li class="list-inline-item"><a data-toggle="tooltip" data-title="Deleted" href="/backend/keywords/delete/<?php echo $item->id ?>" class="btn btn-delete btn-danger"><i class="ki-outline ki-trash"></i></a></li>
 										</ul>
 									</td>
 								</tr>

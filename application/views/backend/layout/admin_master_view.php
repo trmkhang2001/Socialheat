@@ -45,6 +45,8 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Fonts-->
     <!-- CSS-theme -->
     <!--begin::Vendor Stylesheets(used for this page only)-->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
     <link href="/assets/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/demo3/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Vendor Stylesheets-->

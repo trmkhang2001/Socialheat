@@ -12,7 +12,7 @@ define('ITEM_PER_PAGE_100', 100);
 define('DEFAULT_ITEM_PER_PAGE', ITEM_PER_PAGE_10);
 define('STATUS_ACTIVE', 10);
 define('STATUS_DEACTIVE', 1);
-define('STATUS_DELETE', 0);// khi do bi xoa
+define('STATUS_DELETE', 0); // khi do bi xoa
 
 define('STATUS_API_SUCCESS', 1);
 define('STATUS_API_ERROR', 0);
@@ -74,9 +74,9 @@ define('XPATH_TYPE_TOOL_TWITTER', '4');
 define('XPATH_TYPE_TOOL_INSTAGRAM', '5');
 define('XPATH_TYPE_TOOL_TELEGRAM', '6');
 //type
-define('XPATH_TYPE_FANPAGE', '1');//fanpge
-define('XPATH_TYPE_PROFILE', '2');//profile
-define('XPATH_TYPE_GROUP', '3');//GROUP
+define('XPATH_TYPE_FANPAGE', '1'); //fanpge
+define('XPATH_TYPE_PROFILE', '2'); //profile
+define('XPATH_TYPE_GROUP', '3'); //GROUP
 
 
 define('XPATH', 'xpath');
@@ -94,7 +94,7 @@ define('CHANNEL_TYPE_FACEBOOK_COMMENT', '6');
 define('CHANNEL_TYPE_INSTAGRAM_AUTO_COMMENT', '7');
 define('CHANNEL_TYPE_TIKTOK', '8');
 // token fb
-define('FB_TOKEN', 'EAAGNO4a7r2wBAFXBarPHZCLHYzSahc2lqfNm4tPHG3OYtZAdxZC6YSguRwopoAiU2thTO1Ac7yext6Njqlrud2GYJ5zx4c0SZAiZAtKLpQN9MeJ5dVukKzLzswHXuhOwam5TmZB5UeOOeC4lP14LUsydllMSaa40E6LUrdwGaAon0ou3uRZBtGB');
+define('FB_TOKEN', 'EAAI1aP4ltbsBO0Hwvu66LoBvNmTovPJg2Se3majtZBL0i2sJ5DMprjslYxVe0RVczLkSZAyG0pCAuHG6blZCDAS947OduxrXkZB6OewxQPjQR23zJAltXFfmHSkdBzZAQeYKmrunAwyenFWkBDMKfq2cNRjxQwrob4qfy58Ur06xm5XaIlrq2bclF4WUCjGoF9LrTmZAlmadQqHJx0FQZDZD');
 
 // status comment reports
 define('COMMENT_REPORT_STATUS_PENDING', '0');
@@ -272,4 +272,3 @@ return array(
 		],
 	],
 );
-

@@ -46,12 +46,12 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 			<form data-kt-search-element="form" class="d-flex bd-highlight" autocomplete="on">
 				<div class="flex-fill me-3">
 					<!-- begin::Input -->
-					<input type="text" class="search-input form-control form-control border h-lg-45px ps-3" name="search" value="" placeholder="UID/Phone" data-kt-search-element="input">
+					<input type="text" class="search-input form-control form-control border h-lg-45px ps-3" id="uid" name="uid" value="" placeholder="UID" data-kt-search-element="input">
 					<!--end::Input-->
 				</div>
 				<div class="flex-fill me-3">
 					<!--begin::Input-->
-					<input type="text" class="search-input form-control form-control border h-lg-45px ps-3" name=" search" value="" placeholder="Keywords" data-kt-search-element="input">
+					<input type="text" class="search-input form-control form-control border h-lg-45px ps-3" id="keywords" name="keywords" value="<?= $this->input->get('keywords') ?>" placeholder=" Keywords" data-kt-search-element="input">
 					<!--end::Input-->
 				</div>
 				<div class="flex-fill ms-7 me-3">
@@ -59,13 +59,23 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 				</div>
 			</form>
 		</div>
+		<?php if ($userInfo['role_id'] === ROLE_DOWNLOAD || $userInfo['role_id'] === ROLE_ADMIN) : ?>
+			<div class=" card p-3 mb-5 export-status form-group m-form__group" style="display: none;">
+				<h6>Downloading</h6>
+				<div class="progress">
+					<div class="progress-bar progress-bar-primary progress-bar-striped " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+						0% Complete
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
 		<!--end::Form-->
 		<div class="row mb-6">
 			<div class="col-md-12">
 				<div class="panel">
 					<div class="bg-white rounded ps-2 pt-5">
-						<div class="app-container  container-xxl d-flex flex-stack ">
-							<div class="d-flex flex-column justify-content-center flex-wrap me-3 ">
+						<div class="app-container d-flex flex-stack ms-3 me-3 ">
+							<div class="d-flex flex-column justify-content-center flex-wrap me-3">
 								<!--begin::Title-->
 								<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0 mb-3">
 									Result
@@ -142,12 +152,13 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->birthday ?></span>
 											</td>
 											<td class="form_filters_post text-left ">
-												<div class="clearfix item-content-read-less">
+												<div class="d-flex clearfix item-content-read-less">
 													<?php $this->load->view('/backend/monitoring/item_keywords', ['keywords' => explode(',', $item->keywords)]); ?>
 												</div>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->created_date ?></span>
+												<span class="text-dark me-2 fs--7 fw-bold "><?php $date = date('d/m/Y', strtotime($item->created_date));
+																							echo $date; ?></span>
 											</td>
 										</tr>
 									<?php } ?>
@@ -159,9 +170,15 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 						<!--end::Table container-->
 
 					</div>
-					<div class="clearfix my-15">
-						<?php echo $pagination ?>
+					<div class="row">
+						<div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+							<div class="dataTables_paginate paging_simple_numbers" id="kt_ecommerce_report_views_table_paginate">
+								<?php echo $pagination ?>
+							</div>
+						</div>
 					</div>
+					<!-- <div class="clearfix my-15">
+					</div> -->
 				</div>
 			</div>
 

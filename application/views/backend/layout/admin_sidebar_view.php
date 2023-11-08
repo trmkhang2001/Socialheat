@@ -51,28 +51,30 @@
                         <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-user fs-3"></i></span><span class="menu-title">Profile</span><!--end:Menu link--><!--begin:Menu sub-->
                     </a>
                 </div>
-                <!-- end -->
-                <div data-kt-menu-trigger="click" class="menu-item fw-bold mb-3 hover showing"><!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-address-book fs-2"></i></span><span class="menu-title">Admin</span><span class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                    <div class="menu-sub menu-sub-accordion"><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/groupkeys"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
-                                    Group</span></a><!--end:Menu link--></div>
-                        <!--end:Menu item--><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/keywords"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Keyword</span></a><!--end:Menu link-->
-                        </div><!--end:Menu item--><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Social
-                                    Audience</span></a><!--end:Menu link--></div>
-                        <!--end:Menu item--><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">User
-                                    Managment</span></a><!--end:Menu link--></div>
-                        <!--end:Menu item--><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Xpath</span></a><!--end:Menu link-->
-                        </div><!--end:Menu item--><!--begin:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
-                                    Items</span></a><!--end:Menu link--></div><!--end:Menu item-->
-                        <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Config</span></a><!--end:Menu link-->
-                        </div><!--end:Menu item-->
-                    </div><!--end:Menu sub-->
-                </div>
+                <?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
+                    <!-- end -->
+                    <div data-kt-menu-trigger="click" class="menu-item fw-bold mb-3 hover showing"><!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-address-book fs-2"></i></span><span class="menu-title">Admin</span><span class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-accordion"><!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/groupkeys"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
+                                        Group</span></a><!--end:Menu link--></div>
+                            <!--end:Menu item--><!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/keywords"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Keyword</span></a><!--end:Menu link-->
+                            </div><!--end:Menu item--><!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/socialItems"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Social
+                                        Audience</span></a><!--end:Menu link--></div>
+                            <!--end:Menu item--><!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/users"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">User
+                                        Managment</span></a><!--end:Menu link--></div>
+                            <!--end:Menu item--><!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/xpath"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Xpath</span></a><!--end:Menu link-->
+                            </div><!--end:Menu item--><!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
+                                        Items</span></a><!--end:Menu link--></div><!--end:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/xpath/token"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Config</span></a><!--end:Menu link-->
+                            </div><!--end:Menu item-->
+                        </div><!--end:Menu sub-->
+                    </div>
+                <?php endif ?>
             </div>
             <!--end::Menu-->
         </div>
