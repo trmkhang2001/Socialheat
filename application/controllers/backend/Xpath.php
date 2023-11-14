@@ -5,7 +5,8 @@ use app\common\utilities\Pagination;
 use app\controllers\backend\BackendController;
 use app\common\business\BusinessXpath;
 
-class Xpath extends BackendController {
+class Xpath extends BackendController
+{
 
 
 	public function index()
@@ -32,10 +33,8 @@ class Xpath extends BackendController {
 		$this->temp['data']['channel_type'] = $filterConditions['channel_type'];
 		$this->temp['data']['type'] = $filterConditions['type'];
 		$conditions = array();
-		foreach ($filterConditions as $key => $condition)
-		{
-			if ( $condition)
-			{
+		foreach ($filterConditions as $key => $condition) {
+			if ($condition) {
 				$conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), $key) => $condition);
 			}
 		}
@@ -66,19 +65,16 @@ class Xpath extends BackendController {
 	public function save()
 	{
 		$model = BusinessXpath::getModel();
-		$data = $this->input->post($model::$fields,TRUE);
+		$data = $this->input->post($model::$fields, TRUE);
 		unset($data['status']);
 		$id = $this->input->post('id', TRUE);
 
-		if ($_POST && $data)
-		{
-			if ($id > 0)
-			{
+		if ($_POST && $data) {
+			if ($id > 0) {
 
 				$data['updated_date'] = date('Y-m-d H:i:s');
 				$res = BusinessXpath::getInstance()->update($id, $data, TRUE);
-			} else
-			{
+			} else {
 				$data['created_date'] = date('Y-m-d H:i:s');
 				$data['status'] = STATUS_ACTIVE;
 				$res = BusinessXpath::getInstance()->save($data, TRUE);
@@ -91,25 +87,23 @@ class Xpath extends BackendController {
 	public function delete($id)
 	{
 		$item = BusinessXpath::getInstance()->findOne($id);
-		if ($item)
-		{
+		if ($item) {
 			$res = BusinessXpath::getInstance()->delete($id, []);
 			$this->result = $res;
 			$this->response();
 		}
 	}
 
-	public function token(){
-		$item = BusinessXpath::getInstance()->findByConditions(['channel_type' => XPATH_TYPE_TOOL_POST_FB_TOKEN],TRUE);
-		if(empty($item)){
+	public function token()
+	{
+		$item = BusinessXpath::getInstance()->findByConditions(['channel_type' => XPATH_TYPE_TOOL_POST_FB_TOKEN], TRUE);
+		if (empty($item)) {
 			$model = BusinessXpath::getModel();
 			$item = Common::getFieldObj($model::$fields);
 			$item->id = 0;
 		}
-		$this->setBreadcrumbs('FB token', 'Quản lý');
 		$this->temp['data']['item'] = $item;
 		$this->temp['template'] = 'backend/xpath/fb_token';
 		$this->render();
 	}
-
 }

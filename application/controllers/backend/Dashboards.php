@@ -1,12 +1,14 @@
 <?php
 
 use app\common\business\BusinessInteraction;
+use app\common\business\BusinessItem;
 use app\common\business\BusinessKeyword;
 use app\common\business\BusinessSocialItem;
 use app\common\utilities\Common;
 use app\common\business\BusinessUser;
 use app\common\utilities\Pagination;
 use app\controllers\backend\BackendController;
+use app\models\Item;
 
 class Dashboards extends BackendController
 {
@@ -23,12 +25,14 @@ class Dashboards extends BackendController
         $totalKeywords = $this->getKeywordsCount();
         $totalAudience = $this->getAudienceCount();
         $totalMentions = $this->getMentionsCount();
+        $topKey = $this->getTopKey();
         $totalSocial['Total Mentions'] = $totalMentions;
         $totalSocial['Total Audience'] = $totalAudience;
         $totalSocial['Total Keywords'] = $totalKeywords;
         $totalSocial['Total User Engage'] = $totalAudience;
         $this->temp['data']['totalSocial'] = $totalSocial;
         $this->temp['data']['users'] = $users;
+        $this->temp['data']['topKey'] = $topKey;
         $this->temp['data']['pagination'] = $pagination;
         $this->temp['template'] = 'backend/dashboards/index';
         $this->render();
@@ -141,9 +145,41 @@ class Dashboards extends BackendController
         $this->temp['template'] = '/backend/dashboards/denied';
         $this->render();
     }
-    public function getTotal()
+    public function getTopKey()
     {
-        $conditions = $this->getConditions();
-        $totalUserEngage =  count($conditions);
+        $conditions = array();
+        $items = BusinessItem::getInstance()->getRangeCache($conditions);
+        $keywords = BusinessKeyword::getInstance()->getRangeCache($conditions);
+        $allKey = array();
+        foreach ($keywords as $item) {
+            $allKey = $item->keyword;
+        }
+        $allKey = explode(',', $allKey);
+        $topKey = array();
+        foreach ($allKey as $key => $value) {
+            $oneKey = array();
+            $count = 0;
+            $engage = 0;
+            foreach ($items as $item) {
+                if (!strpos($item->keywords, $value)) {
+                    $count++;
+                    $engage += ($item->total_share + $item->total_like + $item->total_comment);
+                }
+            }
+            $oneKey['key'] = $value;
+            $oneKey['count'] = $count;
+            $oneKey['engage'] = $engage;
+            $topKey[$key] = $oneKey;
+        }
+        usort($topKey, function ($a, $b) {
+            return (int)($a['count'] <= $b['count']);
+        });
+        $top = array();
+        foreach ($topKey as $key => $item) {
+            if ($key <= 9) {
+                $top[$key] = $item;
+            }
+        }
+        return $top;
     }
 }

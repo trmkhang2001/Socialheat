@@ -27,7 +27,7 @@ $types = $params['types'];
 							<div class="form-group me-3">
 								<label class="text-system">Channel type</label>
 								<div class="form-inline">
-									<select name="channel_type" class="form-control">
+									<select name="channel_type" class="form-select">
 										<option value="">Chọn</option>
 										<?php foreach ($channelTypes as $type) : ?>
 											<option value="<?= $type['value'] ?>"><?= $type['name'] ?></option>
@@ -50,7 +50,7 @@ $types = $params['types'];
 							<div class="form-group me-3">
 								<label class="text-system">Types</label>
 								<div class="form-inline">
-									<select name="type" class="form-control">
+									<select name="type" class="form-select">
 										<option value="">Chọn</option>
 										<?php foreach ($types as $type) : ?>
 											<option value="<?= $type['value'] ?>"><?= $type['name'] ?></option>
@@ -61,7 +61,7 @@ $types = $params['types'];
 							<div class="form-group me-3">
 								<label class="text-system">Status</label>
 								<div class="form-inline">
-									<select name="status" class="form-control">
+									<select name="status" class="form-select form-control">
 										<option value="">Chọn</option>
 										<?php foreach ($listStatus as $status) : ?>
 											<option value="<?= $status['value'] ?>"><?= $status['name'] ?></option>

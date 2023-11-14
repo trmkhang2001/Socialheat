@@ -17,41 +17,43 @@ $types = $params['types'];
 <form method="get" class="form_filters_post form-filter">
     <div class="card p-3" style="margin-top: 40px;margin-bottom: 15px">
         <div class="row pb-3">
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-start" style="width: 20%;">
                 <select class="form-select" aria-label=".form-select-lg example">
                     <option selected>Catagory</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">Marketing</option>
+                    <option value="2">Navigation</option>
                 </select>
             </div>
         </div>
-        <?php $this->load->view('/backend/monitoring/item_keywords'); ?>
+        <div class="" style="overflow:scroll;height: 300px;">
+            <?php $this->load->view('/backend/monitoring/item_keywords'); ?>
+        </div>
 
     </div>
-    <div class="card">
+    <div class="card p-3">
         <div class="clearfix filter-input col-md-12">
-            <div class="d-flex flex-stack flex-wrap">
-                <div class="col has-feedback " style="position: relative">
-                    <input type="text" data-title="" data-class-filter="filter-keyword" name="q" style="background: #f2f2f2;" value="<?= isset($filters['q']) ? $filters['q'] : '' ?>" class="form-control  keyword_filters" id="inputValidation" placeholder="Keyword on Post">
-                    <button type="submit" class="btn btn-icon-submit">
-                        <span class="glyphicon glyphicon-search form-control-feedback" style="color:#B2B2B2;"></span>
-                    </button>
+            <div class="d-flex align-items-center flex-stack flex-wrap">
+                <div class="mx-3 col has-feedback">
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+                            <span class="path1"></span><span class="path2"></span></i>
+                        <input type="text" name="q" value="<?= isset($filters['q']) ? $filters['q'] : '' ?>" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-13 keyword_filters" id="inputValidation" placeholder="Keyword on Post">
+                    </div>
                 </div>
-                <div class=" col post_type">
-                    <label> Sort by</label>
-
-                    <select data-title="Types" data-class-filter="filter-post-type" name="sort_by" class="form-control  sort_by" title="Post type" data-width="160px">
-                        <option value="">Interaction</option>
-                        <option value="1" <?= $filters['sort_by'] === 1 ? 'selected' : '' ?>>Interaction: Min</option>
-                        <option value="2" <?= $filters['sort_by'] === 2 ? 'selected' : '' ?>>Interaction: Max</option>
-                        <option value="1" <?= $filters['sort_by'] === 3 ? 'selected' : '' ?>>Data: Min</option>
-                        <option value="2" <?= $filters['sort_by'] === 4 ? 'selected' : '' ?>>Data: Max</option>
-                    </select>
+                <div class="me-3 col post_type">
+                    <div class="card-toolbar">
+                        <select data-title="Types" data-class-filter="filter-post-type" name="sort_by" class="form-select  sort_by" title="Post type" data-width="160px">
+                            <option value="#">Interaction</option>
+                            <option value="1" <?= $filters['sort_by'] === 1 ? 'selected' : '' ?>>Interaction: Min</option>
+                            <option value="2" <?= $filters['sort_by'] === 2 ? 'selected' : '' ?>>Interaction: Max</option>
+                            <option value="1" <?= $filters['sort_by'] === 3 ? 'selected' : '' ?>>Data: Min</option>
+                            <option value="2" <?= $filters['sort_by'] === 4 ? 'selected' : '' ?>>Data: Max</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class=" col post_type">
-                    <select data-title="Types" data-class-filter="filter-post-type" name="type" class="form-control " title="Post type" data-width="160px">
+                <div class="me-3 col post_type">
+                    <select data-title="Types" data-class-filter="filter-post-type" name="type" class="form-select " title="Post type" data-width="160px">
                         <option value="">Types</option>
                         <?php foreach ($types as $type) :
                             $selected = '';
@@ -63,15 +65,15 @@ $types = $params['types'];
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col">
-                    <label>Date Created</label>
+                <div class="me-3 col fw-bold">
+                    <span class="align-middle">Date Created</span>
                 </div>
-                <div class=" col has-feedback form_input_date">
+                <div class=" me-3 col has-feedback form_input_date">
 
                     <input data-title="From Date" data-class-filter="filter-to-date" type="text" name="from_date" value="<?= isset($filters['from_date']) ? $filters['from_date'] : '' ?>" class="form-control " placeholder="From">
                     <span class="glyphicon glyphicon-calendar form-control-feedback" style="background:#E5E5E5;color: #404A7D;height: 30px"></span>
                 </div>
-                <div class=" col has-feedback form_input_date">
+                <div class=" me-3 col has-feedback form_input_date">
                     <input data-title="To Date" data-class-filter="filter-to-date" type="text" name="to_date" value="<?= isset($filters['to_date']) ? $filters['to_date'] : '' ?>" class="form-control " placeholder="To">
                     <span class="glyphicon glyphicon-calendar form-control-feedback" style="background:#E5E5E5;color: #404A7D;height: 30px"></span>
 

@@ -1,5 +1,5 @@
 <?php
-$name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietnam", "#suaensure");
+$name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#ensuregoldvietnam", "#suaensure", "#suaensure", "#suaensure", "#suaensure", "#suaensure");
 /**
  * @var $total
  * @var $totalSocial
@@ -7,6 +7,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
  * @var $interactions
  * @var $userInfo
  * @var $totalKeywords
+ * @var $topKey
  */
 ?>
 <style>
@@ -39,33 +40,91 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
         <!--begin::Container-->
         <div class="container-fluid" id="kt_content_container">
             <!-- begin::Row -->
-            <div class="row">
-                <?php foreach ($totalSocial as $key => $value) {
-                ?>
-                    <div class="col-sm mb-4">
-                        <div class="card h-lg-100">
-                            <div class="card-body d-flex align-items-center flex-row-fluid">
-                                <!--begin::Section-->
-                                <div class="d-flex flex-column my-7">
-                                    <!--begin::Follower-->
-                                    <div class="m-0 mb-3">
-                                        <span class="fw-semibold fs-6 text-gray-500 fw-bold">
-                                            <?= $key ?> </span>
+            <div class="row mb-5">
+                <div class="col-sm mb-4">
+                    <div class="card h-lg-100">
+                        <div class="card-body d-flex align-items-center flex-row-fluid">
+                            <img class="me-3" src="/assets/images/icon-total-mentions.png" alt="">
+                            <!--begin::Section-->
+                            <div class="d-flex flex-column my-7">
+                                <!--begin::Follower-->
+                                <div class="m-0 mb-3">
+                                    <span class="fw-semibold fs-6 text-gray-500 fw-bold">
+                                        Total Mentions </span>
 
-                                    </div>
-                                    <!--end::Follower-->
-                                    <!--begin::Number-->
-                                    <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($value) ?></span>
-                                    <!--end::Number-->
                                 </div>
-                                <!--end::Section-->
-
-
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total Mentions']) ?></span>
+                                <!--end::Number-->
                             </div>
+                            <!--end::Section-->
                         </div>
                     </div>
-                <?php
-                } ?>
+                </div>
+                <div class="col-sm mb-4">
+                    <div class="card h-lg-100">
+                        <div class="card-body d-flex align-items-center flex-row-fluid">
+                            <img class="me-3" src="/assets/images/icon-total-audience.png" alt="">
+                            <!--begin::Section-->
+                            <div class="d-flex flex-column my-7">
+                                <!--begin::Follower-->
+                                <div class="m-0 mb-3">
+                                    <span class="fw-semibold fs-6 text-gray-500 fw-bold">
+                                        Total Audience </span>
+
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total Audience']) ?></span>
+                                <!--end::Number-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm mb-4">
+                    <div class="card h-lg-100">
+                        <div class="card-body d-flex align-items-center flex-row-fluid">
+                            <img class="me-3" src="/assets/images/icon-total-keywords.png" alt="">
+                            <!--begin::Section-->
+                            <div class="d-flex flex-column my-7">
+                                <!--begin::Follower-->
+                                <div class="m-0 mb-3">
+                                    <span class="fw-semibold fs-6 text-gray-500 fw-bold">
+                                        Total Keywords </span>
+
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total Keywords']) ?></span>
+                                <!--end::Number-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm mb-4">
+                    <div class="card h-lg-100">
+                        <div class="card-body d-flex align-items-center flex-row-fluid">
+                            <img class="me-3" src="/assets/images/icon-total-user-engage.png" alt="">
+                            <!--begin::Section-->
+                            <div class="d-flex flex-column my-7">
+                                <!--begin::Follower-->
+                                <div class="m-0 mb-3">
+                                    <span class="fw-semibold fs-6 text-gray-500 fw-bold">
+                                        Total User Engage </span>
+
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total User Engage']) ?></span>
+                                <!--end::Number-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- begin::Row -->
             <!--begin::Row-->
@@ -129,7 +188,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                 <!--begin::Header-->
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Top KeyWord of the week</span>
+                        <span class="card-label fw-bold fs-3 mb-1">Top 10 KeyWord of the week</span>
                     </h3>
                 </div>
                 <!--end::Header-->
@@ -146,32 +205,36 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                         NO.
                                     </th>
                                     <th class="min-w-500px">Audience Name</th>
-                                    <th class="min-w-150px">Mentions</th>
+                                    <th class="min-w-150px">Post</th>
                                     <th class="min-w-150px">Engage</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody>
-                                <?php for ($i = 0; $i < 5; $i++) { ?>
+                                <?php
+                                $i = 0;
+                                foreach ($topKey as $key) {
+                                    $i++ ?>
                                     <tr>
                                         <td>
-                                            <span><?php echo number_format($i + 1) ?></span>
+                                            <span><?php echo number_format($i) ?>.</span>
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-start flex-column">
-                                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6"><?php echo $name[$i] ?></a>
+                                                <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $key['key'] ?></span>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="text-muted fw-bold text-hover-primary d-block">Fanpage</span>
+                                            <span class="text-dark fw-bold text-hover-primary d-block"><?php echo number_format($key['count']) ?></span>
 
                                         </td>
                                         <td>
-                                            <span class="text-dark me-2 fs--7 fw-bold "><?php echo number_format($i + 123456) ?></span>
+                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($key['engage']) ?></span>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php
+                                } ?>
                             </tbody>
                             <!--end::Table body-->
                         </table>

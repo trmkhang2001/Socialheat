@@ -5,7 +5,8 @@ use app\common\utilities\Pagination;
 use app\controllers\backend\BackendController;
 use app\common\business\BusinessKeyword;
 
-class Keywords extends BackendController {
+class Keywords extends BackendController
+{
 
 
 	public function __construct()
@@ -35,15 +36,11 @@ class Keywords extends BackendController {
 		$filterArr = array('status_api', 'uid', 'email', 'keyword');
 		$filterConditions = $this->input->get($filterArr, TRUE);
 		$conditions = array();
-		foreach ($filterConditions as $key => $condition)
-		{
-			if ($key === 'keyword')
-			{
+		foreach ($filterConditions as $key => $condition) {
+			if ($key === 'keyword') {
 				$conditions[] = $this->getSimpleSearchCondition($modelDbSetting::tableName() . '.phone');
-			} elseif($condition === '0' || $condition)
-			{
+			} elseif ($condition === '0' || $condition) {
 				$conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), $key) => $condition);
-
 			}
 		}
 		return $conditions;
@@ -76,15 +73,12 @@ class Keywords extends BackendController {
 		$data = $this->input->post($model::$fields, TRUE);
 		$id = $this->input->post('id', TRUE);
 
-		if ($_POST && $data)
-		{
-			if ($id > 0)
-			{
+		if ($_POST && $data) {
+			if ($id > 0) {
 
 				$data['updated_date'] = date('Y-m-d H:i:s');
 				$res = BusinessKeyword::getInstance()->update($id, $data, TRUE);
-			} else
-			{
+			} else {
 				$data['created_date'] = date('Y-m-d H:i:s');
 				$data['status'] = STATUS_ACTIVE;
 				$res = BusinessKeyword::getInstance()->save($data, TRUE);
@@ -97,13 +91,10 @@ class Keywords extends BackendController {
 	public function delete($id)
 	{
 		$item = BusinessKeyword::getInstance()->findOne($id);
-		if ($item)
-		{
+		if ($item) {
 			$res = BusinessKeyword::getInstance()->delete($id, []);
 			$this->result = $res;
 			$this->response();
 		}
 	}
-
-
 }

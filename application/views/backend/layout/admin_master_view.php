@@ -60,6 +60,13 @@ License: For each use you must have a valid license purchased only from above li
     .header {
         left: 400px !important;
     }
+
+    #btn-back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+    }
 </style>
 <!--begin::Body-->
 
@@ -92,6 +99,9 @@ License: For each use you must have a valid license purchased only from above li
         </section>
         <!--end::Wrapper-->
     </div>
+    <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <!--end::Root-->
     <!--end::Main-->
     <!--begin::Javascript-->
@@ -122,6 +132,52 @@ License: For each use you must have a valid license purchased only from above li
     <script src="/assets/demo3/js/custom/widgets.js"></script>
     <script src="/assets/demo3/js/custom/apps/chat/chat.js"></script>
     <script src="/assets/demo3/js/custom/utilities/modals/users-search.js"></script>
+    <script>
+        //Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            document.documentElement.scrollTop.
+        }
+    </script>
+    <script>
+        $.fn.dataTable.ext.errMode = 'none';
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('.read_more').click(function(e) {
+            e.preventDefault();
+            var content = $(this).parent().find('.item-content-read-less');
+            if (content.hasClass('read-less')) {
+                content.removeClass('read-less')
+                content.addClass('read-more');
+                $(this).text('Read less');
+            } else {
+                content.removeClass('read-more')
+                content.addClass('read-less');
+                $(this).text('Read more');
+            }
+        });
+    </script>
     <!-- /Script -->
     <?php $this->load->view('/backend/layout/script_chart'); ?>
     <?php $this->load->view('/backend/layout/script'); ?>

@@ -18,7 +18,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Từ khóa</label>
 							<div class="col-sm-9">
-								<textarea type="text" class="form-control" name="keyword" placeholder=""><?php echo $item->keyword ?></textarea>
+								<textarea style="height: 250px;" type="text" class="form-control" name="keyword" placeholder=""><?php echo $item->keyword ?></textarea>
 							</div>
 						</div>
 

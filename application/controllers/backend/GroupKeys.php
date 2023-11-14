@@ -1,5 +1,6 @@
 <?php
 
+use app\common\business\BusinessGroupKeys;
 use app\common\utilities\Common;
 use app\common\business\BusinessUser;
 use app\common\utilities\Pagination;
@@ -16,6 +17,8 @@ class GroupKeys extends BackendController
         $users = BusinessUser::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
         $total = BusinessUser::getInstance()->getCount($conditions);
         $pagination = Pagination::bootstrap($total, '', $itemPerPage);
+        $id = 0;
+        $this->temp['data']['id'] = $id;
         $this->temp['data']['users'] = $users;
         $this->temp['data']['pagination'] = $pagination;
         $this->temp['template'] = 'backend/groupkeys/index';
@@ -46,11 +49,11 @@ class GroupKeys extends BackendController
 
     public function create()
     {
-        $model = BusinessUser::getModel();
+        $model = BusinessGroupKeys::getModel();
         $item = Common::getFieldObj($model::$fields);
         $item->id = 0;
         $this->temp['data']['item'] = $item;
-        $this->temp['template'] = 'backend/user/update';
+        $this->temp['template'] = 'backend/groupkeys/index';
         $this->render();
     }
 
@@ -70,21 +73,16 @@ class GroupKeys extends BackendController
 
     public function save()
     {
-        $model = BusinessUser::getModel();
+        $model = BusinessGroupKeys::getModel();
         $data = $this->input->post($model::$fields, TRUE);
         $id = $this->input->post('id', TRUE);
         if ($_POST && $data) {
-            if (!empty($data['password'])) {
-                $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-            }
             if ($id > 0) {
                 $data['updated_date'] = date('Y-m-d H:i:s');
-                $res = BusinessUser::getInstance()->update($id, $data, TRUE);
+                $res = BusinessGroupKeys::getInstance()->update($id, $data, TRUE);
             } else {
                 $data['created_date'] = date('Y-m-d H:i:s');
-                $data['avatar'] = '/assets/images/no_avatar.png';
-                $data['status'] = STATUS_ACTIVE;
-                $res = BusinessUser::getInstance()->save($data, TRUE);
+                $res = BusinessGroupKeys::getInstance()->save($data, TRUE);
             }
             $this->result = $res;
             $this->response();

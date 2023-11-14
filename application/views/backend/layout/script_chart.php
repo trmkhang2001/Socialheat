@@ -36,7 +36,7 @@
         });
     }
     //doughnut
-    var ctxD = document.getElementById("doughnutChart").getContext('2d');
+    var ctxD = document.getElementById("doughnutChart");
     var myLineChart = new Chart(ctxD, {
         type: 'doughnut',
         data: {

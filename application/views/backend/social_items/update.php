@@ -37,7 +37,7 @@ $channel_types = $params['channel_types'];
 							<label class="col-sm-2 col-form-label">Type</label>
 							<div class="col-sm-10">
 								<label class="field select">
-									<select name="type" class="form-control">
+									<select name="type" class="form-select">
 										<option value="">Chọn</option>
 										<?php foreach ($types as $type) :
 											$selected = '';
@@ -56,7 +56,7 @@ $channel_types = $params['channel_types'];
 							<label class="col-sm-2 col-form-label">Channel Type</label>
 							<div class="col-sm-10">
 								<label class="field select">
-									<select name="channel_type" class="form-control">
+									<select name="channel_type" class="form-select">
 										<option value="">Chọn</option>
 										<?php foreach ($channel_types as $type) :
 											$selected = '';

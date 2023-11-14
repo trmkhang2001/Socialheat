@@ -100,7 +100,7 @@ $types = $params[XPATH]['types'];
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="active ">
-								<th style="width: 40%;">Xpath</th>
+								<th>Xpath</th>
 								<th>Channel type</th>
 								<th>Type</th>
 								<th>Created date</th>

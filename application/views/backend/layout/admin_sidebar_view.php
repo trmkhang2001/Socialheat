@@ -11,9 +11,8 @@
     <!--begin::Brand-->
     <div class="aside-logo px-9 mb-9" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="../../demo3/dist/index.html">
+        <a href="/backend/dashboards">
             <img alt="Logo" src="/assets/images/logo.png" class="h-20px logo theme-light-show" />
-            <img alt="Logo" src="/assets/images/logo.png" class="h-20px logo theme-dark-show" />
         </a>
         <!--end::Logo-->
     </div>
@@ -68,7 +67,7 @@
                             <!--end:Menu item--><!--begin:Menu item-->
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/xpath"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Xpath</span></a><!--end:Menu link-->
                             </div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/items/create"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
                                         Items</span></a><!--end:Menu link--></div><!--end:Menu item-->
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/xpath/token"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Config</span></a><!--end:Menu link-->
                             </div><!--end:Menu item-->

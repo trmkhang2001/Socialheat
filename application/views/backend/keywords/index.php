@@ -45,8 +45,7 @@ $types = $params['types'];
 	<div class="row mt-5">
 		<div class="col-md-12">
 			<div class="panel">
-				<div class="">
-
+				<div class="table-responsive table-scrollable m-5">
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="active ">

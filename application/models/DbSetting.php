@@ -5,7 +5,8 @@ namespace app\models;
 /**
  * @property  $email
  */
-class DbSetting extends MyModel {
+class DbSetting extends MyModel
+{
 
 	static protected $_instance = NULL;
 
@@ -15,8 +16,7 @@ class DbSetting extends MyModel {
 	 */
 	public static function getInstance()
 	{
-		if (self::$_instance === NULL)
-		{
+		if (self::$_instance === NULL) {
 			self::$_instance = new self();
 		}
 		return self::$_instance;
@@ -35,7 +35,7 @@ class DbSetting extends MyModel {
 	);
 	public static $requiredFiled = array(
 		'hostname'     => 'Hostname',
-//		'password'   => 'Password',
+		'password'   => 'Password',
 		'database'     => 'Database',
 		'table_name'   => 'Table name',
 		'username'     => 'Username',

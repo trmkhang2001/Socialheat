@@ -34,6 +34,10 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 		font-size: 13px;
 		text-align: center;
 	}
+
+	.table td {
+		white-space: nowrap;
+	}
 </style>
 
 <!--begin::Content-->
@@ -55,7 +59,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 					<!--end::Input-->
 				</div>
 				<div class="flex-fill ms-7 me-3">
-					<button class="btn btn-primary">Filter</button>
+					<button type="submit" class="btn btn-primary">Filter</button>
 				</div>
 			</form>
 		</div>
@@ -84,11 +88,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 								<span>Total: <b><?= number_format($total) ?> </b> interactions</span>
 							</div>
 							<div class="clearfix">
-								<a href="#" class="btn btn-primary pull-right group-export-csv can-export">
-									<span>
-										<i class="fa fa-download"></i>
-										<span>Export</span>
-									</span>
+								<a href="#" class="btn btn-light-primary me-3 pull-right group-export-csv can-export" data-bs-toggle="modal" data-bs-target="#kt_customers_export_modal">
+									<i class="ki-duotone ki-exit-up fs-2"><span class="path1"></span><span class="path2"></span></i> Export
 								</a>
 							</div>
 						</div>

@@ -128,7 +128,7 @@ class Monitoring extends BackendController
 
     public function detail($postId)
     {
-
+        $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
         $group = BusinessItem::getInstance()->findByPostId($postId);
         if (($group->channel_type && $group->channel_type !== CHANNEL_TYPE_FACEBOOK) || !$group) {
             show_404('Post id không tồn tại');
@@ -167,9 +167,10 @@ class Monitoring extends BackendController
         $data['total'] = 1000;
         $data['content'] = (array)$group;
         $data['items']['numpages'] = ceil($total_records / ITEM_PER_PAGE_10);
+        $this->temp['colorBg'] = $colorBg;
         $this->temp['page_title'] = 'Detail item';
         $this->temp['data'] = $data;
-        $this->temp['template'] = 'backend/clients/uids';
+        $this->temp['template'] = 'backend/monitoring/uids';
         $this->render();
     }
 
@@ -527,7 +528,7 @@ class Monitoring extends BackendController
         $this->temp['data']['totalEmail'] = $totalEmail;
         $this->temp['data']['totalBirthDay'] = $totalBirthDay;
         $this->temp['data']['totalRelationShip'] = $totalRelationShip;
-        $this->temp['template'] = 'backend/clients/reports';
+        $this->temp['template'] = 'backend/monitoring/reports';
         $this->render();
     }
 
