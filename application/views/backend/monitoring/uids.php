@@ -90,7 +90,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                 <?php echo json_encode($items); ?>
                             </script>
                             <div class="m-portlet m-portlet--mobile">
-                                <div class="m-portlet__head">
+                                <div class="m-portlet__head mb-10">
                                     <div class="m-portlet__head-tools d-flex justify-content-end">
                                         <?php if (in_array($userInfo['role_id'], [ROLE_ADMIN, ROLE_DOWNLOAD], FALSE)) : ?>
 
@@ -104,11 +104,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                     </div>
 
                                 </div>
-                                <div class="div" hidden>
-                                    <?php
-                                    render_field_panel();
-                                    ?>
-                                </div>
+
                                 <div class="m-portlet__body">
 
                                     <div class="row">
@@ -131,94 +127,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
                                                                     </svg>
                                                                 </div>
-                                                                <div class="dataTables_length dataTables_filter" id="myTable_length">
-                                                                    <label>Show
-                                                                        <select name="myTable_length" aria-controls="groupTable" class="custom-select custom-select-sm form-control form-control-sm">
-                                                                            <option value="10">10</option>
-                                                                            <option value="25">25</option>
-                                                                            <option value="50">50</option>
-                                                                            <option value="100">100</option>
-                                                                        </select> entries</label>
-
-                                                                    <label>City : <select name="city" class="custom-select custom-select-sm form-control form-control-sm" id="city">
-                                                                            <option value="">Select city</option>
-                                                                            <?php foreach (get_cities() as $city) : ?>
-                                                                                <option value="<?php echo vn_to_str($city); ?> "><?php echo $city; ?></option>
-                                                                            <?php endforeach; ?>
-                                                                        </select>
-                                                                    </label>
-
-                                                                    &nbsp;
-                                                                    <label>Friends : <select name="friends" class="custom-select custom-select-sm form-control form-control-sm" id="friends">
-                                                                            <option value="">Number of friend</option>
-                                                                            <option value="> 5000"> > 5,000</option>
-                                                                            <option value="4000-5000"> 4,000 - 5,000</option>
-                                                                            <option value="3000-4000"> 3,000 - 4,000</option>
-                                                                            <option value="2000-3000"> 2,000 - 3,000</option>
-                                                                            <option value="1000-2000"> 1,000 - 2,000</option>
-                                                                            <option value="<1000"> 0 - 999</option>
-                                                                        </select>
-                                                                    </label>
-
-                                                                    <label>Follows : <select name="follows" class="custom-select custom-select-sm form-control form-control-sm" id="follows">
-                                                                            <option value="">Number of followers</option>
-                                                                            <option value="> 5000"> > 5,000</option>
-                                                                            <option value="4000-5000"> 4,000 - 5,000</option>
-                                                                            <option value="3000-4000"> 3,000 - 4,000</option>
-                                                                            <option value="2000-3000"> 2,000 - 3,000</option>
-                                                                            <option value="1000-2000"> 1,000 - 2,000</option>
-                                                                            <option value="<1000"> 0 - 999</option>
-                                                                        </select>
-                                                                    </label>
-                                                                    &nbsp;
-                                                                    <label>Filter
-                                                                        <select name="sex" class="custom-select custom-select-sm form-control form-control-sm" id="sex">
-                                                                            <option value="">Sex</option>
-                                                                            <option value="male">Male</option>
-                                                                            <option value="female">Female</option>
-                                                                        </select>
-                                                                    </label>
-
-                                                                    &nbsp;
-                                                                    <label>
-                                                                        <select name="relationship" class="custom-select custom-select-sm form-control form-control-sm" id="relationship">
-                                                                            <option value="">Relationship</option>
-                                                                            <option value="single">Single</option>
-                                                                            <option value="married">Married</option>
-                                                                            <option value="In a relationship">In a
-                                                                                relationship
-                                                                            </option>
-                                                                            <option value="It's complicated">It's complicated
-                                                                            </option>
-                                                                            <option value="In an open relationship">In an open
-                                                                                relationship
-                                                                            </option>
-                                                                            <option value="Engaged">Engaged</option>
-                                                                            <option value="Divorced">Divorced</option>
-                                                                            <option value="In a domestic partnership">In a
-                                                                                domestic partnership
-                                                                            </option>
-                                                                            <option value="Separated">Separated</option>
-                                                                            <option value="In a civil union">In a civil union
-                                                                            </option>
-                                                                        </select>
-                                                                    </label>
-                                                                    &nbsp;
-                                                                    <?php
-                                                                    $get_age_ranges = get_age_ranges();
-                                                                    ?>
-                                                                    <label>
-                                                                        <select name="age" class="custom-select custom-select-sm form-control form-control-sm" id="age">
-                                                                            <option value="">Age</option>
-                                                                            <?php foreach ($get_age_ranges as $key => $age_range) : ?>
-                                                                                <option value="<?php echo $age_range[0] . '_' . $age_range[1]; ?>"><?php echo $age_range[2]; ?></option>
-                                                                            <?php endforeach; ?>
-                                                                        </select>
-                                                                    </label>
-                                                                    &nbsp;
-                                                                    <label>Search:<input type="search" id="search" class="form-control form-control-sm" placeholder="Uid or Phone" aria-controls="myTable"></label>
-
-                                                                </div>
                                                                 <div class="table_scrool_wrapper">
                                                                     <table id="uidTable" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer">
                                                                         <thead>
@@ -227,42 +135,83 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                                 <th class="Name name sorting">Name</th>
                                                                                 <th class="email">Email</th>
                                                                                 <th class="Phone">Phone</th>
-                                                                                <th class="Friends friends sorting_desc">Friends
-                                                                                </th>
+                                                                                <th class="Friends friends sorting_desc">Friends</th>
                                                                                 <th class="Follow follows sorting">Follow</th>
                                                                                 <th class="Sex">Birthday</th>
-                                                                                <th class="Sex">Sex</th>
-
+                                                                                <th class="Sex" style="min-width: 150px">Sex</th>
                                                                                 <th class="Relationship">Relationship</th>
-
-                                                                                <?php $extra_fields = get_extra_fields_label();
-                                                                                ?>
-                                                                                <?php foreach ($extra_fields as $key => $extra_field) :
-
-                                                                                ?>
-                                                                                    <th class="<?php echo $key; ?>"><?php echo $extra_field; ?></th>
-                                                                                <?php endforeach; ?>
                                                                                 <th class="City">City</th>
                                                                             </tr>
                                                                         </thead>
 
-                                                                        <tbody>
+	                                                                    <tbody>
+																		<?php
+																		/**
+																		 * @var $interactions
+																		 */
+																		foreach ($interactions as $value):
+																			?>
+		                                                                    <tr>
+			                                                                    <td>
+				                                                                    <div class="d-flex align-items-center">
+					                                                                    <a href="https://facebook.com/<?= $value['uid'] ?>"
+					                                                                       class="symbol symbol-50px"
+					                                                                       target="_blank">
+						                                                                    <img style="width: 40px" class="m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $value['uid'] ?>/picture?type=large&width=500&height=500&access_token=2712477385668128|b429aeb53369951d411e1cae8e810640"
+						                                                                         alt="">
+					                                                                    </a>
 
-                                                                        </tbody>
+				                                                                    </div>
+			                                                                    </td>
+			                                                                    <td><a target="_blank"
+			                                                                           href="https://facebook.com/<?= $value['uid'] ?>"
+			                                                                           class="text-gray-800 text-hover-primary fs-5 fw-bold"
+			                                                                           data-kt-ecommerce-product-filter="product_name"><?= $value['name'] ?></a></td>
+			                                                                    <td><?= $value['email'] ?  substr($value['email'], 0, -4) . '****' : ''?></td>
+			                                                                    <td><?= substr($value['phone'], 0, -4) . '****'?></td>
+			                                                                    <td><?= $value['friends']?></td>
+			                                                                    <td><?= $value['follow']?></td>
+			                                                                    <td><?= $value['birthday']?></td>
+			                                                                    <td>
+																					<?php
+																					if ($value['sex'] === 'male'): ?>
+					                                                                    <span class="m-badge  m-badge--male m-badge--wide"
+					                                                                          style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i
+								                                                                    class="fa fa-mars"
+								                                                                    aria-hidden="true"></i>male</span>
+																					<?php
+				                                                                    elseif ($value['sex'] === 'female'): ?>
+					                                                                    <span class="m-badge  m-badge--female m-badge--wide"
+					                                                                          style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #E91E63"">
+					                                                                    <i class="fa fa-venus"
+					                                                                       aria-hidden="true"></i>
+					                                                                    female</span>
+																					<?php
+																					else: ?>
+					                                                                    <div class="d-flex">
+						                                                                    <div style="width: 20px;height: 20px;border-radius: 50%;background-color: #8c8c93"></div>
+						                                                                    <div style="padding-left: 5px">other
+						                                                                    </div>
+
+					                                                                    </div>
+																					<?php
+
+
+																					endif; ?>
+			                                                                    </td>
+			                                                                    <td><?= $value['relationship'] ?></td>
+			                                                                    <td><?= $value['city'] ?></td>
+		                                                                    </tr>
+																		<?php
+																		endforeach ?>
+	                                                                    </tbody>
+
                                                                     </table>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-12 col-md-5">
-                                                                        <div class="dataTables_info" id="myTable_info" role="status" aria-live="polite">Showing 1
-                                                                            to <?php echo $items['limit'] ?>
-                                                                            of <?php echo $items['totals']; ?> entries
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-12 col-md-7">
-                                                                        <div class="dataTables_paginate paging_simple_numbers" id="myTable_paginate">
-                                                                            <?php helper_pagination($items['numpages'], 1); ?>
-                                                                        </div>
-                                                                    </div>
+                                                                <div class="row mt-5">
+
+																	<?= $pagination?>
+
                                                                 </div>
                                                             </div>
                                                         </div>

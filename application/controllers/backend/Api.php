@@ -7,6 +7,11 @@ use app\common\business\BusinessKeyword;
 use app\common\business\BusinessSocialItem;
 use app\common\business\BusinessXpath;
 use app\controllers\backend\ApiController;
+use app\common\utilities\GoogleCloudStorage;
+use app\common\utilities\Common;
+use app\models\Interaction;
+use app\common\components\Finduid;
+
 
 class Api extends ApiController {
 
@@ -23,6 +28,7 @@ class Api extends ApiController {
 		$type = $this->input->get('type', TRUE);
 		$page = intval($this->input->get('page', TRUE));
 		$channel_type = $this->input->get('channel_type', TRUE);
+		$isPrivate = $this->input->get('is_private',TRUE);
 		$keywords = BusinessKeyword::getInstance()->getAllCache();
 		$conditions = [];
 		if ($type)
@@ -37,6 +43,9 @@ class Api extends ApiController {
 		{
 			$channel_type = CHANNEL_TYPE_FACEBOOK;
 		}
+		if($isPrivate){
+			$conditions['is_private'] = (bool)$isPrivate;
+		}
 		$conditions['channel_type'] = $channel_type;
 		$offset = $page ? $limit * ($page - 1) : 0;
 		$conditions['key IS NULL'] = NULL;
@@ -50,14 +59,16 @@ class Api extends ApiController {
 			foreach ($items as $item)
 			{
 				$updateIds[] = [
-					'id'  => $item->id,
+					'id' => $item->id,
 
 					'key' => $key
 				];
 				$res[] = [
-					'Id'     => $item->id,
-					'FbId'   => $item->social_id,
-					'FbType' => $item->type
+					'Id'        => $item->id,
+					'FbId'      => $item->social_id,
+					'FbType'    => $item->type,
+					'IsPrivate' => (bool)$item->is_private,
+					'Token'		=> $item->token
 				];
 			}
 			if ($key)
@@ -83,19 +94,46 @@ class Api extends ApiController {
 			{
 				if ($data['PostId'])
 				{
+					$data['PostOwnerId'] = '120551278013175';
 					$socialItem = BusinessSocialItem::getInstance()->findBySocialId($data['PostOwnerId']);
-					if (in_array($socialItem->channel_type, [CHANNEL_TYPE_INSTAGRAM, CHANNEL_TYPE_FACEBOOK, CHANNEL_TYPE_TWITTER,CHANNEL_TYPE_TIKTOK], FALSE))
+					if (in_array($socialItem->channel_type, [CHANNEL_TYPE_INSTAGRAM, CHANNEL_TYPE_FACEBOOK, CHANNEL_TYPE_TWITTER, CHANNEL_TYPE_TIKTOK], FALSE))
 					{
 						$keywordComments = [];
 						$dataPostId = $data['PostId'];
 						$channel_type = $socialItem->channel_type;
 						$shareCount = self::unFormatNumber($data['ShareCount']);
-						if ($channel_type === CHANNEL_TYPE_FACEBOOK)
-						{
-							$keywordComments = BusinessApi::getInstance()->createTableAndSaveData($data['PostId'], $data['Comments']);
-//							$dataPostId = preg_replace("/[^0-9]/", '', $dataPostId);
+						if (($channel_type === CHANNEL_TYPE_FACEBOOK)) {
+							$countD = 0;
+							try
+							{
+								$findId = new Finduid((object)['link' => $data['PostOriginUrl']]);
+								$res = $findId->getIdPostByTraoDoiSub()->getResponse();
+								if (empty($res['id'])) {
+									$res = $findId->getIdPostByAPT()->getResponse();
+								}
+								if($res['id']){
+									$pos = strpos($res['id'], ":");
+									if($pos){
+										$arrId = explode(':',$res['id']);
+										$res['id'] = $arrId[0];
+									}
+								}
+
+
+							} catch (\Exception $e)
+							{
+								$res['id'] = '';
+							}
+							$dataPostId = ! empty($res['id']) ? $res['id'] : $data['PostId'];
 						}
-						if($channel_type === CHANNEL_TYPE_TIKTOK){
+
+//						if ($channel_type === CHANNEL_TYPE_FACEBOOK)
+//						{
+//							$keywordComments = BusinessApi::getInstance()->createTableAndSaveData($data['PostId'], $data['Comments']);
+////							$dataPostId = preg_replace("/[^0-9]/", '', $dataPostId);
+//						}
+						if ($channel_type === CHANNEL_TYPE_TIKTOK)
+						{
 							$shareCount = $data['ViewCount'];
 						}
 						$check = BusinessItem::getInstance()->findByPostId($dataPostId);
@@ -158,46 +196,34 @@ class Api extends ApiController {
 		$this->response(['message' => 'Không tìm thấy dự liệu đẩy lên'], 400);
 	}
 
-	public function sendNotice()
-	{
-
-		$options = array(
-			'cluster' => 'ap1',
-			'useTLS'  => TRUE
-		);
-		$pusher = new Pusher\Pusher(
-			PUSHER_AUTH_KEY,
-			PUSHER_SECRET,
-			PUSHER_APP_ID,
-			$options
-		);
-		$data['message'] = 'hello world';
-		$data['name'] = 'Mỹ test';
-
-		$pusher->trigger('SIVC', 'notice', $data);
-		exit();
-
-	}
-
 	public function posts_interactive()
 	{
 		$key = $this->input->get('key', TRUE);
 		$limit = $this->input->get('limit', TRUE);
 		$type = $this->input->get('type', TRUE);
 		$page = intval($this->input->get('page', TRUE));
+		$isPrivate = $this->input->get('is_private',TRUE);
+		$socialId = $this->input->get('social_id',TRUE);
+		// 1 fanpage ; 2 groupd ; 3 profile
 		$conditions = [];
 		if ($type)
 		{
-			$conditions['type'] = $type;
+			$conditions['items.type'] = $type;
 		}
 		if ( ! $limit)
 		{
 			$limit = ITEM_PER_PAGE_100;
 		}
+		if($isPrivate){
+			$conditions['s.is_private'] = (bool)$isPrivate;
+		}
+		if($socialId){
+			$conditions['s.social_id'] = $socialId;
+		}
 		$offset = $page ? $limit * ($page - 1) : 0;
-		$conditions['i.key_craw IS NULL'] = NULL;
-		$conditions['i.channel_type'] = CHANNEL_TYPE_FACEBOOK;
-		$items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $limit,'id ASC');
+		$conditions['items.key_craw IS NULL'] = NULL;
+		$conditions['items.channel_type'] = CHANNEL_TYPE_FACEBOOK;
+		$items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $limit, 'id ASC');
 		//$items = [];
 		if ($items)
 		{
@@ -205,21 +231,36 @@ class Api extends ApiController {
 			$updateIds = [];
 			foreach ($items as $item)
 			{
+				$typeName = '';
+				if ($item->type == 1)
+				{
+					$typeName = 'fanpage';
+				} elseif ($item->type == '2')
+				{
+					$typeName = 'group';
+				} elseif ($item->type == '3')
+				{
+					$typeName = 'profile';
+				}
+
 				$socialItem = BusinessSocialItem::getInstance()->findBySocialId($item->post_owner_id);
 				$updateIds[] = [
 					'id'  => $item->id,
 					'key' => $key
 				];
+
 				if ( ! empty($socialItem->name))
 				{
 					$res[] = [
 						'Id'            => $item->id,
 						'PostId'        => $item->post_id,
 						'Status'        => $item->status,
-						'PostType'      => 'link',
+						'PostType'      => $typeName,
 						'PostOwnerId'   => $item->post_owner_id,
 						'PostOwnerName' => $socialItem->name,
 						'FbType'        => $item->type,
+						'IsPrivate'		=> (bool)$socialItem->is_private,
+						'Token'			=> $socialItem->token
 					];
 				}
 			}
@@ -233,18 +274,21 @@ class Api extends ApiController {
 		$this->response([]);
 
 	}
+
 	public static function unFormatNumber($numberFormat)
 	{
 		$numberFormat = strtolower($numberFormat);
 		$numberFormat = str_replace('comments', '', $numberFormat);
-		if (strpos($numberFormat, 'k')) {
+		if (strpos($numberFormat, 'k'))
+		{
 			$numberFormat = str_replace('k', '', $numberFormat);
 			return $numberFormat * 1000;
-		} elseif (strpos($numberFormat, 'm')) {
+		} elseif (strpos($numberFormat, 'm'))
+		{
 			$numberFormat = str_replace('m', '', $numberFormat);
 			return $numberFormat * 1000000;
-		}
-		else {
+		} else
+		{
 			return preg_replace("/[^0-9]/", '', $numberFormat);
 		}
 	}
@@ -287,62 +331,102 @@ class Api extends ApiController {
 	public function import_interactive()
 	{
 		$request = $this->inputJson([], FALSE);
+//		file_put_contents(time().'.json',json_encode($request));
 		if (empty($request->PostId))
 		{
 			$this->response(['message' => 'Field PostId does not exists.'], 500);
 		}
 		$item = BusinessItem::getInstance()->findByPostId($request->PostId);
-		if ($item->channel_type !== CHANNEL_TYPE_FACEBOOK)
-		{
-			$this->response(['message' => 'Channel type not support'], 200);
-			exit();
-		}
+
 		if ( ! $item)
 		{
 			$this->response(['message' => 'PostId  not exists.'], 500);
 		}
-
-		$interactions['comment'] = [];
-		$interactions['like'] = [];
-		$interactions['share'] = [];
+		if ($item && $item->channel_type !== CHANNEL_TYPE_FACEBOOK)
+		{
+			$this->response(['message' => 'Channel type not support'], 200);
+			exit();
+		}
+		$interactions = [];
+		$numberComments = 0;
+		$numberLikes = 0;
+		$numberShares = 0;
 		if ( ! empty($request->CommentUID))
 		{
-			$interactions['comment'] = $request->CommentUID;
-			//BusinessApi::getInstance()->handle_file($item->post_id, $request->CommentUID, 'comment');
+			$numberComments = count($request->CommentUID);
+			$interactions[] = $request->CommentUID;
 		}
 		if ( ! empty($request->ReactionUID))
 		{
-			$interactions['like'] = $request->ReactionUID;
-			//BusinessApi::getInstance()->handle_file($item->post_id, $request->ReactionUID, 'like');
+			$numberLikes = count($request->ReactionUID);
+			$interactions[] = $request->ReactionUID;
 		}
 		if ( ! empty($request->ShareUID))
 		{
-			$interactions['share'] = $request->ShareUID;
-
-			//BusinessApi::getInstance()->handle_file($item->post_id, $request->ShareUID, 'share');
+			$numberShares = count($request->ShareUID);
+			$interactions[] = $request->ShareUID;
 		}
-		if (count($interactions['comment']) || count($interactions['like']) || count($interactions['share']))
+		$interactions = array_merge(...$interactions);
+		$interactions = array_unique($interactions);
+		$countData = 0;
+		if ($interactions)
 		{
-			BusinessApi::getInstance()->getInfoInteractions($item->post_id, $interactions, $item);
+			$fileName = "$item->post_id.json";
+			$currentInteractions = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
+			$interactions = array_flip($interactions);
+			foreach ($currentInteractions as $currentInteraction)
+			{
+				if (isset($interactions[$currentInteraction['uid']]))
+				{
+					unset($interactions[$currentInteraction['uid']]);
+				}
+			}
+			$interactions = array_flip($interactions);
+			$interactions = array_values($interactions);
+			$response = Common::getRequest(API_GET_USER_INFO_BY_UIDS, $interactions, [], 'POST');
+			$response = json_decode($response['response'], TRUE);
+			if ($response['success'])
+			{
+				$newInteractions = $response['data']?? [];
+				if ($newInteractions)
+				{
+					$tempInteractions = [];
+ 					foreach ($newInteractions as $interaction)
+					{
+						$interaction['keywords'] = $item->keywords;
+						$interaction['created_date'] = date('Y-m-d');
+						$interaction['post_id'] = $item->post_id;
+						$tempInteractions[] = $interaction;
+					}
+					if ($tempInteractions)
+					{
+						Interaction::insertBatch($tempInteractions);
+					}
+					$dataInteractions = array_merge($newInteractions, $currentInteractions);
+					GoogleCloudStorage::uploadFiles(
+						[
+							[
+								'name'  => $fileName,
+								'value' => json_encode($response['data'] ?? [])
+							]
+						],
+						BUCKET_NAME_ADSSPY,
+						NULL
+					);
+					$countData = count($dataInteractions);
+				}
+			}
 		}
 
-		$countData = array(
-			//'key'       => '',
-			'craw_date' => date(DATE_TIME_FORMAT),
-		);
+		$dataUpdate = [
+			'total_like'    => $numberLikes > 0 ? $numberLikes : $item->total_like,
+			'total_share'   => $numberShares > 0 ? $numberShares : $item->total_share,
+			'total_comment' => $numberComments > 0 ? $numberComments : $item->total_comment,
+			'count_d'       => $countData > 0 ? $countData : $item->count_d,
+		];
+		$isUpdate = BusinessItem::getModel()->update($item->id, $dataUpdate, TRUE, FALSE);
 
-		$totalLike = BusinessApi::getInstance()->countByConditions($request->PostId, ['is_like' => TRUE]);
-		$totalShare = BusinessApi::getInstance()->countByConditions($request->PostId, ['is_share' => TRUE]);
-		$totalComment = BusinessApi::getInstance()->countByConditions($request->PostId, ['is_comment' => TRUE]);
-		$countLikeShare = $totalLike + $totalShare;
-		$countData['count_like_share'] = $countLikeShare;
-		$countData['count_comment'] = $totalComment;
-		$countData['count_d'] = $countLikeShare + $totalComment;
-		$countData['total_like'] = $totalLike;
-		$countData['total_comment'] = $totalComment;
-		$countData['total_share'] = $totalShare;
-		$countData['count'] = BusinessApi::getInstance()->countALLTableV($request->PostId);
-		$isUpdate = BusinessItem::getModel()->update($item->id, $countData, TRUE, FALSE);
+
 		if ( ! empty($isUpdate['code']))
 		{
 			$this->response($isUpdate, 200);
@@ -401,7 +485,7 @@ class Api extends ApiController {
 				];
 			}
 		}
-		echo json_encode($res,  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		echo json_encode($res, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 		exit();
 	}
 

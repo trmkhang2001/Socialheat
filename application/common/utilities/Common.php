@@ -464,4 +464,32 @@ class Common{
 			return false;
 		}
 	}
+
+
+	public static function getRequest(
+		string $endpoint,
+		$params = [],
+		array $headers = [],
+		string $method = 'GET'
+	): array {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $endpoint);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		if ($method === 'POST') {
+			curl_setopt($ch, CURLOPT_POST, true);
+			if (is_array($params)) {
+				$params = json_encode($params);
+			}
+
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+		}
+
+		$response = curl_exec($ch);
+		$statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$curl_errors = curl_error($ch);
+		curl_close($ch);
+
+		return ['response' => $response, 'statusCode' => $statusCode, 'errors' => $curl_errors];
+	}
 }

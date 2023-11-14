@@ -37,7 +37,8 @@ class Item extends MyModel {
 	 * @inheritdoc
 	 */
 	public static $fields = array(
-		'name', 'post_id', 'type','image_url','status','content','channel_type','keywords','post_owner_id','craw_date'
+		'name', 'post_id', 'type','image_url','status','content','channel_type','keywords','post_owner_id','craw_date',
+		'total_like','total_share','total_comment','count_d'
 	);
 	public static $requiredFiled = array(
 		//'name'    => 'Name',

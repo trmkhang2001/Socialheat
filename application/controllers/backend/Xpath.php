@@ -96,7 +96,7 @@ class Xpath extends BackendController
 
 	public function token()
 	{
-		$item = BusinessXpath::getInstance()->findByConditions(['channel_type' => XPATH_TYPE_TOOL_POST_FB_TOKEN], TRUE);
+		$item = BusinessXpath::getInstance()->findByConditions(['type' => XPATH_TYPE_TOOL_POST_FB_TOKEN], TRUE);
 		if (empty($item)) {
 			$model = BusinessXpath::getModel();
 			$item = Common::getFieldObj($model::$fields);

@@ -1,6 +1,7 @@
 <?php
 
 use app\common\utilities\Common;
+use app\common\utilities\GoogleCloudStorage;
 use app\common\utilities\Pagination;
 use app\controllers\backend\BackendController;
 use app\common\business\BusinessItem;
@@ -81,7 +82,7 @@ class Monitoring extends BackendController
         }
         $items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage, $orderBy);
         $total = BusinessItem::getInstance()->getCount($conditions);
-        $pagination = Pagination::bootstrap($total, '', $itemPerPage);
+        $pagination = Pagination::bootstrap($total, '', $itemPerPage,'page', 5);
         $channelTypes = $this->config->config['params']['channel_types'];
         $this->temp['user'] = User::getAuthSession();
         $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
@@ -92,7 +93,7 @@ class Monitoring extends BackendController
         $this->temp['data']['keywordColors'] = [];
         $this->temp['data']['pagination'] = $pagination;
         $this->temp['data']['channelTypes'] = $channelTypes;
-        $this->temp['data']['types'] = $this->config->config['params']['types'];;
+        $this->temp['data']['types'] = $this->config->config['params']['types'];
         $this->temp['data']['colorBg'] = $colorBg;
         $this->temp['template'] = 'backend/monitoring/index';
     }
@@ -130,6 +131,7 @@ class Monitoring extends BackendController
     {
         $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
         $group = BusinessItem::getInstance()->findByPostId($postId);
+
         if (($group->channel_type && $group->channel_type !== CHANNEL_TYPE_FACEBOOK) || !$group) {
             show_404('Post id không tồn tại');
         }
@@ -166,8 +168,37 @@ class Monitoring extends BackendController
         $data['total_comment'] = $group->total_comment;
         $data['total'] = 1000;
         $data['content'] = (array)$group;
-        $data['items']['numpages'] = ceil($total_records / ITEM_PER_PAGE_10);
-        $this->temp['colorBg'] = $colorBg;
+		$fileName = "$group->post_id.json";
+		$data['items']['numpages'] = ceil($total_records / ITEM_PER_PAGE_10);
+		$fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
+		$profiles = [];
+		$page = $this->input->get('page', TRUE);
+		$limit = $this->input->get('limit', TRUE);
+		$itemPerPage = ITEM_PER_PAGE_10;
+		if ($limit)
+		{
+			$itemPerPage = $limit;
+		}
+		$user = $this->userInfo;
+
+		$offset = $page ? $itemPerPage * ($page - 1) : 0;
+		$count = $itemPerPage + $offset;
+		foreach ($fileContent as $index => $profile)
+		{
+			if ($index >= $offset && $index < $count)
+			{
+				$profiles[] = $profile;
+
+			}
+			if ($index > $count)
+			{
+				break;
+			}
+		}
+		$pagination = Pagination::bootstrap($group->count_d, '', $itemPerPage, 'page', 5);
+		$data['interactions'] = $profiles;
+		$data['pagination'] = $pagination;
+		$this->temp['colorBg'] = $colorBg;
         $this->temp['page_title'] = 'Detail item';
         $this->temp['data'] = $data;
         $this->temp['template'] = 'backend/monitoring/uids';

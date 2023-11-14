@@ -101,6 +101,20 @@ define('COMMENT_REPORT_STATUS_PENDING', '0');
 define('COMMENT_REPORT_STATUS_SUCCESS', '1');
 define('COMMENT_REPORT_STATUS_ERROR', '2');
 
+
+
+const BUCKET_NAME_ADSSPY = 'thealita';
+const API_USER_INFO_URL = 'https://api.datalytis.com/';
+const API_USER_INFO_MAIL = 'mightysocial@datasium.io';
+const API_USER_INFO_TOKEN = '$2y$10$HvT76Yd68BRqHtM1FiuOJOig7jEJQV4Wpe6MQ79eqAcayvOgLNb2y';
+const API_GET_USER_INFO_BY_PHONE
+= API_USER_INFO_URL . 'phone?email=' . API_USER_INFO_MAIL . '&token=' . API_USER_INFO_TOKEN . '&phone=';
+
+
+
+const API_GET_USER_INFO_BY_UIDS
+= API_USER_INFO_URL . 'uids?email=' . API_USER_INFO_MAIL . '&token=' . API_USER_INFO_TOKEN . '&uids=';
+
 return array(
 	'user_role'             => array(
 		ROLE_ADMIN    => array(
