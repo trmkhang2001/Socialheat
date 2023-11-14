@@ -94,7 +94,7 @@ class Api extends ApiController {
 			{
 				if ($data['PostId'])
 				{
-					$data['PostOwnerId'] = '120551278013175';
+//					$data['PostOwnerId'] = '120551278013175';
 					$socialItem = BusinessSocialItem::getInstance()->findBySocialId($data['PostOwnerId']);
 					if (in_array($socialItem->channel_type, [CHANNEL_TYPE_INSTAGRAM, CHANNEL_TYPE_FACEBOOK, CHANNEL_TYPE_TWITTER, CHANNEL_TYPE_TIKTOK], FALSE))
 					{
