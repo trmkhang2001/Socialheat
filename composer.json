@@ -19,9 +19,11 @@
 		"ext-curl": "*",
 		"ext-mbstring": "*",
 		"phpunit/phpunit": "4.* || 5.*",
-		"zendframework/zend-inputfilter": "^2.10",
+		"zendframework/zend-inputfilter": "*",
 		"yidas/codeigniter-psr4-autoload": "^2.0",
-		"pusher/pusher-php-server": "^7.0"
+		"pusher/pusher-php-server": "^7.0",
+		"google/cloud-storage": "^1.35",
+		"halaxa/json-machine": "^1.1"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
