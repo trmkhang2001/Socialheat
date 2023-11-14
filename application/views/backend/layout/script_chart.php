@@ -56,4 +56,104 @@
             responsive: true
         }
     });
+    var ctxD = document.getElementById("doughnutChartGender");
+    var myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["Male", "Female", "None"],
+            datasets: [{
+                data: [64, 10, 26],
+                backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+                hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            responsive: true
+        }
+    });
+    var ctxD = document.getElementById("doughnutChartAge");
+    var myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["18-30", "30-40", "40-60"],
+            datasets: [{
+                data: [64, 10, 26],
+                backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+                hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            responsive: true
+        }
+    });
+    var ctxD = document.getElementById("doughnutChartRelationship");
+    var myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["Single", "Married", "Other"],
+            datasets: [{
+                data: [64, 10, 26],
+                backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+                hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            responsive: true
+        }
+    });
+    var ctxD = document.getElementById("doughnutChartFriends");
+    var myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["0-2000", "2000-4000", "4000+"],
+            datasets: [{
+                data: [64, 10, 26],
+                backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+                hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            responsive: true
+        }
+    });
+    var ctxD = document.getElementById("doughnutChartFollows");
+    var myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["0-3000", "3000-6000", "6000+"],
+            datasets: [{
+                data: [64, 10, 26],
+                backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+                hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            responsive: true
+        }
+    });
 </script>

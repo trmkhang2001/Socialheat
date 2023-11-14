@@ -71,6 +71,106 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
             <!--end::Col-->
         </div>
         <!-- end::Row -->
+        <!-- begin::Row -->
+        <div class="row">
+            <div class=" row mb-5">
+                <div class="col-4">
+                    <div class="card">
+                        <!--begin::Header-->
+                        <div class="card-header">
+                            <!--begin::Title-->
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold text-gray-800">Gender</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">3 types of gender</span>
+                            </h3>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body p-10">
+                            <canvas id="doughnutChartGender"></canvas>
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card"> <!--begin::Header-->
+                        <div class="card-header">
+                            <!--begin::Title-->
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold text-gray-800">Age</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">6 age ranges</span>
+                            </h3>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body p-10">
+                            <canvas id="doughnutChartAge"></canvas>
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card"> <!--begin::Header-->
+                        <div class="card-header">
+                            <!--begin::Title-->
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold text-gray-800">Relationship</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">The most common 6 types of relationship</span>
+                            </h3>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body p-10">
+                            <canvas id="doughnutChartRelationship"></canvas>
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-4">
+                    <div class="card">
+                        <!--begin::Header-->
+                        <div class="card-header">
+                            <!--begin::Title-->
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold text-gray-800">Friends</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">Friends of friends</span>
+                            </h3>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body p-10">
+                            <canvas id="doughnutChartFriends"></canvas>
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card"> <!--begin::Header-->
+                        <div class="card-header">
+                            <!--begin::Title-->
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold text-gray-800">Follows</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">User’s followers</span>
+                            </h3>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body p-10">
+                            <canvas id="doughnutChartFollows"></canvas>
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end::Row -->
         <div class="export-status form-group m-form__group" style="display: none;">
             <h6>Downloading</h6>
             <div class="progress">

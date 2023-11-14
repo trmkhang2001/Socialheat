@@ -8,7 +8,7 @@
  */
 ?>
 <!-- Dashboard -->
-<div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
+<div class="m-content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
     <div class="container-fluid">
         <h1 class="mb-7">Monitoring</h1>
         <div class="clearfix form-filter m--margin-bottom-10">
@@ -65,7 +65,7 @@
     async function sendDataToDB(target) {
         var totals = '<?= $total ?>';
         var home_url = '<?= site_url() ?>';
-        var url = '<?= site_url('/backend/clients/download') ?>';
+        var url = '<?= site_url('/backend/monitoring/download') ?>';
         let itemPerPage = 1000;
         var number_of_page = Math.ceil(parseInt(totals.replace(/,/g, '')) / itemPerPage);
         csv_data = [];
