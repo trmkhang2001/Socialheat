@@ -38,6 +38,7 @@ $types = $params['types'];
                         <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
                             <span class="path1"></span><span class="path2"></span></i>
                         <input type="text" name="q" value="<?= isset($filters['q']) ? $filters['q'] : '' ?>" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-13 keyword_filters" id="inputValidation" placeholder="Keyword on Post">
+                        <button id="btn-submit" type="submit" hidden></button>
                     </div>
                 </div>
                 <div class="me-3 col post_type">
@@ -99,6 +100,16 @@ $types = $params['types'];
 
 </form>
 <script>
+    var input = document.getElementById("inputValidation");
+    input.addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementById("btn-submit").click();
+        }
+    });
     $('input[name=from_date],input[name=to_date]').on('blur', function() {
         if (this.value === '') {
             this.type = 'text';

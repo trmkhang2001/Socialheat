@@ -98,6 +98,13 @@ License: For each use you must have a valid license purchased only from above li
             <?php $this->load->view($template, $data); ?>
         </section>
         <!--end::Wrapper-->
+        <div class="container">
+            <footer class="py-3 my-4 border-top">
+                <div class="d-flex justify-content-center">
+                    <span class="mb-3 mb-md-0 text-muted">© 2023 SOCIAL HEAT</span>
+                </div>
+            </footer>
+        </div>
     </div>
     <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
         <i class="fas fa-arrow-up"></i>
