@@ -25,7 +25,7 @@ $types = $params['types'];
                 </select>
             </div>
         </div>
-        <div class="" style="overflow:scroll;height: 300px;">
+        <div class="" style="overflow:scroll;height: 200px;">
             <?php $this->load->view('/backend/monitoring/item_keywords'); ?>
         </div>
 

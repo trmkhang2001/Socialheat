@@ -28,11 +28,12 @@
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
-	"autoload":{
-		"psr-4":{
-			"app\\":"application"
+	"autoload": {
+		"psr-4": {
+			"app\\": "application"
 		},
-		"classmap": ["system/"]
-
+		"classmap": [
+			"system/"
+		]
 	}
 }

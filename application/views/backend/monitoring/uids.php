@@ -33,37 +33,43 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
     <div class="container-fluid" id="kt_content_container">
         <h1 class="mb-7">Monitoring</h1>
         <!--begin::Row-->
-        <div class="row g-5 g-xl-10 mb-xl-10">
+        <div class="row mb-5">
             <!--begin::Col-->
-            <div class="col-xxl-8">
+            <div class="col-8">
                 <!--begin::Chart widget 38-->
                 <?php $this->load->view('/backend/monitoring/_item_fb_post', ['item' => $content, 'key' => $content['post_id']]) ?>
                 <!--end::Chart widget 38-->
             </div>
             <!--end::Col-->
             <!--begin::Col-->
-            <div class="col-xxl-4">
-                <!--begin::Engage widget 1-->
-                <div class="row h-md-100 d-flex justify-content-center" dir="ltr">
-                    <div class="card col-5 me-3 mb-3 p-10">
-                        <img class="img" src="/assets/images/icon-total-audience.png" alt="">
-                        <span class="tgray mt-3 fw-bold">Total Profile</span>
-                        <div class="fw-bold fs-2 mt-3"><?php echo number_format($content['count_d']); ?></div>
-                    </div>
-                    <div class="card col-5 mb-3 p-10">
-                        <img class="img" src="/assets/images/icon_total_mail.png" alt="">
-                        <span class="tgray mt-3 fw-bold">Total Email</span>
-                        <div class="fw-bold fs-2 mt-3"><?php echo number_format($group_data['email_count']) ?></div>
-                    </div>
-                    <div class="card col-5 me-3 p-10">
-                        <img class="img" src="/assets/images/icon_location.png" alt="">
-                        <span class="tgray mt-3 fw-bold">Location</span>
-                        <div class="fw-bold fs-2 mt-3"><?php echo number_format($group_data['relationship_count']) ?></div>
-                    </div>
-                    <div class="card col-5 p-10">
-                        <img class="img" src="/assets/images/icon_relationship.png" alt="">
-                        <span class="tgray mt-3 fw-bold">Relationship</span>
-                        <div class="fw-bold fs-2 mt-3"><?php echo number_format($group_data['relationship_count']) ?></div>
+            <div class="col-4">
+                <div class="">
+                    <!--begin::Engage widget 1-->
+                    <div class="d-flex justify-content-center align-items-center row">
+                        <div class="col">
+                            <div class="card p-5 d-flex justify-content-center">
+                                <img class="img" src="/assets/images/icon-total-audience.png" alt="">
+                                <span class="tgray mt-3 fw-bold">Total Profile</span>
+                                <div class="fw-bold fs-2 mt-3"><?php echo number_format($content['count_d']); ?></div>
+                            </div>
+                            <div class="card p-5 mt-5">
+                                <img class="img" src="/assets/images/icon_total_mail.png" alt="">
+                                <span class="tgray mt-3 fw-bold">Total Email</span>
+                                <div class="fw-bold fs-2 mt-3"><?php echo number_format($group_data['email_count']) ?></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card p-5">
+                                <img class="img" src="/assets/images/icon_location.png" alt="">
+                                <span class="tgray mt-3 fw-bold">Location</span>
+                                <div class="fw-bold fs-2 mt-3"><?php echo number_format($group_data['relationship_count']) ?></div>
+                            </div>
+                            <div class="card p-5 mt-5">
+                                <img class="img" src="/assets/images/icon_relationship.png" alt="">
+                                <span class="tgray mt-3 fw-bold">Relationship</span>
+                                <div class="fw-bold fs-2 mt-3"><?php echo number_format($group_data['relationship_count']) ?></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--end::Engage widget 1-->
@@ -72,101 +78,99 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
         </div>
         <!-- end::Row -->
         <!-- begin::Row -->
-        <div class="row">
-            <div class=" row mb-5">
-                <div class="col-4">
-                    <div class="card">
-                        <!--begin::Header-->
-                        <div class="card-header">
-                            <!--begin::Title-->
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Gender</span>
-                                <span class="text-gray-500 mt-1 fw-semibold fs-6">3 types of gender</span>
-                            </h3>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body p-10">
-                            <canvas id="doughnutChartGender"></canvas>
-                        </div>
-                        <!--end::Body-->
+        <div class=" row mb-5">
+            <div class="col-4">
+                <div class="card">
+                    <!--begin::Header-->
+                    <div class="card-header">
+                        <!--begin::Title-->
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold text-gray-800">Gender</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-6">3 types of gender</span>
+                        </h3>
+                        <!--end::Title-->
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="card"> <!--begin::Header-->
-                        <div class="card-header">
-                            <!--begin::Title-->
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Age</span>
-                                <span class="text-gray-500 mt-1 fw-semibold fs-6">6 age ranges</span>
-                            </h3>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body p-10">
-                            <canvas id="doughnutChartAge"></canvas>
-                        </div>
-                        <!--end::Body-->
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body p-10">
+                        <canvas id="doughnutChartGender"></canvas>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="card"> <!--begin::Header-->
-                        <div class="card-header">
-                            <!--begin::Title-->
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Relationship</span>
-                                <span class="text-gray-500 mt-1 fw-semibold fs-6">The most common 6 types of relationship</span>
-                            </h3>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body p-10">
-                            <canvas id="doughnutChartRelationship"></canvas>
-                        </div>
-                        <!--end::Body-->
-                    </div>
+                    <!--end::Body-->
                 </div>
             </div>
-            <div class="row mb-5">
-                <div class="col-4">
-                    <div class="card">
-                        <!--begin::Header-->
-                        <div class="card-header">
-                            <!--begin::Title-->
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Friends</span>
-                                <span class="text-gray-500 mt-1 fw-semibold fs-6">Friends of friends</span>
-                            </h3>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body p-10">
-                            <canvas id="doughnutChartFriends"></canvas>
-                        </div>
-                        <!--end::Body-->
+            <div class="col-4">
+                <div class="card"> <!--begin::Header-->
+                    <div class="card-header">
+                        <!--begin::Title-->
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold text-gray-800">Age</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-6">6 age ranges</span>
+                        </h3>
+                        <!--end::Title-->
                     </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body p-10">
+                        <canvas id="doughnutChartAge"></canvas>
+                    </div>
+                    <!--end::Body-->
                 </div>
-                <div class="col-4">
-                    <div class="card"> <!--begin::Header-->
-                        <div class="card-header">
-                            <!--begin::Title-->
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Follows</span>
-                                <span class="text-gray-500 mt-1 fw-semibold fs-6">User’s followers</span>
-                            </h3>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body p-10">
-                            <canvas id="doughnutChartFollows"></canvas>
-                        </div>
-                        <!--end::Body-->
+            </div>
+            <div class="col-4">
+                <div class="card"> <!--begin::Header-->
+                    <div class="card-header">
+                        <!--begin::Title-->
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold text-gray-800">Relationship</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-6">The most common 6 types of relationship</span>
+                        </h3>
+                        <!--end::Title-->
                     </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body p-10">
+                        <canvas id="doughnutChartRelationship"></canvas>
+                    </div>
+                    <!--end::Body-->
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-4">
+                <div class="card">
+                    <!--begin::Header-->
+                    <div class="card-header">
+                        <!--begin::Title-->
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold text-gray-800">Friends</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-6">Friends of friends</span>
+                        </h3>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body p-10">
+                        <canvas id="doughnutChartFriends"></canvas>
+                    </div>
+                    <!--end::Body-->
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card"> <!--begin::Header-->
+                    <div class="card-header">
+                        <!--begin::Title-->
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold text-gray-800">Follows</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-6">User’s followers</span>
+                        </h3>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body p-10">
+                        <canvas id="doughnutChartFollows"></canvas>
+                    </div>
+                    <!--end::Body-->
                 </div>
             </div>
         </div>
@@ -228,9 +232,9 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                     </svg>
                                                                 </div>
                                                                 <div class="table_scrool_wrapper">
-                                                                    <table id="uidTable" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer">
+                                                                    <table id="uidTable" class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
                                                                         <thead>
-                                                                            <tr>
+                                                                            <tr class="fw-bold text-muted">
                                                                                 <th class="uid sorting">Social Profile</th>
                                                                                 <th class="Name name sorting">Name</th>
                                                                                 <th class="email">Email</th>
@@ -244,73 +248,62 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                             </tr>
                                                                         </thead>
 
-	                                                                    <tbody>
-																		<?php
-																		/**
-																		 * @var $interactions
-																		 */
-																		foreach ($interactions as $value):
-																			?>
-		                                                                    <tr>
-			                                                                    <td>
-				                                                                    <div class="d-flex align-items-center">
-					                                                                    <a href="https://facebook.com/<?= $value['uid'] ?>"
-					                                                                       class="symbol symbol-50px"
-					                                                                       target="_blank">
-						                                                                    <img style="width: 40px" class="m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $value['uid'] ?>/picture?type=large&width=500&height=500&access_token=2712477385668128|b429aeb53369951d411e1cae8e810640"
-						                                                                         alt="">
-					                                                                    </a>
+                                                                        <tbody>
+                                                                            <?php
+                                                                            /**
+                                                                             * @var $interactions
+                                                                             */
+                                                                            foreach ($interactions as $value) :
+                                                                            ?>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div class="d-flex align-items-center symbol symbol-50px">
+                                                                                            <a href="https://facebook.com/<?= $value['uid'] ?>" class="symbol symbol-50px" target="_blank">
+                                                                                                <img style="width: 40px;" class="m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $value['uid'] ?>/picture?type=large&width=500&height=500&access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
+                                                                                            </a>
 
-				                                                                    </div>
-			                                                                    </td>
-			                                                                    <td><a target="_blank"
-			                                                                           href="https://facebook.com/<?= $value['uid'] ?>"
-			                                                                           class="text-gray-800 text-hover-primary fs-5 fw-bold"
-			                                                                           data-kt-ecommerce-product-filter="product_name"><?= $value['name'] ?></a></td>
-			                                                                    <td><?= $value['email'] ?  substr($value['email'], 0, -4) . '****' : ''?></td>
-			                                                                    <td><?= substr($value['phone'], 0, -4) . '****'?></td>
-			                                                                    <td><?= $value['friends']?></td>
-			                                                                    <td><?= $value['follow']?></td>
-			                                                                    <td><?= $value['birthday']?></td>
-			                                                                    <td>
-																					<?php
-																					if ($value['sex'] === 'male'): ?>
-					                                                                    <span class="m-badge  m-badge--male m-badge--wide"
-					                                                                          style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i
-								                                                                    class="fa fa-mars"
-								                                                                    aria-hidden="true"></i>male</span>
-																					<?php
-				                                                                    elseif ($value['sex'] === 'female'): ?>
-					                                                                    <span class="m-badge  m-badge--female m-badge--wide"
-					                                                                          style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #E91E63"">
-					                                                                    <i class="fa fa-venus"
-					                                                                       aria-hidden="true"></i>
-					                                                                    female</span>
-																					<?php
-																					else: ?>
-					                                                                    <div class="d-flex">
-						                                                                    <div style="width: 20px;height: 20px;border-radius: 50%;background-color: #8c8c93"></div>
-						                                                                    <div style="padding-left: 5px">other
-						                                                                    </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td><a target="_blank" href="https://facebook.com/<?= $value['uid'] ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?= $value['name'] ?></a></td>
+                                                                                    <td><?= $value['email'] ?  substr($value['email'], 0, -4) . '****' : '' ?></td>
+                                                                                    <td><?= substr($value['phone'], 0, -4) . '****' ?></td>
+                                                                                    <td><?= $value['friends'] ?></td>
+                                                                                    <td><?= $value['follow'] ?></td>
+                                                                                    <td><?= $value['birthday'] ?></td>
+                                                                                    <td>
+                                                                                        <?php
+                                                                                        if ($value['sex'] === 'male') : ?>
+                                                                                            <span class="m-badge  m-badge--male m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i class="fa fa-mars" aria-hidden="true"></i>male</span>
+                                                                                        <?php
+                                                                                        elseif ($value['sex'] === 'female') : ?>
+                                                                                            <span class="m-badge  m-badge--female m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #E91E63"">
+					                                                                    <i class=" fa fa-venus" aria-hidden="true"></i>
+                                                                                                female</span>
+                                                                                        <?php
+                                                                                        else : ?>
+                                                                                            <div class="d-flex">
+                                                                                                <div style="width: 20px;height: 20px;border-radius: 50%;background-color: #8c8c93"></div>
+                                                                                                <div style="padding-left: 5px">other
+                                                                                                </div>
 
-					                                                                    </div>
-																					<?php
+                                                                                            </div>
+                                                                                        <?php
 
 
-																					endif; ?>
-			                                                                    </td>
-			                                                                    <td><?= $value['relationship'] ?></td>
-			                                                                    <td><?= $value['city'] ?></td>
-		                                                                    </tr>
-																		<?php
-																		endforeach ?>
-	                                                                    </tbody>
+                                                                                        endif; ?>
+                                                                                    </td>
+                                                                                    <td><?= $value['relationship'] ?></td>
+                                                                                    <td><?= $value['city'] ?></td>
+                                                                                </tr>
+                                                                            <?php
+                                                                            endforeach ?>
+                                                                        </tbody>
 
                                                                     </table>
                                                                 </div>
                                                                 <div class="row mt-5">
 
-																	<?= $pagination?>
+                                                                    <?= $pagination ?>
 
                                                                 </div>
                                                             </div>

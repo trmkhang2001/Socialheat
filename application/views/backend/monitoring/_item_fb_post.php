@@ -16,6 +16,8 @@ $item['image_url'] = 'https://storage.googleapis.com/' . $item['image_url'];
 $total_like = (int)$item['total_like'];
 $total_share = (int)$item['total_share'];
 $total_comment = (int)$item['total_comment'];
+$colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
+$colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
 ?>
 <style>
     .footer-item-post {
@@ -37,21 +39,32 @@ $total_comment = (int)$item['total_comment'];
         line-clamp: 10;
         -webkit-box-orient: vertical;
     }
+
+    .text-id {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 250px;
+    }
+
+    .post_link {
+        text-decoration: none;
+    }
 </style>
-<div class="card card-flush h-md-100">
+<div class="card card-flush">
     <!--begin::Header-->
     <div class="card-header pt-3 justify-content-start">
-        <div class="me-3" style="position: relative;">
-            <img class="rounded-circle" style="width: 72px; height: 72px;" src="https://chingizpro.github.io/portfolio/img/person.png" alt="">
+        <div class="" style="position: relative;">
+            <img class="border border-primary border-3 rounded-circle" style="width: 72px; height: 72px;" src="https://cmu-cdn.vinfast.vn/2023/08/450bb39b-2debaaea-51b7-4cf1-ad81-ff163874d683.jpeg" alt="">
             <a target="_blank" style="position: absolute; top: 0; right: -6px; float: left;margin-right: 6px" href="https://facebook.com/<?php echo $key; ?>">
                 <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="/assets/images/icon-fb.png" width="27"></span>
             </a>
         </div>
         <!--begin::Title-->
-        <h1 class="card-title align-items-start flex-column">
-            <span class="card-label fs-1 fw-bold text-gray-800">Post Detail</span>
-            <span class="text-gray-400 mt-1 fw-semibold fs-6"><?= $item['created_post_date'] ?> | ID: <?= $item['post_id'] ?> </span>
-        </h1>
+        <div class="card-title align-items-start flex-column" style="margin-left: 15px;">
+            <a target="_blank" href="https://facebook.com/<?php echo $key; ?>" class="card-label fs-1 fw-bold text-gray-800"><span>POST DETAIL</span></a>
+            <span class="text-gray-400 mt-1 fw-semibold fs-6 text-id"><?= $item['created_post_date'] ?> | <a target="_blank" class="post_link" href="https://facebook.com/<?php echo $key; ?>"> <span class="text-gray-400 mt-1 fw-semibold fs-6 text-id">ID: <?= $item['post_id'] ?></span></a> </span>
+        </div>
         <!--end::Title-->
     </div>
     <!--end::Header-->
@@ -70,15 +83,19 @@ $total_comment = (int)$item['total_comment'];
         <div class="d-flex">
             <?php
             $keywords = explode(',', $item['keywords']);
-
+            $indexColor = 0;
+            $bg_color = '';
+            $text_color = '';
             foreach ($keywords as $index => $keyword) :
                 $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
-                $color = '#' . substr(md5($index . time()), 0, 6);
-                $keywordsColor[$slug] = $color;
-
+                if ($indexColor > 4) {
+                    $indexColor = 0;
+                }
+                $bg_color = $colorBg[$indexColor];
+                $text_color = $colorText[$indexColor];
+                $indexColor++;
             ?>
-                <a style="background: <?= $color ?> ;border: 1px solid <?= $color ?> !important;border-radius: 7px !important;color: #000000;
-									line-height: 30px;height: 30px;font-weight: 400;padding:0 10px" href="#"><?= $keyword ?></a>
+                <a href="#" class="rounded-pill fw-bold" style="line-height: 30px;height: 30px;font-weight: 400;padding:0 10px;margin:3px; color: <?= $text_color ?>;background: <?= $bg_color ?>;"><?= $keyword ?></a>
 
             <?php endforeach; ?>
         </div>

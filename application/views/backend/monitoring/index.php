@@ -7,10 +7,63 @@
  * @var $total
  */
 ?>
+<style>
+    .margin-left-100 {
+        margin-left: 100px !important;
+    }
+
+    .border-instagram {
+        border: 3px solid #f7504f;
+    }
+
+    .border-twitter {
+        border: 3px solid #1da1f1;
+    }
+
+    .text {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* number fs-1 p-3  of lines to show */
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .chats {
+        display: inline-flex;
+    }
+
+    .text-title {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #B5B5C3;
+    }
+
+    .number {
+        font-weight: bold;
+    }
+
+    ul {
+        margin-top: 10px;
+        margin-left: 15px;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .item {
+        margin: 2px;
+    }
+
+    .title_social:hover {
+        color: var(--bs-primary) !important;
+    }
+</style>
 <!-- Dashboard -->
 <div class="m-content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
     <div class="container-fluid">
-        <h1 class="mb-7">Monitoring</h1>
+        <h1 style="margin-bottom: -20px;">Monitoring</h1>
         <div class="clearfix form-filter m--margin-bottom-10">
             <?php $this->load->view('/backend/monitoring/_item_filters', ['filters' => $filters]) ?>
         </div>

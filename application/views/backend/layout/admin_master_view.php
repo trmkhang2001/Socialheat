@@ -61,16 +61,13 @@ License: For each use you must have a valid license purchased only from above li
         left: 400px !important;
     }
 
-    #btn-back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        display: none;
+    .btn-scroll {
+        right: 48px !important;
     }
 </style>
 <!--begin::Body-->
 
-<body id="kt_body" class="header-fixed sidebar-enabled">
+<body id="kt_body" class="header-fixed">
     <!--begin::Main-->
     <!--begin::Root-->
     <div class="wrapper d-flex flex-column flex-row-fluid" style="padding-right: 0px;">
@@ -106,9 +103,14 @@ License: For each use you must have a valid license purchased only from above li
             </footer>
         </div>
     </div>
-    <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <!--begin::Scrolltop-->
+    <div id="kt_scrolltop" class="scrolltop btn-scroll" data-kt-scrolltop="true">
+        <i class="ki-duotone ki-arrow-up">
+            <span class="path1"></span>
+            <span class="path2"></span>
+        </i>
+    </div>
+    <!--end::Scrolltop-->
     <!--end::Root-->
     <!--end::Main-->
     <!--begin::Javascript-->
@@ -139,34 +141,6 @@ License: For each use you must have a valid license purchased only from above li
     <script src="/assets/demo3/js/custom/widgets.js"></script>
     <script src="/assets/demo3/js/custom/apps/chat/chat.js"></script>
     <script src="/assets/demo3/js/custom/utilities/modals/users-search.js"></script>
-    <script>
-        //Get the button
-        let mybutton = document.getElementById("btn-back-to-top");
-
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {
-            scrollFunction();
-        };
-
-        function scrollFunction() {
-            if (
-                document.body.scrollTop > 20 ||
-                document.documentElement.scrollTop > 20
-            ) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-        // When the user clicks on the button, scroll to the top of the document
-        mybutton.addEventListener("click", backToTop);
-
-        function backToTop() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-            document.documentElement.scrollTop.
-        }
-    </script>
     <script>
         $.fn.dataTable.ext.errMode = 'none';
         $('[data-toggle="tooltip"]').tooltip();

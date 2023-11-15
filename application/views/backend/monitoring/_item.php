@@ -3,7 +3,6 @@
 /**
  * @var $item
  * @var $types
- * @var $colorBg
  * @var $channel_type
  * @var $iconImage
  * @var $channelTypes
@@ -28,187 +27,138 @@ if ($channel_type === CHANNEL_TYPE_INSTAGRAM) {
     $classBorder = 'border-instagram ';
 }
 $typeInfo = $types[$item->type];
+$colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
+$colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
 ?>
 <style>
-    .margin-left-100 {
-        margin-left: 100px !important;
+    .data:hover {
+        cursor: pointer;
+        background-color: #F7F7F7;
+        border-radius: 30px;
     }
 
-    .border-instagram {
-        border: 3px solid #f7504f;
-    }
-
-    .border-twitter {
-        border: 3px solid #1da1f1;
-    }
-
-    .text {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        /* number fs-1 p-3  of lines to show */
-        line-clamp: 3;
-        -webkit-box-orient: vertical;
-    }
-
-    .chats {
-        display: inline-flex;
-    }
-
-    .text-title {
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #B5B5C3;
-    }
-
-    .number {
+    .read_more {
+        color: #3E97FF;
         font-weight: bold;
     }
 
-    ul {
-        margin-top: 10px;
-        margin-left: 15px;
-    }
-
-    li {
-        list-style: none;
-    }
-
-    .item {
-        margin: 2px;
+    .read_more:hover {
+        opacity: 0.5;
     }
 </style>
-<div class="card my-5 p-3">
-    <div class="portlet light bordered <?php echo !empty($is_animation) ? 'animation' : '' ?>">
-        <div class="portlet-body" id="chats">
-            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto;">
-                <div class="scroller" style="overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1">
-                    <div class="d-flex flex-stack flex-grap row">
-                        <div class="d-flex">
-                            <?php
+<div class="d-flex justify-content-center card my-5 p-3">
+    <div class="portlet-body" id="chats">
+        <div class="d-flex flex-stack flex-grap row">
+            <div class="d-flex justify-content-between">
+                <?php
 
-                            $image = $item->image;
-                            if (!$image) {
-                                $image = '/assets/images/icon.jpg';
-                            }
-                            $keywords = explode(',', $item->keywords);
-                            ?>
-                            <div class="d-flex message clearfix ">
-                                <div class="item-thumbnail">
-                                    <span class="text-center">
-                                        <a target="_blank" href="<?= $socialLink ?>">
-                                            <div style="position: relative; margin-right: 15px;">
-                                                <img style="width: 72px; height: 72px;" class="avatar rounded-circle  <?= $classBorder ?> " alt="" src="<?= site_url($image) ?>">
-                                                <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="<?= $iconImage ?>" width="27"></span>
-                                            </div>
-                                        </a>
-                                    </span>
-
+                $image = $item->image;
+                if (!$image) {
+                    $image = '/assets/images/icon.jpg';
+                }
+                $keywords = explode(',', $item->keywords);
+                ?>
+                <div class="d-flex message clearfix ">
+                    <div class="item-thumbnail">
+                        <span class="text-center">
+                            <a target="_blank" href="<?= $socialLink ?>">
+                                <div style="position: relative; margin-right: 15px;">
+                                    <img style="width: 72px; height: 72px;" class="avatar rounded-circle border border-primary border-3 <?= $classBorder ?> " alt="" src="https://cmu-cdn.vinfast.vn/2023/08/450bb39b-2debaaea-51b7-4cf1-ad81-ff163874d683.jpeg">
+                                    <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="<?= $iconImage ?>" width="27"></span>
                                 </div>
-                                <div class="d-flex justify-content-center flex-stuck">
-                                    <div class="">
-                                        <h5 class="clearfix title-type" style="position: relative;">
-                                            <a style="color: #000000" href="<?= $socialLink ?>">
-                                                <div>
-                                                    <b class="fs-1"><?= $item->social_name ?></b>
-                                                </div>
-                                                <br>
-                                                <span>
-                                                    <b style="position: absolute; top:0px; right:10px; color:#6993FF;background-color:#CCFFFF; padding:5px;" class="rounded text-uppercase"><?= $typeInfo['name'] ?></b>
-                                                    <span style="color: #B5B5C3;"><?= date('j M Y \a\t H:ia ', strtotime($item->craw_date)) ?></span>
-                                                </span>
-                                            </a>
-                                        </h5>
-                                        <div class="">
-                                            <p class="text text-justify item-content-read-less _items-post-content content-item" style="margin-bottom:0;overflow: hidden;word-break: break-word;font-size: 13px;">
-                                                <?= html_entity_decode($item->content) ?></p>
-                                            <a href="#" id="read_more" class="read_more">Read more</a>
-                                            <div class="d-flex justify-content-en clearfix mt-5 list-post-keywords">
-                                                <span class="post_keywords col-md-8 col-xs-7 no-padding" data-keyword="">
-                                                    <?php
-                                                    $count = count($colorBg);
-                                                    $indexColor = 0;
-                                                    foreach ($keywords as $index => $keyword) :
-                                                        if ($keyword) :
-                                                            $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
+                            </a>
+                        </span>
 
-                                                            if (!empty($keywordsColor[$slug])) {
-                                                                $color = $keywordsColor[$slug];
-                                                            } else {
-                                                                if ($indexColor > 4) {
-                                                                    $indexColor = 0;
-                                                                }
-                                                                $color = $colorBg[$indexColor];
-                                                                $keywordsColor[$slug] = $color;
-                                                                ++$indexColor;
-                                                            }
-
-                                                    ?>
-                                                            <i data-keyword="<?= $keyword ?>" style="color:<?= $color ?>;border: 1px solid <?= $color ?> !important"> <?= sprintf('%s', $keyword) ?></i>
-                                                    <?php endif;
-                                                    endforeach; ?>
-                                                </span>
-                                                <span class="col-xs-5 col-md-4 no-padding">
-                                                    <a class="btn btn-primary text-uppercase pull-right btn-detail-item" target="_blank" href="<?= $linkDetail ?>">View detail </a>
-                                                </span>
-                                            </div>
-                                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center flex-stuck">
+                        <div class="">
+                            <h5 class="clearfix title-type">
+                                <a target="_blank" style="color: #000000" href="<?= $socialLink ?>">
+                                    <div class="d-flex justify-content-between">
+                                        <b class="title_social fs-2"><?= $item->social_name ?></b>
                                     </div>
-                                    <div class="rounded clearfix">
-                                        <div class="d-flex justify-content-center text-center interaction visible-xl visible-lg hidden-xs hidden-sm hidden-md p-5">
-                                            <div class="item p-3 <?= $class ?>">
-                                                <span class="img"><img src="/assets/images/like_icon.png"></span><br>
-                                                <div class="number fs-1 p-3 mt-3 "><?= $item->total_like ?></div><br>
-                                                <span class="text-title">LIKE</span>
-                                            </div>
-                                            <div class="item p-3 <?= $class ?>">
-                                                <span class="img"><img src="/assets/images/comment_icon.png"></span><br>
-                                                <div class="number fs-1 p-3 mt-3"><?= $item->total_comment ?></div><br>
-                                                <span class="text-title">COMMENT</span>
-                                            </div>
-                                            <div class="item p-3 <?= $class ?>">
-                                                <span class="img"><img src="/assets/images/share_icon.png"></span><br>
-                                                <div class="number fs-1 p-3 mt-3"><?= $item->total_share ?></div><br>
-                                                <span class="text-title"><?= $channel_type === CHANNEL_TYPE_TWITTER ? 'Retweet' : 'Share' ?></span>
-                                            </div>
-                                            <?php if ($item->channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
-                                                <div class="item p-3 <?= $class ?> ">
-                                                    <span class="img"><img src="/assets/images/like_share_icon.png"></span><br>
-                                                    <div class="number fs-1 p-3 mt-3"><?= $item->count_like_share ?: 0 ?></div><br>
-                                                    <span class="text-title">DATA LIKE & SHARE</span>
-                                                </div>
-                                                <div class="item p-3 <?= $class ?>">
-                                                    <span class="img"><img src="/assets/images/comment_icon.png"></span><br>
-                                                    <div class="number fs-1 p-3 mt-3"><?= $item->count_comment ?></div><br>
-                                                    <span class="text-title">DATA COMMENT</span>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                    <!-- <ul class="clearfix list-inline interaction-mobile hidden-lg hidden-xl  ">
-                                            <li><span class="text-title"><?= $item->total_like ?></span> Like</li>
-                                            <li><span class="text-title"><?= $item->total_comment ?></span> Comment</li>
-                                            <li>
-                                                <span class="text-title"><?= $item->total_share ?> </span><?= $channel_type === CHANNEL_TYPE_TWITTER ? 'Retweet' : 'Share' ?>
-                                            </li>
-                                            <?php if ($channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
+                                    <br>
+                                    <span>
+                                        <span style="color: #B5B5C3;"><?= date('j M Y \a\t H:ia ', strtotime($item->craw_date)) ?></span>
+                                    </span>
+                                </a>
+                            </h5>
+                            <div class="d-flex flex-column justify-content-between">
+                                <div>
+                                    <p class="text text-justify-betwen item-content-read-less _items-post-content content-item" style="margin-bottom:0;overflow: hidden;word-break: break-word;font-size: 13px;">
+                                        <?= html_entity_decode($item->content) ?></p>
+                                    <a target="_blank" href="<?= $linkDetail ?>" id="read_more" class="read_more">Read more</a>
+                                </div>
+                                <div class="d-flex justify-content-end clearfix mt-5 list-post-keywords">
+                                    <span class="post_keywords col-md-8 col-xs-7 no-padding" data-keyword="">
+                                        <?php
+                                        $indexColor = 0;
+                                        $bg_color = '';
+                                        $text_color = '';
+                                        foreach ($keywords as $index => $keyword) :
+                                            if ($keyword) :
+                                                $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
 
-                                                <li><span class="text-title"><?= $item->count_like_share ?: 0 ?></span> Data
-                                                    like &
-                                                    share
-                                                </li>
-                                                <li><span class="text-title"><?= $item->count_comment ?></span> Data comment
-                                                </li>
-                                            <?php endif; ?>
-                                        </ul> -->
+                                                if (!empty($keywordsColor[$slug])) {
+                                                    $color = $keywordsColor[$slug];
+                                                } else {
+                                                    if ($indexColor > 4) {
+                                                        $indexColor = 0;
+                                                    }
+                                                    $bg_color = $colorBg[$indexColor];
+                                                    $text_color = $colorText[$indexColor];
+                                                    $color = $colorBg[$indexColor];
+                                                    $keywordsColor[$slug] = $color;
+                                                    $indexColor++;
+                                                }
+
+                                        ?>
+                                                <a href="#" class="border rounded-pill p-1 fw-bold" data-keyword="<?= $keyword ?>" style="color:<?= $text_color ?>;background-color:<?= $bg_color ?>"> <?= sprintf('%s', $keyword) ?></a>
+                                        <?php endif;
+                                        endforeach; ?>
+                                    </span>
+                                    <span class="col-xs-5 col-md-4 no-padding">
+                                        <a class="btn btn-primary text-uppercase pull-right btn-detail-item" target="_blank" href="<?= $linkDetail ?>">View detail </a>
+                                    </span>
                                 </div>
                             </div>
-
+                        </div>
+                    </div>
+                    <div class=" data rounded clearfix">
+                        <div class="d-flex justify-content-center text-center interaction visible-xl visible-lg hidden-xs hidden-sm hidden-md p-5">
+                            <div class="item p-3 <?= $class ?>">
+                                <span class="img"><img src="/assets/images/like_icon.png"></span><br>
+                                <div class="number fs-1 p-3 mt-3 "><?= $item->total_like ?></div><br>
+                                <span class="text-title">LIKE</span>
+                            </div>
+                            <div class="item p-3 <?= $class ?>">
+                                <span class="img"><img src="/assets/images/comment_icon.png"></span><br>
+                                <div class="number fs-1 p-3 mt-3"><?= $item->total_comment ?></div><br>
+                                <span class="text-title">COMMENT</span>
+                            </div>
+                            <div class="item p-3 <?= $class ?>">
+                                <span class="img"><img src="/assets/images/share_icon.png"></span><br>
+                                <div class="number fs-1 p-3 mt-3"><?= $item->total_share ?></div><br>
+                                <span class="text-title"><?= $channel_type === CHANNEL_TYPE_TWITTER ? 'Retweet' : 'Share' ?></span>
+                            </div>
+                            <?php if ($item->channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
+                                <div class="item p-3 <?= $class ?> ">
+                                    <span class="img"><img src="/assets/images/like_share_icon.png"></span><br>
+                                    <div class="number fs-1 p-3 mt-3"><?= $item->count_like_share ?: 0 ?></div><br>
+                                    <span class="text-title">DATA LIKE & SHARE</span>
+                                </div>
+                                <div class="item p-3 <?= $class ?>">
+                                    <span class="img"><img src="/assets/images/comment_icon.png"></span><br>
+                                    <div class="number fs-1 p-3 mt-3"><?= $item->count_comment ?></div><br>
+                                    <span class="text-title">DATA COMMENT</span>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+
     </div>
 </div>

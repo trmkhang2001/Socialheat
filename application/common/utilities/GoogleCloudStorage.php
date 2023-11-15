@@ -76,7 +76,7 @@ class GoogleCloudStorage
 
     public static function uploadFiles($data, $bucketName, $endId)
     {
-        if (! $bucketName) {
+        if (!$bucketName) {
             $bucketName = self::BUCKKET_NAME;
         }
         $storageClient = self::getStorageClient();
@@ -84,24 +84,24 @@ class GoogleCloudStorage
         $promises = [];
         foreach ($data as $item) {
             $promises[] = $bucket->uploadAsync($item['value'], ['name' => $item['name']])
-                                 ->then(
-                                     function (StorageObject $object) use ($item) {
-                                         $info = $object->info();
-                                         if (! empty($info['id'])) {
-//						echo "<pre>\n";
-//						print_r($item['path']);
-                                             //	@unlink($item['path']);
-//                                             echo "<pre>\n ";
-//                                             print_r('Upload file ' . $info['name'] . ' lên google cloud thành công');
-                                         }
-                                     },
-                                     function (\Exception $e) {
-                                         return $e->getMessage();
-//                                         echo "<pre>";
-//                                         print_r($e->getMessage());
-//                                         die;
-                                     }
-                                 );
+                ->then(
+                    function (StorageObject $object) use ($item) {
+                        $info = $object->info();
+                        if (!empty($info['id'])) {
+                            //						echo "<pre>\n";
+                            //						print_r($item['path']);
+                            //	@unlink($item['path']);
+                            //                                             echo "<pre>\n ";
+                            //                                             print_r('Upload file ' . $info['name'] . ' lên google cloud thành công');
+                        }
+                    },
+                    function (\Exception $e) {
+                        return $e->getMessage();
+                        //                                         echo "<pre>";
+                        //                                         print_r($e->getMessage());
+                        //                                         die;
+                    }
+                );
         }
         foreach ($promises as $index => $promise) {
             $promise->wait();
@@ -114,27 +114,27 @@ class GoogleCloudStorage
 
     public static function getDataFile($fileName)
     {
-//		try
-//		{
-//			ini_set('memory_limit', '-1');
-//			$storage = self::getStorageClient();
-//			$storage->registerStreamWrapper();
-//			$path = sprintf('gs://%s/%s', self::BUCKKET_NAME, $fileName);
-//			//$data = @file_get_contents($path);
-//			$data = explode("\n", @file_get_contents($path));
-//			if ($data)
-//			{
-//				return  array_unique(array_values(array_filter($data)));
-//			}
-//			return NULL;
-//		} catch (\Exception $e)
-//		{
-//			echo "<pre>";
-//			print_r($e->getMessage());
-//			die;
-//		}
+        //		try
+        //		{
+        //			ini_set('memory_limit', '-1');
+        //			$storage = self::getStorageClient();
+        //			$storage->registerStreamWrapper();
+        //			$path = sprintf('gs://%s/%s', self::BUCKKET_NAME, $fileName);
+        //			//$data = @file_get_contents($path);
+        //			$data = explode("\n", @file_get_contents($path));
+        //			if ($data)
+        //			{
+        //				return  array_unique(array_values(array_filter($data)));
+        //			}
+        //			return NULL;
+        //		} catch (\Exception $e)
+        //		{
+        //			echo "<pre>";
+        //			print_r($e->getMessage());
+        //			die;
+        //		}
         try {
-//            ini_set('memory_limit', '-1');
+            //            ini_set('memory_limit', '-1');
             $storage = self::getStorageClient();
             $storage->registerStreamWrapper();
             $path = sprintf('gs://%s/%s', self::BUCKKET_NAME, $fileName);
@@ -156,12 +156,12 @@ class GoogleCloudStorage
     public static function getDataFileJson($fileName, $bucketName)
     {
         try {
-			$googleClient = self::getStorageClient();
-			$googleClient->bucket($bucketName)->object($fileName)->info();
-			$googleClient->registerStreamWrapper();
-			$filePath = sprintf('gs://%s/%s', $bucketName, $fileName);
-			$fileContent = Items::fromFile($filePath, ['decoder' => new ExtJsonDecoder(TRUE)]);
-			return $fileContent;
+            $googleClient = self::getStorageClient();
+            $googleClient->bucket($bucketName)->object($fileName)->info();
+            $googleClient->registerStreamWrapper();
+            $filePath = sprintf('gs://%s/%s', $bucketName, $fileName);
+            $fileContent = Items::fromFile($filePath, ['decoder' => new ExtJsonDecoder(TRUE)]);
+            return $fileContent;
         } catch (\Exception $e) {
             return  [];
         }
@@ -181,9 +181,10 @@ class GoogleCloudStorage
             $storageClient = self::getStorageClient();
             $bucket = $storageClient->bucket($bucketName);
             $writeStream = new WriteStream(
-                null, [
-                        'chunkSize' => 1024 * 256, // 256KB
-                    ]
+                null,
+                [
+                    'chunkSize' => 1024 * 256, // 256KB
+                ]
             );
             $uploader = $bucket->getStreamableUploader(
                 $writeStream,
