@@ -205,4 +205,22 @@ class GoogleCloudStorage
             return '';
         }
     }
+
+
+
+
+
+	public static function getDataFileGetContent($fileName, $bucketName)
+	{
+		try {
+			$googleClient = self::getStorageClient();
+			$googleClient->bucket($bucketName)->object($fileName)->info();
+			$googleClient->registerStreamWrapper();
+			$filePath = sprintf('gs://%s/%s', $bucketName, $fileName);
+			return json_decode(@file_get_contents($filePath),true);
+		} catch (\Exception $e) {
+			return  [];
+		}
+	}
+
 }

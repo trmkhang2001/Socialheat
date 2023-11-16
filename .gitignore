@@ -7,4 +7,6 @@ thumbs
 source
 /images
 .idea
+application/session
+vendor/*
 
