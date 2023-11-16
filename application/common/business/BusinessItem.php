@@ -89,7 +89,7 @@ class BusinessItem implements BusinessInterface
 	public function findByPostId($postId)
 	{
 		$query = Item::getInstance()->find()->where('post_id', $postId);
-		$nameCache = 'findByPostId_' . $postId;
+		$nameCache = 'findByPostId' . $postId;
 		return Item::queryBuilder($nameCache, $query, TRUE);
 	}
 
@@ -491,4 +491,328 @@ class BusinessItem implements BusinessInterface
 		$dbObj = Item::getInstance()->getConditions($conditions, $dbObj);
 		return Item::queryBuilder($nameCache, $dbObj, FALSE);
 	}
+
+
+	public function getCharts($users): array
+	{
+		// gender => male,female,other
+		$totalGenderMale = 0;
+		$totalMail = 0;
+		$totalDob = 0;
+		$totalRelationship = 0;
+		$totalLocation = 0;
+		$totalGenderFemale = 0;
+		$totalGenderOther = 0;
+		// age
+		$ageRange0_18 = 0;
+		$ageRange18_30 = 0;
+		$ageRange30_60 = 0;
+		$ageRange60_80 = 0;
+		// relationship
+		$totalRelationshipSingle = 0;
+		$totalRelationshipDating = 0;
+		$totalRelationshipMarried = 0;
+		$totalRelationshipDivorce = 0;
+		//friends
+		$friendRange0_200 = 0;
+		$friendRange200_1000 = 0;
+		$friendRange1000_3000 = 0;
+		$friendRange3000 = 0;
+		// follows
+		$followRange0_200 = 0;
+		$followRange200_1000 = 0;
+		$followRange1000_3000 = 0;
+		$followRange3000 = 0;
+		$numberCities = [];
+		$numberLocations = [
+			'Vietnam'                => 0,
+			'United States & Canada' => 0,
+			'France'                 => 0,
+			'Italy'                  => 0,
+			'Japan'                  => 0,
+			'Singapore'              => 0,
+			'United Kingdom'         => 0,
+			'Australia'              => 0,
+			'Other'                  => 0
+
+		];
+		$total = 0;
+		if ($users) {
+			foreach ($users as $user) {
+				++$total;
+				self::countGender($totalGenderMale, $totalGenderFemale, $totalGenderOther, $user);
+				self::countMail($totalMail, $user);
+				self::countDob($totalDob, $user);
+				self::countRelationship($totalRelationship, $user);
+				self::countLocation($totalLocation, $user);
+				self::rangeAge($ageRange0_18, $ageRange18_30, $ageRange30_60, $ageRange60_80, $user);
+				self::checkRelationship(
+					$totalRelationshipSingle,
+					$totalRelationshipDating,
+					$totalRelationshipMarried,
+					$totalRelationshipDivorce,
+					$user
+				);
+				self::rangeFriends(
+					$friendRange0_200,
+					$friendRange200_1000,
+					$friendRange1000_3000,
+					$friendRange3000,
+					$user
+				);
+				self::rangeFollows(
+					$followRange0_200,
+					$followRange200_1000,
+					$followRange1000_3000,
+					$followRange3000,
+					$user
+				);
+				self::getNumberCities($numberCities, $user);
+				self::getNumberLocations($numberLocations, $user);
+			}
+			arsort($numberCities);
+			$numberCities = array_splice($numberCities, 0, 10);
+		}
+
+//		['#0BB783', '#3699FF', '#F64E60', '#8950FC', '#FFD74A']
+
+
+		return [
+			'total'             => $total,
+			'totalMail'         => $totalMail,
+			'totalLocation'     => $totalLocation,
+			'totalRelationship' => $totalRelationship,
+			'totalDob'          => $totalDob,
+			'charts'            => [
+				'gender'        => [
+					'series'     => [$totalGenderMale, $totalGenderFemale, $totalGenderOther],
+					'labels'     => ['Male', 'Female', 'Other'],
+					'colors'     => ['#0BB783', '#3699FF', '#F64E60'],
+					'itemLabels' => [
+						['name' => 'Male', 'value' => $totalGenderMale, 'color' => '#0BB783'],
+						['name' => 'Female', 'value' => $totalGenderFemale, 'color' => '#3699FF'],
+						['name' => 'Other', 'value' => $totalGenderOther, 'color' => '#F64E60'],
+					],
+					'title'      => 'Gender'
+				],
+				'ages'          => [
+					'series'     => [$ageRange0_18, $ageRange18_30, $ageRange30_60, $ageRange60_80],
+					'labels'     => ['0 - 18', '18 - 30', '30 - 60', '60 - 80'],
+					'colors'     => ['#0BB783', '#3699FF', '#F64E60', '#8950FC'],
+					'itemLabels' => [
+						['name' => '0 - 18', 'value' => $ageRange0_18, 'color' => '#0BB783'],
+						['name' => '18 - 30', 'value' => $ageRange18_30, 'color' => '#3699FF'],
+						['name' => '30 - 60', 'value' => $ageRange30_60, 'color' => '#F64E60'],
+						['name' => '60 - 80', 'value' => $ageRange60_80, 'color' => '#8950FC'],
+					],
+					'title'      => 'Age'
+				],
+				'relationships' => [
+					'series'     => [
+						$totalRelationshipSingle,
+						$totalRelationshipDating,
+						$totalRelationshipMarried,
+						$totalRelationshipDivorce
+					],
+					'labels'     => ['Single', 'Dating', 'Married', 'Divorce'],
+					'colors'     => ['#0BB783', '#3699FF', '#F64E60', '#8950FC'],
+					'itemLabels' => [
+						['name' => 'Single', 'value' => $totalRelationshipSingle, 'color' => '#0BB783'],
+						['name' => 'Dating', 'value' => $totalRelationshipDating, 'color' => '#3699FF'],
+						['name' => 'Married', 'value' => $totalRelationshipMarried, 'color' => '#F64E60'],
+						['name' => 'Divorce', 'value' => $totalRelationshipDivorce, 'color' => '#8950FC'],
+					],
+					'title'      => 'Relationship'
+				],
+				'friends'       => [
+					'series'     => [$friendRange0_200, $friendRange200_1000, $friendRange1000_3000, $friendRange3000],
+					'labels'     => ['0 - 200', '200 - 1000', '1000 - 3000', '3000+'],
+					'colors'     => ['#0BB783', '#3699FF', '#F64E60', '#8950FC'],
+					'itemLabels' => [
+						['name' => '0 - 200', 'value' => $friendRange0_200, 'color' => '#0BB783'],
+						['name' => '200 - 1000', 'value' => $friendRange200_1000, 'color' => '#3699FF'],
+						['name' => '1000 - 3000', 'value' => $friendRange1000_3000, 'color' => '#F64E60'],
+						['name' => '3000+', 'value' => $friendRange3000, 'color' => '#8950FC'],
+					],
+					'title'      => 'Friends'
+				],
+				'follows'       => [
+					'series'     => [$followRange0_200, $followRange200_1000, $followRange1000_3000, $followRange3000],
+					'labels'     => ['0 - 200', '200 - 1000', '1000 - 3000', '3000+'],
+					'colors'     => ['#0BB783', '#3699FF', '#F64E60', '#8950FC'],
+					'itemLabels' => [
+						['name' => '0 - 200', 'value' => $followRange0_200, 'color' => '#0BB783'],
+						['name' => '200 - 1000', 'value' => $followRange200_1000, 'color' => '#3699FF'],
+						['name' => '1000 - 3000', 'value' => $followRange1000_3000, 'color' => '#F64E60'],
+						['name' => '3000+', 'value' => $followRange3000, 'color' => '#8950FC'],
+					],
+					'title'      => 'Follows'
+				],
+				'cities'        => [
+					'series' => array_values($numberCities),
+					'labels' => array_keys($numberCities),
+					'title'  => 'City'
+				],
+				'locations'     => [
+					'series' => array_values($numberLocations),
+					'labels' => array_keys($numberLocations),
+					'title'  => 'Country'
+				]
+			]
+		];
+	}
+
+	public static function countGender(&$totalMale, &$totalFemale, &$totalGenderOther, $user)
+	{
+		if ($user['sex'] === 'male') {
+			++$totalMale;
+		} elseif ($user['sex'] === 'female') {
+			++$totalFemale;
+		} else {
+			++$totalGenderOther;
+		}
+	}
+
+	public static function countMail(&$totalMail, $user)
+	{
+		if ($user['email'] != null) {
+			++$totalMail;
+		}
+	}
+
+	public static function countDob(&$totalDob, $user)
+	{
+		if ($user['birthday']) {
+			++$totalDob;
+		}
+	}
+
+	public static function countRelationship(&$totalRelationship, $user)
+	{
+		if ($user['relationship'] != null) {
+			++$totalRelationship;
+		}
+	}
+
+	public static function countLocation(&$totalLocation, $user)
+	{
+		if ($user['city'] != null) {
+			++$totalLocation;
+		}
+	}
+
+	public static function rangeAge(&$ageRange0_18, &$ageRange18_30, &$ageRange30_60, &$ageRange60_80, $user)
+	{
+		if ($user['birthday']) {
+			$from = new DateTime($user['birthday']);
+			$to = new DateTime('today');
+			$age = $from->diff($to)->y;
+			if ($age <= 18) {
+				++$ageRange0_18;
+			} elseif ($age > 18 && $age <= 30) {
+				++$ageRange18_30;
+			} elseif ($age > 30 && $age <= 60) {
+				++$ageRange30_60;
+			} else {
+				++$ageRange60_80;
+			}
+		}
+	}
+
+	public static function checkRelationship(&$totalSingle, &$totalDating, &$totalMarried, &$totalDivorce, $user)
+
+	{
+		if($user['relationship']){
+			$relationship = strtolower($user['relationship']);
+			if ($relationship === 'single') {
+				++$totalSingle;
+			}
+			if ($relationship === 'dating') {
+				++$totalDating;
+			}
+			if ($relationship === 'married') {
+				++$totalMarried;
+			}
+			if ($relationship === 'divorced') {
+				++$totalDivorce;
+			}
+		}
+	}
+
+	public static function rangeFriends(
+		&$friendRange0_200,
+		&$friendRange200_1000,
+		&$friendRange1000_3000,
+		&$friendRange3000,
+		$user
+	) {
+		$numberFriends = (int)$user['friends'];
+		if ($numberFriends <= 200) {
+			++$friendRange0_200;
+		} elseif ($numberFriends > 200 && $numberFriends <= 1000) {
+			++$friendRange200_1000;
+		} elseif ($numberFriends > 1000 && $numberFriends <= 3000) {
+			++$friendRange1000_3000;
+		} else {
+			++$friendRange3000;
+		}
+	}
+
+	public static function rangeFollows(
+		&$followRange0_200,
+		&$followRange200_1000,
+		&$followRange1000_3000,
+		&$followRange3000,
+		$user
+	) {
+		$numberFollows = (int)$user['follow'];
+		if ($numberFollows <= 200) {
+			++$followRange0_200;
+		} elseif ($numberFollows > 200 && $numberFollows <= 1000) {
+			++$followRange200_1000;
+		} elseif ($numberFollows > 1000 && $numberFollows <= 3000) {
+			++$followRange1000_3000;
+		} else {
+			++$followRange3000;
+		}
+	}
+
+	public static function getNumberCities(&$numberCities, $user)
+	{
+		$city = mb_strtolower($user['city'] ?: '');
+		if ($city) {
+			if (isset($numberCities[$city])) {
+				++$numberCities[$city];
+			} else {
+				$numberCities[$city] = 0;
+			}
+		}
+	}
+
+	public static function getNumberLocations(&$numberLocations, $user)
+	{
+		$phone = $user['phone'];
+		if ($phone) {
+			if (substr($phone, 0, 2) === '84') {
+				++$numberLocations['Vietnam'];
+			} elseif (substr($phone, 0, 1) === '1') {
+				++$numberLocations['United States & Canada'];
+			} elseif (substr($phone, 0, 2) === '33') {
+				++$numberLocations['France'];
+			} elseif (substr($phone, 0, 2) === '39') {
+				++$numberLocations['Italy'];
+			} elseif (substr($phone, 0, 2) === '81') {
+				++$numberLocations['Japan'];
+			} elseif (substr($phone, 0, 2) === '65') {
+				++$numberLocations['Singapore'];
+			} elseif (substr($phone, 0, 2) === '44') {
+				++$numberLocations['United Kingdom'];
+			} elseif (substr($phone, 0, 2) === '61') {
+				++$numberLocations['Australia'];
+			} else {
+				++$numberLocations['Other'];
+			}
+		}
+	}
+
 }

@@ -11,7 +11,7 @@ use app\common\utilities\GoogleCloudStorage;
 use app\common\utilities\Common;
 use app\models\Interaction;
 use app\common\components\Finduid;
-
+use app\models\MissInteraction;
 
 class Api extends ApiController {
 
@@ -127,11 +127,6 @@ class Api extends ApiController {
 							$dataPostId = ! empty($res['id']) ? $res['id'] : $data['PostId'];
 						}
 
-//						if ($channel_type === CHANNEL_TYPE_FACEBOOK)
-//						{
-//							$keywordComments = BusinessApi::getInstance()->createTableAndSaveData($data['PostId'], $data['Comments']);
-////							$dataPostId = preg_replace("/[^0-9]/", '', $dataPostId);
-//						}
 						if ($channel_type === CHANNEL_TYPE_TIKTOK)
 						{
 							$shareCount = $data['ViewCount'];
@@ -372,7 +367,7 @@ class Api extends ApiController {
 		if ($interactions)
 		{
 			$fileName = "$item->post_id.json";
-			$currentInteractions = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
+			$currentInteractions = GoogleCloudStorage::getDataFileGetContent($fileName, BUCKET_NAME_ADSSPY);
 			$interactions = array_flip($interactions);
 			foreach ($currentInteractions as $currentInteraction)
 			{
@@ -390,24 +385,35 @@ class Api extends ApiController {
 				$newInteractions = $response['data']?? [];
 				if ($newInteractions)
 				{
+					$interactions = array_flip($interactions);
 					$tempInteractions = [];
- 					foreach ($newInteractions as $interaction)
+ 					foreach ($newInteractions as  $index => $interaction)
 					{
 						$interaction['keywords'] = $item->keywords;
 						$interaction['created_date'] = date('Y-m-d');
 						$interaction['post_id'] = $item->post_id;
 						$tempInteractions[] = $interaction;
+						$newInteractions[$index]['created_date'] = date(DATE_TIME_FORMAT);
+
+						if (isset($interactions[$interaction['uid']]))
+						{
+							unset($interactions[$interaction['uid']]);
+						}
 					}
 					if ($tempInteractions)
 					{
 						Interaction::insertBatch($tempInteractions);
 					}
 					$dataInteractions = array_merge($newInteractions, $currentInteractions);
+					$infoProfiles = BusinessItem::getInstance()->getCharts($dataInteractions);
+					$interactions = array_flip($interactions);
+					$interactions = array_values($interactions);
+
 					GoogleCloudStorage::uploadFiles(
 						[
 							[
 								'name'  => $fileName,
-								'value' => json_encode($response['data'] ?? [])
+								'value' => json_encode($dataInteractions)
 							]
 						],
 						BUCKET_NAME_ADSSPY,
@@ -415,6 +421,18 @@ class Api extends ApiController {
 					);
 					$countData = count($dataInteractions);
 				}
+			}
+
+			if($interactions){
+				$dataBulkMiss = [];
+				foreach ($interactions as  $uid){
+					$dataBulkMiss[] = [
+						'uid' => $uid,
+						'item_id' => $item->id,
+						'created_date' => date(DATE_TIME_FORMAT),
+					];
+				}
+				MissInteraction::getInstance()->insertBatch($dataBulkMiss);
 			}
 		}
 
@@ -424,6 +442,9 @@ class Api extends ApiController {
 			'total_comment' => $numberComments > 0 ? $numberComments : $item->total_comment,
 			'count_d'       => $countData > 0 ? $countData : $item->count_d,
 		];
+		if(!empty($infoProfiles)){
+			$dataUpdate['charts'] = json_encode($infoProfiles);
+		}
 		$isUpdate = BusinessItem::getModel()->update($item->id, $dataUpdate, TRUE, FALSE);
 
 
@@ -523,4 +544,7 @@ class Api extends ApiController {
 		}
 		$this->response($res, $statusCode);
 	}
+
+
+
 }

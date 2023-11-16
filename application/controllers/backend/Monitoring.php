@@ -144,36 +144,11 @@ class Monitoring extends BackendController
         //		$group->count_d = 100000;
         $data['page_title'] = $group->from_name;
         $data['is_page_detail'] = TRUE;
-        // check permision
-        $is_download = 10000;
-        $group_data = array(
-            'friend'       => array(),
-            'follow'       => array(),
-            'sex'          => array('female' => 0, 'male' => 0, 'Other' => 0),
-            'relationship' => array(),
-        );
-        $total_records = $group->count_d;
-        $group_data['email_count'] = 0;
-        $group_data['birthday_count'] = 0;
-        $group_data['relationship_count'] = 0;
-        $group_data['fields_count'] = array();
-        $data['group_data'] = $group_data;
-        $current_user = $this->userInfo;
-        $user_id = $current_user['id'];
-        $data['user_id'] = $user_id;
-        $data['items']['limit'] = 10;
-        $data['items']['totals'] = $total_records;
-        $data['items']['group_id'] = $group->post_id;
-        $data['can_download'] = $is_download;
-        $data['total_like'] = $group->total_like;
-        $data['total_share'] = $group->total_share;
-        $data['total_comment'] = $group->total_comment;
-        $data['total'] = 1000;
+
         $data['content'] = (array)$group;
         $id = "1003543184091350";
         $fileName = "$id.json";
         // $fileName = "$group->post_id.json";
-        $data['items']['numpages'] = ceil($total_records / ITEM_PER_PAGE_10);
         $fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
         $profiles = [];
         $page = $this->input->get('page', TRUE);
@@ -182,8 +157,6 @@ class Monitoring extends BackendController
         if ($limit) {
             $itemPerPage = $limit;
         }
-        $user = $this->userInfo;
-
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $count = $itemPerPage + $offset;
         foreach ($fileContent as $index => $profile) {
@@ -205,257 +178,7 @@ class Monitoring extends BackendController
     }
 
 
-    public function get_last_item()
-    {
-        $item = BusinessItem::getInstance()->findByLastUpdate();
-        $types = $this->config->config['params']['types'];
-        $html = $this->load->view('backend/clients/_item', ['item' => $item, 'is_animation' => TRUE, 'types' => $types], TRUE);
-        $this->response(['html' => $html, 'success' => TRUE]);
-    }
 
-    public function getDataCity($postId)
-    {
-        $city = BusinessItem::getInstance()->getCountCities($postId);
-        $group = BusinessItem::getInstance()->findByPostId($postId);
-        $res = [
-            'city'    => [],
-            'success' => FALSE
-        ];
-        if ($city) {
-            $res['success'] = TRUE;
-            foreach ($city as $index => $count) {
-                $group_count = 1;
-                if ($group->count) {
-                    $group_count = $group->count;
-                }
-                $count = round($count * 100 / $group_count);
-                $res['city'][] = [$index, $count];
-            }
-        }
-        echo json_encode($res);
-        exit();
-    }
-
-    public function ajax()
-    {
-        $can_download = FALSE;
-        $user = $this->userInfo;
-        $get = $this->input->get();
-        if ($user['role_id'] === ROLE_ADMIN || $user['role_id'] === ROLE_DOWNLOAD) {
-            $can_download = TRUE;
-        }
-        if ($can_download === FALSE && isset($get['export'])) {
-            $msg = 'You have not enough credit for download ';
-
-            $data = array(
-                'uids'       => "",
-                'pagination' => "",
-                'totals'     => "",
-                'msg'        => $msg,
-                'status'     => FALSE
-            );
-            header('Content-Type: application/json');
-            echo json_encode($data);
-            exit;
-        }
-        $group = BusinessItem::getInstance()->findByPostId($get['group_id']);
-        $get['friend_start'] = '';
-        $get['friend_end'] = '';
-        $conditions = [];
-        if ($get['friends']) {
-            if ($get['friends'] == '> 5000') {
-                $conditions['friend_start'] = 5001;
-                $conditions['friend_end'] = '';
-            } elseif ($get['friends'] == '<1000') {
-                $conditions['friend_start'] = 0;
-                $conditions['friend_end'] = 999;
-            } else {
-                $v = explode('-', $get['friends']);
-                $conditions['friend_start'] = $v[0] + 1;
-                $conditions['friend_end'] = $v[1];
-            }
-        }
-
-        $get['follow_start'] = '';
-        $get['follow_end'] = '';
-        if (isset($get['follows']) && $get['follows']) {
-            if ($get['follows'] == '> 5000') {
-                $conditions['follow_start'] = 5001;
-                $conditions['follow_end'] = '';
-            } elseif ($get['follows'] == '<1000') {
-                $conditions['follow_start'] = 0;
-                $conditions['follow_end'] = 999;
-            } else {
-                $v = explode('-', $get['follows']);
-                $conditions['follow_start'] = $v[0] + 1;
-                $conditions['follow_end'] = $v[1];
-            }
-        }
-        if ($get['city']) {
-            $conditions['city'] = $get['city'];
-        }
-        if ($get['Sex']) {
-            $conditions['sex'] = $get['Sex'];
-        }
-        $get['birthday'] = '';
-        if ($get['ages']) {
-            $conditions['birthday'] = explode('_', $get['ages']);
-        }
-        if ($get['type']) {
-            if ($get['type'] === 'is_like') {
-                $conditions['is_like'] = TRUE;
-            }
-            if ($get['type'] === 'is_comment') {
-                $conditions['is_comment'] = TRUE;
-            }
-        }
-        // check permision
-        $totals = $group->count_d;
-        $itemPerPage = $get['limit'];
-        $page = $this->input->get('current_page', TRUE);
-        $offset = $page ? $itemPerPage * ($page - 1) : 0;
-        if (!$conditions) {
-            $uids = BusinessItem::getInstance()->getRangeUids($get['group_id'], $offset, $itemPerPage);
-            $stringUids = implode(',', array_column($uids, 'uid'));
-            $uids = $this->get_info_uids($stringUids);
-        } else {
-            $res = BusinessItem::getInstance()->filterConditions($get['group_id'], $conditions);
-            $total = $itemPerPage + $offset;
-            $uids = [];
-            for ($i = $offset; $i < $total; $i++) {
-                if (!empty($res[$i])) {
-                    $uids[] = $res[$i];
-                }
-            }
-        }
-        if (empty($uids)) {
-            $data = array(
-                'uids'       => "",
-                'pagination' => "",
-                'totals'     => "",
-                'msg'        => 'No data',
-                'status'     => TRUE
-            );
-            header('Content-Type: application/json');
-            echo json_encode($data);
-            exit;
-        }
-        //$account_type = $this->session->userdata('account_type');
-        $token = BusinessXpath::getInstance()->findByConditions(['channel_type' => CHANNEL_TYPE_FACEBOOK_TOKEN], TRUE);
-        if ($token) {
-            $access_token = $token->xpath;
-        } else {
-            $access_token = FB_TOKEN;
-        }
-        $urlCheckToken = sprintf('https://graph.facebook.com/%s/picture?type=square&access_token=%s', $uids[0]->uid, $access_token);
-        $res = json_decode(Common::getFileContent($urlCheckToken), FALSE);
-        $tokenDie = FALSE;
-        if (!empty($res->error)) {
-            $tokenDie = TRUE;
-        }
-        foreach ($uids as $key => $uid) {
-            $uids[$key]->Uid = $uid->uid;
-            $uids[$key]->Name = $uid->name;
-            $uids[$key]->Sex = $uid->sex;
-            $uids[$key]->Relationship = $uid->relationship;
-            if ($tokenDie === TRUE) {
-                $url_thumb = '/assets/images/icon_person.png';
-                if ($uid->sex === 'female') {
-                    $url_thumb = '/assets/images/female.png';
-                } elseif ($uid->sex === 'male') {
-                    $url_thumb = '/assets/images/male.png';
-                }
-            } else {
-                $url_thumb = sprintf('https://graph.facebook.com/%s/picture?type=square&access_token=%s', $uid->uid, $access_token);
-            }
-            $uids[$key]->url_thumb = $url_thumb;
-            $uids[$key]->Phone_Original = '';
-            if (isset($uids[$key]->phone)) {
-                $uids[$key]->Phone_Original = $uids[$key]->phone;
-            }
-            $uids[$key]->email_Original = $uids[$key]->email;
-            if ($can_download || !isset($get['export'])) {
-                $uids[$key]->Phone = '';
-                $uids[$key]->Phone2 = '';
-                if (isset($uids[$key]->phone)) {
-                    $uids[$key]->Phone = substr($uids[$key]->phone, 0, -4) . '****';
-                    $uids[$key]->Phone2 = substr($uids[$key]->phone, 0, -4) . '****';
-                }
-
-                if (isset($uids[$key]->email)) {
-                    $mail = explode('@', $uids[$key]->email);
-                    $uids[$key]->email = '*****@' . $mail[1];
-                }
-
-                if (isset($uids[$key]->Birthday)) {
-                    $uids[$key]->Birthday = $uids[$key]->birthday ? my_date_show($uids[$key]->birthday) : '';
-                } else {
-                    $uids[$key]->Birthday = '';
-                }
-                $uids[$key]->Friends = number_format($uids[$key]->friends);
-                $uids[$key]->Follow = number_format($uids[$key]->follow);
-                $uids[$key]->Location = "";
-            }
-        }
-        if (!isset($get['export'])) {
-            ob_start();
-            helper_pagination(ceil($totals / $itemPerPage), $page);
-            $pagination = ob_get_clean();
-        } else {
-            $pagination = '';
-            //			if ($get['current_page'] == 1)
-            //			{
-            //				$download_time = update_user_download('Download list from group ' . $group->from_name . ', id ' . $group->post_id, $totals, $get);
-            //				$user_data = $this->session->userdata();
-            //				$user_data['download_time'] = $download_time;
-            //				$this->session->set_userdata($user_data);
-            //			}
-        }
-
-        $data = array(
-            'uids'         => $uids,
-            'pagination'   => $pagination,
-            'totals'       => number_format($totals),
-            'total_emails' => 0,
-            'status'       => TRUE
-        );
-
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
-    }
-
-    public function get_info_uids($uids, $limit = '')
-    {
-        $nameCache = 'getCountRangeUids_v_' . $uids;
-        $nameCache .= '.cache';
-        $res = $this->cache->get($nameCache);
-        if ($res) {
-            return $res;
-        }
-        //		$apiUrl = URL_API_FLASH . 'uids?email=%s&pass=%s&token=%s&uids=%s&db=' . DB_NAME_SELECT_API;
-        $apiUrl = URL_API_FLASH . 'uids?email=%s&pass=%s&token=%s&uids=%s&db=';
-        $email = USER_API_FLASH;
-        $pass = PASSWORD_API_FLASH;
-        $token = USER_TOKEN_API;
-        $apiUrl = sprintf($apiUrl, $email, $pass, $token, $uids);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $apiUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        $server_output = curl_exec($ch);
-        curl_close($ch);
-        $content = json_decode($server_output);
-        if (isset($content->data)) {
-            if ($content->data) {
-                $this->cache->save($nameCache, $content->data, 3600);
-            }
-            return $content->data;
-        }
-        if (isset($content->mesage)) {
-            return $content->message;
-        }
-        return [];
-    }
 
     public function reports()
     {
@@ -592,30 +315,50 @@ class Monitoring extends BackendController
         $this->render();
     }
 
-    public function download()
-    {
-        $user = $this->userInfo;
-        if ($user['role_id'] !== ROLE_ADMIN && $user['role_id'] !== ROLE_DOWNLOAD) {
-            $this->response(['status' => FALSE, 'msg' => 'Permission denied']);
-        }
 
-        $conditions = $this->getConditions();
-        $conditions[]['i.channel_type'] = FALSE;
-        $itemPerPage = $this->input->get('limit', TRUE);
-        $page = intval($this->input->get('page', TRUE));
-        $offset = $page ? $itemPerPage * ($page - 1) : 0;
-        $sort_by = (int)$this->input->get('sort_by', TRUE);
-        $orderBy = 'i.id DESC';
-        if ($sort_by === 1) {
-            $orderBy = 'i.count_d ASC';
-        } elseif ($sort_by === 2) {
-            $orderBy = 'i.count_d DESC';
-        } elseif ($sort_by === 3) {
-            $orderBy = 'i.count ASC';
-        } elseif ($sort_by === 4) {
-            $orderBy = 'i.count DESC';
-        }
-        $items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage, $orderBy);
-        $this->response(['uids' => $items, 'status' => TRUE]);
-    }
+
+	public function downloads($id){
+		$user = $this->userInfo;
+		if($user['role_id'] !== ROLE_ADMIN && $user['role_id'] !== ROLE_DOWNLOAD){
+			$this->response(['status' => FALSE, 'msg' => 'Permission denied']);
+		}
+		$item = BusinessItem::getInstance()->findOne($id);
+		if($item){
+			$fileName = "$item->post_id.json";
+			$interactions = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
+			$filePath = 'downloads/' . sprintf('SocialHeat-%s.csv',time());
+			$out = fopen($filePath, 'wb');
+			fwrite($out, "\xEF\xBB\xBF");       // Write UTF-8 BOM
+			fputcsv($out, ['Social Profile URL', 'Name', 'Gender', 'Phone', 'Email', 'Location', 'Relationship']);
+			foreach ($interactions as $interaction) {
+				fputcsv(
+					$out,
+					[
+						'https://www.facebook.com/'.$interaction['uid'],
+						$interaction['name'],
+						$interaction['sex'],
+						$interaction['phone'],
+						$interaction['email'],
+						$interaction['city'],
+						$interaction['relationship'],
+					]
+				);
+			}
+			fclose($out);
+			$fileName = sprintf('SocialHeat-%s.csv', date('Y-m-d-H:i:s'));
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Disposition: attachment; filename=' . $fileName);
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate');
+			header('Pragma: public');
+			header('Content-Length: ' . filesize($filePath));
+			ob_clean();
+			flush();
+			readfile($filePath);
+			@unlink($filePath);
+			exit();
+		}
+	}
+
 }
