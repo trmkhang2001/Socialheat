@@ -29,6 +29,8 @@ if ($channel_type === CHANNEL_TYPE_INSTAGRAM) {
 $typeInfo = $types[$item->type];
 $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#FFE000', '#ffd6cc'];
 $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
+$user_id = $item->post_id;
+$access_token = FB_TOKEN;
 ?>
 <style>
     .data:hover {
@@ -77,7 +79,14 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
                         <span class="text-center">
                             <a target="_blank" href="<?= $socialLink ?>">
                                 <div style="position: relative; margin-right: 15px;">
-                                    <img style="width: 72px; height: 72px;" class="avatar rounded-circle border border-primary border-3 <?= $classBorder ?> " alt="" src="https://cmu-cdn.vinfast.vn/2023/08/450bb39b-2debaaea-51b7-4cf1-ad81-ff163874d683.jpeg">
+                                    <img style="width: 72px; height: 72px;" class="avatar rounded-circle border border-primary border-3 <?= $classBorder ?> " alt="" src="
+                                    <?php
+                                    if ($typeInfo['name'] == "Group") {
+                                        echo "/assets/images/avartar_group.png";
+                                    } else {
+                                        echo "/assets/images/avatar_unknown.png";
+                                    }
+                                    ?>">
                                     <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="<?= $iconImage ?>" width="27"></span>
                                 </div>
                             </a>
