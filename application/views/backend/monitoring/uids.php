@@ -48,18 +48,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
     #phone_user {
         display: none;
     }
-
-    .badge-blue {
-        background: rgba(47, 129, 252, 0.08) !important;
-    }
-
-    .badge-red {
-        background: rgba(248, 123, 123, 0.08) !important;
-    }
-
-    .badge-blue {
-        cursor: pointer;
-    }
 </style>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -401,12 +389,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
     </div>
     <!--end::Content-->
 </div>
-<script>
-    $('.showData').click(function(e) {
-        let dataDecode = $(this).data('decode');
-        $(this).text(dataDecode);
-    })
-</script>
 <script type="text/json" id="extra-fields">
     <?php echo json_encode(get_extra_fields()); ?>
 </script>

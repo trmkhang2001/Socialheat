@@ -146,10 +146,57 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->friends ?></span>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->sex ?></span>
+												<?php
+												if ($item->sex === 'male') : ?>
+													<!-- <span class="m-badge  m-badge--male m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i class="fa fa-mars" aria-hidden="true"></i>male</span> -->
+													<span class="badge badge-blue px-4">
+														<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+														<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1">
+															<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<path d="M12 0H0V12H12V0Z" fill="white" fill-opacity="0.01"></path>
+																<path d="M10.4879 3.76222V1.51221H8.23785" stroke="#2F81FC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+																<path d="M2.60325 9.50028C3.97007 10.8671 6.18617 10.8671 7.553 9.50028C8.23642 8.81685 8.57812 7.92113 8.57812 7.0254C8.57812 6.12968 8.23642 5.23395 7.553 4.55053C6.18617 3.18368 3.97007 3.18368 2.60325 4.55053C1.23642 5.91735 1.23642 8.13343 2.60325 9.50028Z" stroke="#2F81FC" stroke-width="1.4" stroke-linejoin="round"></path>
+																<path d="M7.49997 4.50008L9.98787 2.01221" stroke="#2F81FC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+															</svg>
+														</span>Male
+													</span>
+												<?php
+												elseif ($item->sex === 'female') : ?>
+													<span class="badge badge-red px-4">
+														<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1">
+															<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<g clip-path="url(#clip0_575_111)">
+																	<path d="M12 0H0V12H12V0Z" fill="white" fill-opacity="0.01"></path>
+																	<path d="M9.59467 2.46307C8.22784 1.09624 6.01176 1.09624 4.64492 2.46307C3.96151 3.14649 3.6198 4.04222 3.6198 4.93795C3.6198 5.83368 3.96151 6.7294 4.64492 7.41282C6.01176 8.77966 8.22784 8.77966 9.59467 7.41282C10.9615 6.04599 10.9615 3.82991 9.59467 2.46307Z" stroke="#F87B7B" stroke-width="1.4" stroke-linejoin="round"></path>
+																	<path d="M4.61612 7.38394L1.43414 10.5659" stroke="#F87B7B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+																	<path d="M4.79289 10.3892L1.61091 7.20718" stroke="#F87B7B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+																</g>
+																<defs>
+																	<clipPath id="clip0_575_111">
+																		<rect width="12" height="12" fill="white"></rect>
+																	</clipPath>
+																</defs>
+															</svg>
+
+														</span>Female
+													</span>
+												<?php
+												else : ?>
+													<!-- <span class="m-badge  m-badge--male m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i class="fa fa-mars" aria-hidden="true"></i>male</span> -->
+													<span class="badge badge-blue px-4">
+														<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+														<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1">
+															<i class="fa-solid fa-venus-mars" style="color: #FF00C9;"></i>
+														</span>Other
+													</span>
+												<?php
+
+
+												endif; ?>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->birthday ?></span>
+												<span class="text-dark me-2 fs--7 fw-bold "><?php $date = date('d/m/Y', strtotime($item->birthday));
+																							echo $date; ?></span></span>
 											</td>
 											<td class="form_filters_post text-left ">
 												<div class="d-flex clearfix item-content-read-less">

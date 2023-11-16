@@ -64,6 +64,18 @@ License: For each use you must have a valid license purchased only from above li
     .btn-scroll {
         right: 48px !important;
     }
+
+    .badge-blue {
+        background: rgba(47, 129, 252, 0.08) !important;
+    }
+
+    .badge-red {
+        background: rgba(248, 123, 123, 0.08) !important;
+    }
+
+    .badge-blue {
+        cursor: pointer;
+    }
 </style>
 <!--begin::Body-->
 
@@ -158,6 +170,12 @@ License: For each use you must have a valid license purchased only from above li
                 $(this).text('Read more');
             }
         });
+    </script>
+    <script>
+        $('.showData').click(function(e) {
+            let dataDecode = $(this).data('decode');
+            $(this).text(dataDecode);
+        })
     </script>
     <!-- /Script -->
     <?php $this->load->view('/backend/layout/script_chart'); ?>

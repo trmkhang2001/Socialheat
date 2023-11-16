@@ -150,7 +150,7 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
                                                     ++$indexColor;
 
                                             ?>
-                                                    <i data-keyword="<?= $keyword ?>" style="color:<?= $colorKey ?>;border: 1px solid <?= $colorBgKey ?> !important"> <?= sprintf('%s', $keyword) ?></i>
+                                                    <i data-keyword="<?= $keyword ?>" style="color:<?= $colorKey ?>;border: 1px solid <?= $colorBgKey ?> !important;padding:3px"> <?= sprintf('%s', $keyword) ?></i>
                                             <?php endif;
                                             endforeach; ?>
                                         </span>
