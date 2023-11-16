@@ -5,6 +5,9 @@
  * @var  $key
  * @var  $user_id
  */
+
+use app\common\business\BusinessSocialItem;
+
 $ri = 0;
 $count = (int)$item['count'];
 $d_count = (int)$item['count_d'];
@@ -18,6 +21,7 @@ $total_share = (int)$item['total_share'];
 $total_comment = (int)$item['total_comment'];
 $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
 $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
+$social_item = BusinessSocialItem::getInstance()->findBySocialId($item['post_owner_id']);
 ?>
 <style>
     .footer-item-post {
@@ -51,35 +55,35 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
         text-decoration: none;
     }
 </style>
-<div class="card card-flush">
+<div class="card card-flush p-3">
     <!--begin::Header-->
-    <div class="card-header pt-3 justify-content-start">
-        <div class="" style="position: relative;">
+    <div class="pt-3 justify-content-start">
+        <!-- <div class="" style="position: relative;">
             <img class="border border-primary border-3 rounded-circle" style="width: 72px; height: 72px;" src="https://cmu-cdn.vinfast.vn/2023/08/450bb39b-2debaaea-51b7-4cf1-ad81-ff163874d683.jpeg" alt="">
             <a target="_blank" style="position: absolute; top: 0; right: -6px; float: left;margin-right: 6px" href="https://facebook.com/<?php echo $key; ?>">
                 <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="/assets/images/icon-fb.png" width="27"></span>
             </a>
-        </div>
+        </div> -->
         <!--begin::Title-->
         <div class="card-title align-items-start flex-column" style="margin-left: 15px;">
-            <a target="_blank" href="https://facebook.com/<?php echo $key; ?>" class="card-label fs-1 fw-bold text-gray-800"><span>POST DETAIL</span></a>
-            <span class="text-gray-400 mt-1 fw-semibold fs-6 text-id"><?= $item['created_post_date'] ?> | <a target="_blank" class="post_link" href="https://facebook.com/<?php echo $key; ?>"> <span class="text-gray-400 mt-1 fw-semibold fs-6 text-id">ID: <?= $item['post_id'] ?></span></a> </span>
+            <a target="_blank" href="https://facebook.com/<?php echo $key; ?>" class="card-label fs-1 fw-bold text-gray-800"><span><?php echo $social_item->name ?></span></a>
+            <span class="text-gray-400 mt-1 fw-semibold fs-6 text-id"><?php echo date('d/m/Y', strtotime($item['created_post_date'])); ?> | <a target="_blank" class="post_link" href="https://facebook.com/<?php echo $key; ?>"> <span class="text-gray-400 mt-1 fw-semibold fs-6 text-id">ID: <?= $item['post_id'] ?></span></a> </span>
         </div>
         <!--end::Title-->
     </div>
     <!--end::Header-->
     <!--begin::Body-->
-    <div class="card-body px-0" style="padding-top: 0px; margin-top:0px">
+    <div class="px-0" style="padding-top: 0px; margin-top:0px">
         <!--begin::Chart-->
         <div class="w-100 min-h-auto">
-            <div class="card-body">
+            <div class="p-5">
                 <p class="text" style="font-size: medium;"><?= html_entity_decode($item['content']) ?></p>
             </div>
         </div>
         <!--end::Chart-->
     </div>
     <!--end: Card Body-->
-    <div class="card-footer">
+    <div class="p-5">
         <div class="d-flex">
             <?php
             $keywords = explode(',', $item['keywords']);

@@ -4,13 +4,13 @@ namespace app\common\business;
 
 use app\models\Interaction;
 
-class BusinessInteraction implements BusinessInterface {
+class BusinessInteraction implements BusinessInterface
+{
 	static protected $_instance = NULL;
 
 	static public function getInstance()
 	{
-		if (self::$_instance === NULL)
-		{
+		if (self::$_instance === NULL) {
 			self::$_instance = new self();
 		}
 
@@ -66,8 +66,7 @@ class BusinessInteraction implements BusinessInterface {
 		 * @var $dbObj \CI_DB_query_builder
 		 */
 		$dbObj = $modelInstance::find(FALSE)->order_by($orderBy);
-		if ($itemPerPage)
-		{
+		if ($itemPerPage) {
 			$dbObj->limit($itemPerPage);
 		}
 		$dbObj = $modelInstance->getConditions($conditions, $dbObj);
@@ -83,15 +82,14 @@ class BusinessInteraction implements BusinessInterface {
 	}
 
 
-
 	public function getDataDownload($conditions, $offset, $itemPerPage, $endId)
 	{
 		$modelInstance = self::getModel();
 		$dbObj = $modelInstance::find(FALSE);
 		$dbObj = $modelInstance->getConditions($conditions, $dbObj);
-		if($endId){
-			$dbObj->where('id > ',$endId);
-		}else{
+		if ($endId) {
+			$dbObj->where('id > ', $endId);
+		} else {
 			$dbObj->offset($offset);
 		}
 		$dbObj->limit($itemPerPage);
@@ -101,33 +99,34 @@ class BusinessInteraction implements BusinessInterface {
 	public function getCount($conditions = array(), $alias = '')
 	{
 		$modelInstance = self::getModel();
-		$nameCache = 'getCount'.http_build_query($conditions);
+		$nameCache = 'getCount' . http_build_query($conditions);
 		$res = $modelInstance::getCache($nameCache);
-		if($res){
+		if ($res) {
 			return $res;
 		}
 		/**
 		 * @var $dbObj \CI_DB_query_builder
 		 */
-		if($alias){
-			$dbObj = $modelInstance::find(FALSE,$alias);
-
-		}else{
+		if ($alias) {
+			$dbObj = $modelInstance::find(FALSE, $alias);
+		} else {
 			$dbObj = $modelInstance::find(FALSE);
-
 		}
 
 		$dbObj = $modelInstance->getConditions($conditions, $dbObj);
 		$number =   $dbObj->count_all_results();
-		$modelInstance::setCache($nameCache,$number,60*60*24*30);
+		$modelInstance::setCache($nameCache, $number, 60 * 60 * 24 * 30);
 		return  $number;
 	}
-
+	// public function getCountPostId($conditions = array(), $postId)
+	// {
+	// 	$modelInstance = self::getModel();
+	// 	$na
+	// }
 	public function findByConditions($conditions = array())
 	{
 		$dbObj = Interaction::getInstance()->find(false);
 		$dbObj = Interaction::getInstance()->getConditions($conditions, $dbObj);
 		return $dbObj;
 	}
-
 }

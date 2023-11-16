@@ -1,6 +1,8 @@
 <?php
 
+use app\common\business\BusinessApi;
 use app\common\business\BusinessInteraction;
+use app\common\business\BusinessInterface;
 use app\common\business\BusinessItem;
 use app\common\business\BusinessKeyword;
 use app\common\business\BusinessSocialItem;
@@ -8,6 +10,7 @@ use app\common\utilities\Common;
 use app\common\business\BusinessUser;
 use app\common\utilities\Pagination;
 use app\controllers\backend\BackendController;
+use app\models\Interaction;
 use app\models\Item;
 
 class Dashboards extends BackendController
@@ -26,6 +29,7 @@ class Dashboards extends BackendController
         $totalAudience = $this->getAudienceCount();
         $totalMentions = $this->getMentionsCount();
         $topKey = $this->getTopKey();
+        $interact = $this->getInteract();
         $totalSocial['Total Mentions'] = $totalMentions;
         $totalSocial['Total Audience'] = $totalAudience;
         $totalSocial['Total Keywords'] = $totalKeywords;
@@ -33,6 +37,7 @@ class Dashboards extends BackendController
         $this->temp['data']['totalSocial'] = $totalSocial;
         $this->temp['data']['users'] = $users;
         $this->temp['data']['topKey'] = $topKey;
+        $this->temp['data']['interact'] = $interact;
         $this->temp['data']['pagination'] = $pagination;
         $this->temp['template'] = 'backend/dashboards/index';
         $this->render();
@@ -160,15 +165,18 @@ class Dashboards extends BackendController
             $oneKey = array();
             $count = 0;
             $engage = 0;
+            $data = 0;
             foreach ($items as $item) {
                 if (!strpos($item->keywords, $value)) {
                     $count++;
                     $engage += ($item->total_share + $item->total_like + $item->total_comment);
+                    $data += ($item->count_d);
                 }
             }
             $oneKey['key'] = $value;
             $oneKey['count'] = $count;
             $oneKey['engage'] = $engage;
+            $oneKey['data'] = $data;
             $topKey[$key] = $oneKey;
         }
         usort($topKey, function ($a, $b) {
@@ -181,5 +189,38 @@ class Dashboards extends BackendController
             }
         }
         return $top;
+    }
+    public function getInteract()
+    {
+        $conditions = array();
+        $items = BusinessItem::getInstance()->getRangeCache($conditions);
+        $total = array();
+        $res = $items[0];
+        $total = array();
+        $index = 0;
+        $count_user = 0;
+        $count_post = 0;
+        $totalOne = array();
+        foreach ($items as $key => $item) {
+            if ($index < 6) {
+                if (strcmp(date('d/m/Y', strtotime($res->craw_date)), date('d/m/Y', strtotime($item->craw_date))) == 0) {
+                    $totalUser = BusinessInteraction::getInstance()->getCount(['post_id' => $res->post_id]);
+                    unset($items[$key]);
+                    $count_user = $totalUser + $count_user;
+                    $count_post++;
+                } else {
+                    $totalOne['date'] = date('d/m', strtotime($res->craw_date));
+                    $totalOne['count_user'] = $count_user;
+                    $totalOne['count_post'] = $count_post;
+                    $total[$index] = $totalOne;
+                    $count_post = 0;
+                    $count_user = 0;
+                    $totalOne = array();
+                    $res = $item;
+                    $index++;
+                }
+            }
+        }
+        return $total;
     }
 }

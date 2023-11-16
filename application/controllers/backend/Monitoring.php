@@ -8,6 +8,7 @@ use app\common\business\BusinessItem;
 use app\common\business\BusinessXpath;
 use app\models\User;
 use app\common\business\BusinessInteraction;
+use app\common\business\BusinessSocialItem;
 use app\common\business\BusinessUser;
 
 class Monitoring extends BackendController
@@ -131,6 +132,7 @@ class Monitoring extends BackendController
     {
         $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
         $group = BusinessItem::getInstance()->findByPostId($postId);
+        // $social_item = BusinessSocialItem::getInstance()->findBySocialId($group['post_owner_id"']);
 
         if (($group->channel_type && $group->channel_type !== CHANNEL_TYPE_FACEBOOK) || !$group) {
             show_404('Post id không tồn tại');

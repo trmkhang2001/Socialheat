@@ -8,6 +8,7 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
  * @var $userInfo
  * @var $totalKeywords
  * @var $topKey
+ * @var $interact
  */
 ?>
 <style>
@@ -204,9 +205,10 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
                                     <th class="w-25px">
                                         NO.
                                     </th>
-                                    <th class="min-w-500px">Audience Name</th>
+                                    <th class="min-w-500px">Keywords Name</th>
                                     <th class="min-w-150px">Post</th>
                                     <th class="min-w-150px">Engage</th>
+                                    <th class="min-w-150px">Data</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -231,6 +233,9 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
                                         </td>
                                         <td>
                                             <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($key['engage']) ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($key['data']) ?></span>
                                         </td>
                                     </tr>
                                 <?php

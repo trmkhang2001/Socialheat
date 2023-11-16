@@ -8,21 +8,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
  * @var $userInfo
  * @var $totalKeywords
  */
+// var_dump($content);
 ?>
-<script>
-    // const toggleShow = document.querySelector('.showHide');
-    // const phoneUser = document.getElementById('phone_user');
-    // const title = document.getElementById('title');
-    // console.log(title);
-
-    // function showHide() {
-    //     if (phoneUser.style.display === "none") {
-    //         phoneUser.style.display = "normal";
-    //     } else {
-    //         phoneUser.style.display = "none";
-    //     }
-    // }
-</script>
 <style>
     .header {
         height: 0px;
@@ -287,11 +274,13 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $value['email'] ?>">
-                                                                                            <span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
-                                                                                                <i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+                                                                                        <?php if (!empty($value['email'])) { ?>
+                                                                                            <span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $value['email'] ?>">
+                                                                                                <span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+                                                                                                    <i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+                                                                                                </span>
                                                                                             </span>
-                                                                                        </span>
+                                                                                        <?php  } ?>
                                                                                     </td>
                                                                                     <td class="fw-bold">
                                                                                         <?php // substr($value['phone'], 0, -4) . '****' 
@@ -302,11 +291,11 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                                             </span>
                                                                                         </span>
                                                                                     </td>
-                                                                                    <td class="fw-bold"><?= $value['friends'] ?></td>
-                                                                                    <td class="fw-bold"><?= $value['follow'] ?></td>
-                                                                                    <td class="fw-bold"><?php $date = date('d/m/Y', strtotime($value['birthday']));
-                                                                                                        echo $date; ?></td>
-                                                                                    <td class="fw-bold">
+                                                                                    <td><?= $value['friends'] ?></td>
+                                                                                    <td><?= $value['follow'] ?></td>
+                                                                                    <td><?php $date = date('d/m/Y', strtotime($value['birthday']));
+                                                                                        echo $date; ?></td>
+                                                                                    <td>
                                                                                         <?php
                                                                                         if ($value['sex'] === 'male') : ?>
                                                                                             <!-- <span class="m-badge  m-badge--male m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i class="fa fa-mars" aria-hidden="true"></i>male</span> -->
@@ -354,8 +343,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 
                                                                                         endif; ?>
                                                                                     </td>
-                                                                                    <td class="fw-bold"><?= $value['relationship'] ?></td>
-                                                                                    <td class="fw-bold"><?= $value['city'] ?></td>
+                                                                                    <td><?= $value['relationship'] ?></td>
+                                                                                    <td><?= $value['city'] ?></td>
                                                                                 </tr>
                                                                             <?php
                                                                             endforeach ?>

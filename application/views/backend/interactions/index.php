@@ -137,7 +137,13 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 												</span>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->email ?></span>
+												<?php if (!empty($item->email)) { ?>
+													<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $item->email ?>">
+														<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+															<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+														</span>
+													</span>
+												<?php  } ?>
 											</td>
 											<td>
 												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->relationship ?></span>

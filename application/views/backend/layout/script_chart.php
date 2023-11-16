@@ -1,3 +1,9 @@
+<?php
+
+/**
+ * @var $interact
+ */
+?>
 <script>
     /* chart.js chart examples */
 
@@ -9,16 +15,19 @@
         new Chart(chBar, {
             type: 'bar',
             data: {
-                labels: ["29/10", "30/10", "01/11", "02/11", "03/11", "04/11"],
+                labels: ["30/10", "29/10", "28/10", "27/10", "26/10", "25/10"],
                 datasets: [{
-                        data: [200, 300, 400, 500, 600, 3000],
+                        label: 'User',
+                        data: [100, 300, 400, 500, 600, 3000],
                         backgroundColor: colors[0]
                     },
                     {
+                        label: 'Post',
                         data: [1200, 600, 1400, 800, 2200, 4000],
                         backgroundColor: colors[1]
                     }
                 ]
+
             },
             options: {
                 plugins: {

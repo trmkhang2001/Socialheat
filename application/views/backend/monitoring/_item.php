@@ -61,6 +61,14 @@ $access_token = FB_TOKEN;
         color: #7F8089;
 
     }
+
+    .type_name {
+        margin-right: 15px;
+        padding: 3px;
+        text-align: center;
+        background: rgba(54, 51, 219, 0.05);
+        color: #3633DB;
+    }
 </style>
 <div class="d-flex justify-content-center card my-5 p-3">
     <div class="portlet-body" id="chats">
@@ -81,10 +89,14 @@ $access_token = FB_TOKEN;
                                 <div style="position: relative; margin-right: 15px;">
                                     <img style="width: 72px; height: 72px;" class="avatar rounded-circle border border-primary border-3 <?= $classBorder ?> " alt="" src="
                                     <?php
-                                    if ($typeInfo['name'] == "Group") {
-                                        echo "/assets/images/avartar_group.png";
+                                    if (file_exists($item->image)) {
+                                        echo "$item->image";
                                     } else {
-                                        echo "/assets/images/avatar_unknown.png";
+                                        if ($typeInfo['name'] == "Group") {
+                                            echo "/assets/images/avartar_group.png";
+                                        } else {
+                                            echo "/assets/images/avatar_unknown.png";
+                                        }
                                     }
                                     ?>">
                                     <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="<?= $iconImage ?>" width="27"></span>
@@ -94,11 +106,16 @@ $access_token = FB_TOKEN;
 
                     </div>
                     <div class="d-flex justify-content-center">
-                        <div class="">
+                        <div class="" style="width: 573px;">
                             <h5 class="clearfix title-type">
                                 <a target="_blank" style="color: #000000" href="<?= $socialLink ?>">
-                                    <div class="d-flex justify-content-between">
-                                        <b class="title_social fs-2"><?= $item->social_name ?></b>
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <div class="">
+                                            <b class="title_social fs-2"><?= $item->social_name ?></b>
+                                        </div>
+                                        <div class="">
+                                            <span class="type_name rounded"><?= $typeInfo['name'] ?></span>
+                                        </div>
                                     </div>
                                     <br>
                                     <span>
@@ -159,7 +176,7 @@ $access_token = FB_TOKEN;
                                                     ++$indexColor;
 
                                             ?>
-                                                    <i data-keyword="<?= $keyword ?>" style="color:<?= $colorKey ?>;border: 1px solid <?= $colorBgKey ?> !important;padding:3px"> <?= sprintf('%s', $keyword) ?></i>
+                                                    <span data-keyword="<?= $keyword ?>" style="color:<?= $colorKey ?>;border: 1px solid <?= $colorBgKey ?> !important;padding:3px"> <?= sprintf('%s', $keyword) ?></span>
                                             <?php endif;
                                             endforeach; ?>
                                         </span>
