@@ -1,5 +1,5 @@
 <?php
-$name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietnam", "#suaensure");
+
 /**
  * @var $total
  * @var $totalSocial
@@ -8,7 +8,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
  * @var $userInfo
  * @var $totalKeywords
  */
-// var_dump($content);
 ?>
 <style>
     .header {

@@ -6,44 +6,45 @@
 ?>
 <script>
     /* chart.js chart examples */
+    <?php if (isset($interact)) { ?>
+        // chart colors
+        var colors = ['#3E97FF', '#E1E3EA'];
+        /* bar chart */
+        var chBar = document.getElementById("chBar");
+        if (chBar) {
+            new Chart(chBar, {
+                type: 'bar',
+                data: {
+                    labels: ["<?php echo $interact[5]['date'] ?>", "<?php echo $interact[4]['date'] ?>", "<?php echo $interact[3]['date'] ?>", "<?php echo $interact[2]['date'] ?>", "<?php echo $interact[1]['date'] ?>", "<?php echo $interact[0]['date'] ?>"],
+                    datasets: [{
+                            label: 'User',
+                            data: [<?= $interact[5]['count_user'] ?>, <?= $interact[4]['count_user'] ?>, <?= $interact[3]['count_user'] ?>, <?= $interact[2]['count_user'] ?>, <?= $interact[1]['count_user'] ?>, <?= $interact[0]['count_user'] ?>],
+                            backgroundColor: colors[0]
+                        },
+                        {
+                            label: 'Post',
+                            data: [<?= $interact[5]['count_post'] ?>, <?= $interact[4]['count_post'] ?>, <?= $interact[3]['count_post'] ?>, <?= $interact[2]['count_post'] ?>, <?= $interact[1]['count_post'] ?>, <?= $interact[0]['count_post'] ?>],
+                            backgroundColor: colors[1]
+                        }
+                    ]
 
-    // chart colors
-    var colors = ['#3E97FF', '#E1E3EA'];
-    /* bar chart */
-    var chBar = document.getElementById("chBar");
-    if (chBar) {
-        new Chart(chBar, {
-            type: 'bar',
-            data: {
-                labels: ["30/10", "29/10", "28/10", "27/10", "26/10", "25/10"],
-                datasets: [{
-                        label: 'User',
-                        data: [100, 300, 400, 500, 600, 3000],
-                        backgroundColor: colors[0]
-                    },
-                    {
-                        label: 'Post',
-                        data: [1200, 600, 1400, 800, 2200, 4000],
-                        backgroundColor: colors[1]
-                    }
-                ]
-
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
                 },
-                scales: {
-                    xAxes: [{
-                        barPercentage: 0.4,
-                        categoryPercentage: 0.5
-                    }]
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            barPercentage: 0.4,
+                            categoryPercentage: 0.5
+                        }]
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
+    <?php } ?>
     //doughnut
     var ctxD = document.getElementById("doughnutChart");
     var myLineChart = new Chart(ctxD, {
