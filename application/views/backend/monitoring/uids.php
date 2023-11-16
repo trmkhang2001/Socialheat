@@ -9,6 +9,20 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
  * @var $totalKeywords
  */
 ?>
+<script>
+    // const toggleShow = document.querySelector('.showHide');
+    // const phoneUser = document.getElementById('phone_user');
+    // const title = document.getElementById('title');
+    // console.log(title);
+
+    // function showHide() {
+    //     if (phoneUser.style.display === "none") {
+    //         phoneUser.style.display = "normal";
+    //     } else {
+    //         phoneUser.style.display = "none";
+    //     }
+    // }
+</script>
 <style>
     .header {
         height: 0px;
@@ -26,12 +40,32 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
     li {
         list-style: none;
     }
+
+    .showhide {
+        cursor: pointer;
+    }
+
+    #phone_user {
+        display: none;
+    }
+
+    .badge-blue {
+        background: rgba(47, 129, 252, 0.08) !important;
+    }
+
+    .badge-red {
+        background: rgba(248, 123, 123, 0.08) !important;
+    }
+
+    .badge-blue {
+        cursor: pointer;
+    }
 </style>
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Container-->
     <div class="container-fluid" id="kt_content_container">
-        <h1 class="mb-7">Monitoring</h1>
+        <h1 class="mb-7" id="title">Monitoring</h1>
         <!--begin::Row-->
         <div class="row mb-5">
             <!--begin::Col-->
@@ -236,7 +270,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                         <thead>
                                                                             <tr class="fw-bold text-muted">
                                                                                 <th class="uid sorting">Social Profile</th>
-                                                                                <th class="Name name sorting">Name</th>
                                                                                 <th class="email">Email</th>
                                                                                 <th class="Phone">Phone</th>
                                                                                 <th class="Friends friends sorting_desc">Friends</th>
@@ -258,27 +291,68 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                                                                 <tr>
                                                                                     <td>
                                                                                         <div class="d-flex align-items-center symbol symbol-50px">
-                                                                                            <a href="https://facebook.com/<?= $value['uid'] ?>" class="symbol symbol-50px" target="_blank">
-                                                                                                <img style="width: 40px;" class="m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $value['uid'] ?>/picture?type=large&width=500&height=500&access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
+                                                                                            <a href="https://facebook.com/<?= $value['uid'] ?>" class="symbol symbol-50px me-4" target="_blank">
+                                                                                                <img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $value['uid'] ?>/picture?type=large&width=500&height=500&access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
                                                                                             </a>
+                                                                                            <a target="_blank" href="https://facebook.com/<?= $value['uid'] ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?= $value['name'] ?></a>
 
                                                                                         </div>
                                                                                     </td>
-                                                                                    <td><a target="_blank" href="https://facebook.com/<?= $value['uid'] ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?= $value['name'] ?></a></td>
-                                                                                    <td><?= $value['email'] ?  substr($value['email'], 0, -4) . '****' : '' ?></td>
-                                                                                    <td><?= substr($value['phone'], 0, -4) . '****' ?></td>
-                                                                                    <td><?= $value['friends'] ?></td>
-                                                                                    <td><?= $value['follow'] ?></td>
-                                                                                    <td><?= $value['birthday'] ?></td>
                                                                                     <td>
+                                                                                        <span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $value['email'] ?>">
+                                                                                            <span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+                                                                                                <i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                    <td class="fw-bold">
+                                                                                        <?php // substr($value['phone'], 0, -4) . '****' 
+                                                                                        ?>
+                                                                                        <span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $value['phone'] ?>">
+                                                                                            <span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+                                                                                                <i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                    <td class="fw-bold"><?= $value['friends'] ?></td>
+                                                                                    <td class="fw-bold"><?= $value['follow'] ?></td>
+                                                                                    <td class="fw-bold"><?php $date = date('d/m/Y', strtotime($value['birthday']));
+                                                                                                        echo $date; ?></td>
+                                                                                    <td class="fw-bold">
                                                                                         <?php
                                                                                         if ($value['sex'] === 'male') : ?>
-                                                                                            <span class="m-badge  m-badge--male m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i class="fa fa-mars" aria-hidden="true"></i>male</span>
+                                                                                            <!-- <span class="m-badge  m-badge--male m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #3F51B5"><i class="fa fa-mars" aria-hidden="true"></i>male</span> -->
+                                                                                            <span class="badge badge-blue px-4">
+                                                                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+                                                                                                <span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1">
+                                                                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                        <path d="M12 0H0V12H12V0Z" fill="white" fill-opacity="0.01"></path>
+                                                                                                        <path d="M10.4879 3.76222V1.51221H8.23785" stroke="#2F81FC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                                        <path d="M2.60325 9.50028C3.97007 10.8671 6.18617 10.8671 7.553 9.50028C8.23642 8.81685 8.57812 7.92113 8.57812 7.0254C8.57812 6.12968 8.23642 5.23395 7.553 4.55053C6.18617 3.18368 3.97007 3.18368 2.60325 4.55053C1.23642 5.91735 1.23642 8.13343 2.60325 9.50028Z" stroke="#2F81FC" stroke-width="1.4" stroke-linejoin="round"></path>
+                                                                                                        <path d="M7.49997 4.50008L9.98787 2.01221" stroke="#2F81FC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                                    </svg>
+                                                                                                </span>Male
+                                                                                            </span>
                                                                                         <?php
                                                                                         elseif ($value['sex'] === 'female') : ?>
-                                                                                            <span class="m-badge  m-badge--female m-badge--wide" style="color:white;letter-spacing: 0.6px;padding: 1px 10px;border-radius: 0.75rem;background-color: #E91E63"">
-					                                                                    <i class=" fa fa-venus" aria-hidden="true"></i>
-                                                                                                female</span>
+                                                                                            <span class="badge badge-red px-4">
+                                                                                                <span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1">
+                                                                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                        <g clip-path="url(#clip0_575_111)">
+                                                                                                            <path d="M12 0H0V12H12V0Z" fill="white" fill-opacity="0.01"></path>
+                                                                                                            <path d="M9.59467 2.46307C8.22784 1.09624 6.01176 1.09624 4.64492 2.46307C3.96151 3.14649 3.6198 4.04222 3.6198 4.93795C3.6198 5.83368 3.96151 6.7294 4.64492 7.41282C6.01176 8.77966 8.22784 8.77966 9.59467 7.41282C10.9615 6.04599 10.9615 3.82991 9.59467 2.46307Z" stroke="#F87B7B" stroke-width="1.4" stroke-linejoin="round"></path>
+                                                                                                            <path d="M4.61612 7.38394L1.43414 10.5659" stroke="#F87B7B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                                            <path d="M4.79289 10.3892L1.61091 7.20718" stroke="#F87B7B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                                        </g>
+                                                                                                        <defs>
+                                                                                                            <clipPath id="clip0_575_111">
+                                                                                                                <rect width="12" height="12" fill="white"></rect>
+                                                                                                            </clipPath>
+                                                                                                        </defs>
+                                                                                                    </svg>
+
+                                                                                                </span>Female
+                                                                                            </span>
                                                                                         <?php
                                                                                         else : ?>
                                                                                             <div class="d-flex">
@@ -292,8 +366,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 
                                                                                         endif; ?>
                                                                                     </td>
-                                                                                    <td><?= $value['relationship'] ?></td>
-                                                                                    <td><?= $value['city'] ?></td>
+                                                                                    <td class="fw-bold"><?= $value['relationship'] ?></td>
+                                                                                    <td class="fw-bold"><?= $value['city'] ?></td>
                                                                                 </tr>
                                                                             <?php
                                                                             endforeach ?>
@@ -327,6 +401,12 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
     </div>
     <!--end::Content-->
 </div>
+<script>
+    $('.showData').click(function(e) {
+        let dataDecode = $(this).data('decode');
+        $(this).text(dataDecode);
+    })
+</script>
 <script type="text/json" id="extra-fields">
     <?php echo json_encode(get_extra_fields()); ?>
 </script>

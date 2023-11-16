@@ -8,18 +8,6 @@
  */
 ?>
 <style>
-    .margin-left-100 {
-        margin-left: 100px !important;
-    }
-
-    .border-instagram {
-        border: 3px solid #f7504f;
-    }
-
-    .border-twitter {
-        border: 3px solid #1da1f1;
-    }
-
     .text {
         overflow: hidden;
         display: -webkit-box;
@@ -31,12 +19,6 @@
 
     .chats {
         display: inline-flex;
-    }
-
-    .text-title {
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #B5B5C3;
     }
 
     .number {

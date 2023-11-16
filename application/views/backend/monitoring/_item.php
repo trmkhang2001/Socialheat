@@ -27,7 +27,7 @@ if ($channel_type === CHANNEL_TYPE_INSTAGRAM) {
     $classBorder = 'border-instagram ';
 }
 $typeInfo = $types[$item->type];
-$colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
+$colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#FFE000', '#ffd6cc'];
 $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
 ?>
 <style>
@@ -44,6 +44,20 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
 
     .read_more:hover {
         opacity: 0.5;
+    }
+
+    .btn-detail-item:hover {
+        opacity: 2;
+    }
+
+    .text-title {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: normal;
+        letter-spacing: -0.01em;
+        color: #7F8089;
+
     }
 </style>
 <div class="d-flex justify-content-center card my-5 p-3">
@@ -70,7 +84,7 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
                         </span>
 
                     </div>
-                    <div class="d-flex justify-content-center flex-stuck">
+                    <div class="d-flex justify-content-center">
                         <div class="">
                             <h5 class="clearfix title-type">
                                 <a target="_blank" style="color: #000000" href="<?= $socialLink ?>">
@@ -83,43 +97,69 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
                                     </span>
                                 </a>
                             </h5>
-                            <div class="d-flex flex-column justify-content-between">
-                                <div>
+                            <div class="d-flex flex-column  ">
+                                <div class="d-flex flex-column">
                                     <p class="text text-justify-betwen item-content-read-less _items-post-content content-item" style="margin-bottom:0;overflow: hidden;word-break: break-word;font-size: 13px;">
                                         <?= html_entity_decode($item->content) ?></p>
                                     <a target="_blank" href="<?= $linkDetail ?>" id="read_more" class="read_more">Read more</a>
                                 </div>
-                                <div class="d-flex justify-content-end clearfix mt-5 list-post-keywords">
-                                    <span class="post_keywords col-md-8 col-xs-7 no-padding" data-keyword="">
-                                        <?php
-                                        $indexColor = 0;
-                                        $bg_color = '';
-                                        $text_color = '';
-                                        foreach ($keywords as $index => $keyword) :
-                                            if ($keyword) :
-                                                $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
+                                <div class="d-flex d-flex justify-content-between clearfix mt-5 list-post-keywords">
+                                    <div class="col-md-8 col-xs-7">
+                                        <!-- <span class="post_keywords no-padding" data-keyword="">
+                                            <?php
+                                            // $indexColor = 0;
+                                            // $bg_color = '';
+                                            // $text_color = '';
+                                            // foreach ($keywords as $index => $keyword) :
+                                            //     if ($keyword) :
+                                            //         $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
 
-                                                if (!empty($keywordsColor[$slug])) {
-                                                    $color = $keywordsColor[$slug];
-                                                } else {
+                                            //         if (!empty($keywordsColor[$slug])) {
+                                            //             $color = $keywordsColor[$slug];
+                                            //         } else {
+                                            //             if ($indexColor > 4) {
+                                            //                 $indexColor = 0;
+                                            //             }
+                                            //             $bg_color = $colorBg[$indexColor];
+                                            //             $text_color = $colorText[$indexColor];
+                                            //             $color = $colorBg[$indexColor];
+                                            //             $keywordsColor[$slug] = $color;
+                                            //             $indexColor++;
+                                            //         }
+
+                                            ?>
+                                                    <a href="#" class="border rounded-pill p-1 fw-bold" data-keyword="<?= $keyword ?>" style="color:<?= $text_color ?>;background-color:<?= $bg_color ?>"> <?= sprintf('%s', $keyword) ?></a>
+                                            <?php //endif;
+                                            //endforeach; 
+                                            ?>
+                                        </span> -->
+                                        <span class="post_keywords col-md-8 col-xs-7 no-padding" data-keyword="">
+                                            <?php
+                                            $count = count($colorBg);
+                                            $indexColor = 0;
+                                            $colorKey = "";
+                                            $colorBgKey = "";
+                                            foreach ($keywords as $index => $keyword) :
+                                                if ($keyword) :
+                                                    $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
                                                     if ($indexColor > 4) {
                                                         $indexColor = 0;
                                                     }
-                                                    $bg_color = $colorBg[$indexColor];
-                                                    $text_color = $colorText[$indexColor];
-                                                    $color = $colorBg[$indexColor];
-                                                    $keywordsColor[$slug] = $color;
-                                                    $indexColor++;
-                                                }
+                                                    $colorKey = $colorText[$indexColor];
+                                                    $colorBgKey = $colorBg[$indexColor];
+                                                    ++$indexColor;
 
-                                        ?>
-                                                <a href="#" class="border rounded-pill p-1 fw-bold" data-keyword="<?= $keyword ?>" style="color:<?= $text_color ?>;background-color:<?= $bg_color ?>"> <?= sprintf('%s', $keyword) ?></a>
-                                        <?php endif;
-                                        endforeach; ?>
-                                    </span>
-                                    <span class="col-xs-5 col-md-4 no-padding">
-                                        <a class="btn btn-primary text-uppercase pull-right btn-detail-item" target="_blank" href="<?= $linkDetail ?>">View detail </a>
-                                    </span>
+                                            ?>
+                                                    <i data-keyword="<?= $keyword ?>" style="color:<?= $colorKey ?>;border: 1px solid <?= $colorBgKey ?> !important"> <?= sprintf('%s', $keyword) ?></i>
+                                            <?php endif;
+                                            endforeach; ?>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-4 col-md-4">
+                                        <span class="no-padding">
+                                            <a class="btn btn-sm fw-bold btn-primary text-uppercase pull-right btn-detail-item" target="_blank" href="<?= $linkDetail ?>">View detail </a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
