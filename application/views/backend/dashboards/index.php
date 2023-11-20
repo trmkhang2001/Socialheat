@@ -1,14 +1,12 @@
 <?php
-$name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#ensuregoldvietnam", "#suaensure", "#suaensure", "#suaensure", "#suaensure", "#suaensure");
 /**
- * @var $total
- * @var $totalSocial
- * @var $item
- * @var $interactions
- * @var $userInfo
- * @var $totalKeywords
- * @var $topKey
- * @var $interact
+ * @var $totalMentions
+ * @var $topKeywords
+ * @var $totalKeyword
+ * @var $totalAudience
+ * @var $totalMentions
+ * @var $totalEngage
+
  */
 ?>
 <style>
@@ -56,7 +54,7 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
                                 </div>
                                 <!--end::Follower-->
                                 <!--begin::Number-->
-                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total Mentions']) ?></span>
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalMentions) ?></span>
                                 <!--end::Number-->
                             </div>
                             <!--end::Section-->
@@ -77,7 +75,7 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
                                 </div>
                                 <!--end::Follower-->
                                 <!--begin::Number-->
-                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total Audience']) ?></span>
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalAudience) ?></span>
                                 <!--end::Number-->
                             </div>
                             <!--end::Section-->
@@ -98,7 +96,7 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
                                 </div>
                                 <!--end::Follower-->
                                 <!--begin::Number-->
-                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total Keywords']) ?></span>
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalKeyword) ?></span>
                                 <!--end::Number-->
                             </div>
                             <!--end::Section-->
@@ -119,7 +117,7 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
                                 </div>
                                 <!--end::Follower-->
                                 <!--begin::Number-->
-                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalSocial['Total User Engage']) ?></span>
+                                <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2"><?= number_format($totalEngage) ?></span>
                                 <!--end::Number-->
                             </div>
                             <!--end::Section-->
@@ -215,31 +213,30 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
                             <!--begin::Table body-->
                             <tbody>
                                 <?php
-                                $i = 0;
-                                foreach ($topKey as $key) {
-                                    $i++ ?>
+
+                                foreach ($topKeywords as $index =>  $keyword):
+	                                ?>
                                     <tr>
                                         <td>
-                                            <span><?php echo number_format($i) ?>.</span>
+                                            <span><?php echo number_format($index + 1) ?>.</span>
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-start flex-column">
-                                                <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $key['key'] ?></span>
+                                                <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $keyword->keywords?></span>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="text-dark fw-bold text-hover-primary d-block"><?php echo number_format($key['count']) ?></span>
+                                            <span class="text-dark fw-bold text-hover-primary d-block"><?php echo number_format($keyword->number_keyword) ?></span>
 
                                         </td>
                                         <td>
-                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($key['engage']) ?></span>
+                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($keyword->total_engage) ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($key['data']) ?></span>
+                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($keyword->total_data?? 0) ?></span>
                                         </td>
                                     </tr>
-                                <?php
-                                } ?>
+                                <?php endforeach;?>
                             </tbody>
                             <!--end::Table body-->
                         </table>
@@ -256,3 +253,68 @@ $name = array("Ensure Gold", "#ensureGold", "Ensure Gold", "#ensurevietnam", "#e
     </div>
     <!--end::Content-->
 </div>
+<script>
+	/* chart.js chart examples */
+	<?php if (!empty($chartPosts)) { ?>
+	// chart colors
+	var colors = ['#3E97FF', '#E1E3EA'];
+	/* bar chart */
+	var chBar = document.getElementById("chBar");
+	if (chBar) {
+		new Chart(chBar, {
+			type: 'bar',
+			data: {
+				labels: <?= json_encode($chartPosts['label'])?>,
+				datasets: [{
+					label: 'User',
+					data: <?= json_encode($chartPosts['data'])?>,
+					backgroundColor: colors[0]
+				},
+					{
+						label: 'Post',
+						data: <?= json_encode($chartPosts['items'])?>,
+						backgroundColor: colors[1]
+					}
+				]
+
+			},
+			options: {
+				plugins: {
+					legend: {
+						display: false,
+					}
+				},
+				scales: {
+					xAxes: [{
+						barPercentage: 0.4,
+						categoryPercentage: 0.5
+					}]
+				}
+			}
+		});
+	}
+	<?php } ?>
+	//doughnut
+	<?php if(!empty($chartInteractions)):?>
+	var ctxD = document.getElementById("doughnutChart");
+	var myLineChart = new Chart(ctxD, {
+		type: 'doughnut',
+		data: {
+			labels: <?= json_encode($chartInteractions['label'])?>,
+			datasets: [{
+				data: <?= json_encode($chartInteractions['data'])?>,
+				backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+				hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+			}]
+		},
+		options: {
+			plugins: {
+				legend: {
+					position: 'bottom'
+				}
+			},
+			responsive: true
+		}
+	});
+	<?php endif;?>
+</script>

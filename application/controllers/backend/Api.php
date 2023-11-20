@@ -447,7 +447,7 @@ class Api extends ApiController {
 		}
 		$isUpdate = BusinessItem::getModel()->update($item->id, $dataUpdate, TRUE, FALSE);
 
-
+		BusinessItem::getModel()->clearCache();
 		if ( ! empty($isUpdate['code']))
 		{
 			$this->response($isUpdate, 200);

@@ -5,6 +5,8 @@ namespace app\common\business;
 use app\common\components\Upload;
 use app\models\Item;
 use app\common\utilities\Common;
+use app\models\Keyword;
+use DateTime;
 
 class BusinessItem implements BusinessInterface
 {
@@ -814,5 +816,46 @@ class BusinessItem implements BusinessInterface
 			}
 		}
 	}
+	public function getTopKeywords($limit)
+	{
+		$name = 'getTopKeywords_'.$limit;
+		$model  = self::getModel();
+		$dbObj = $model::find();
+		$dbObj->select(' keywords , count(keywords) as number_keyword,sum(count_d) as total_data,
+			sum(total_share + total_like + total_comment) as total_engage
+		')
+			->where('keywords <>' ,'')
+			->group_by('keywords')
+			->order_by('number_keyword','DESC')
+			->limit($limit);
+		$res = $model::queryBuilder($name, $dbObj, FALSE,24*60*60*7);
+		return $res;
+	}
 
+	public function getTotalInteractionByType()
+	{
+		$name = 'getTotalInteractionByType';
+		$model  = self::getModel();
+		$dbObj = $model::find();
+		$dbObj->select('sum(count_d) as total_data, type')
+			->where('channel_type ' ,CHANNEL_TYPE_FACEBOOK)
+			->group_by('type');
+		$res = $model::queryBuilder($name, $dbObj, FALSE,24*60*60*7);
+		return $res;
+	}
+
+
+	public function getPostByRangeDate()
+	{
+		$name = 'getPostByRangeDate';
+		$model  = self::getModel();
+		$dbObj = $model::find();
+		$dbObj->select('count(id) as total_item, sum(count_d) as total_data, craw_date, DATE(craw_date) as date_format')
+			->where('channel_type ' ,CHANNEL_TYPE_FACEBOOK)
+			->where('craw_date >',date('Y-m-d 00:00:00',strtotime('- 7day')))
+			->where('craw_date <',date('Y-m-d 23:59:59'))
+			->group_by('date_format');
+		$res = $model::queryBuilder($name, $dbObj, FALSE,24*60*60*7);
+		return $res;
+	}
 }

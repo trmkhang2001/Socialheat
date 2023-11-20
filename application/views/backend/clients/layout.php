@@ -178,7 +178,7 @@ License: For each use you must have a valid license purchased only from above li
 		});
 	</script>
 	<!-- /Script -->
-	<?php $this->load->view('/backend/layout/script_chart'); ?>
+<!--	--><?php //$this->load->view('/backend/layout/script_chart'); ?>
 	<?php $this->load->view('/backend/layout/script'); ?>
 	<!--end::Custom Javascript-->
 	<!--end::Javascript-->

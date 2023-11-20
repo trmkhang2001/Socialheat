@@ -54,6 +54,9 @@ License: For each use you must have a valid license purchased only from above li
     <link href="/assets/demo3/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/demo3/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+
+	<script src="/assets/demo3/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/demo3/js/scripts.bundle.js"></script>
 </head>
 <!--end::Head-->
 <style>
@@ -130,22 +133,10 @@ License: For each use you must have a valid license purchased only from above li
         var hostUrl = "/assets/demo3/";
     </script>
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="/assets/demo3/plugins/global/plugins.bundle.js"></script>
-    <script src="/assets/demo3/js/scripts.bundle.js"></script>
+
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
     <script src="/assets/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
     <script src="/assets/demo3/plugins/custom/datatables/datatables.bundle.js"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
@@ -178,7 +169,7 @@ License: For each use you must have a valid license purchased only from above li
         })
     </script>
     <!-- /Script -->
-    <?php $this->load->view('/backend/layout/script_chart'); ?>
+<!--    --><?php //$this->load->view('/backend/layout/script_chart'); ?>
     <?php $this->load->view('/backend/layout/script'); ?>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
