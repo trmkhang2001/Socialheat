@@ -62,7 +62,7 @@ $types = $params['types'];
                                 $selected = 'selected';
                             }
                         ?>
-                            <option value="<?= $type['value'] ?>" <?= $selected ?>><?= $type['name'] ?></option>
+                            <option value="<?= $type['value'] ?>" <?= isset($filters['type']) ? $filters['type'] : '' ?> <?= $selected ?>><?= $type['name'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

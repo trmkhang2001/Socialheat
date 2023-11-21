@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var $totalMentions
  * @var $topKeywords
@@ -214,15 +215,15 @@
                             <tbody>
                                 <?php
 
-                                foreach ($topKeywords as $index =>  $keyword):
-	                                ?>
+                                foreach ($topKeywords as $index =>  $keyword) :
+                                ?>
                                     <tr>
                                         <td>
                                             <span><?php echo number_format($index + 1) ?>.</span>
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-start flex-column">
-                                                <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $keyword->keywords?></span>
+                                                <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $keyword->keywords ?></span>
                                             </div>
                                         </td>
                                         <td>
@@ -233,10 +234,10 @@
                                             <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($keyword->total_engage) ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($keyword->total_data?? 0) ?></span>
+                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($keyword->total_data ?? 0) ?></span>
                                         </td>
                                     </tr>
-                                <?php endforeach;?>
+                                <?php endforeach; ?>
                             </tbody>
                             <!--end::Table body-->
                         </table>
@@ -254,67 +255,67 @@
     <!--end::Content-->
 </div>
 <script>
-	/* chart.js chart examples */
-	<?php if (!empty($chartPosts)) { ?>
-	// chart colors
-	var colors = ['#3E97FF', '#E1E3EA'];
-	/* bar chart */
-	var chBar = document.getElementById("chBar");
-	if (chBar) {
-		new Chart(chBar, {
-			type: 'bar',
-			data: {
-				labels: <?= json_encode($chartPosts['label'])?>,
-				datasets: [{
-					label: 'User',
-					data: <?= json_encode($chartPosts['data'])?>,
-					backgroundColor: colors[0]
-				},
-					{
-						label: 'Post',
-						data: <?= json_encode($chartPosts['items'])?>,
-						backgroundColor: colors[1]
-					}
-				]
+    /* chart.js chart examples */
+    <?php if (!empty($chartPosts)) { ?>
+        // chart colors
+        var colors = ['#3E97FF', '#E1E3EA'];
+        /* bar chart */
+        var chBar = document.getElementById("chBar");
+        if (chBar) {
+            new Chart(chBar, {
+                type: 'bar',
+                data: {
+                    labels: <?= json_encode($chartPosts['label']) ?>,
+                    datasets: [{
+                            label: 'User',
+                            data: <?= json_encode($chartPosts['data']) ?>,
+                            backgroundColor: colors[0]
+                        },
+                        {
+                            label: 'Post',
+                            data: <?= json_encode($chartPosts['items']) ?>,
+                            backgroundColor: colors[1]
+                        }
+                    ]
 
-			},
-			options: {
-				plugins: {
-					legend: {
-						display: false,
-					}
-				},
-				scales: {
-					xAxes: [{
-						barPercentage: 0.4,
-						categoryPercentage: 0.5
-					}]
-				}
-			}
-		});
-	}
-	<?php } ?>
-	//doughnut
-	<?php if(!empty($chartInteractions)):?>
-	var ctxD = document.getElementById("doughnutChart");
-	var myLineChart = new Chart(ctxD, {
-		type: 'doughnut',
-		data: {
-			labels: <?= json_encode($chartInteractions['label'])?>,
-			datasets: [{
-				data: <?= json_encode($chartInteractions['data'])?>,
-				backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
-				hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
-			}]
-		},
-		options: {
-			plugins: {
-				legend: {
-					position: 'bottom'
-				}
-			},
-			responsive: true
-		}
-	});
-	<?php endif;?>
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            barPercentage: 0.4,
+                            categoryPercentage: 0.5
+                        }]
+                    }
+                }
+            });
+        }
+    <?php } ?>
+    //doughnut
+    <?php if (!empty($chartInteractions)) : ?>
+        var ctxD = document.getElementById("doughnutChart");
+        var myLineChart = new Chart(ctxD, {
+            type: 'doughnut',
+            data: {
+                labels: <?= json_encode($chartInteractions['label']) ?>,
+                datasets: [{
+                    data: <?= json_encode($chartInteractions['data']) ?>,
+                    backgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"],
+                    hoverBackgroundColor: ["#0B0044", "#FF5E5E", "#33DB9E"]
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                responsive: true
+            }
+        });
+    <?php endif; ?>
 </script>

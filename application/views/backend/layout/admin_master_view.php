@@ -55,8 +55,8 @@ License: For each use you must have a valid license purchased only from above li
     <link href="/assets/demo3/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 
-	<script src="/assets/demo3/plugins/global/plugins.bundle.js"></script>
-	<script src="/assets/demo3/js/scripts.bundle.js"></script>
+    <script src="/assets/demo3/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/demo3/js/scripts.bundle.js"></script>
 </head>
 <!--end::Head-->
 <style>
@@ -169,7 +169,8 @@ License: For each use you must have a valid license purchased only from above li
         })
     </script>
     <!-- /Script -->
-<!--    --><?php //$this->load->view('/backend/layout/script_chart'); ?>
+    <!-- <?php //$this->load->view('/backend/layout/script_chart'); 
+            ?> -->
     <?php $this->load->view('/backend/layout/script'); ?>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->

@@ -3,6 +3,7 @@
 use app\controllers\backend\BackendController;
 use app\common\business\BusinessInteraction;
 use app\common\business\BusinessXpath;
+use app\common\utilities\Pagination;
 
 class Interactions extends BackendController
 {
@@ -14,7 +15,7 @@ class Interactions extends BackendController
 		$offset = $page ? $itemPerPage * ($page - 1) : 0;
 		$items = BusinessInteraction::getInstance()->getRangeCache($conditions, $offset, $itemPerPage, 'id DESC');
 		$total = BusinessInteraction::getInstance()->getCount($conditions);
-		$pagination = $this->pagination($total, $itemPerPage);
+		$pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
 		$accessToken = FB_TOKEN;
 		$token = BusinessXpath::getInstance()->findByConditions(['channel_type' => CHANNEL_TYPE_FACEBOOK_TOKEN], TRUE);
 		if ($token) {

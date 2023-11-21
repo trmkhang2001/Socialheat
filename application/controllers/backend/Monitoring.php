@@ -17,9 +17,9 @@ class Monitoring extends BackendController
     {
         $itemPerPage = ITEM_PER_PAGE_14;
         $conditions = $this->getConditions();
-		$conditions[]['i.channel_type'] = FALSE;
-		$this->_items($conditions, $itemPerPage);
-		$this->temp['data']['channel_type'] = CHANNEL_TYPE_FACEBOOK;
+        $conditions[]['i.channel_type'] = FALSE;
+        $this->_items($conditions, $itemPerPage);
+        $this->temp['data']['channel_type'] = CHANNEL_TYPE_FACEBOOK;
         $this->temp['template'] = 'backend/monitoring/index';
         $this->render();
     }
@@ -85,6 +85,8 @@ class Monitoring extends BackendController
                     $conditions[] = array(sprintf('%s', 'i.craw_date <') => $condition . " 23:59:50");
                 } elseif ($key === 'from_date') {
                     $conditions[] = array(sprintf('%s', 'i.craw_date >') => $condition . " 00:00:00");
+                } elseif ($key === 'type') {
+                    $conditions = array(sprintf('%s', 'i.type=') => $condition);
                 } else {
                     $conditions[] = array(sprintf('i.%s', $key) => $condition);
                 }
@@ -104,7 +106,7 @@ class Monitoring extends BackendController
         if (empty($item)) {
             redirect(site_url('/backend/monitoring/index'));
         }
-		$item->from_name = 'Detail list';
+        $item->from_name = 'Detail list';
         $data['content'] = (array)$item;
         $fileName = "$item->post_id.json";
         $fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
@@ -125,7 +127,7 @@ class Monitoring extends BackendController
                 break;
             }
         }
-        $charts =  $item->charts ? json_decode($item->charts,TRUE) : [];
+        $charts =  $item->charts ? json_decode($item->charts, TRUE) : [];
         $pagination = Pagination::bootstrap($item->count_d, '', $itemPerPage, 'page', 5);
         $data['interactions'] = $profiles;
         $data['pagination'] = $pagination;
@@ -139,48 +141,48 @@ class Monitoring extends BackendController
 
 
 
-	public function downloads($id){
-		$user = $this->userInfo;
-		if($user['role_id'] !== ROLE_ADMIN && $user['role_id'] !== ROLE_DOWNLOAD){
-			$this->response(['status' => FALSE, 'msg' => 'Permission denied']);
-		}
-		$item = BusinessItem::getInstance()->findOne($id);
-		if($item){
-			$fileName = "$item->post_id.json";
-			$interactions = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
-			$filePath = 'downloads/' . sprintf('SocialHeat-%s.csv',time());
-			$out = fopen($filePath, 'wb');
-			fwrite($out, "\xEF\xBB\xBF");       // Write UTF-8 BOM
-			fputcsv($out, ['Social Profile URL', 'Name', 'Gender', 'Phone', 'Email', 'Location', 'Relationship']);
-			foreach ($interactions as $interaction) {
-				fputcsv(
-					$out,
-					[
-						'https://www.facebook.com/'.$interaction['uid'],
-						$interaction['name'],
-						$interaction['sex'],
-						$interaction['phone'],
-						$interaction['email'],
-						$interaction['city'],
-						$interaction['relationship'],
-					]
-				);
-			}
-			fclose($out);
-			$fileName = sprintf('SocialHeat-%s.csv', date('Y-m-d-H:i:s'));
-			header('Content-Description: File Transfer');
-			header('Content-Type: application/octet-stream');
-			header('Content-Disposition: attachment; filename=' . $fileName);
-			header('Expires: 0');
-			header('Cache-Control: must-revalidate');
-			header('Pragma: public');
-			header('Content-Length: ' . filesize($filePath));
-			ob_clean();
-			flush();
-			readfile($filePath);
-			@unlink($filePath);
-			exit();
-		}
-	}
-
+    public function downloads($id)
+    {
+        $user = $this->userInfo;
+        if ($user['role_id'] !== ROLE_ADMIN && $user['role_id'] !== ROLE_DOWNLOAD) {
+            $this->response(['status' => FALSE, 'msg' => 'Permission denied']);
+        }
+        $item = BusinessItem::getInstance()->findOne($id);
+        if ($item) {
+            $fileName = "$item->post_id.json";
+            $interactions = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
+            $filePath = 'downloads/' . sprintf('SocialHeat-%s.csv', time());
+            $out = fopen($filePath, 'wb');
+            fwrite($out, "\xEF\xBB\xBF");       // Write UTF-8 BOM
+            fputcsv($out, ['Social Profile URL', 'Name', 'Gender', 'Phone', 'Email', 'Location', 'Relationship']);
+            foreach ($interactions as $interaction) {
+                fputcsv(
+                    $out,
+                    [
+                        'https://www.facebook.com/' . $interaction['uid'],
+                        $interaction['name'],
+                        $interaction['sex'],
+                        $interaction['phone'],
+                        $interaction['email'],
+                        $interaction['city'],
+                        $interaction['relationship'],
+                    ]
+                );
+            }
+            fclose($out);
+            $fileName = sprintf('SocialHeat-%s.csv', date('Y-m-d-H:i:s'));
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename=' . $fileName);
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($filePath));
+            ob_clean();
+            flush();
+            readfile($filePath);
+            @unlink($filePath);
+            exit();
+        }
+    }
 }

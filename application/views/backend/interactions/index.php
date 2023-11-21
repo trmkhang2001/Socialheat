@@ -126,7 +126,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 											</td>
 											<td>
 												<div class="d-flex justify-content-start flex-column">
-													<a href="#" class="text-dark fw-bold text-hover-primary fs-6"><?= $item->name ?></a>
+													<a target="_blank" href="https://facebook.com/<?= $item->uid ?>" class="text-dark fw-bold text-hover-primary fs-6"><?= $item->name ?></a>
 												</div>
 											</td>
 											<td>

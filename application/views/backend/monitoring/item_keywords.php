@@ -12,6 +12,11 @@ if (empty($keywords)) {
 $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
 $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E']
 ?>
+<style>
+    .keyword:hover {
+        cursor: pointer;
+    }
+</style>
 <ul class="list-inline list_keyword_social text-justify clearfix">
     <?php
     $indexColor = 0;
@@ -30,16 +35,18 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E']
             $keywordColors[$slug] = $colorBg[$indexColor];
             $checked = '';
             $class = '';
+            $style = '';
             if (!empty($filters['keyword']) && in_array($keyword, $filters['keyword'], FALSE)) {
                 $checked = 'checked';
                 $class = 'active';
-                $color = '#ffffff';
+                $style = 'border: 2px solid;';
             }
             ++$indexColor;
     ?>
             <li class="list-inline-item text-lowercase bs-bg-opacity m-1 <?= $class ?>" data-color="<?= $bg_color ?>">
-                <label class="rounded fw-bold p-1" style=" background: <?= $bg_color ?>; color: <?= $text_color ?>">
-                    <span style="padding: 10px;"><?= $keyword ?></span>
+                <label class="rounded fw-bold p-1 keyword " style="<?= $style ?> background: <?= $bg_color ?>; color: <?= $text_color ?>;">
+                    <?= $keyword ?>
+                    <input type="checkbox" name="keyword[]" <?= $checked ?> value="<?= $keyword ?>" hidden>
                 </label>
             </li>
     <?php endif;
