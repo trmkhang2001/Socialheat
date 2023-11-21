@@ -11,9 +11,9 @@
     .text {
         overflow: hidden;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 6;
         /* number fs-1 p-3  of lines to show */
-        line-clamp: 3;
+        line-clamp: 6;
         -webkit-box-orient: vertical;
     }
 

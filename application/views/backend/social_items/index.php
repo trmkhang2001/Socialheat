@@ -21,11 +21,11 @@ $types = $params['types'];
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel">
-				<div class="card p-3 mx-3">
+				<div class="card p-5 mx-3">
 					<form method="get" action="">
 						<div class="d-flex">
 							<div class="form-group me-3">
-								<label class="text-system">Channel type</label>
+								<label class="fw-bold text-system">Channel type</label>
 								<div class="form-inline">
 									<select name="channel_type" class="form-select">
 										<option value="">Chọn</option>
@@ -36,19 +36,19 @@ $types = $params['types'];
 								</div>
 							</div>
 							<div class="form-group me-3">
-								<label class="text-system">Social Id</label>
+								<label class="fw-bold text-system">Social Id</label>
 								<div class="form-inline">
 									<input type="text" name="social_id" class="form-control " value="" placeholder="Uid">
 								</div>
 							</div>
 							<div class="form-group me-3">
-								<label class="text-system">Name</label>
+								<label class="fw-bold text-system">Name</label>
 								<div class="form-inline">
 									<input type="text" name="keyword" class="form-control " value="" placeholder="Email">
 								</div>
 							</div>
 							<div class="form-group me-3">
-								<label class="text-system">Types</label>
+								<label class="fw-bold text-system">Types</label>
 								<div class="form-inline">
 									<select name="type" class="form-select">
 										<option value="">Chọn</option>
@@ -59,7 +59,7 @@ $types = $params['types'];
 								</div>
 							</div>
 							<div class="form-group me-3">
-								<label class="text-system">Status</label>
+								<label class="fw-bold text-system">Status</label>
 								<div class="form-inline">
 									<select name="status" class="form-select form-control">
 										<option value="">Chọn</option>
@@ -72,7 +72,7 @@ $types = $params['types'];
 							<div class="form-group me-3">
 								<label class="text-system"> &nbsp;</label>
 								<div class="form-inline">
-									<button type="submit" class="btn btn-default "><i class="fa fa-filter"></i> Filter </button>
+									<button type="submit" class="btn btn-secondary "><i class="fa fa-filter"></i> Filter </button>
 
 								</div>
 							</div>
@@ -98,9 +98,8 @@ $types = $params['types'];
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel">
-					<div class="d-flex">
-
-						<table class="table table-hover table-bordered">
+					<div class="d-flex p-5">
+						<table class="table table-hover">
 							<thead>
 								<tr class="active ">
 									<th>Name</th>

@@ -1,8 +1,46 @@
+<?php
+
+/**
+ * @var $item
+ * @var $types
+ * @var $channel_type
+ * @var $iconImage
+ * @var $channelTypes
+ */
+$socialLink = 'https://facebook.com/' . $item->post_id;
+$channelInfo = $channelTypes[$item->channel_type];
+$iconImage = $channelInfo['icon_image'];
+$channel_type = $item->channel_type;
+$class = '';
+$linkDetail = base_url('backend/monitoring/detail/' . $item->post_id);
+$classBorder  = '';
+if ($channel_type !== CHANNEL_TYPE_FACEBOOK) {
+    $class = 'margin-left-100';
+    $socialLink = $item->post_url;
+    $linkDetail = $socialLink;
+}
+if ($channel_type === CHANNEL_TYPE_TWITTER) {
+    $classBorder = 'border-twitter ';
+}
+if ($channel_type === CHANNEL_TYPE_INSTAGRAM) {
+    $classBorder = 'border-instagram ';
+}
+$typeInfo = $types[$item->type];
+$colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#FFE000', '#ffd6cc'];
+$colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
+$user_id = $item->post_id;
+$access_token = FB_TOKEN;
+?>
 <style>
     .title_span {
         background-color: #F4D6D6;
         color: #D2A68D;
         padding: 5px;
+    }
+
+    .fw-bold i {
+        color: #6993FF;
+        margin-right: 3px;
     }
 </style>
 <div class="col-xl-4 mb-5 mb-xl-10">
@@ -17,7 +55,7 @@
                 </div>
                 <div class="col-8">
                     <div class="align-items-start flex-column">
-                        <span class="fw-bold text-gray-800 fs-3">Dự Án Best Western Premier Charm Resort Hồ Tràm</span>
+                        <span class="fw-bold text-gray-800 fs-3"><?= $item->social_name ?></span>
                         <br>
                         <span class="rounded text-gray-500 mt-2 fw-semibold fs-6 title_span">Sponspor</span>
                     </div>
@@ -26,55 +64,40 @@
             <!--end::Title-->
         </div>
         <!--end::Header-->
-
         <!--begin::Body-->
         <div class="card-body d-flex justify-content-between flex-column">
             <!--begin::Items-->
-            <div class="d-flex flex-wrap d-grid gap-5 mb-10">
-                <!--begin::Item-->
-                <div class="border-end-dashed border-end border-gray-300 pe-xxl-7 me-xxl-5">
-                    <!--begin::Statistics-->
-                    <div class="d-flex mb-2">
-                        <span class="fs-4 fw-semibold text-gray-500 me-1">$</span>
-                        <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">8,035</span>
-                    </div>
-                    <!--end::Statistics-->
-
-                    <!--begin::Description-->
-                    <span class="fs-6 fw-semibold text-gray-500">Actual for April</span>
-                    <!--end::Description-->
-                </div>
-                <!--end::Item-->
-
-                <!--begin::Item-->
-                <div class="m-0">
-                    <!--begin::Statistics-->
-                    <div class="d-flex align-items-center mb-2">
-                        <!--begin::Currency-->
-                        <span class="fs-4 fw-semibold text-gray-500 align-self-start me-1">$</span>
-                        <!--end::Currency-->
-
-                        <!--begin::Value-->
-                        <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">4,684</span>
-                        <!--end::Value-->
-
-                        <!--begin::Label-->
-                        <span class="badge badge-light-success fs-base">
-                            <i class="ki-outline ki-arrow-up fs-5 text-success ms-n1"></i>
-                            4.5%
-                        </span>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Statistics-->
-
-                    <!--begin::Description-->
-                    <span class="fs-6 fw-semibold text-gray-500">GAP</span>
-                    <!--end::Description-->
-                </div>
-                <!--end::Item-->
+            <div class="d-flex flex-column">
+                <img class="rounded" src="https://as2.ftcdn.net/v2/jpg/05/49/86/39/1000_F_549863991_6yPKI08MG7JiZX83tMHlhDtd6XLFAMce.jpg" alt="">
+            </div>
+            <div class="d-flex flex-column mt-3">
+                <p class="text text-justify-betwen item-content-read-less fs-4"><?= html_entity_decode($item->content) ?></p>
+                <a target="_blank" href="<?= $linkDetail ?>" id="read_more" class="read_more fw-bold">Read more</a>
             </div>
             <!--end::Items-->
+            <div class="d-flex justify-content-between flex-row mt-2">
+                <span class="fs-4 fw-bold">Catagory</span>
+                <span class="text-muted">Oto</span>
+            </div>
+            <div class="d-flex justify-content-between flex-row mt-2">
+                <span class="fs-4 fw-bold">Hasttag</span>
+                <span class="text-muted">#pti,#mic</span>
+            </div>
+            <div class="d-flex justify-content-between flex-row mt-2">
+                <span class="fs-4 fw-bold">Country</span>
+                <span class="text-muted">Viet Nam</span>
+            </div>
+            <div class="d-flex justify-content-start flex-row mt-2">
+                <span class="fw-bold me-5"> <i class="fa-solid fa-thumbs-up pe-2"></i><?= $item->total_like ?></span>
+                <span class="fw-bold me-5"><i class="fa-solid fa-comment pe-2"></i><?= $item->total_comment ?></span>
+                <span class="fw-bold"><i class="fa-solid fa-users pe-2"></i><?= $item->count_like_share ?: 0 ?> </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center flex-row mt-2">
+                <span class="text-muted">Update: <?php echo date('d/m/Y', strtotime($item->craw_date)); ?></span>
+                <a href="" class="btn btn-primary">Add Analytis</a>
+            </div>
         </div>
+
         <!--end::Body-->
     </div>
     <!--end::Chart widget 30-->
