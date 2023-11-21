@@ -1,6 +1,7 @@
 <?php
 /*Item per page*/
 define('ITEM_PER_PAGE_5', 5);
+define('ITEM_PER_PAGE_9', 9);
 define('ITEM_PER_PAGE_10', 10);
 define('ITEM_PER_PAGE_14', 14);
 define('ITEM_PER_PAGE_28', 28);

@@ -54,7 +54,7 @@ $types = $params['types'];
                 </div>
 
                 <div class="me-3 col post_type">
-                    <select data-title="Types" data-class-filter="filter-post-type" name="type" class="form-select " title="Post type" data-width="160px">
+                    <select data-title="Types" data-class-filter="filter-post-type" name="type" class="form-select" title="Post type" data-width="160px">
                         <option value="">Types</option>
                         <?php foreach ($types as $type) :
                             $selected = '';
@@ -62,7 +62,7 @@ $types = $params['types'];
                                 $selected = 'selected';
                             }
                         ?>
-                            <option value="<?= $type['value'] ?>" <?= isset($filters['type']) ? $filters['type'] : '' ?> <?= $selected ?>><?= $type['name'] ?></option>
+                            <option value="<?= $type['value'] ?>" <?= $selected ?>><?= $type['name'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -142,5 +142,14 @@ $types = $params['types'];
             });
         }
         $('.form_filters_post').submit();
+    });
+    $(document).ready(function() {
+        $("#inputValidation").keypress(function(event) {
+            if (event.which === 13) {
+                event.preventDefault();
+                // Thực hiện hành động submit tại đây
+                // Ví dụ: $("#myForm").submit();
+            }
+        });
     });
 </script>

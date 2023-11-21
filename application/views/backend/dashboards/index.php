@@ -7,7 +7,6 @@
  * @var $totalAudience
  * @var $totalMentions
  * @var $totalEngage
-
  */
 ?>
 <style>

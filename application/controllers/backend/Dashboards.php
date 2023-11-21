@@ -17,14 +17,14 @@ class Dashboards extends BackendController
 {
 	public function index()
 	{
-		$keywords = BusinessKeyword::getInstance()->findByConditions([],TRUE);
-		$totalKeyword = count(explode(',',$keywords->keyword));
+		$keywords = BusinessKeyword::getInstance()->findByConditions([], TRUE);
+		$totalKeyword = count(explode(',', $keywords->keyword));
 		$totalAudience = BusinessItem::getInstance()->getCount();
 		$totalMentions = BusinessSocialItem::getInstance()->getCount();
 		$totalEngage = BusinessInteraction::getInstance()->getCount();
-        $topKeywords  = BusinessItem::getInstance()->getTopKeywords(ITEM_PER_PAGE_10);
-        $chartInteractions = $this->_getChartInteractionByType();
-        $chartPosts = $this->_getChartPostByRangeDate();
+		$topKeywords  = BusinessItem::getInstance()->getTopKeywords(ITEM_PER_PAGE_10);
+		$chartInteractions = $this->_getChartInteractionByType();
+		$chartPosts = $this->_getChartPostByRangeDate();
 		$this->temp['data']['totalKeyword'] = $totalKeyword;
 		$this->temp['data']['totalAudience'] = $totalAudience;
 		$this->temp['data']['totalMentions'] = $totalMentions;
@@ -37,10 +37,11 @@ class Dashboards extends BackendController
 	}
 
 
-	private function _getChartPostByRangeDate(){
+	private function _getChartPostByRangeDate()
+	{
 		$posts = BusinessItem::getInstance()->getPostByRangeDate();
 		$charts = [];
-		foreach ($posts as $post){
+		foreach ($posts as $post) {
 			$charts['label'][] = $post->date_format;
 			$charts['items'][] = $post->total_item;
 			$charts['data'][] = $post->total_data ?? 0;
@@ -48,19 +49,19 @@ class Dashboards extends BackendController
 		return $charts;
 	}
 
-	private function _getChartInteractionByType(){
+	private function _getChartInteractionByType()
+	{
 		$interactions = BusinessItem::getInstance()->getTotalInteractionByType();
 		$params = $this->config->config['params'];
 		$charts = [];
 
-		if($interactions){
+		if ($interactions) {
 			$types = $params['types'];
-			foreach ($interactions as $interaction){
+			foreach ($interactions as $interaction) {
 				$charts['label'][] = $types[$interaction->type]['name'];
 				$charts['data'][] = $interaction->total_data ?? 0;
 			}
 		}
 		return $charts;
-
 	}
 }

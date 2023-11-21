@@ -576,7 +576,7 @@ class BusinessItem implements BusinessInterface
 			$numberCities = array_splice($numberCities, 0, 10);
 		}
 
-//		['#0BB783', '#3699FF', '#F64E60', '#8950FC', '#FFD74A']
+		//		['#0BB783', '#3699FF', '#F64E60', '#8950FC', '#FFD74A']
 
 
 		return [
@@ -724,7 +724,7 @@ class BusinessItem implements BusinessInterface
 	public static function checkRelationship(&$totalSingle, &$totalDating, &$totalMarried, &$totalDivorce, $user)
 
 	{
-		if($user['relationship']){
+		if ($user['relationship']) {
 			$relationship = strtolower($user['relationship']);
 			if ($relationship === 'single') {
 				++$totalSingle;
@@ -818,17 +818,17 @@ class BusinessItem implements BusinessInterface
 	}
 	public function getTopKeywords($limit)
 	{
-		$name = 'getTopKeywords_'.$limit;
+		$name = 'getTopKeywords_' . $limit;
 		$model  = self::getModel();
 		$dbObj = $model::find();
 		$dbObj->select(' keywords , count(keywords) as number_keyword,sum(count_d) as total_data,
 			sum(total_share + total_like + total_comment) as total_engage
 		')
-			->where('keywords <>' ,'')
+			->where('keywords <>', '')
 			->group_by('keywords')
-			->order_by('number_keyword','DESC')
+			->order_by('number_keyword', 'DESC')
 			->limit($limit);
-		$res = $model::queryBuilder($name, $dbObj, FALSE,24*60*60*7);
+		$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
 		return $res;
 	}
 
@@ -838,9 +838,9 @@ class BusinessItem implements BusinessInterface
 		$model  = self::getModel();
 		$dbObj = $model::find();
 		$dbObj->select('sum(count_d) as total_data, type')
-			->where('channel_type ' ,CHANNEL_TYPE_FACEBOOK)
+			->where('channel_type ', CHANNEL_TYPE_FACEBOOK)
 			->group_by('type');
-		$res = $model::queryBuilder($name, $dbObj, FALSE,24*60*60*7);
+		$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
 		return $res;
 	}
 
@@ -851,11 +851,11 @@ class BusinessItem implements BusinessInterface
 		$model  = self::getModel();
 		$dbObj = $model::find();
 		$dbObj->select('count(id) as total_item, sum(count_d) as total_data, craw_date, DATE(craw_date) as date_format')
-			->where('channel_type ' ,CHANNEL_TYPE_FACEBOOK)
-			->where('craw_date >',date('Y-m-d 00:00:00',strtotime('- 7day')))
-			->where('craw_date <',date('Y-m-d 23:59:59'))
+			->where('channel_type ', CHANNEL_TYPE_FACEBOOK)
+			->where('craw_date >', date('Y-m-d 00:00:00', strtotime('- 7day')))
+			->where('craw_date <', date('Y-m-d 23:59:59'))
 			->group_by('date_format');
-		$res = $model::queryBuilder($name, $dbObj, FALSE,24*60*60*7);
+		$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
 		return $res;
 	}
 }

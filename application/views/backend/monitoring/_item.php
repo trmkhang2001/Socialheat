@@ -31,6 +31,7 @@ $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#FFE000', '#ffd6cc'];
 $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
 $user_id = $item->post_id;
 $access_token = FB_TOKEN;
+
 ?>
 <style>
     .data:hover {

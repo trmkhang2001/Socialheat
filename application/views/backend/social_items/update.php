@@ -65,6 +65,16 @@ $channel_types = $params['channel_types'];
 								</select>
 							</div>
 						</div>
+						<div class="mb-3 row">
+							<label class="col-sm-2 col-form-label">Is Private</label>
+							<div class="col-sm-10">
+								<input type="checkbox" value="1" name="is_private" placeholder="">
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label class="col-sm-2 col-form-label">Token/Cookie</label>
+							<div class="col-sm-10"><textarea rows="3" name="token" placeholder="" class="form-control"></textarea></div>
+						</div>
 				</div>
 				<div class="mb-3 row">
 					<label class="col-sm-2 col-form-label">Image</label>

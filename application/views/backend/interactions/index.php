@@ -95,7 +95,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 						<br>
 						<br>
 						<!--begin::Table container-->
-						<div class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+						<div class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
 							<!--begin::Table-->
 							<table class="table table-bordered table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
 								<!--begin::Table head-->

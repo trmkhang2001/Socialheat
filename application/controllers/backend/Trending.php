@@ -11,16 +11,16 @@ use app\common\business\BusinessInteraction;
 use app\common\business\BusinessSocialItem;
 use app\common\business\BusinessUser;
 
-class Monitoring extends BackendController
+class Trending extends BackendController
 {
     public function index()
     {
-        $itemPerPage = ITEM_PER_PAGE_14;
+        $itemPerPage = ITEM_PER_PAGE_9;
         $conditions = $this->getConditions();
         $conditions[]['i.channel_type'] = FALSE;
         $this->_items($conditions, $itemPerPage);
         $this->temp['data']['channel_type'] = CHANNEL_TYPE_FACEBOOK;
-        $this->temp['template'] = 'backend/monitoring/index';
+        $this->temp['template'] = 'backend/trending/index';
         $this->render();
     }
 
