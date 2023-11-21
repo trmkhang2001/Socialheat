@@ -57,6 +57,9 @@
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/groupkeys"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add
                                         Group</span></a><!--end:Menu link--></div>
                             <!--end:Menu item--><!--begin:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/items/create"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add Post</span></a><!--end:Menu link--></div>
+                            <!--end:Menu item--><!--begin:Menu item-->
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/keywords"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Keyword</span></a><!--end:Menu link-->
                             </div><!--end:Menu item--><!--begin:Menu item-->
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/socialItems"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Social

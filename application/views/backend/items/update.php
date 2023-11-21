@@ -14,19 +14,6 @@ $channel_types = $params['channel_types'];
 <link href="/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
 
 <style>
-	.form_filters_post .list_keyword_social label {
-		font-weight: 500;
-		font-size: 10px;
-		text-transform: uppercase;
-		color: #ffffff;
-		border-radius: 101px !important;
-		height: 20px;
-		line-height: 20px;
-		padding-left: 11px;
-		padding-right: 11px;
-		display: block;
-	}
-
 	.allcp-form .select .arrow {
 		display: none;
 	}
@@ -58,9 +45,14 @@ $channel_types = $params['channel_types'];
 	.post_keywords i:hover {
 		color: #000000 !important;
 	}
+
+	.bootstrap-tagsinput span {
+		padding: 3px;
+		background-color: #4fd8b0;
+	}
 </style>
+<h1 class="mx-5 p-3">ADD POST</h1>
 <div class="card mx-5 p-3">
-	<h1>ADD ITEM</h1>
 	<div class="row" id='vue-form'>
 		<div class="col-md-12">
 			<div class="panel">
@@ -70,93 +62,83 @@ $channel_types = $params['channel_types'];
 							<input type="hidden" name="id" value="<?php echo $item->id ?>" />
 						</label>
 						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Name</label>
+							<label class="col-sm-2 col-form-label fw-bold">Name</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="name" placeholder="" value="<?php echo $item->name ?>" />
 							</div>
 						</div>
 						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Post Id</label>
+							<label class="col-sm-2 col-form-label fw-bold">Post Id</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="post_id" placeholder="" value="<?php echo $item->post_id ?>" />
 							</div>
 						</div>
 						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Content</label>
+							<label class="col-sm-2 col-form-label fw-bold">Content</label>
 							<div class="col-sm-10">
 								<textarea type="text" class="form-control" name="content" placeholder=""><?php echo $item->content ?></textarea>
 							</div>
 						</div>
 						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Channel Type</label>
+							<label class="col-sm-2 col-form-label fw-bold">Channel Type</label>
 							<div class="col-sm-10">
-								<label class="field select">
-									<select name="channel_type" class="form-control">
-										<option value="">Chọn</option>
-										<?php foreach ($channel_types as $type) :
-											$selected = '';
-											if ($type['value'] === (int)$item->type) {
-												$selected = 'selected';
-											}
-										?>
-											<option value="<?= $type['value'] ?>" <?= $selected ?>><?= $type['name'] ?></option>
-										<?php endforeach; ?>
-									</select>
-									<i class="arrow"></i>
-								</label>
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Type</label>
-							<div class="col-sm-10">
-								<label class="field select">
-									<select name="type" class="form-control">
-										<option value="">Chọn</option>
-										<?php foreach ($types as $type) :
-											$selected = '';
-											if ($type['value'] === (int)$item->type) {
-												$selected = 'selected';
-											}
-										?>mb-3 row
+								<select name="channel_type" class="form-select form-select-lg mb-3">
+									<option value="">Chọn</option>
+									<?php foreach ($channel_types as $type) :
+										$selected = '';
+										if ($type['value'] === (int)$item->type) {
+											$selected = 'selected';
+										}
+									?>
 										<option value="<?= $type['value'] ?>" <?= $selected ?>><?= $type['name'] ?></option>
 									<?php endforeach; ?>
-									</select>
-									<i class="arrow"></i>
-								</label>
+								</select>
 							</div>
 						</div>
 						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Social Item</label>
+							<label class="col-sm-2 col-form-label fw-bold">Type</label>
 							<div class="col-sm-10">
-								<label class="field select">
-									<select name="post_owner_id" class="form-control social-item-select2">
-										<option value="">Chọn</option>
-										<?php foreach ($socialItems as $social_item) :
-											$selected = '';
-											if ($social_item->id === (int)$item->post_owner_id) {
-												$selected = 'selected';
-											}
-										?>
-											<option value="<?= $social_item->social_id ?>" <?= $selected ?>><?= $social_item->name ?></option>
-										<?php endforeach; ?>
-									</select>
-									<i class="arrow"></i>
-								</label>
+								<select name="type" class="form-select form-select-lg mb-3">
+									<option value="">Chọn</option>
+									<?php foreach ($types as $type) :
+										$selected = '';
+										if ($type['value'] === (int)$item->type) {
+											$selected = 'selected';
+										}
+									?>mb-3 row
+									<option value="<?= $type['value'] ?>" <?= $selected ?>><?= $type['name'] ?></option>
+								<?php endforeach; ?>
+								</select>
 							</div>
 						</div>
 						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Từ khóa hiện có</label>
+							<label class="col-sm-2 col-form-label fw-bold">Social Item</label>
+							<div class="col-sm-10">
+								<select name="post_owner_id" class="form-select form-select-lg mb-3 social-item-select2">
+									<option value="">Chọn</option>
+									<?php foreach ($socialItems as $social_item) :
+										$selected = '';
+										if ($social_item->id === (int)$item->post_owner_id) {
+											$selected = 'selected';
+										}
+									?>
+										<option value="<?= $social_item->social_id ?>" <?= $selected ?>><?= $social_item->name ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label class="col-sm-2 col-form-label fw-bold">Từ khóa hiện có</label>
 							<div class="col-sm-10 form_filters_post">
-								<div class="border border-2 rounded p-2">
+								<div class="border border-2 rounded p-2" style="overflow:scroll;height: 200px;">
 									<?php $this->load->view('/backend/monitoring/item_keywords'); ?>
 								</div>
 							</div>
 						</div>
 						<div class="mb-3 row">
-							<label class="col-sm-2 control-label fw-bold">Từ khóa</label>
+							<label class="col-sm-2 col-form-label fw-bold">Từ khóa</label>
 							<div class="col-sm-10">
-								<input class="form-control" name="keywords" id="object_tagsinput" type="text" value="">
-								<small class="fw-bold">VD:căn hộ cho thuê,cắt lỗ,đất thổ cư</small><br>
+								<input type="text" class="form-control" name="keywords" id="object_tagsinput" value="">
 							</div>
 						</div>
 
@@ -211,7 +193,8 @@ $channel_types = $params['channel_types'];
 			?>
 					t.tagsinput("add", {
 						value: '<?= $keyword ?>',
-						text: "<?= $keyword ?>",
+						text: '<?= $keyword ?>',
+						color: '#000000',
 					})
 			<?php endforeach;
 			endif; ?>

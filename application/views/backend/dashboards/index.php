@@ -223,7 +223,9 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-start flex-column">
-                                                <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $keyword->keywords ?></span>
+                                                <a href="/backend/monitoring">
+                                                    <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $keyword->keywords ?></span>
+                                                </a>
                                             </div>
                                         </td>
                                         <td>
