@@ -59,6 +59,7 @@ require(__DIR__ . '/vendor/autoload.php');
 //	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 define('ENVIRONMENT', 'development');
 //define('ENVIRONMENT','production');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 /*
  *---------------------------------------------------------------
