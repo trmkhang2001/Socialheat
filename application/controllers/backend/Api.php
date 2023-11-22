@@ -203,7 +203,7 @@ class Api extends ApiController {
 		$conditions = [];
 		if ($type)
 		{
-			$conditions['items.type'] = $type;
+			$conditions['i.type'] = $type;
 		}
 		if ( ! $limit)
 		{
@@ -216,8 +216,8 @@ class Api extends ApiController {
 			$conditions['s.social_id'] = $socialId;
 		}
 		$offset = $page ? $limit * ($page - 1) : 0;
-		$conditions['items.key_craw IS NULL'] = NULL;
-		$conditions['items.channel_type'] = CHANNEL_TYPE_FACEBOOK;
+		$conditions['i.key_craw IS NULL'] = NULL;
+		$conditions['i.channel_type'] = CHANNEL_TYPE_FACEBOOK;
 		$items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $limit, 'id ASC');
 		//$items = [];
 		if ($items)
