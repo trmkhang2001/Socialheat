@@ -55,7 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 /*Backend*/
 $route['admin'] = '/backend/auth';
 $route['auth/logout'] = '/backend/auth/logOut';
-$route['auth/register'] = '/backend/auth/register';
 $route['phone'] = '/backend/phone';
 $route['uids'] = '/backend/uids';
 $route['posts'] = '/backend/posts';
