@@ -42,6 +42,15 @@ $access_token = FB_TOKEN;
         color: #6993FF;
         margin-right: 3px;
     }
+
+    a {
+        color: black;
+    }
+
+    a:hover {
+        color: #6993FF;
+        cursor: pointer;
+    }
 </style>
 <div class="col-xl-4 mb-5 mb-xl-10">
     <!--begin::Chart widget 30-->
@@ -55,7 +64,7 @@ $access_token = FB_TOKEN;
                 </div>
                 <div class="col-8">
                     <div class="align-items-start flex-column">
-                        <span class="fw-bold text-gray-800 fs-3"><?= $item->social_name ?></span>
+                        <a class="fw-bold fs-3"><?= $item->social_name ?></a>
                         <br>
                         <span class="rounded text-gray-500 mt-2 fw-semibold fs-6 title_span">Sponspor</span>
                     </div>
@@ -70,23 +79,11 @@ $access_token = FB_TOKEN;
             <div class="d-flex flex-column">
                 <img class="rounded" src="https://as2.ftcdn.net/v2/jpg/05/49/86/39/1000_F_549863991_6yPKI08MG7JiZX83tMHlhDtd6XLFAMce.jpg" alt="">
             </div>
-            <div class="d-flex flex-column mt-3">
+            <div class="d-flex flex-column my-3">
                 <p class="text text-justify-betwen item-content-read-less fs-4"><?= html_entity_decode($item->content) ?></p>
                 <a target="_blank" href="<?= $linkDetail ?>" id="read_more" class="read_more fw-bold">Read more</a>
             </div>
             <!--end::Items-->
-            <div class="d-flex justify-content-between flex-row mt-2">
-                <span class="fs-4 fw-bold">Catagory</span>
-                <span class="text-muted">Oto</span>
-            </div>
-            <div class="d-flex justify-content-between flex-row mt-2">
-                <span class="fs-4 fw-bold">Hasttag</span>
-                <span class="text-muted">#pti,#mic</span>
-            </div>
-            <div class="d-flex justify-content-between flex-row mt-2">
-                <span class="fs-4 fw-bold">Country</span>
-                <span class="text-muted">Viet Nam</span>
-            </div>
             <div class="d-flex justify-content-start flex-row mt-2">
                 <span class="fw-bold me-5"> <i class="fa-solid fa-thumbs-up pe-2"></i><?= $item->total_like ?></span>
                 <span class="fw-bold me-5"><i class="fa-solid fa-comment pe-2"></i><?= $item->total_comment ?></span>
@@ -94,7 +91,7 @@ $access_token = FB_TOKEN;
             </div>
             <div class="d-flex justify-content-between align-items-center flex-row mt-2">
                 <span class="text-muted">Update: <?php echo date('d/m/Y', strtotime($item->craw_date)); ?></span>
-                <a href="" class="btn btn-primary">Add Analytis</a>
+                <a href="" class="btn btn-primary" style="background-color: #3633DB;">Add Analytis</a>
             </div>
         </div>
 

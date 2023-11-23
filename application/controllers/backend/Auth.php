@@ -36,7 +36,6 @@ class Auth extends BackendController
         }
         $this->load->view('backend/layout/admin_login_view', $data);
     }
-
     private function redirectSuccess($roleId)
     {
         $link = '/backend/dashboards';

@@ -37,7 +37,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="/assets/backend/plugins/tinymce/tinymce.min.js"></script>
     <!-- Demo3 -->
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="/assets/demo3/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/images/fav-icon.png" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
@@ -78,6 +78,18 @@ License: For each use you must have a valid license purchased only from above li
 
     .badge-blue {
         cursor: pointer;
+    }
+
+    .aside {
+        width: 250px !important;
+    }
+
+    .wrapper {
+        padding-left: 300px !important;
+    }
+
+    .container-fluid {
+        padding: 0 20px !important;
     }
 </style>
 <!--begin::Body-->

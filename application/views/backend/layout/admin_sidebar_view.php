@@ -12,7 +12,7 @@
     <div class="aside-logo px-9 mb-9" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="/backend/dashboards">
-            <img alt="Logo" src="/assets/images/logo.png" class="h-20px logo theme-light-show" />
+            <img alt="Logo" src="/assets/images/logo.png" class="h-30px logo theme-light-show" />
         </a>
         <!--end::Logo-->
     </div>
@@ -44,6 +44,13 @@
                     </a>
                 </div>
                 <!-- end -->
+                <!-- begin::Menu item Ads -->
+                <div class="menu-item">
+                    <a href="/backend/trending" class="menu-link">
+                        <!--begin:Menu link--><span class="menu-icon"><i class="fa-brands fa-buysellads fs-1"></i></span><span class="menu-title">Ads</span><!--end:Menu link--><!--begin:Menu sub-->
+                    </a>
+                </div>
+                <!-- end::Menu item Ads -->
                 <!--begin:Menu item Monitoring-->
                 <div class="menu-item">
                     <a href="/backend/profile" class="menu-link">
@@ -52,10 +59,8 @@
                 </div>
                 <?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
                     <!-- end -->
-                    <div data-kt-menu-trigger="click" class="menu-item fw-bold mb-3 hover showing"><!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-address-book fs-2"></i></span><span class="menu-title">Admin</span><span class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
+                    <div data-kt-menu-trigger="click" class="menu-item mb-3 hover showing"><!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-address-book fs-2"></i></span><span class="menu-title" style="color: var(--bs-gray-700);">Admin</span><span class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/trending"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Trending</span></a><!--end:Menu link--></div>
                             <!--begin:Menu item-->
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/groupkeys"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add Group</span></a><!--end:Menu link--></div>
                             <!--end:Menu item--><!--begin:Menu item-->

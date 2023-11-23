@@ -23,7 +23,7 @@ class SocialItems extends BackendController
 		$offset = $page ? $itemPerPage * ($page - 1) : 0;
 		$items = BusinessSocialItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
 		$total = BusinessSocialItem::getInstance()->getCount($conditions);
-		$pagination = Pagination::bootstrap($total, '', $itemPerPage);
+		$pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
 		$this->setBreadcrumbs('Danh sách Social Items', 'Quản lý');
 		$this->temp['data']['items'] = $items;
 		$this->temp['data']['pagination'] = $pagination;

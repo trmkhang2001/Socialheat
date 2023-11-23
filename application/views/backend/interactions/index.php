@@ -58,7 +58,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 					<!--end::Input-->
 				</div>
 				<div class="flex-fill ms-7 me-3">
-					<button type="submit" class="btn btn-primary">Filter</button>
+					<button type="submit" class="btn btn-primary" style="background-color: #0B0044;">Filter</button>
 				</div>
 			</form>
 		</div>
@@ -92,41 +92,36 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 								</a>
 							</div>
 						</div>
-						<br>
-						<br>
 						<!--begin::Table container-->
 						<div class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
 							<!--begin::Table-->
-							<table class="table table-bordered table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+							<table class="table align-middle table-row-dashed fs-6 gy-5">
 								<!--begin::Table head-->
 								<thead>
-									<tr class="text-muted">
-										<th width="20px">Uid</th>
-										<th>Name</th>
-										<th>Phone</th>
-										<th width="230px">Email</th>
-										<th width="120px">Relationship</th>
-										<th>City</th>
-										<th>Friends</th>
-										<th>Sex</th>
-										<th>Birthday</th>
-										<th width="300px">Keywords</th>
-										<th>Created date</th>
+									<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+										<th class="min-w-200px  text-uppercase">Profile/Name</th>
+										<th class="text-start min-w-100px text-uppercase">Phone</th>
+										<th class="text-start min-w-100px text-uppercase">Email</th>
+										<th class="text-start min-w-100px text-uppercas">Relationship</th>
+										<th class="text-start min-w-100px text-uppercase">City</th>
+										<!-- <th class="text-start min-w-100px text-uppercase">Friends</th> -->
+										<th class="text-start min-w-100px text-uppercase">Sex</th>
+										<th class="text-start min-w-100px text-uppercase">Birthday</th>
+										<th class="text-start min-w-100px text-uppercase">Keywords</th>
+										<th class="text-start min-w-100px text-uppercase">Created date</th>
 									</tr>
 								</thead>
 								<!--end::Table head-->
 								<!--begin::Table body-->
-								<tbody>
+								<tbody class="fw-semibold text-gray-600">
 									<?php foreach ($items as $item) { ?>
 										<tr>
-											<td style="width: fit-content">
-												<a target="_blank" href="https://facebook.com/<?= $item->uid ?>">
-													<img style="width:40px;" class="m--img-rounded " src="<?= sprintf('https://graph.facebook.com/%s/picture?type=square&access_token=%s', $item->uid, $tokenFb) ?>">
-												</a>
-											</td>
 											<td>
-												<div class="d-flex justify-content-start flex-column">
-													<a target="_blank" href="https://facebook.com/<?= $item->uid ?>" class="text-dark fw-bold text-hover-primary fs-6"><?= $item->name ?></a>
+												<div class="d-flex align-items-center flex-stuck">
+													<a style="margin-right: 15px;" target="_blank" href="https://facebook.com/<?= $item->uid ?>">
+														<img style="width:40px;" class="m--img-rounded " src="<?= sprintf('https://graph.facebook.com/%s/picture?type=square&access_token=%s', $item->uid, $tokenFb) ?>">
+													</a>
+													<a target="_blank" href="https://facebook.com/<?= $item->uid ?>" class="text-gray-800 text-hover-primary fw-bold"><?= $item->name ?></a>
 												</div>
 											</td>
 											<td>
@@ -138,7 +133,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 											</td>
 											<td>
 												<?php if (!empty($item->email)) { ?>
-													<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $item->email ?>">
+													<span class="badge badge-blue px-4 showData" data-decode="<?= $item->email ?>">
 														<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
 															<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
 														</span>
@@ -146,14 +141,14 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 												<?php  } ?>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->relationship ?></span>
+												<span class=" me-2 fs--7 "><?= $item->relationship ?></span>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->city ?></span>
+												<span class=" me-2 fs--7"><?= $item->city ?></span>
 											</td>
-											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?= $item->friends ?></span>
-											</td>
+											<!-- <td>
+												<span class=" me-2 fs--7 fw-bold "><?= $item->friends ?></span>
+											</td> -->
 											<td>
 												<?php
 												if ($item->sex === 'male') : ?>
@@ -204,8 +199,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 												endif; ?>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?php $date = date('d/m/Y', strtotime($item->birthday));
-																							echo $date; ?></span></span>
+												<span class=" me-2 fs--7"><?php $date = date('d/m/Y', strtotime($item->birthday));
+																			echo $date; ?></span></span>
 											</td>
 											<td class="form_filters_post text-left ">
 												<div class="d-flex clearfix item-content-read-less">
@@ -213,8 +208,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 												</div>
 											</td>
 											<td>
-												<span class="text-dark me-2 fs--7 fw-bold "><?php $date = date('d/m/Y', strtotime($item->created_date));
-																							echo $date; ?></span>
+												<span class=" me-2 fs--7 "><?php $date = date('d/m/Y', strtotime($item->created_date));
+																			echo $date; ?></span>
 											</td>
 										</tr>
 									<?php } ?>

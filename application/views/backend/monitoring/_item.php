@@ -9,6 +9,11 @@
  */
 
 $socialLink = 'https://facebook.com/' . $item->post_id;
+$typeInfo = $types[$item->type];
+if ($typeInfo['name'] === 'Group')
+    $link_image = '/assets/images/avartar_group.png';
+else
+    $link_image = 'https://graph.facebook.com/' . $item->post_owner_id . '/picture?type=square&access_token=' . FB_TOKEN;
 $channelInfo = $channelTypes[$item->channel_type];
 $iconImage = $channelInfo['icon_image'];
 $channel_type = $item->channel_type;
@@ -26,12 +31,11 @@ if ($channel_type === CHANNEL_TYPE_TWITTER) {
 if ($channel_type === CHANNEL_TYPE_INSTAGRAM) {
     $classBorder = 'border-instagram ';
 }
-$typeInfo = $types[$item->type];
 $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#FFE000', '#ffd6cc'];
 $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
 $user_id = $item->post_id;
 $access_token = FB_TOKEN;
-
+$keywords = explode(',', $item->keywords);
 ?>
 <style>
     .data:hover {
@@ -70,96 +74,58 @@ $access_token = FB_TOKEN;
         background: rgba(54, 51, 219, 0.05);
         color: #3633DB;
     }
+
+    /* .title-type {
+        position: relative;
+    }
+
+    .type-info {
+        position: absolute;
+        right: 5px;
+    } */
 </style>
 <div class="d-flex justify-content-center card my-5 p-3">
     <div class="portlet-body" id="chats">
         <div class="d-flex flex-stack flex-grap row">
             <div class="d-flex justify-content-between">
-                <?php
-
-                $image = $item->image;
-                if (!$image) {
-                    $image = '/assets/images/icon.jpg';
-                }
-                $keywords = explode(',', $item->keywords);
-                ?>
-                <div class="d-flex message clearfix ">
-                    <div class="item-thumbnail">
-                        <span class="text-center">
-                            <a target="_blank" href="<?= $socialLink ?>">
-                                <div style="position: relative; margin-right: 15px;">
-                                    <img style="width: 72px; height: 72px;" class="avatar rounded-circle border border-primary border-3 <?= $classBorder ?> " alt="" src="
-                                    <?php
-                                    if (file_exists($item->image)) {
-                                        echo "$item->image";
-                                    } else {
-                                        if ($typeInfo['name'] == "Group") {
-                                            echo "/assets/images/avartar_group.png";
-                                        } else {
-                                            echo "/assets/images/avatar_unknown.png";
-                                        }
-                                    }
-                                    ?>">
-                                    <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="<?= $iconImage ?>" width="27"></span>
-                                </div>
-                            </a>
-                        </span>
-
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="" style="width: 573px;">
-                            <h5 class="clearfix title-type">
-                                <a target="_blank" style="color: #000000" href="<?= $socialLink ?>">
-                                    <div class="d-flex justify-content-between mt-3">
-                                        <div class="">
-                                            <b class="title_social fs-2"><?= $item->social_name ?></b>
-                                        </div>
-                                        <div class="">
-                                            <span class="type_name rounded"><?= $typeInfo['name'] ?></span>
+                <div class="d-flex message clearfix p-2 justify-content-between">
+                    <div class="d-flex justify-content-between">
+                        <div class="" style="width: 680px;">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <div class="item-thumbnail">
+                                        <span class="text-center">
+                                            <a target="_blank" href="<?= $socialLink ?>">
+                                                <div style="position: relative; margin-right: 15px;">
+                                                    <img style="width: 72px; height: 72px;" class="avatar rounded-circle <?= $classBorder ?> " alt="" src="<?= $link_image ?>">
+                                                    <span style="position: absolute; top: 0; right: -6px;" class="channel-icon"><img src="<?= $iconImage ?>" width="27"></span>
+                                                </div>
+                                            </a>
+                                        </span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-column">
+                                            <a class="fw-bold title_social fs-2" target="_blank" style="color: #000000" href="<?= $socialLink ?>">
+                                                <?= $item->social_name ?>
+                                            </a>
+                                            <span>
+                                                <span style="color: #B5B5C3;"><?= date('j M Y \a\t H:ia ', strtotime($item->craw_date)) ?></span>
+                                            </span>
                                         </div>
                                     </div>
-                                    <br>
-                                    <span>
-                                        <span style="color: #B5B5C3;"><?= date('j M Y \a\t H:ia ', strtotime($item->craw_date)) ?></span>
-                                    </span>
-                                </a>
-                            </h5>
-                            <div class="d-flex flex-column  ">
+                                </div>
+                                <div class="">
+                                    <span style="padding: 5px;" class="type_name rounded fw-bold fs-4"><?= $typeInfo['name'] ?></span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column mt-5 d-flex justify-content-end">
                                 <div class="d-flex flex-column">
-                                    <p class="text text-justify-betwen item-content-read-less _items-post-content content-item" style="margin-bottom:0;overflow: hidden;word-break: break-word;font-size: 13px;">
+                                    <p class="fs-7 fw-bold text text-justify-betwen item-content-read-less _items-post-content content-item" style="margin-bottom:0;overflow: hidden;word-break: break-word;font-size: 13px; color:#5E6278;">
                                         <?= html_entity_decode($item->content) ?></p>
                                     <a target="_blank" href="<?= $linkDetail ?>" id="read_more" class="read_more">Read more</a>
                                 </div>
                                 <div class="d-flex d-flex justify-content-between clearfix mt-5 list-post-keywords">
                                     <div class="col-md-8 col-xs-7">
-                                        <!-- <span class="post_keywords no-padding" data-keyword="">
-                                            <?php
-                                            // $indexColor = 0;
-                                            // $bg_color = '';
-                                            // $text_color = '';
-                                            // foreach ($keywords as $index => $keyword) :
-                                            //     if ($keyword) :
-                                            //         $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
-
-                                            //         if (!empty($keywordsColor[$slug])) {
-                                            //             $color = $keywordsColor[$slug];
-                                            //         } else {
-                                            //             if ($indexColor > 4) {
-                                            //                 $indexColor = 0;
-                                            //             }
-                                            //             $bg_color = $colorBg[$indexColor];
-                                            //             $text_color = $colorText[$indexColor];
-                                            //             $color = $colorBg[$indexColor];
-                                            //             $keywordsColor[$slug] = $color;
-                                            //             $indexColor++;
-                                            //         }
-
-                                            ?>
-                                                    <a href="#" class="border rounded-pill p-1 fw-bold" data-keyword="<?= $keyword ?>" style="color:<?= $text_color ?>;background-color:<?= $bg_color ?>"> <?= sprintf('%s', $keyword) ?></a>
-                                            <?php //endif;
-                                            //endforeach; 
-                                            ?>
-                                        </span> -->
                                         <span class="post_keywords col-md-8 col-xs-7 no-padding" data-keyword="">
                                             <?php
                                             $count = count($colorBg);
@@ -182,9 +148,9 @@ $access_token = FB_TOKEN;
                                             endforeach; ?>
                                         </span>
                                     </div>
-                                    <div class="col-xs-4 col-md-4">
-                                        <span class="no-padding">
-                                            <a class="btn btn-sm fw-bold btn-primary text-uppercase pull-right btn-detail-item" target="_blank" href="<?= $linkDetail ?>">View detail </a>
+                                    <div class="col-xs-4 col-md-4 d-flex justify-content-end">
+                                        <span class="no-padding me-3">
+                                            <a class="btn btn-sm fw-bold btn-primary text-uppercase pull-right btn-detail-item" style="background-color: #3633DB;" target="_blank" href="<?= $linkDetail ?>">View detail </a>
                                         </span>
                                     </div>
                                 </div>

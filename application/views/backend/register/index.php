@@ -45,13 +45,13 @@ License: For each use you must have a valid license purchased only from above li
             <img src="/assets/images/logo.png" alt="">
         </div>
         <div class="mw-1920 d-flex flex-center m-7">
-            <div class="login" id="login">
-                <div class="d-flex flex-row">
+            <div class="register" id="register">
+                <div class="d-flex flex-row ">
                     <!--begin::Wrapper-->
                     <div class="card card-flush w-md-400px w-lg-400px w-xl-400px w-325px py-5">
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <h1 class="">Login</h1>
+                                <h1 class="">Register</h1>
                             </div>
                             <?php if ($msg != "") { ?>
                                 <div class="alert alert-danger">
@@ -59,8 +59,12 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                             <?php } ?>
                             <!--begin::Form-->
-                            <form class="form w-100 form_login" method="post" action="">
+                            <form class="form w-100 form-edit-item" method="post" action="auth/register">
                                 <!--begin::Input group=-->
+                                <div class="fv-row mb-4">
+                                    <label class="fw-bold text-black-main py-3 font-size-h5">Name</label>
+                                    <input type="text" class="form-control bg-gray-100 py-4" name="name" placeholder="Name" autocomplete="off" required>
+                                </div>
                                 <div class="fv-row mb-4">
                                     <!--begin::Email-->
                                     <label class="fw-bold text-black-main py-3 font-size-h5" style="font-weight: 600">Email</label>
@@ -74,26 +78,24 @@ License: For each use you must have a valid license purchased only from above li
                                     <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-gray-100 py-4">
                                     <!--end::Password-->
                                 </div>
-                                <!--end::Input group=-->
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-4 plr-20 py-lg-5 mb-lg-0">
-                                    <div>
-                                        <div class="form-check form-check-custom">
-                                            <input class="form-check-input bg-gray-100" type="checkbox" value="1" id="flexCheckDefault" />
-                                            <label class="form-check-label text-texxt" for="flexCheckDefault">
-                                                Remember me
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <!--begin::Link-->
-                                    <!--end::Link-->
+                                <div class="fv-row mb-4">
+                                    <!--begin::Password-->
+                                    <label class="fw-bold text-black-main py-3 font-size-h5" style="font-weight: 600">Confirm Password</label>
+                                    <input type="password" placeholder="Confirm Password" name="confirm_password" autocomplete="off" class="form-control bg-gray-100 py-4">
+                                    <!--end::Password-->
                                 </div>
-                                <!--end::Wrapper-->
+                                <div class="fv-row mb-4">
+                                    <!--begin::Password-->
+                                    <label class="fw-bold text-black-main py-3 font-size-h5" style="font-weight: 600">Phone</label>
+                                    <input type="phone" placeholder="Phone" name="phone" autocomplete="off" class="form-control bg-gray-100 py-4">
+                                    <!--end::Password-->
+                                </div>
+                                <!--end::Input group=-->
                                 <!--begin::Submit button-->
                                 <div class="d-grid mb-5 mt-2">
-                                    <button type="submit" id="kt_sign_in_submit" class="btn btn-primary m-auto w-100 px-8 py-4 my-3 " style="background-color:#2B00FF;">
+                                    <button type="submit" @click="saveComplete" class="btn btn-primary m-auto w-100 px-8 py-4 my-3 " style="background-color:#2B00FF;">
                                         <!--begin::Indicator label-->
-                                        <span class="indicator-label fs-16">Sign In</span>
+                                        <span class="indicator-label fs-16">Register</span>
                                         <!--end::Indicator label-->
                                         <!--begin::Indicator progress-->
 
@@ -103,8 +105,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Submit button-->
                             </form>
                             <!--end::Form-->
-                            <div class="text-center text-gray-400 fw-bold fs-4">Don’t have an account?
-                                <a href="#" class="btn fw-bolder link-primary ml-2" style="color:#2B00FF;">Register</a>
+                            <div class="text-center text-gray-400 fw-bold fs-4">Already have an account?
+                                <button class="btn link-primary fw-bolder ml-2" onclick="toggleLogin()">Login</button>
                             </div>
                         </div>
                     </div>
@@ -113,7 +115,7 @@ License: For each use you must have a valid license purchased only from above li
             </div>
         </div>
     </div>
-    <script src=" /assets/demo3/js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/assets/demo3/js/jquery/jquery-1.11.3.min.js"></script>
 
     <script src="/assets/demo3/js/plugins/canvasbg/canvasbg.js"></script>
     <script type="text/javascript">

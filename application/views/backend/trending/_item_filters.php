@@ -15,30 +15,15 @@ $types = $params['types'];
     }
 </style>
 <form method="get" class="form_filters_post form-filter">
-    <div class="card p-3" style="margin-top: 40px;margin-bottom: 15px">
-        <div class="row pb-3">
-            <div class="d-flex justify-content-start" style="width: 20%;">
-                <select class="form-select" aria-label=".form-select-lg example">
-                    <option selected>Catagory</option>
-                    <option value="1">Marketing</option>
-                    <option value="2">Navigation</option>
-                </select>
-            </div>
-        </div>
-        <div class="border rounded" style="overflow:scroll;height: 200px;">
-            <?php $this->load->view('/backend/monitoring/item_keywords'); ?>
-        </div>
-
-    </div>
     <div class="card p-3">
         <div class="clearfix filter-input col-md-12">
             <div class="d-flex align-items-center flex-stack flex-wrap">
-                <div class="mx-3 col has-feedback d-flex flex-stuck">
-                    <div class="d-flex align-items-center me-2">
-                        <button type="submit" class="btn btn-primary" style="background-color: #0B0044;"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
+                <div class="mx-3 col has-feedback">
                     <div class="d-flex align-items-center position-relative my-1">
-                        <input type="text" name="q" value="<?= isset($filters['q']) ? $filters['q'] : '' ?>" data-kt-customer-table-filter="search" class="form-control form-control-solid w-200px keyword_filters" id="inputValidation" placeholder="Keyword on Post">
+                        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+                            <span class="path1"></span><span class="path2"></span></i>
+                        <input type="text" name="q" value="<?= isset($filters['q']) ? $filters['q'] : '' ?>" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-13 keyword_filters" id="inputValidation" placeholder="Keyword on Post">
+                        <!-- <button id="btn-submit" type="submit" hidden></button> -->
                     </div>
                 </div>
                 <div class="me-3 col post_type">
@@ -77,27 +62,13 @@ $types = $params['types'];
                 <div class=" me-3 col has-feedback form_input_date">
                     <input data-title="To Date" data-class-filter="filter-to-date" type="text" name="to_date" value="<?= isset($filters['to_date']) ? $filters['to_date'] : '' ?>" class="form-control " placeholder="To">
                     <span class="glyphicon glyphicon-calendar form-control-feedback" style="background:#E5E5E5;color: #404A7D;height: 30px"></span>
-
                 </div>
-                <?php if ($channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
-                    <div class="col">
-                        <a href="#" class="btn btn-xs btn-success pull-right group-export-csv can-export">
-                            <span>
-                                <i class="fa fa-download"></i>
-                                <span>Download Post</span>
-                            </span>
-                        </a>
-                    </div>
-                <?php endif; ?>
+                <div class="me-3 col has-feedback">
+                    <button type="submit" class="btn btn-primary btn-icon-submit" style="background-color: #0B0044;">Filter</button>
+                </div>
             </div>
         </div>
     </div>
-    <?php
-    $types = $this->config->config['params']['types'];
-    foreach ($items as $item) : ?>
-        <?php $this->load->view('/backend/monitoring/_item', ['item' => $item, 'types' => $types]) ?>
-    <?php endforeach; ?>
-
 </form>
 <script>
     var input = document.getElementById("inputValidation");

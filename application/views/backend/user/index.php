@@ -40,9 +40,7 @@ $roles = $params['user_role'];
                 <div class="mb-3 row">
                     <label for="fw-bold" class="col-sm-2 col-form-label">Type*</label>
                     <div class="col-sm-10">
-                        <select name="type" id="type" class="form-select form-select-lg mb-3">
-                            <option value="ADMIN">ADMIN</option>
-                        </select>
+                        <input type="email" class="form-control" id="email" value="<?= $roles[$userInfo['role_id']]['name']  ?>" readonly>
                     </div>
                 </div>
                 <div class="mb-3 row d-flex">
