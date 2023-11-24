@@ -125,7 +125,7 @@ class Monitoring extends BackendController
                 break;
             }
         }
-        $charts =  $item->charts ? json_decode($item->charts, TRUE) : [];
+        $charts =  !empty($item->charts) ? json_decode($item->charts, TRUE) : [];
         $pagination = Pagination::bootstrap($item->count_d, '', $itemPerPage, 'page', 5);
         $data['interactions'] = $profiles;
         $data['pagination'] = $pagination;
