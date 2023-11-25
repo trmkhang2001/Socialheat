@@ -14,7 +14,7 @@ class Interactions extends BackendController
 		$page = intval($this->input->get('page', TRUE));
 		$offset = $page ? $itemPerPage * ($page - 1) : 0;
 		$items = BusinessInteraction::getInstance()->getRangeCache($conditions, $offset, $itemPerPage, 'id DESC');
-		$total = BusinessInteraction::getInstance()->getCount($conditions);
+		$total = BusinessInteraction::getInstance()->getCount();
 		$pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
 		$accessToken = FB_TOKEN;
 		$token = BusinessXpath::getInstance()->findByConditions(['channel_type' => CHANNEL_TYPE_FACEBOOK_TOKEN], TRUE);

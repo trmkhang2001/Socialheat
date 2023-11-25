@@ -88,13 +88,14 @@ $types = $params['types'];
 
 								</div>
 							</div>
-							<div class="form-group pull-right">
-								<label class="text-system"> &nbsp;</label>
-								<div class="">
-									<a href="/backend/socialItems/create" class="btn btn-primary btn-default create_btn " style="background-color: #0B0044;">Create Social Items</a>
+							<?php if ($userInfo['role_id'] === ROLE_ADMIN) { ?>
+								<div class="form-group pull-right">
+									<label class="text-system"> &nbsp;</label>
+									<div class="">
+										<a href="/backend/socialItems/create" class="btn btn-primary btn-default create_btn " style="background-color: #0B0044;">Create Social Items</a>
+									</div>
 								</div>
-
-							</div>
+							<?php } ?>
 						</div>
 
 					</form>

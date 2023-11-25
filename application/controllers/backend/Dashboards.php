@@ -41,10 +41,11 @@ class Dashboards extends BackendController
 
 	private function _getChartPostByRangeDate()
 	{
-		$posts = BusinessItem::getInstance()->getPostByRangeDate();
+		$posts_item = BusinessItem::getInstance()->getPostByRangeDate();
+		$posts = array_reverse($posts_item);
 		$charts = [];
 		foreach ($posts as $post) {
-			$charts['label'][] = $post->date_format;
+			$charts['label'][] = date('d/m', strtotime($post->date_format));
 			$charts['items'][] = $post->total_item;
 			$charts['data'][] = $post->total_data ?? 0;
 		}

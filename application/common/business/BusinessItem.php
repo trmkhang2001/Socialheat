@@ -846,16 +846,29 @@ class BusinessItem implements BusinessInterface
 	}
 
 
+	// public function getPostByRangeDate()
+	// {
+	// 	$name = 'getPostByRangeDate';
+	// 	$model  = self::getModel();
+	// 	$dbObj = $model::find();
+	// 	$dbObj->select('count(id) as total_item, sum(count_d) as total_data, craw_date, DATE(craw_date) as date_format')
+	// 		->where('channel_type ', CHANNEL_TYPE_FACEBOOK)
+	// 		->where('craw_date >', date('Y-m-d 00:00:00', strtotime('- 7day')))
+	// 		->where('craw_date <', date('Y-m-d 23:59:59'))
+	// 		->group_by('date_format');
+	// 	$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
+	// 	return $res;
+	// }
 	public function getPostByRangeDate()
 	{
 		$name = 'getPostByRangeDate';
 		$model  = self::getModel();
 		$dbObj = $model::find();
-		$dbObj->select('count(id) as total_item, sum(count_d) as total_data, craw_date, DATE(craw_date) as date_format')
+		$dbObj->select('count(id) as total_item, sum(count_d) as total_data, DATE(craw_date) as date_format')
 			->where('channel_type ', CHANNEL_TYPE_FACEBOOK)
-			->where('craw_date >', date('Y-m-d 00:00:00', strtotime('- 7day')))
-			->where('craw_date <', date('Y-m-d 23:59:59'))
-			->group_by('date_format');
+			->group_by('DATE(date_format)')
+			->order_by('DATE(craw_date)', 'desc')
+			->limit(7);
 		$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
 		return $res;
 	}
