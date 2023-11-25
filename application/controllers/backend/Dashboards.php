@@ -22,6 +22,7 @@ class Dashboards extends BackendController
 		$totalAudience = BusinessItem::getInstance()->getCount();
 		$totalMentions = BusinessSocialItem::getInstance()->getCount();
 		$totalEngage = BusinessInteraction::getInstance()->getCount();
+		$totalData = BusinessItem::getInstance()->getTotalCountD();
 		$topKeywords  = BusinessItem::getInstance()->getTopKeywords(ITEM_PER_PAGE_10);
 		$chartInteractions = $this->_getChartInteractionByType();
 		$chartPosts = $this->_getChartPostByRangeDate();
@@ -29,6 +30,7 @@ class Dashboards extends BackendController
 		$this->temp['data']['totalAudience'] = $totalAudience;
 		$this->temp['data']['totalMentions'] = $totalMentions;
 		$this->temp['data']['totalEngage'] = $totalEngage;
+		$this->temp['data']['totalData'] = $totalData;
 		$this->temp['data']['chartInteractions'] = $chartInteractions;
 		$this->temp['data']['chartPosts'] = $chartPosts;
 		$this->temp['data']['topKeywords'] = $topKeywords;

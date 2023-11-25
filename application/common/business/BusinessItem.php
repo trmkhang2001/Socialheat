@@ -7,6 +7,7 @@ use app\models\Item;
 use app\common\utilities\Common;
 use app\models\Keyword;
 use DateTime;
+use FFI;
 
 class BusinessItem implements BusinessInterface
 {
@@ -857,5 +858,14 @@ class BusinessItem implements BusinessInterface
 			->group_by('date_format');
 		$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
 		return $res;
+	}
+	public function getTotalCountD()
+	{
+		$name = 'getTotalData';
+		$model = self::getModel();
+		$dbObj = $model::find();
+		$dbObj->select('sum(count_d) as total_data');
+		$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
+		return $res[0]->total_data;
 	}
 }

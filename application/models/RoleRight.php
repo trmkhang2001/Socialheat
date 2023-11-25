@@ -1,7 +1,9 @@
 <?php
 
 namespace app\models;
-class RoleRight extends MyModel {
+
+class RoleRight extends MyModel
+{
 
 	static protected $_instance = NULL;
 
@@ -11,8 +13,7 @@ class RoleRight extends MyModel {
 	 */
 	static public function getInstance()
 	{
-		if (self::$_instance === NULL)
-		{
+		if (self::$_instance === NULL) {
 			self::$_instance = new self();
 		}
 		return self::$_instance;
@@ -43,6 +44,10 @@ class RoleRight extends MyModel {
 				'clients/getDataCity',
 				'clients/ajax',
 				'clients/get_info_uids',
+				'dashboards/index',
+				'monitoring/index',
+				'trending/index',
+				'profile/index',
 			),
 			ROLE_NORMAL   => array(
 				'clients/index',

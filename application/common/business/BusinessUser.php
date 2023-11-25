@@ -4,7 +4,8 @@ namespace app\common\business;
 
 use app\models\User;
 
-class BusinessUser implements BusinessInterface {
+class BusinessUser implements BusinessInterface
+{
 	static protected $_instance = NULL;
 
 	/**
@@ -14,8 +15,7 @@ class BusinessUser implements BusinessInterface {
 	 */
 	static public function getInstance()
 	{
-		if (self::$_instance === NULL)
-		{
+		if (self::$_instance === NULL) {
 			self::$_instance = new self();
 		}
 
@@ -53,7 +53,6 @@ class BusinessUser implements BusinessInterface {
 	public function findOne($id)
 	{
 		return User::getInstance()->findOne(array('id' => $id))->get()->row();
-
 	}
 
 	public function findByConditions($conditions = array(), $row = FALSE)
@@ -76,10 +75,8 @@ class BusinessUser implements BusinessInterface {
 		$query = User::getInstance()->findByMultipleId($ids);
 		$dbDatas = User::queryBuilder($name, $query, FALSE);
 		$ret = array();
-		if ($dbDatas)
-		{
-			foreach ($dbDatas as $dbData)
-			{
+		if ($dbDatas) {
+			foreach ($dbDatas as $dbData) {
 				$ret[$dbData['id']] = $dbData;
 			}
 		}
@@ -89,8 +86,7 @@ class BusinessUser implements BusinessInterface {
 	public function save($data = array(), $runValidation = TRUE)
 	{
 		$validation = $this->validateForm($data);
-		if (($validation['validation']))
-		{
+		if (($validation['validation'])) {
 			return $validation;
 		}
 		User::getInstance()->save($data);
@@ -103,20 +99,17 @@ class BusinessUser implements BusinessInterface {
 
 	public function update($id, $data = array(), $runValidation = TRUE)
 	{
-		if($runValidation === TRUE){
+		if ($runValidation === TRUE) {
 			$validation = $this->validateForm($data);
 			$oldUser = $this->findOne($id);
-			if ($oldUser && $oldUser->email === $data['email'])
-			{
+			if ($oldUser && $oldUser->email === $data['email']) {
 				unset($validation['validation']['email']);
 			}
 
-			if ($validation['validation'])
-			{
+			if ($validation['validation']) {
 				return $validation;
 			}
-			if (empty($data['password']))
-			{
+			if (empty($data['password'])) {
 				unset($data['password']);
 			}
 		}
@@ -127,15 +120,12 @@ class BusinessUser implements BusinessInterface {
 		);
 		return $res;
 	}
-
 	private function validateForm($data)
 	{
 		$validation = User::getInstance()->validateForm($data);
-		if ($data['email'])
-		{
+		if ($data['email']) {
 			$user = $this->findByEmail($data['email']);
-			if ($user)
-			{
+			if ($user) {
 				$validation['validation']['email'] = 'Email đã tồn tại ';
 			}
 		}
@@ -144,7 +134,7 @@ class BusinessUser implements BusinessInterface {
 
 	public function delete($id, $data)
 	{
-		User::getInstance()->delete($id,[]);
+		User::getInstance()->delete($id, []);
 		//User::getInstance()->update($id, $data);
 		$res = array(
 			'success' => TRUE,
@@ -156,12 +146,10 @@ class BusinessUser implements BusinessInterface {
 	public function getRange($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = '')
 	{
 		$dbObj = User::getInstance()->find();
-		if ($itemPerPage)
-		{
+		if ($itemPerPage) {
 			$dbObj->limit($itemPerPage);
 		}
-		if ($orderBy)
-		{
+		if ($orderBy) {
 			$dbObj->order_by($orderBy);
 		}
 		$dbObj = User::getInstance()->getConditions($conditions, $dbObj);
@@ -181,7 +169,6 @@ class BusinessUser implements BusinessInterface {
 		$dbObj = User::getInstance()->find();
 		$dbObj = User::getInstance()->getConditions($conditions, $dbObj);
 		return $dbObj->count_all_results();
-
 	}
 
 	public function findByEmail($email)
@@ -195,13 +182,11 @@ class BusinessUser implements BusinessInterface {
 	public function checkAuth($email, $password)
 	{
 		$user = $this->findByEmail($email);
-		if (empty($user))
-		{
+		if (empty($user)) {
 			return NULL;
 		}
 		$isSuccess = password_verify($password, $user->password);
-		if ($isSuccess)
-		{
+		if ($isSuccess) {
 			return $user;
 		}
 		return NULL;
@@ -234,5 +219,14 @@ class BusinessUser implements BusinessInterface {
 		$res = User::queryBuilder($name, $dbObj, FALSE);
 		return $res;
 	}
-
+	public function register($data = array())
+	{
+		$user = User::getInstance()->findByEmail($data['email']);
+		if ($user) {
+			return false;
+		} else {
+			User::getInstance()->save($data);
+			return true;
+		}
+	}
 }

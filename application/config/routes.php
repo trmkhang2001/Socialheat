@@ -53,6 +53,8 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 /*Backend*/
+$route['sigup'] = '/backend/sigup';
+$route['sigup/register'] = '/backend/sigup/register';
 $route['admin'] = '/backend/auth';
 $route['auth/logout'] = '/backend/auth/logOut';
 $route['phone'] = '/backend/phone';
