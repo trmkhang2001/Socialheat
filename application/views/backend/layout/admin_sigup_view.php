@@ -63,16 +63,12 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Input group=-->
                                 <div class="fv-row mb-4">
                                     <label class="fw-bold text-black-main py-3 font-size-h5">Name</label>
-                                    <input type="text" class="form-control bg-gray-100 py-4" name="name" placeholder="Name" autocomplete="off" value="<?php if ($name) {
-                                                                                                                                                            echo $name;
-                                                                                                                                                        } ?>" required>
+                                    <input type="text" class="form-control bg-gray-100 py-4" name="name" placeholder="Name" autocomplete="off" value="" required>
                                 </div>
                                 <div class="fv-row mb-4">
                                     <!--begin::Email-->
                                     <label class="fw-bold text-black-main py-3 font-size-h5" style="font-weight: 600">Email</label>
-                                    <input type="email" placeholder="Email" name="email" autocomplete="off" class="form-control bg-gray-100 py-4" value="<?php if ($email) {
-                                                                                                                                                                echo $email;
-                                                                                                                                                            } ?>" required>
+                                    <input type="email" placeholder="Email" name="email" autocomplete="off" class="form-control bg-gray-100 py-4" value="" required>
                                     <!--end::Email-->
                                 </div>
                                 <!--end::Input group=-->
@@ -91,9 +87,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <div class="fv-row mb-4">
                                     <!--begin::Password-->
                                     <label class="fw-bold text-black-main py-3 font-size-h5" style="font-weight: 600">Phone</label>
-                                    <input type="phone" placeholder="Phone" name="phone" autocomplete="off" class="form-control bg-gray-100 py-4" value="<?php if ($phone) {
-                                                                                                                                                                echo $phone;
-                                                                                                                                                            } ?>">
+                                    <input type="phone" placeholder="Phone" name="phone" autocomplete="off" class="form-control bg-gray-100 py-4" value="">
                                     <!--end::Password-->
                                 </div>
                                 <!--end::Input group=-->
