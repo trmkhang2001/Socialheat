@@ -221,7 +221,7 @@ class BusinessUser implements BusinessInterface
 	}
 	public function register($data = array())
 	{
-		$user = User::getInstance()->findByEmail($data['email']);
+		$user = User::getInstance()->getByIdAsArray(array('email' => $data['email']));
 		if ($user) {
 			return false;
 		} else {
