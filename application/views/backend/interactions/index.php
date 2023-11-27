@@ -86,11 +86,13 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 								<!--end::Title-->
 								<span>Total: <b><?= number_format($total) ?> </b> interactions</span>
 							</div>
-							<div class="clearfix">
-								<a href="#" class="btn btn-light-primary me-3 pull-right group-export-csv can-export" data-bs-toggle="modal" data-bs-target="#kt_customers_export_modal">
-									<i class="ki-duotone ki-exit-up fs-2"><span class="path1"></span><span class="path2"></span></i> Export
-								</a>
-							</div>
+							<?php if ($userInfo['role_id'] === ROLE_ADMIN || $userInfo['role_id'] === ROLE_DOWNLOAD) : ?>
+								<div class="clearfix">
+									<a href="#" class="btn btn-light-primary me-3 pull-right group-export-csv can-export" data-bs-toggle="modal" data-bs-target="#kt_customers_export_modal">
+										<i class="ki-duotone ki-exit-up fs-2"><span class="path1"></span><span class="path2"></span></i> Export
+									</a>
+								</div>
+							<?php endif; ?>
 						</div>
 						<!--begin::Table container-->
 						<div class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
@@ -125,20 +127,36 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 												</div>
 											</td>
 											<td>
-												<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $item->phone ?>">
-													<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
-														<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
-													</span>
-												</span>
-											</td>
-											<td>
-												<?php if (!empty($item->email)) { ?>
-													<span class="badge badge-blue px-4 showData" data-decode="<?= $item->email ?>">
+												<?php if ($userInfo['role_id'] != ROLE_CLIENTS) : ?>
+													<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $item->phone ?>">
 														<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
 															<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
 														</span>
 													</span>
-												<?php  } ?>
+												<?php else : ?>
+													<span class="fw-bold badge badge-blue px-4">
+														<span class=" svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+															<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+														</span>
+													</span>
+												<?php endif ?>
+											</td>
+											<td>
+												<?php if ($userInfo['role_id'] != ROLE_CLIENTS) : ?>
+													<?php if (!empty($item->email)) { ?>
+														<span class="badge badge-blue px-4 showData" data-decode="<?= $item->email ?>">
+															<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+																<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+															</span>
+														</span>
+													<?php  } ?>
+												<?php else : ?>
+													<span class="fw-bold badge badge-blue px-4">
+														<span class=" svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+															<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+														</span>
+													</span>
+												<?php endif ?>
 											</td>
 											<td>
 												<span class=" me-2 fs--7 "><?= $item->relationship ?></span>

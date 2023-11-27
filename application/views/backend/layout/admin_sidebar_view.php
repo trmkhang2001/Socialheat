@@ -4,6 +4,8 @@
 /**
  * @var $userInfo
  */
+$params = $this->config->config['params'];
+$roles = $params['user_role'];
 ?>
 
 <!--begin::Aside-->
@@ -112,7 +114,8 @@
             <div class="d-flex align-items-center">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-circle symbol-40px">
-                    <img src="<?php echo $userInfo['avatar'] ?>" alt="photo" />
+                    <img src="<?php if ($userInfo['avatar'] == NULL) echo '/assets/images/no_avatar.png';
+                                else echo $userInfo['avatar'] ?>" alt="photo" />
                 </div>
                 <!--end::Avatar-->
                 <!--begin::User info-->
@@ -121,7 +124,12 @@
                     <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-1"><?php echo $userInfo['name'] ?></a>
                     <!--end::Name-->
                     <!--begin::Major-->
-                    <span class="text-muted fw-semibold d-block fs-7 lh-1">Developer</span>
+                    <span class="text-muted fw-semibold d-block fs-7 lh-1">
+                        <?php foreach ($roles as $role) :
+                            if ($userInfo['role_id'] === $role['id'])
+                                echo $role['name'];
+                        endforeach; ?>
+                    </span>
                     <!--end::Major-->
                 </div>
                 <!--end::User info-->

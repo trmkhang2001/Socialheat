@@ -67,7 +67,7 @@ $channel_types = $params['channel_types'];
 						</div>
 						<div class="mb-3 row">
 							<label class="col-sm-2 col-form-label">Is Private</label>
-							<div class="col-sm-10">
+							<div class="col-sm-10 d-flex aigh-item-center">
 								<input type="checkbox" value="1" name="is_private" placeholder="">
 							</div>
 						</div>
@@ -95,7 +95,12 @@ $channel_types = $params['channel_types'];
 						</div>
 					<?php endif; ?>
 				</div>
-
+				<div class="mb-3 row">
+					<label class="col-sm-2 col-form-label">Feature</label>
+					<div class="col-sm-10 d-flex aigh-item-center">
+						<input type="checkbox" value="1" name="feature" placeholder="">
+					</div>
+				</div>
 				<div class="mb-3 row">
 					<div class="col-sm-10 col-sm-offset-3">
 						<button type="button" @click="saveComplete" class="btn btn-primary"><i class="fa fa-save"></i> SAVE

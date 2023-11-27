@@ -120,7 +120,9 @@ $types = $params['types'];
 									<th class="text-start min-w-100px">Type</th>
 									<th class="text-start min-w-100px">Audience Size</th>
 									<th class="text-start min-w-100px">Status</th>
-									<th class="text-start min-w-100px">Rating</th>
+									<?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
+										<th class="text-start min-w-100px">Rating</th>
+									<?php endif ?>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
@@ -158,16 +160,17 @@ $types = $params['types'];
 												<div class="clasificacion"><input type="radio"><label>★</label><input checked="" type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label></div>
 											</div>
 										</td>
-
-										<td class="actions">
-											<a data-bs-toggle="tooltip" data-bs-placement="top" title="Update" href="/backend/socialItems/update/<?php echo $item->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-											<a data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" href="/backend/socialItems/delete/<?php echo $item->id ?>" class="btn btn-delete btn-danger"><i class="ki-outline ki-trash fa-trash-o"></i></a>
-											<?php if ((int)$item->status ===  STATUS_ACTIVE) : ?>
-												<a data-bs-toggle="tooltip" data-bs-placement="top" title="DeActive" href="/backend/socialItems/deactive/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-pause"></i></a>
-											<?php else : ?>
-												<a data-bs-toggle="tooltip" data-bs-placement="top" title="Active" href="/backend/socialItems/active/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-play"></i></a>
-											<?php endif; ?>
-										</td>
+										<?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
+											<td class="actions">
+												<a data-bs-toggle="tooltip" data-bs-placement="top" title="Update" href="/backend/socialItems/update/<?php echo $item->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" href="/backend/socialItems/delete/<?php echo $item->id ?>" class="btn btn-delete btn-danger"><i class="ki-outline ki-trash fa-trash-o"></i></a>
+												<?php if ((int)$item->status ===  STATUS_ACTIVE) : ?>
+													<a data-bs-toggle="tooltip" data-bs-placement="top" title="DeActive" href="/backend/socialItems/deactive/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-pause"></i></a>
+												<?php else : ?>
+													<a data-bs-toggle="tooltip" data-bs-placement="top" title="Active" href="/backend/socialItems/active/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-play"></i></a>
+												<?php endif; ?>
+											</td>
+										<?php endif ?>
 									</tr>
 								<?php $index++;
 								endforeach; ?>

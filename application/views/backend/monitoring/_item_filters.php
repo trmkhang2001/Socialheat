@@ -79,7 +79,7 @@ $types = $params['types'];
                     <span class="glyphicon glyphicon-calendar form-control-feedback" style="background:#E5E5E5;color: #404A7D;height: 30px"></span>
 
                 </div>
-                <?php if ($channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
+                <?php if ($channel_type === CHANNEL_TYPE_FACEBOOK && ($userInfo['role_id'] === ROLE_ADMIN || $userInfo['role_id'] === ROLE_DOWNLOAD)) : ?>
                     <div class="col">
                         <a href="#" class="btn btn-xs btn-success pull-right group-export-csv can-export">
                             <span>

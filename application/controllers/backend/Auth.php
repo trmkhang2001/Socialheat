@@ -40,7 +40,7 @@ class Auth extends BackendController
     {
         $link = '/backend/dashboards';
         if ($roleId !== ROLE_ADMIN) {
-            $link = '/backend/clients';
+            $link = '/backend/dashboards';
         }
         $continueUrl = $this->input->get('continue', TRUE);
         if ($continueUrl) {

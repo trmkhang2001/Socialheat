@@ -121,18 +121,18 @@ return array(
 	'user_role'             => array(
 		ROLE_ADMIN    => array(
 			'id'   => ROLE_ADMIN,
-			'name' => 'Supper Admin',
+			'name' => 'Admin',
 			'slug' => 'supper-admin'
 		),
 		ROLE_NORMAL   => array(
 			'id'   => ROLE_NORMAL,
-			'name' => 'Nhân viên ',
-			'slug' => 'nhan-vien'
+			'name' => 'Premium',
+			'slug' => 'premium'
 		),
 		ROLE_CLIENTS  => array(
 			'id'   => ROLE_CLIENTS,
-			'name' => 'Khách hàng',
-			'slug' => 'khach-hang'
+			'name' => 'User',
+			'slug' => 'user'
 		),
 		ROLE_DOWNLOAD => array(
 			'id'   => ROLE_DOWNLOAD,

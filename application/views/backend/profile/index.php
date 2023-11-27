@@ -1,12 +1,13 @@
 <?php
-$items = array("Total Mentions", "Total Audience", "Total Keywords", "Total User Engage");
-$name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietnam", "#suaensure");
+
 /**
  * @var $total
  * @var $item
  * @var $interactions
  * @var $userInfo
  */
+$params = $this->config->config['params'];
+$roles = $params['user_role'];
 ?>
 <!-- Dashboard -->
 <div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
@@ -38,7 +39,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                         <!--begin: Pic-->
                         <div class="me-7 mb-4">
                             <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="<?= $userInfo['avatar'] ?>" alt="image">
+                                <img src="<?php if ($userInfo['avatar'] == NULL) echo '/assets/images/no_avatar.png';
+                                            else echo $userInfo['avatar'] ?>" alt="image">
                             </div>
                         </div>
                         <!--end::Pic-->
@@ -59,7 +61,11 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
                                     <!--begin::Info-->
                                     <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
                                         <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
-                                            <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> Developer
+                                            <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                            <?php foreach ($roles as $role) :
+                                                if ($userInfo['role_id'] === $role['id'])
+                                                    echo $role['name'];
+                                            endforeach; ?>
                                         </a>
                                     </div>
                                     <!--end::Info-->
