@@ -7,7 +7,6 @@
  * @var $iconImage
  * @var $channelTypes
  */
-
 $socialLink = 'https://facebook.com/' . $item->post_id;
 $typeInfo = $types[$item->type];
 if ($typeInfo['name'] === 'Group')
@@ -177,14 +176,14 @@ $keywords = explode(',', $item->keywords);
                             <?php if ($item->channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
                                 <div class="item p-3 <?= $class ?> ">
                                     <span class="img"><img src="/assets/images/like_share_icon.png"></span><br>
-                                    <div class="number fs-1 p-3 mt-3"><?= $item->count_like_share ?: 0 ?></div><br>
-                                    <span class="text-title">DATA LIKE & SHARE</span>
+                                    <div class="number fs-1 p-3 mt-3"><?= $item->count_d ?: 0 ?></div><br>
+                                    <span class="text-title">DATA</span>
                                 </div>
-                                <div class="item p-3 <?= $class ?>">
+                                <!-- <div class="item p-3 <?= $class ?>">
                                     <span class="img"><img src="/assets/images/comment_icon.png"></span><br>
                                     <div class="number fs-1 p-3 mt-3"><?= $item->count_comment ?></div><br>
                                     <span class="text-title">DATA COMMENT</span>
-                                </div>
+                                </div> -->
                             <?php endif; ?>
                         </div>
                     </div>
