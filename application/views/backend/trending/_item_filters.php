@@ -18,14 +18,6 @@ $types = $params['types'];
     <div class="card p-3">
         <div class="clearfix filter-input col-md-12">
             <div class="d-flex align-items-center flex-stack flex-wrap">
-                <div class="mx-3 col has-feedback">
-                    <div class="d-flex align-items-center position-relative my-1">
-                        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-                            <span class="path1"></span><span class="path2"></span></i>
-                        <input type="text" name="q" value="<?= isset($filters['q']) ? $filters['q'] : '' ?>" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-13 keyword_filters" id="inputValidation" placeholder="Keyword on Post">
-                        <!-- <button id="btn-submit" type="submit" hidden></button> -->
-                    </div>
-                </div>
                 <div class="me-3 col post_type">
                     <div class="card-toolbar">
                         <select data-title="Types" data-class-filter="filter-post-type" name="sort_by" class="form-select  sort_by" title="Post type" data-width="160px">

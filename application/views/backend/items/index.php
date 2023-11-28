@@ -118,7 +118,7 @@ $types = $params['types'];
 											<td><?php echo $type['name'] ?></td>
 											<td>
 												<?php if ($item->image_url) : ?>
-													<img src="<?= site_url($item->image_url) ?>" height="150" width="auto">
+													<img class="rounded " src="<?= site_url($item->image_url) ?>" height="60px" width="auto">
 												<?php endif; ?>
 											</td>
 											<td><?php $date = date('d/m/Y', strtotime($item->craw_date));

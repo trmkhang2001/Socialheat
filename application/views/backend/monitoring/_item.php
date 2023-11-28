@@ -9,10 +9,13 @@
  */
 $socialLink = 'https://facebook.com/' . $item->post_id;
 $typeInfo = $types[$item->type];
-if ($typeInfo['name'] === 'Group')
+if ($item->image_url === NULL) {
     $link_image = '/assets/images/avartar_group.png';
-else
-    $link_image = 'https://graph.facebook.com/' . $item->post_owner_id . '/picture?type=square&access_token=' . FB_TOKEN;
+    if ($typeInfo['name'] != 'Group')
+        $link_image = 'https://graph.facebook.com/' . $item->post_owner_id . '/picture?type=square&access_token=' . FB_TOKEN;
+} else {
+    $link_image = '/' . $item->image_url;
+}
 $channelInfo = $channelTypes[$item->channel_type];
 $iconImage = $channelInfo['icon_image'];
 $channel_type = $item->channel_type;
@@ -160,17 +163,17 @@ $keywords = explode(',', $item->keywords);
                         <div class="d-flex justify-content-center text-center interaction visible-xl visible-lg hidden-xs hidden-sm hidden-md p-5">
                             <div class="item p-3 <?= $class ?>">
                                 <span class="img"><img src="/assets/images/like_icon.png"></span><br>
-                                <div class="number fs-1 p-3 mt-3 "><?= $item->total_like ?></div><br>
+                                <div class="number fs-1 p-3 mt-3 "><?= $item->total_like ?: 0 ?></div><br>
                                 <span class="text-title">LIKE</span>
                             </div>
                             <div class="item p-3 <?= $class ?>">
                                 <span class="img"><img src="/assets/images/comment_icon.png"></span><br>
-                                <div class="number fs-1 p-3 mt-3"><?= $item->total_comment ?></div><br>
+                                <div class="number fs-1 p-3 mt-3"><?= $item->total_comment ?: 0  ?></div><br>
                                 <span class="text-title">COMMENT</span>
                             </div>
                             <div class="item p-3 <?= $class ?>">
                                 <span class="img"><img src="/assets/images/share_icon.png"></span><br>
-                                <div class="number fs-1 p-3 mt-3"><?= $item->total_share ?></div><br>
+                                <div class="number fs-1 p-3 mt-3"><?= $item->total_share ?: 0 ?></div><br>
                                 <span class="text-title"><?= $channel_type === CHANNEL_TYPE_TWITTER ? 'Retweet' : 'Share' ?></span>
                             </div>
                             <?php if ($item->channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
