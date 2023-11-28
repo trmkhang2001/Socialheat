@@ -141,7 +141,25 @@ $channel_types = $params['channel_types'];
 								<input type="text" class="form-control" name="keywords" id="object_tagsinput" value="">
 							</div>
 						</div>
-
+						<div class="mb-3 row">
+							<label class="col-sm-2 col-form-label">Image</label>
+							<div class="col-sm-10">
+								<input type="file" class="form-control" id="image" name="image" placeholder="" />
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<?php if (isset($item->image_url)) : ?>
+								<label class="col-sm-2"></label>
+								<div class="col-sm-10">
+									<img class="img-avt img-fluid img-thumbnail" src="<?php echo base_url($item->image_url) ?>" />
+								</div>
+							<?php else : ?>
+								<label class="col-sm-2"></label>
+								<div class="col-sm-10">
+									<img class="img-avt img-fluid img-thumbnail" src="" id="blah" width="100%" />
+								</div>
+							<?php endif; ?>
+						</div>
 						<div class="mb-3 row">
 							<div class="col-sm-10 col-sm-offset-3">
 								<button type="button" @click="saveComplete" class="btn btn-primary"><i class="fa fa-save"></i> SAVE
@@ -211,5 +229,21 @@ $channel_types = $params['channel_types'];
 
 		$('.social-item-select2').select2();
 
+	});
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#blah').attr('src', e.target.result);
+			};
+
+			reader.readAsDataURL(input.files[0]); // convert to base64 string
+		}
+	}
+
+	$('#image').change(function() {
+		readURL(this);
 	});
 </script>
