@@ -43,7 +43,7 @@
     }
 </style>
 <!-- Dashboard -->
-<div class="m-content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
+<div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
     <div class="container-fluid">
         <h1 style="margin-bottom: -20px;">Monitoring</h1>
         <div class="clearfix form-filter m--margin-bottom-10">

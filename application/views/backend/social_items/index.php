@@ -34,7 +34,7 @@ $types = $params['types'];
 		right: 1.25rem !important;
 	}
 </style>
-<div class="ms-5">
+<div class="content ms-5">
 	<h1 class="mb-7 mx-3">Social Audience</h1>
 	<div class="row">
 		<div class="col-md-12">

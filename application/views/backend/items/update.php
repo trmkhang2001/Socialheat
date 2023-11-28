@@ -149,7 +149,6 @@ $channel_types = $params['channel_types'];
 							</div>
 						</div>
 					</form>
-
 				</div>
 			</div>
 		</div>

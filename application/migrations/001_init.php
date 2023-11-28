@@ -20,16 +20,6 @@ class Migration_Init extends CI_Migration
 				]
 			]
 		);
-		$dbForge->add_column(
-			'social_items',
-			[
-				'is_feature' => [
-					'type' => 'bit',
-					'null' => TRUE
-				]
-			]
-		);
-
 		$dbForge->create_table(
 			'miss_interactions',
 			true,
