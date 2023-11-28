@@ -21,7 +21,7 @@ class Dashboards extends BackendController
 		$totalKeyword = count(explode(',', $keywords->keyword));
 		$totalAudience = BusinessSocialItem::getInstance()->getCount();
 		$totalMentions = BusinessItem::getInstance()->getCount();
-		$totalEngage = BusinessInteraction::getInstance()->getCount();
+		$totalEngage = BusinessItem::getInstance()->getTotalUserEngage();
 		$totalData = BusinessItem::getInstance()->getTotalCountD();
 		$topKeywords  = BusinessItem::getInstance()->getTopKeywords(ITEM_PER_PAGE_10);
 		$chartInteractions = $this->_getChartInteractionByType();

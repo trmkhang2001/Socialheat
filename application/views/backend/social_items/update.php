@@ -75,40 +75,39 @@ $channel_types = $params['channel_types'];
 							<label class="col-sm-2 col-form-label">Token/Cookie</label>
 							<div class="col-sm-10"><textarea rows="3" name="token" placeholder="" class="form-control"></textarea></div>
 						</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2 col-form-label">Image</label>
-					<div class="col-sm-10">
-						<input type="file" class="form-control" id="image" name="image" placeholder="" />
-					</div>
-				</div>
-				<div class="mb-3 row">
-					<?php if (isset($item->image_url)) : ?>
-						<label class="col-sm-2"></label>
-						<div class="col-sm-10">
-							<img src="<?php echo base_url($item->image_url) ?>" width="100%" />
+						<div class="mb-3 row">
+							<label class="col-sm-2 col-form-label">Image</label>
+							<div class="col-sm-10">
+								<input type="file" class="form-control" id="image" name="image" placeholder="" />
+							</div>
 						</div>
-					<?php else : ?>
-						<label class="col-sm-2"></label>
-						<div class="col-sm-10">
-							<img src="" id="blah" width="100%" />
+						<div class="mb-3 row">
+							<?php if (isset($item->image_url)) : ?>
+								<label class="col-sm-2"></label>
+								<div class="col-sm-10">
+									<img src="<?php echo base_url($item->image_url) ?>" width="100%" />
+								</div>
+							<?php else : ?>
+								<label class="col-sm-2"></label>
+								<div class="col-sm-10">
+									<img src="" id="blah" width="100%" />
+								</div>
+							<?php endif; ?>
 						</div>
-					<?php endif; ?>
+						<div class="mb-3 row">
+							<label class="col-sm-2 col-form-label">Feature</label>
+							<div class="col-sm-10 d-flex aigh-item-center">
+								<input type="checkbox" value="1" name="is_feature" placeholder="">
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<div class="col-sm-10 col-sm-offset-3">
+								<button type="button" @click="saveComplete" class="btn btn-primary"><i class="fa fa-save"></i> SAVE
+								</button>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2 col-form-label">Feature</label>
-					<div class="col-sm-10 d-flex aigh-item-center">
-						<input type="checkbox" value="1" name="feature" placeholder="">
-					</div>
-				</div>
-				<div class="mb-3 row">
-					<div class="col-sm-10 col-sm-offset-3">
-						<button type="button" @click="saveComplete" class="btn btn-primary"><i class="fa fa-save"></i> SAVE
-						</button>
-					</div>
-				</div>
-				</form>
-
 			</div>
 		</div>
 	</div>

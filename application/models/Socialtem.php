@@ -5,7 +5,8 @@ namespace app\models;
 /**
  * @property  $email
  */
-class Socialtem extends MyModel {
+class Socialtem extends MyModel
+{
 
 	static protected $_instance = NULL;
 
@@ -15,8 +16,7 @@ class Socialtem extends MyModel {
 	 */
 	public static function getInstance()
 	{
-		if (self::$_instance === NULL)
-		{
+		if (self::$_instance === NULL) {
 			self::$_instance = new self();
 		}
 		return self::$_instance;
@@ -31,7 +31,7 @@ class Socialtem extends MyModel {
 	 * @inheritdoc
 	 */
 	public static $fields = array(
-		'name', 'social_id', 'note', 'image','type','status','channel_type'
+		'name', 'social_id', 'note', 'image', 'type', 'status', 'channel_type', 'is_private', 'is_feature',
 	);
 	public static $requiredFiled = array(
 		'name'      => 'Name',

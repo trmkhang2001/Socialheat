@@ -881,4 +881,12 @@ class BusinessItem implements BusinessInterface
 		$res = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
 		return $res[0]->total_data;
 	}
+	public function getTotalUserEngage()
+	{
+		$conditions = array();
+		$nameCache = http_build_query($conditions);
+		$total = BusinessItem::getInstance()->getTotalPost($conditions, $nameCache);
+		$totalEngage = $total->total_like + $total->total_share + $total->total_comment;
+		return $totalEngage;
+	}
 }

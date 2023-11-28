@@ -34,9 +34,6 @@ $types = $params['types'];
         <div class="clearfix filter-input col-md-12">
             <div class="d-flex align-items-center flex-stack flex-wrap">
                 <div class="mx-3 col has-feedback d-flex flex-stuck">
-                    <div class="d-flex align-items-center me-2">
-                        <button type="submit" class="btn btn-primary" style="background-color: #0B0044;"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
                     <div class="d-flex align-items-center position-relative my-1">
                         <input type="text" name="q" value="<?= isset($filters['q']) ? $filters['q'] : '' ?>" data-kt-customer-table-filter="search" class="form-control form-control-solid w-200px keyword_filters" id="inputValidation" placeholder="Keyword on Post">
                     </div>
@@ -78,6 +75,9 @@ $types = $params['types'];
                     <input data-title="To Date" data-class-filter="filter-to-date" type="text" name="to_date" value="<?= isset($filters['to_date']) ? $filters['to_date'] : '' ?>" class="form-control " placeholder="To">
                     <span class="glyphicon glyphicon-calendar form-control-feedback" style="background:#E5E5E5;color: #404A7D;height: 30px"></span>
 
+                </div>
+                <div class="d-flex align-items-center me-2">
+                    <button type="submit" class="btn btn-primary" style="background-color: #0B0044;"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <?php if ($channel_type === CHANNEL_TYPE_FACEBOOK && ($userInfo['role_id'] === ROLE_ADMIN || $userInfo['role_id'] === ROLE_DOWNLOAD)) : ?>
                     <div class="col">

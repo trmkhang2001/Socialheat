@@ -88,6 +88,7 @@ class SocialItems extends BackendController
 	{
 		$model = BusinessSocialItem::getModel();
 		$data = $this->input->post($model::$fields, TRUE);
+		// echo "<pre>";print_r($data);die;
 		unset($data['status']);
 		$id = $this->input->post('id', TRUE);
 		$user = $this->userInfo;

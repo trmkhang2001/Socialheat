@@ -105,8 +105,8 @@ class Monitoring extends BackendController
             redirect(site_url('/backend/monitoring/index'));
         }
         $data['content'] = (array)$item;
-        $fileName = "$item->post_id.json";
-        // $fileName = "829093682555105.json";
+        // $fileName = "$item->post_id.json";
+        $fileName = "829093682555105.json";
         $fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
         $profiles = [];
         $page = $this->input->get('page', TRUE);
@@ -125,6 +125,9 @@ class Monitoring extends BackendController
                 break;
             }
         }
+        $total['totalMail'] = !empty($item->totalMail) ? $item->totalMail : 0;
+        $total['totalLocation'] = !empty($item->totalLocation) ? $item->totalLocation : 0;
+        $total['totalRelationship'] = !empty($item->totalRelationship) ? $item->totalRelationship : 0;
         $charts =  !empty($item->charts) ? json_decode($item->charts, TRUE) : [];
         $pagination = Pagination::bootstrap($item->count_d, '', $itemPerPage, 'page', 5);
         $data['interactions'] = $profiles;
@@ -132,6 +135,7 @@ class Monitoring extends BackendController
         $this->temp['colorBg'] = $colorBg;
         $this->temp['page_title'] = 'Detail item';
         $this->temp['data'] = $data;
+        $this->temp['total'] = $total;
         $this->temp['charts'] = $charts['charts'] ?? [];
         $this->temp['template'] = 'backend/monitoring/uids';
         $this->render();

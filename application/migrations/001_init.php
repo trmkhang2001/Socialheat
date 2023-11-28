@@ -2,7 +2,8 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Migration_Init extends CI_Migration {
+class Migration_Init extends CI_Migration
+{
 
 	public function up()
 	{
@@ -16,6 +17,15 @@ class Migration_Init extends CI_Migration {
 				'charts' => [
 					'type'    => 'json',
 					'null'    => TRUE
+				]
+			]
+		);
+		$dbForge->add_column(
+			'social_items',
+			[
+				'is_feature' => [
+					'type' => 'bit',
+					'null' => TRUE
 				]
 			]
 		);

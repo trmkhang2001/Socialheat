@@ -63,19 +63,21 @@
 							<div class="card p-5 mt-5">
 								<img class="img" src="/assets/images/icon_total_mail.png" alt="">
 								<span class="tgray mt-3 fw-bold">Total Email</span>
-								<div class="fw-bold fs-2 mt-3"><?php echo number_format($content->totalMail ?? 0) ?></div>
+								<div class="fw-bold fs-2 mt-3"><?php echo number_format($total['totalMail']) ?></div>
 							</div>
 						</div>
 						<div class="col">
+
 							<div class="card p-5">
 								<img class="img" src="/assets/images/icon_location.png" alt="">
 								<span class="tgray mt-3 fw-bold">Location</span>
-								<div class="fw-bold fs-2 mt-3"><?php echo number_format($content->totalLocation ?? 0) ?></div>
+								<div class="fw-bold fs-2 mt-3"><?php echo number_format($total['totalMail']) ?></div>
 							</div>
+
 							<div class="card p-5 mt-5">
 								<img class="img" src="/assets/images/icon_relationship.png" alt="">
 								<span class="tgray mt-3 fw-bold">Relationship</span>
-								<div class="fw-bold fs-2 mt-3"><?php echo number_format($content->totalRelationship ?? 0) ?></div>
+								<div class="fw-bold fs-2 mt-3"><?php echo number_format($total['totalRelationship']) ?></div>
 							</div>
 						</div>
 					</div>
