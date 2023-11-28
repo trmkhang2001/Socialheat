@@ -79,18 +79,6 @@ License: For each use you must have a valid license purchased only from above li
     .badge-blue {
         cursor: pointer;
     }
-
-    .aside {
-        width: 250px !important;
-    }
-
-    .wrapper {
-        padding-left: 300px !important;
-    }
-
-    .container-fluid {
-        padding: 0 20px !important;
-    }
 </style>
 <!--begin::Body-->
 

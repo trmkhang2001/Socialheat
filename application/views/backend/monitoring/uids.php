@@ -277,21 +277,37 @@
 																					</td>
 																					<td>
 																						<?php if (!empty($interaction['email'])) { ?>
-																							<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $interaction['email'] ?>">
-																								<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
-																									<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+																							<?php if ($userInfo['role_id'] != ROLE_CLIENTS) : ?>
+																								<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $interaction['email'] ?>">
+																									<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+																										<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+																									</span>
 																								</span>
-																							</span>
+																							<?php else : ?>
+																								<span class="fw-bold badge badge-blue px-4">
+																									<span class=" svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+																										<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+																									</span>
+																								</span>
+																							<?php endif ?>
 																						<?php } ?>
 																					</td>
 																					<td class="fw-bold">
 																						<?php // substr($value['phone'], 0, -4) . '****'
 																						?>
-																						<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $interaction['phone'] ?>">
-																							<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
-																								<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+																						<?php if ($userInfo['role_id'] != ROLE_CLIENTS) : ?>
+																							<span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $interaction['phone'] ?>">
+																								<span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+																									<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+																								</span>
 																							</span>
-																						</span>
+																						<?php else : ?>
+																							<span class="fw-bold badge badge-blue px-4">
+																								<span class=" svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+																									<i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+																								</span>
+																							</span>
+																						<?php endif ?>
 																					</td>
 																					<td><?= $interaction['friends'] ?></td>
 																					<td><?= $interaction['follow'] ?></td>
@@ -347,7 +363,7 @@
 																					</td>
 																					<td><?= $interaction['relationship'] ?></td>
 																					<td><?= $interaction['city'] ?></td>
-																					<td><?= $interaction['created_date'] ?? '' ?></td>
+																					<td><?= $interaction['created_date'] ? date('d/m/Y', strtotime($interaction['created_date'])) : '' ?></td>
 																				</tr>
 																			<?php
 																			endforeach ?>
