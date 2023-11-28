@@ -19,8 +19,8 @@ class Dashboards extends BackendController
 	{
 		$keywords = BusinessKeyword::getInstance()->findByConditions([], TRUE);
 		$totalKeyword = count(explode(',', $keywords->keyword));
-		$totalAudience = BusinessItem::getInstance()->getCount();
-		$totalMentions = BusinessSocialItem::getInstance()->getCount();
+		$totalAudience = BusinessSocialItem::getInstance()->getCount();
+		$totalMentions = BusinessItem::getInstance()->getCount();
 		$totalEngage = BusinessInteraction::getInstance()->getCount();
 		$totalData = BusinessItem::getInstance()->getTotalCountD();
 		$topKeywords  = BusinessItem::getInstance()->getTopKeywords(ITEM_PER_PAGE_10);
