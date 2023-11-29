@@ -5,7 +5,8 @@ namespace app\models;
 /**
  * @property  $email
  */
-class Item extends MyModel {
+class Item extends MyModel
+{
 
 	static protected $_instance = NULL;
 
@@ -15,8 +16,7 @@ class Item extends MyModel {
 	 */
 	public static function getInstance()
 	{
-		if (self::$_instance === NULL)
-		{
+		if (self::$_instance === NULL) {
 			self::$_instance = new self();
 		}
 		return self::$_instance;
@@ -37,8 +37,7 @@ class Item extends MyModel {
 	 * @inheritdoc
 	 */
 	public static $fields = array(
-		'name', 'post_id', 'type','image_url','status','content','channel_type','keywords','post_owner_id','craw_date',
-		'total_like','total_share','total_comment','count_d','charts'
+		'name', 'post_id', 'type', 'image_url', 'status', 'content', 'channel_type', 'keywords', 'post_owner_id', 'craw_date',
 	);
 	public static $requiredFiled = array(
 		//'name'    => 'Name',

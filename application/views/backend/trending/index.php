@@ -64,9 +64,9 @@
         </div>
         <h1 class="mb-5">Total</h1>
         <div class="row gx-5 gx-xl-10">
-            <?php foreach ($items as $item) :
-                if (($item->image_url != NULL) && (!empty($item->content)) && (!empty($item->count_d)))
-                    $this->load->view('/backend/trending/_item', ['item' => $item, 'types' => $types]);
+            <?php
+            foreach ($items as $item) :
+                $this->load->view('/backend/trending/_item', ['item' => $item, 'types' => $types]);
             endforeach; ?>
         </div>
         <div class="row clearfix text-center" style="display: block">

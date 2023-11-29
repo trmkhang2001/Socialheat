@@ -110,7 +110,7 @@ if ($typeInfo['name'] != 'Group')
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    <span class="uid"></span><a target="_blank" href="https://facebook.com/<?= $item->post_id ?>"><?= $item->post_id ?></a>
+                                    <span class="uid"></span><a class="text-limit-length" target="_blank" href="https://facebook.com/<?= $item->post_id ?>"><?= $item->post_id ?></a>
                                 </span>
                             </div>
                         </div>

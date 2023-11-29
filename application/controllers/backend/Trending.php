@@ -48,6 +48,7 @@ class Trending extends BackendController
             $orderBy = 'i.count DESC';
         }
         $items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage, $orderBy);
+        // var_dump($items);
         $total = BusinessItem::getInstance()->getCount($conditions);
         $pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
         $channelTypes = $this->config->config['params']['channel_types'];
@@ -87,9 +88,12 @@ class Trending extends BackendController
         //         }
         //     }
         // }
-        $conditions[] = [
-            'keywords' => 'datalytis',
-        ];
+        // $conditions[] = [
+        //     'keywords' => 'datalytis',
+        // ];
+        $condition = array();
+        $conditions[0][] = $this->getSimpleSearchCondition('i.keywords', 'datalytis');
+        $conditions[] = array(sprintf('%s', 'i.count_d IS NOT NULL and i.image_url IS NOT NULL and i.content IS NOT NULL'));
         $filterArr = array('type', 'to_date', 'from_date');
         $filterConditions = $this->input->get($filterArr, TRUE);
         $this->temp['data']['filters'] = $filterConditions;
