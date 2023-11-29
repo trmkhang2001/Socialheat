@@ -96,7 +96,7 @@ if ($typeInfo['name'] != 'Group')
                     <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
                         <!--begin::title-->
                         <div class="d-flex flex-column" style="width: 70%">
-                            <a href="#" class="text-gray-900 text-hover-primary fs-3 fw-bold me-1" style="width: 100%"><?= $item->social_name ?></a>
+                            <a href="#" class="text-gray-900 text-hover-primary fs-3 fw-bold me-1 text-limit-length" style="width: 100%"><?= $item->social_name ?></a>
                             <div class="card-toolbar pt-1">
                                 <span class="badge badge-light fw-bold me-auto px-4 py-3 text-color-D2A68D bg-AE7929">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">

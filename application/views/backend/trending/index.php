@@ -46,6 +46,14 @@
     .title_social:hover {
         color: var(--bs-primary) !important;
     }
+
+    .text-limit-length {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 15ch;
+        display: inline-block;
+    }
 </style>
 <!-- Dashboard -->
 <div class="m-content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
@@ -57,7 +65,7 @@
         <h1 class="mb-5">Total</h1>
         <div class="row gx-5 gx-xl-10">
             <?php foreach ($items as $item) :
-                if (($item->image_url != NULL) && (!empty($item->content)))
+                if (($item->image_url != NULL) && (!empty($item->content)) && (!empty($item->count_d)))
                     $this->load->view('/backend/trending/_item', ['item' => $item, 'types' => $types]);
             endforeach; ?>
         </div>
