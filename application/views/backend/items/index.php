@@ -121,8 +121,10 @@ $types = $params['types'];
 													<img class="rounded " src="<?= site_url($item->image_url) ?>" height="60px" width="auto">
 												<?php endif; ?>
 											</td>
-											<td><?php $date = date('d/m/Y', strtotime($item->craw_date));
-												echo $date; ?></td>
+											<td><?php if (!empty($item->craw_date)) {
+													$date = date('d/m/Y', strtotime($item->craw_date));
+													echo $date;
+												} ?></td>
 											<td><?php $date = date('d/m/Y', strtotime($item->updated_date));
 												echo $date; ?></td>
 											</td>

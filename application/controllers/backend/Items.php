@@ -116,7 +116,7 @@ class Items extends BackendController
 			} else {
 				// $data['total_like'] = 0;
 				// $data['total_share'] = 0;
-				$data['craw_date'] = date('Y-m-d H:i:s');
+				// $data['craw_date'] = date('Y-m-d H:i:s');
 				$data['status'] = STATUS_ACTIVE;
 				$res = BusinessItem::getInstance()->save($data, TRUE);
 			}
