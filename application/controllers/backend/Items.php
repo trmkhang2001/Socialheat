@@ -36,14 +36,12 @@ class Items extends BackendController
 	private function getConditions()
 	{
 		$modelDbSetting = BusinessItem::getModel();
-		$filterArr = array('post_id', 'uid', 'type', 'keyword', 'status');
+		$filterArr = array('post_id', 'uid', 'type', 'status');
 		$filterConditions = $this->input->get($filterArr, TRUE);
 		$conditions = array();
 		foreach ($filterConditions as $key => $condition) {
-			if ($key === 'keyword') {
-				$conditions[] = $this->getSimpleSearchCondition($modelDbSetting::tableName() . '.name');
-			} elseif ($condition === '0' || $condition) {
-				$conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), $key) => $condition);
+			if ($condition === '0' || $condition) {
+				$conditions[] = array(sprintf('i.%s', $key) => $condition);
 			}
 		}
 		return $conditions;

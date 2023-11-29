@@ -38,6 +38,14 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 	.table td {
 		white-space: nowrap;
 	}
+
+	.list-inline-item {
+		display: block;
+	}
+
+	.table tbody td div {
+		text-align: left;
+	}
 </style>
 <!--begin::Content-->
 <div class="container d-flex flex-column flex-column-fluid" id="kt_content">

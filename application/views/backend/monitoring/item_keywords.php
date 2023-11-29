@@ -1,6 +1,7 @@
 <?php
 
 use app\common\business\BusinessKeyword;
+use app\common\utilities\Common;
 
 /**
  * @var  $keywords ;
@@ -24,15 +25,15 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E']
     $text_color = '';
     foreach ($keywords as $index => $keyword) :
         if ($keyword) :
-            $keyword = \app\common\utilities\Common::trim($keyword, TRUE);
-            if ($keyword)
-                $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
+            $keyword = Common::trim($keyword, TRUE);
+            // if ($keyword)
+            //     $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
             if ($indexColor > 4) {
                 $indexColor = 0;
             }
             $bg_color = $colorBg[$indexColor];
             $text_color = $colorText[$indexColor];
-            $keywordColors[$slug] = $colorBg[$indexColor];
+            // $keywordColors[$slug] = $colorBg[$indexColor];
             $checked = '';
             $class = '';
             $style = '';
@@ -40,6 +41,7 @@ $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E']
                 $checked = 'checked';
                 $class = 'active';
                 $style = 'border: 2px solid;';
+                $text_color = '#000000 !important';
             }
             ++$indexColor;
     ?>
