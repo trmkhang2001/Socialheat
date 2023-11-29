@@ -9,13 +9,9 @@
  */
 $socialLink = 'https://facebook.com/' . $item->post_id;
 $typeInfo = $types[$item->type];
-if ($item->image_url === NULL) {
-    $link_image = '/assets/images/avartar_group.png';
-    if ($typeInfo['name'] != 'Group')
-        $link_image = 'https://graph.facebook.com/' . $item->post_owner_id . '/picture?type=square&access_token=' . FB_TOKEN;
-} else {
-    $link_image = '/' . $item->image_url;
-}
+$link_image = '/assets/images/avartar_group.png';
+if ($typeInfo['name'] != 'Group')
+    $link_image = 'https://graph.facebook.com/' . $item->post_owner_id . '/picture?type=square&access_token=' . FB_TOKEN;
 $channelInfo = $channelTypes[$item->channel_type];
 $iconImage = $channelInfo['icon_image'];
 $channel_type = $item->channel_type;
