@@ -15,6 +15,14 @@ $types = $params['types'];
 	.actions ul li {
 		margin-bottom: 10px;
 	}
+
+	.text-limit-length {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 15ch;
+		display: inline-block;
+	}
 </style>
 .<div class="container d-flex flex-column flex-column-fluid" id="kt_content">
 	<h1>Items List</h1>
@@ -113,7 +121,7 @@ $types = $params['types'];
 									?>
 										<tr>
 											<td><?php echo $item->name ?></td>
-											<td><a target="_blank" href="https://www.facebook.com/<?php echo $item->post_id ?>">
+											<td><a class="text-limit-length" target="_blank" href="https://www.facebook.com/<?php echo $item->post_id ?>">
 													<?php echo $item->post_id ?></a></td>
 											<td><?php echo $type['name'] ?></td>
 											<td>

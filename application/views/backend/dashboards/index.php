@@ -279,7 +279,7 @@
     /* chart.js chart examples */
     <?php if (!empty($chartPosts)) { ?>
         // chart colors
-        var colors = ['#3E97FF', '#E1E3EA'];
+        var colors = ['#3E97FF', '#E1E3EA', '#70FD8A'];
         /* bar chart */
         var chBar = document.getElementById("chBar");
         if (chBar) {
@@ -296,7 +296,12 @@
                             label: 'Post',
                             data: <?= json_encode($chartPosts['items']) ?>,
                             backgroundColor: colors[1]
-                        }
+                        },
+                        {
+                            label: 'Engage',
+                            data: <?= json_encode($chartPosts['engage']) ?>,
+                            backgroundColor: colors[2]
+                        },
                     ]
 
                 },

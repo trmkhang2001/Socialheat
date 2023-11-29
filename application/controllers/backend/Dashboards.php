@@ -48,6 +48,7 @@ class Dashboards extends BackendController
 			$charts['label'][] = date('d/m', strtotime($post->date_format));
 			$charts['items'][] = $post->total_item;
 			$charts['data'][] = $post->total_data ?? 0;
+			$charts['engage'][] = $post->total_engage ?? 0;
 		}
 		return $charts;
 	}

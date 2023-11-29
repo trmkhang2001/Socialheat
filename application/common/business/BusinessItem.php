@@ -864,7 +864,7 @@ class BusinessItem implements BusinessInterface
 		$name = 'getPostByRangeDate';
 		$model  = self::getModel();
 		$dbObj = $model::find();
-		$dbObj->select('count(id) as total_item, sum(count_d) as total_data, DATE(craw_date) as date_format')
+		$dbObj->select('count(id) as total_item, sum(count_d) as total_data, DATE(craw_date) as date_format,sum(total_share + total_like + total_comment) as total_engage')
 			->where('channel_type ', CHANNEL_TYPE_FACEBOOK)
 			->group_by('DATE(date_format)')
 			->order_by('DATE(craw_date)', 'desc')
