@@ -17,8 +17,8 @@ $types = $params['types'];
 <form method="get" class="form_filters_post form-filter">
     <div class="card p-3">
         <div class="clearfix filter-input col-md-12">
-            <div class="d-flex align-items-center flex-stack flex-wrap">
-                <div class="me-3 col post_type">
+            <div class="row align-items-start flex-wrap">
+                <div class="me-3 col-2 post_type">
                     <div class="card-toolbar">
                         <select data-title="Types" data-class-filter="filter-post-type" name="sort_by" class="form-select  sort_by" title="Post type" data-width="160px">
                             <option value="#">Interaction</option>
@@ -30,7 +30,7 @@ $types = $params['types'];
                     </div>
                 </div>
 
-                <div class="me-3 col post_type">
+                <div class="me-3 col-2 post_type">
                     <select data-title="Types" data-class-filter="filter-post-type" name="type" class="form-select" title="Post type" data-width="160px">
                         <option value="">Types</option>
                         <?php foreach ($types as $type) :
@@ -46,16 +46,15 @@ $types = $params['types'];
                 <!-- <div class="me-3 col fw-bold">
                     <span class="align-middle">Date Created</span>
                 </div> -->
-                <div class=" me-3 col has-feedback form_input_date">
-
+                <!-- <div class=" me-3 col has-feedback form_input_date">
                     <input data-title="From Date" data-class-filter="filter-to-date" type="text" name="from_date" value="<?= isset($filters['from_date']) ? $filters['from_date'] : '' ?>" class="form-control " placeholder="From">
                     <span class="glyphicon glyphicon-calendar form-control-feedback" style="background:#E5E5E5;color: #404A7D;height: 30px"></span>
                 </div>
                 <div class=" me-3 col has-feedback form_input_date">
                     <input data-title="To Date" data-class-filter="filter-to-date" type="text" name="to_date" value="<?= isset($filters['to_date']) ? $filters['to_date'] : '' ?>" class="form-control " placeholder="To">
                     <span class="glyphicon glyphicon-calendar form-control-feedback" style="background:#E5E5E5;color: #404A7D;height: 30px"></span>
-                </div>
-                <div class="me-3 col has-feedback">
+                </div> -->
+                <div class="me-3 col-2 has-feedback">
                     <button type="submit" class="btn btn-primary btn-icon-submit" style="background-color: #0B0044;">Filter</button>
                 </div>
             </div>

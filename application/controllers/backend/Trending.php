@@ -68,29 +68,43 @@ class Trending extends BackendController
 
     private function getConditions()
     {
-        $filterArr = array('type', 'to_date', 'from_date', 'keyword');
+        // $conditions[[0][] = $this->getSimpleSearchCondition('i.keywords', 'datalytis');]
+        // $filterArr = array('type', 'to_date', 'from_date');
+        // $filterConditions = $this->input->get($filterArr, TRUE);
+        // $this->temp['data']['filters'] = $filterConditions;
+        // $this->temp['filters'] = $filterConditions;
+        // $conditions = array();
+        // foreach ($filterConditions as $key => $condition) {
+        //     if ($condition) {
+        //         if ($key === 'q') {
+        //             $conditions[0][] = $this->getSimpleSearchCondition('i.content', $condition);
+        //         } elseif ($key === 'to_date') {
+        //             $conditions[] = array(sprintf('%s', 'i.craw_date <') => $condition . " 23:59:50");
+        //         } elseif ($key === 'from_date') {
+        //             $conditions[] = array(sprintf('%s', 'i.craw_date >') => $condition . " 00:00:00");
+        //         } else {
+        //             $conditions[] = array(sprintf('i.%s', $key) => $condition);
+        //         }
+        //     }
+        // }
+        $conditions[] = [
+            'keywords' => 'datalytis',
+        ];
+        $filterArr = array('type', 'to_date', 'from_date');
         $filterConditions = $this->input->get($filterArr, TRUE);
         $this->temp['data']['filters'] = $filterConditions;
         $this->temp['filters'] = $filterConditions;
-        $conditions = array();
         foreach ($filterConditions as $key => $condition) {
             if ($condition) {
-                if ($key === 'keyword') {
-                    foreach ($condition as $item) {
-                        $conditions[0][] = $this->getSimpleSearchCondition('i.keywords', $item);
-                    }
-                } elseif ($key === 'q') {
-                    $conditions[0][] = $this->getSimpleSearchCondition('i.content', $condition);
-                } elseif ($key === 'to_date') {
+                if ($key === 'to_date') {
                     $conditions[] = array(sprintf('%s', 'i.craw_date <') => $condition . " 23:59:50");
-                } elseif ($key === 'from_date') {
+                } elseif ($key === 'frome_date') {
                     $conditions[] = array(sprintf('%s', 'i.craw_date >') => $condition . " 00:00:00");
                 } else {
                     $conditions[] = array(sprintf('i.%s', $key) => $condition);
                 }
             }
         }
-
         return $conditions;
     }
 

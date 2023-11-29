@@ -11,9 +11,9 @@
     .text {
         overflow: hidden;
         display: -webkit-box;
-        -webkit-line-clamp: 6;
+        -webkit-line-clamp: 2;
         /* number fs-1 p-3  of lines to show */
-        line-clamp: 6;
+        line-clamp: 2;
         -webkit-box-orient: vertical;
     }
 
@@ -34,6 +34,11 @@
         list-style: none;
     }
 
+    .img-thum {
+        height: 280px;
+        width: 100% !important;
+    }
+
     .item {
         margin: 2px;
     }
@@ -51,9 +56,10 @@
         </div>
         <h1 class="mb-5">Total</h1>
         <div class="row gx-5 gx-xl-10">
-            <?php foreach ($items as $item) : ?>
-                <?php $this->load->view('/backend/trending/_item', ['item' => $item, 'types' => $types]) ?>
-            <?php endforeach; ?>
+            <?php foreach ($items as $item) :
+                if (($item->image_url != NULL) && (!empty($item->content)))
+                    $this->load->view('/backend/trending/_item', ['item' => $item, 'types' => $types]);
+            endforeach; ?>
         </div>
         <div class="row clearfix text-center" style="display: block">
             <?= $pagination ?>

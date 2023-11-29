@@ -30,6 +30,11 @@ $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#FFE000', '#ffd6cc'];
 $colorText = ['#FF5E5E', '#3633DB', '#33DB9E', '#F6C000', '#FF5E5E'];
 $user_id = $item->post_id;
 $access_token = FB_TOKEN;
+$link_image = '/' . $item->image_url;
+$link_avt = '/assets/images/avartar_group.png';
+if ($typeInfo['name'] != 'Group')
+    $link_avt = 'https://graph.facebook.com/' . $item->post_owner_id . '/picture?type=square&access_token=' . FB_TOKEN;
+// var_dump($item);
 ?>
 <style>
     .title_span {
@@ -72,7 +77,7 @@ $access_token = FB_TOKEN;
         </div> -->
         <!--end::Header-->
         <!--begin::Body-->
-        <div class="card-body d-flex justify-content-between flex-column">
+        <div class="card-body d-flex flex-column">
             <!--begin::Items-->
             <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
                 <!--begin::avatar-->
@@ -80,7 +85,7 @@ $access_token = FB_TOKEN;
                     <div class="symbol symbol-58px symbol-lg-60px symbol-fixed position-relative">
 
                         <a target="_blank" href="https://facebook.com/102136945917952">
-                            <img data-src="https://graph.facebook.com/102136945917952/picture?type=normal" width="60" height="60" class="lazy loaded" style="border: solid 1px #d0d0d0;border-radius: .475rem" alt="image" loading="lazy" src="/assets/images/no_avatar.png" data-ll-status="loaded">
+                            <img data-src="https://graph.facebook.com/102136945917952/picture?type=normal" width="60" height="60" class="lazy loaded" style="border: solid 1px #d0d0d0;border-radius: .475rem" alt="image" loading="lazy" src="<?= $link_avt ?>" data-ll-status="loaded">
 
                         </a>
                     </div>
@@ -91,7 +96,7 @@ $access_token = FB_TOKEN;
                     <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
                         <!--begin::title-->
                         <div class="d-flex flex-column" style="width: 70%">
-                            <a href="#" class="text-gray-900 text-hover-primary fs-14 fw-bold me-1" style="width: 100%"><?= $item->social_name ?></a>
+                            <a href="#" class="text-gray-900 text-hover-primary fs-3 fw-bold me-1" style="width: 100%"><?= $item->social_name ?></a>
                             <div class="card-toolbar pt-1">
                                 <span class="badge badge-light fw-bold me-auto px-4 py-3 text-color-D2A68D bg-AE7929">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +110,7 @@ $access_token = FB_TOKEN;
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    <span class="uid"></span><a target="_blank" href="https://facebook.com/160656236742655">160656236742655</a>
+                                    <span class="uid"></span><a target="_blank" href="https://facebook.com/<?= $item->post_id ?>"><?= $item->post_id ?></a>
                                 </span>
                             </div>
                         </div>
@@ -145,21 +150,25 @@ $access_token = FB_TOKEN;
                 <!--end::RightGroup-->
             </div>
             <div class="d-flex flex-column">
-                <img class="rounded" src="https://as2.ftcdn.net/v2/jpg/05/49/86/39/1000_F_549863991_6yPKI08MG7JiZX83tMHlhDtd6XLFAMce.jpg" alt="">
+                <a href="">
+                    <img class="rounded img-thum" src="<?= $link_image ?>" alt="">
+                </a>
             </div>
             <div class="d-flex flex-column my-3">
                 <p class="text text-justify-betwen item-content-read-less fs-4"><?= html_entity_decode($item->content) ?></p>
                 <a target="_blank" href="<?= $linkDetail ?>" id="read_more" class="read_more fw-bold">Read more</a>
             </div>
             <!--end::Items-->
-            <div class="d-flex justify-content-start flex-row mt-2">
-                <span class="fw-bold me-5"> <i class="fa-solid fa-thumbs-up pe-2"></i><?= $item->total_like ?></span>
-                <span class="fw-bold me-5"><i class="fa-solid fa-comment pe-2"></i><?= $item->total_comment ?></span>
-                <span class="fw-bold"><i class="fa-solid fa-users pe-2"></i><?= $item->count_like_share ?: 0 ?> </span>
-            </div>
-            <div class="d-flex justify-content-between align-items-center flex-row mt-2">
-                <span class="text-muted">Update: <?php echo date('d/m/Y', strtotime($item->craw_date)); ?></span>
-                <a href="" class="btn btn-primary" style="background-color: #3633DB;">Add Analytis</a>
+            <div class="">
+                <div class="d-flex justify-content-start flex-row mt-2">
+                    <span class="fw-bold me-5"> <i class="fa-solid fa-thumbs-up pe-2"></i><?= $item->total_like ?: 0 ?></span>
+                    <span class="fw-bold me-5"><i class="fa-solid fa-comment pe-2"></i><?= $item->total_comment ?: 0 ?></span>
+                    <span class="fw-bold"><i class="fa-solid fa-users pe-2"></i><?= $item->count_like_share ?: 0 ?> </span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center flex-row mt-2">
+                    <span class="text-muted">Update: <?php echo date('d/m/Y', strtotime($item->craw_date)); ?></span>
+                    <a href="" class="btn btn-primary" style="background-color: #3633DB;">Add Analytis</a>
+                </div>
             </div>
         </div>
 
