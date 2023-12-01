@@ -56,7 +56,7 @@ $types = $params['types'];
 							<div class="form-group me-3">
 								<label class="fw-bold text-system">Name</label>
 								<div class="form-inline">
-									<input type="text" name="keyword" class="form-control " value="" placeholder="Email">
+									<input type="text" name="keyword" class="form-control " value="" placeholder="Name">
 								</div>
 							</div>
 							<div class="form-group me-3">

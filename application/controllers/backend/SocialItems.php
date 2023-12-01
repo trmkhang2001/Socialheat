@@ -24,10 +24,23 @@ class SocialItems extends BackendController
 		$items = BusinessSocialItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
 		$total = BusinessSocialItem::getInstance()->getCount($conditions);
 		$pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
-		$this->setBreadcrumbs('Danh sách Social Items', 'Quản lý');
 		$this->temp['data']['items'] = $items;
 		$this->temp['data']['pagination'] = $pagination;
 		$this->temp['template'] = 'backend/social_items/index';
+		$this->render();
+	}
+	public function clients()
+	{
+		$itemPerPage = DEFAULT_ITEM_PER_PAGE;
+		$conditions = $this->getConditionsClients();
+		$page = intval($this->input->get('page', TRUE));
+		$offset = $page ? $itemPerPage * ($page - 1) : 0;
+		$items = BusinessSocialItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
+		$total = BusinessSocialItem::getInstance()->getCount($conditions);
+		$pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
+		$this->temp['data']['items'] = $items;
+		$this->temp['data']['pagination'] = $pagination;
+		$this->temp['template'] = 'backend/social_items/clients';
 		$this->render();
 	}
 
@@ -37,6 +50,22 @@ class SocialItems extends BackendController
 		$filterArr = array('social_id', 'type', 'keyword', 'status', 'channel_type');
 		$filterConditions = $this->input->get($filterArr, TRUE);
 		$conditions = array();
+		foreach ($filterConditions as $key => $condition) {
+			if ($key === 'keyword') {
+				$conditions[] = $this->getSimpleSearchCondition($modelDbSetting::tableName() . '.name');
+			} elseif ($condition === '0' || $condition) {
+				$conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), $key) => $condition);
+			}
+		}
+		return $conditions;
+	}
+	private function getConditionsClients()
+	{
+		$modelDbSetting = BusinessSocialItem::getModel();
+		$filterArr = array('social_id', 'type', 'keyword', 'status', 'channel_type');
+		$filterConditions = $this->input->get($filterArr, TRUE);
+		$conditions = array();
+		$conditions[] = array(sprintf('%s', 'is_feature IS NOT NULL'));
 		foreach ($filterConditions as $key => $condition) {
 			if ($key === 'keyword') {
 				$conditions[] = $this->getSimpleSearchCondition($modelDbSetting::tableName() . '.name');

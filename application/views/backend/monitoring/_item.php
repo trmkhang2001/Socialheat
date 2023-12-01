@@ -72,15 +72,6 @@ $keywords = explode(',', $item->keywords);
         background: rgba(54, 51, 219, 0.05);
         color: #3633DB;
     }
-
-    /* .title-type {
-        position: relative;
-    }
-
-    .type-info {
-        position: absolute;
-        right: 5px;
-    } */
 </style>
 <div class="d-flex justify-content-center card my-5 p-3">
     <div class="portlet-body" id="chats">
@@ -131,7 +122,7 @@ $keywords = explode(',', $item->keywords);
                                             $colorKey = "";
                                             $colorBgKey = "";
                                             foreach ($keywords as $index => $keyword) :
-                                                if ($keyword) :
+                                                if ($keyword && !($keyword === 'datalytis')) :
                                                     $slug = url_title(convert_accented_characters($keyword), '-', TRUE);
                                                     if ($indexColor > 4) {
                                                         $indexColor = 0;
@@ -139,7 +130,6 @@ $keywords = explode(',', $item->keywords);
                                                     $colorKey = $colorText[$indexColor];
                                                     $colorBgKey = $colorBg[$indexColor];
                                                     ++$indexColor;
-
                                             ?>
                                                     <span data-keyword="<?= $keyword ?>" style="color:<?= $colorKey ?>;border: 1px solid <?= $colorBgKey ?> !important;padding:3px"> <?= sprintf('%s', $keyword) ?></span>
                                             <?php endif;

@@ -53,7 +53,7 @@ $roles = $params['user_role'];
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="/backend/socialItems" class="menu-link">
+                    <a href="/backend/socialItems/clients" class="menu-link">
                         <!--begin:Menu link--><span class="menu-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.35">
                                     <path d="M20 14C21.1046 14 22 13.1046 22 12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12C18 13.1046 18.8954 14 20 14Z" stroke="#0B0044" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -149,7 +149,8 @@ $roles = $params['user_role'];
                         <div class="menu-content d-flex align-items-center px-3">
                             <!--begin::Avatar-->
                             <div class="symbol symbol-50px me-5">
-                                <img alt="Logo" src="<?php echo $userInfo['avatar'] ?>" />
+                                <img alt="Logo" src="<?php if ($userInfo['avatar'] == NULL) echo '/assets/images/no_avatar.png';
+                                                        else echo $userInfo['avatar'] ?>" />
                             </div>
                             <!--end::Avatar-->
                             <!--begin::Username-->
@@ -176,7 +177,7 @@ $roles = $params['user_role'];
                     <!--end::Menu separator-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-5">
-                        <a href="auth/logOut" class="menu-link px-5">Sign Out</a>
+                        <a href="<?php echo site_url() ?>auth/logout" class="menu-link px-5">Sign Out</a>
                     </div>
                     <!--end::Menu item-->
                 </div>

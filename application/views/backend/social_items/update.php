@@ -6,6 +6,7 @@
  */
 $params = $this->config->config['params'];
 $types = $params['types'];
+// var_dump($types);
 $channel_types = $params['channel_types'];
 
 ?>
@@ -38,13 +39,14 @@ $channel_types = $params['channel_types'];
 							<div class="col-sm-10">
 								<select name="type" class="form-select">
 									<option value="">Chọn</option>
-									<?php foreach ($types as $type) :
+									<?php
+									foreach ($types as $type) :
 										$selected = '';
-										if ($type['value'] === (int)$item->type) {
+										if ($type['value'] === $item->type) {
 											$selected = 'selected';
 										}
 									?>
-										<option value="<?= $type['value'] ?>" <?= $selected ?>><?= $type['name'] ?></option>
+										<option value="<?= $type['value'] ?>" <?php echo $selected ?>><?= $type['name'] ?></option>
 									<?php endforeach; ?>
 								</select>
 							</div>
@@ -54,9 +56,10 @@ $channel_types = $params['channel_types'];
 							<div class="col-sm-10">
 								<select name="channel_type" class="form-select">
 									<option value="">Chọn</option>
-									<?php foreach ($channel_types as $type) :
+									<?php
+									foreach ($channel_types as $type) :
 										$selected = '';
-										if ($type['value'] === (int)$item->type) {
+										if ($type['value'] === $item->channel_type) {
 											$selected = 'selected';
 										}
 									?>
@@ -68,7 +71,7 @@ $channel_types = $params['channel_types'];
 						<div class="mb-3 row">
 							<label class="col-sm-2 col-form-label">Is Private</label>
 							<div class="col-sm-10 d-flex aigh-item-center">
-								<input type="checkbox" value="1" name="is_private" placeholder="">
+								<input type="checkbox" value="1" name="is_private" placeholder="" <?= $item->is_private != NULL ? 'checked' : '' ?>>
 							</div>
 						</div>
 						<div class="mb-3 row">
@@ -97,7 +100,7 @@ $channel_types = $params['channel_types'];
 						<div class="mb-3 row">
 							<label class="col-sm-2 col-form-label">Feature</label>
 							<div class="col-sm-10 d-flex aigh-item-center">
-								<input type="checkbox" value="1" name="is_feature" placeholder="">
+								<input type="checkbox" value="1" name="is_feature" placeholder="" <?= $item->is_feature != NULL ? 'checked' : '' ?>>
 							</div>
 						</div>
 						<div class="mb-3 row">

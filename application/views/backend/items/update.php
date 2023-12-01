@@ -86,7 +86,7 @@ $channel_types = $params['channel_types'];
 									<option value="">Chọn</option>
 									<?php foreach ($channel_types as $type) :
 										$selected = '';
-										if ($type['value'] === (int)$item->type) {
+										if ($type['value'] === $item->channel_type) {
 											$selected = 'selected';
 										}
 									?>
@@ -102,7 +102,7 @@ $channel_types = $params['channel_types'];
 									<option value="">Chọn</option>
 									<?php foreach ($types as $type) :
 										$selected = '';
-										if ($type['value'] === (int)$item->type) {
+										if ($type['value'] === $item->type) {
 											$selected = 'selected';
 										}
 									?>mb-3 row
@@ -117,8 +117,9 @@ $channel_types = $params['channel_types'];
 								<select name="post_owner_id" class="form-select form-select-lg mb-3 social-item-select2">
 									<option value="">Chọn</option>
 									<?php foreach ($socialItems as $social_item) :
+										var_dump($social_item);
 										$selected = '';
-										if ($social_item->id === (int)$item->post_owner_id) {
+										if ($social_item->social_id === $item->post_owner_id) {
 											$selected = 'selected';
 										}
 									?>

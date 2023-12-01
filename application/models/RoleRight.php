@@ -48,7 +48,8 @@ class RoleRight extends MyModel
 				'monitoring/detail',
 				'interactions/index',
 				'trending/index',
-				'socialitems/index',
+				// 'socialitems/index',
+				'socialitems/clients',
 				'profile/index',
 			),
 			ROLE_NORMAL   => array(

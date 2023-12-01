@@ -1,4 +1,7 @@
 <?php
+
+use app\common\business\BusinessKeyword;
+
 $params = $this->config->config['params'];
 $types = $params['types'];
 /**
@@ -8,6 +11,14 @@ $types = $params['types'];
  * @var array $channel_type
  * @var array $colorText
  */
+if (empty($keywords)) {
+    $keywords = BusinessKeyword::getInstance()->getAllCache();
+    $keywords = explode(',', $keywords->keyword);
+    $key = array_search('datalytis', $keywords);
+    if ($key) {
+        unset($keywords[$key]);
+    }
+}
 ?>
 <style>
     .form-control-feedback {
@@ -26,7 +37,7 @@ $types = $params['types'];
             </div>
         </div>
         <div class="border rounded" style="overflow:scroll;height: 200px;">
-            <?php $this->load->view('/backend/monitoring/item_keywords'); ?>
+            <?php $this->load->view('/backend/monitoring/item_keywords', ['keywords' => $keywords]); ?>
         </div>
 
     </div>

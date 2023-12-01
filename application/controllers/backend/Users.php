@@ -15,7 +15,7 @@ class Users extends BackendController
 		$offset = $page ? $itemPerPage * ($page - 1) : 0;
 		$users = BusinessUser::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
 		$total = BusinessUser::getInstance()->getCount($conditions);
-		$pagination = Pagination::bootstrap($total, '', $itemPerPage);
+		$pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 3);
 		$this->setBreadcrumbs('Danh sách nhân viên', 'Quản lý');
 		$this->temp['data']['users'] = $users;
 		$this->temp['data']['pagination'] = $pagination;
@@ -79,6 +79,7 @@ class Users extends BackendController
 		$model = BusinessUser::getModel();
 		$data = $this->input->post($model::$fields, TRUE);
 		$id = $this->input->post('id', TRUE);
+		$data['expire_date'] = date($this->input->post('expire_date', TRUE));
 		if ($_POST && $data) {
 			if (!empty($data['password'])) {
 				$data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
@@ -92,6 +93,7 @@ class Users extends BackendController
 				$data['status'] = STATUS_ACTIVE;
 				$res = BusinessUser::getInstance()->save($data, TRUE);
 			}
+			// var_dump($res);
 			$this->result = $res;
 			$this->response();
 		}
@@ -107,8 +109,9 @@ class Users extends BackendController
 				'status'       => STATUS_DELETE
 			);
 			$res = BusinessUser::getInstance()->delete($id, $data);
-			$this->result = $res;
-			$this->response();
+			if ($res['success']) {
+				$this->index();
+			}
 		}
 	}
 }

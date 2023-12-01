@@ -149,6 +149,7 @@ class BusinessUser implements BusinessInterface
 		if ($itemPerPage) {
 			$dbObj->limit($itemPerPage);
 		}
+		$dbObj->order_by('created_date', 'DESC');
 		if ($orderBy) {
 			$dbObj->order_by($orderBy);
 		}

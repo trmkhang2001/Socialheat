@@ -50,7 +50,7 @@ $roles = $params['user_role'];
                             <label class="col-sm-2 control-label fw-bold">Phân quyền</label>
                             <div class="col-sm-10">
                                 <label class="field select">
-                                    <select name="role_id" class="form-control">
+                                    <select name="role_id" class="form-select">
                                         <option value="">Chọn</option>
                                         <?php foreach ($roles as $role) : ?>
                                             <option value="<?php echo $role['id'] ?>"><?php echo $role['name'] ?></option>
@@ -62,12 +62,17 @@ $roles = $params['user_role'];
                             </div>
                         </div>
                         <div class="mb-3 row my-5">
+                            <label class="col-sm-2 control-label fw-bold">Ngày hết hạn</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="expire_date" name="birthday">
+                            </div>
+                        </div>
+                        <div class="mb-3 row my-5">
                             <div class="col-sm-10 col-sm-offset-3">
                                 <button type="button" @click="saveComplete" class="btn btn-primary fw-bold"><i class="fa fa-save"></i> SAVE</button>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
