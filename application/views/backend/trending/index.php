@@ -8,7 +8,7 @@
  */
 ?>
 <style>
-    .text {
+    .read-less {
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -56,7 +56,7 @@
     }
 </style>
 <!-- Dashboard -->
-<div class="m-content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
+<div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
     <div class="container-fluid">
         <h1 class="mb-5">Ads Trend</h1>
         <div class="card p-3 mb-5">

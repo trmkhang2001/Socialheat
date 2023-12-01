@@ -90,7 +90,7 @@ License: For each use you must have a valid license purchased only from above li
         <?php $this->load->view("backend/layout/admin_sidebar_view") ?>
         <!--end::Aside-->
         <!--begin::Wrapper-->
-        <section id="content" class="m-grid__item m-grid__item--fluid m-wrapper">
+        <div id="content" class="m-grid__item m-grid__item--fluid m-wrapper">
             <div class="d-flex d-lg-none align-items-center ms-n3 me-2">
                 <!--begin::Aside mobile toggle-->
                 <div class="btn btn-icon btn-active-icon-primary" id="kt_aside_toggle">
@@ -108,72 +108,72 @@ License: For each use you must have a valid license purchased only from above li
             </div>
             <!--end::Wrapper-->
             <?php $this->load->view($template, $data); ?>
-        </section>
-        <!--end::Wrapper-->
-        <div class="container">
-            <footer class="py-3 my-4 border-top">
-                <div class="d-flex justify-content-center">
-                    <span class="mb-3 mb-md-0 text-muted">© 2023 SOCIAL HEAT</span>
-                </div>
-            </footer>
+            </section>
+            <!--end::Wrapper-->
+            <div class="container">
+                <footer class="py-3 my-4 border-top">
+                    <div class="d-flex justify-content-center">
+                        <span class="mb-3 mb-md-0 text-muted">© 2023 SOCIAL HEAT</span>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </div>
-    <!--begin::Scrolltop-->
-    <div id="kt_scrolltop" class="scrolltop btn-scroll" data-kt-scrolltop="true">
-        <i class="ki-duotone ki-arrow-up">
-            <span class="path1"></span>
-            <span class="path2"></span>
-        </i>
-    </div>
-    <!--end::Scrolltop-->
-    <!--end::Root-->
-    <!--end::Main-->
-    <!--begin::Javascript-->
-    <script>
-        var hostUrl = "/assets/demo3/";
-    </script>
-    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+        <!--begin::Scrolltop-->
+        <div id="kt_scrolltop" class="scrolltop btn-scroll" data-kt-scrolltop="true">
+            <i class="ki-duotone ki-arrow-up">
+                <span class="path1"></span>
+                <span class="path2"></span>
+            </i>
+        </div>
+        <!--end::Scrolltop-->
+        <!--end::Root-->
+        <!--end::Main-->
+        <!--begin::Javascript-->
+        <script>
+            var hostUrl = "/assets/demo3/";
+        </script>
+        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 
-    <!--end::Global Javascript Bundle-->
-    <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="/assets/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-    <script src="/assets/demo3/plugins/custom/datatables/datatables.bundle.js"></script>
-    <!--end::Vendors Javascript-->
-    <!--begin::Custom Javascript(used for this page only)-->
-    <script src="/assets/demo3/js/widgets.bundle.js"></script>
-    <script src="/assets/demo3/js/custom/widgets.js"></script>
-    <script src="/assets/demo3/js/custom/apps/chat/chat.js"></script>
-    <script src="/assets/demo3/js/custom/utilities/modals/users-search.js"></script>
-    <script>
-        $.fn.dataTable.ext.errMode = 'none';
-        $('[data-toggle="tooltip"]').tooltip();
+        <!--end::Global Javascript Bundle-->
+        <!--begin::Vendors Javascript(used for this page only)-->
+        <script src="/assets/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+        <script src="/assets/demo3/plugins/custom/datatables/datatables.bundle.js"></script>
+        <!--end::Vendors Javascript-->
+        <!--begin::Custom Javascript(used for this page only)-->
+        <script src="/assets/demo3/js/widgets.bundle.js"></script>
+        <script src="/assets/demo3/js/custom/widgets.js"></script>
+        <script src="/assets/demo3/js/custom/apps/chat/chat.js"></script>
+        <script src="/assets/demo3/js/custom/utilities/modals/users-search.js"></script>
+        <script>
+            $.fn.dataTable.ext.errMode = 'none';
+            $('[data-toggle="tooltip"]').tooltip();
 
-        $('.read_more').click(function(e) {
-            e.preventDefault();
-            var content = $(this).parent().find('.item-content-read-less');
-            if (content.hasClass('read-less')) {
-                content.removeClass('read-less')
-                content.addClass('read-more');
-                $(this).text('Read less');
-            } else {
-                content.removeClass('read-more')
-                content.addClass('read-less');
-                $(this).text('Read more');
-            }
-        });
-    </script>
-    <script>
-        $('.showData').click(function(e) {
-            let dataDecode = $(this).data('decode');
-            $(this).text(dataDecode);
-        })
-    </script>
-    <!-- /Script -->
-    <!-- <?php //$this->load->view('/backend/layout/script_chart'); 
-            ?> -->
-    <?php $this->load->view('/backend/layout/script'); ?>
-    <!--end::Custom Javascript-->
-    <!--end::Javascript-->
+            $('.read_more').click(function(e) {
+                e.preventDefault();
+                var content = $(this).parent().find('.item-content-read-less');
+                if (content.hasClass('read-less')) {
+                    content.removeClass('read-less')
+                    content.addClass('read-more');
+                    $(this).text('Read less');
+                } else {
+                    content.removeClass('read-more')
+                    content.addClass('read-less');
+                    $(this).text('Read more');
+                }
+            });
+        </script>
+        <script>
+            $('.showData').click(function(e) {
+                let dataDecode = $(this).data('decode');
+                $(this).text(dataDecode);
+            })
+        </script>
+        <!-- /Script -->
+        <!-- <?php //$this->load->view('/backend/layout/script_chart'); 
+                ?> -->
+        <?php $this->load->view('/backend/layout/script'); ?>
+        <!--end::Custom Javascript-->
+        <!--end::Javascript-->
 </body>
 <!--end::Body-->
 

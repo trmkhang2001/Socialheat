@@ -32,19 +32,49 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 	table tbody td div {
 		width: fit-content !important;
 		font-size: 13px;
-		text-align: center;
 	}
 
 	.table td {
 		white-space: nowrap;
 	}
 
-	.list-inline-item {
-		display: block;
+	.hidden {
+		display: none;
 	}
+
+	/* .list-inline-item {
+		display: inline-block;
+		margin-right: 10px;
+	}
+
+	.list-inline-item:nth-child(4n) {
+		margin-right: 0;
+		display: block;
+	} */
 
 	.table tbody td div {
 		text-align: left;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+
+	}
+
+	li {
+		box-sizing: border-box;
+		/* Đảm bảo rằng khoảng cách và padding không làm tăng kích thước */
+	}
+
+	.read-less {
+		max-height: 34px;
+		margin-bottom: 0;
+		overflow: hidden;
+	}
+
+	.read-more {
+		max-height: none;
 	}
 </style>
 <!--begin::Content-->
@@ -92,7 +122,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 									Result
 								</h1>
 								<!--end::Title-->
-								<span>Total: <b><?= number_format($total) ?> </b> interactions</span>
+								<span class="p-3">Total: <b><?= number_format($total) ?> </b> interactions</span>
 							</div>
 							<?php if ($userInfo['role_id'] === ROLE_ADMIN || $userInfo['role_id'] === ROLE_DOWNLOAD) : ?>
 								<div class="clearfix">
@@ -105,7 +135,7 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 						<!--begin::Table container-->
 						<div class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
 							<!--begin::Table-->
-							<table class="table align-middle table-row-dashed fs-6 gy-5">
+							<table class="table table-row-dashed fs-6 gy-5">
 								<!--begin::Table head-->
 								<thead>
 									<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
@@ -229,9 +259,10 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 																			echo $date; ?></span></span>
 											</td>
 											<td class="form_filters_post text-left ">
-												<div class="d-flex clearfix item-content-read-less">
+												<div id="#more" class="d-flex clearfix item-content-read-less" style="width: 100px;">
 													<?php $this->load->view('/backend/monitoring/item_keywords', ['keywords' => explode(',', $item->keywords)]); ?>
 												</div>
+												<a class="btn p-0 read_more" style="color: blue;">Read more</a>
 											</td>
 											<td>
 												<span class=" me-2 fs--7 "><?php $date = date('d/m/Y', strtotime($item->created_date));
@@ -404,12 +435,21 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 	$('.item-content-read-less').each(function(idx, $element) {
 		var height = this.clientHeight;
 		console.log(height)
-		if (height <= 60) {
+		if (height <= 46) {
 			$(this).parent().find('.read_more').addClass('hidden');
 		} else {
 			$(this).addClass('read-less');
 			$(this).parent().find('.read_more').removeClass('hidden');
-
 		}
 	})
+	$('.read_more').click(function(e) {
+		var content = $('.item-content-read-less');
+		if (content.hasClass('read-less')) {
+			content.removeClass('read-less');
+			$(this).text('Read less');
+		} else {
+			content.addClass('read-less');
+			$(this).text('Read more');
+		}
+	});
 </script>

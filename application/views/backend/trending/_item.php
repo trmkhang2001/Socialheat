@@ -84,7 +84,7 @@ if ($typeInfo['name'] != 'Group')
                 <div class="me-12px" style="padding-right: 20px">
                     <div class="symbol symbol-58px symbol-lg-60px symbol-fixed position-relative">
 
-                        <a target="_blank" href="https://facebook.com/102136945917952">
+                        <a target="_blank" href="https://facebook.com/<?= $item->post_id ?>">
                             <img data-src="https://graph.facebook.com/102136945917952/picture?type=normal" width="60" height="60" class="lazy loaded" style="border: solid 1px #d0d0d0;border-radius: .475rem" alt="image" loading="lazy" src="<?= $link_avt ?>" data-ll-status="loaded">
 
                         </a>
@@ -96,7 +96,7 @@ if ($typeInfo['name'] != 'Group')
                     <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
                         <!--begin::title-->
                         <div class="d-flex flex-column" style="width: 70%">
-                            <a href="#" class="text-gray-900 text-hover-primary fs-3 fw-bold me-1 text-limit-length" style="width: 100%"><?= $item->social_name ?></a>
+                            <a target="_blank" href="https://facebook.com/<?= $item->post_id ?>" class="text-gray-900 text-hover-primary fs-3 fw-bold me-1 text-limit-length" style="width: 100%"><?= $item->social_name ?></a>
                             <div class="card-toolbar pt-1">
                                 <span class="badge badge-light fw-bold me-auto px-4 py-3 text-color-D2A68D bg-AE7929">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,19 +155,19 @@ if ($typeInfo['name'] != 'Group')
                 </a>
             </div>
             <div class="d-flex flex-column my-3">
-                <p class="text text-justify-betwen item-content-read-less fs-4"><?= html_entity_decode($item->content) ?></p>
-                <a target="_blank" href="<?= $linkDetail ?>" id="read_more" class="read_more fw-bold">Read more</a>
+                <p class="read-less text-justify-betwen item-content-read-less fs-4"><?= html_entity_decode($item->content) ?></p>
+                <a id="read_more" class="read_more fw-bold">Read more</a>
             </div>
             <!--end::Items-->
             <div class="">
                 <div class="d-flex justify-content-start flex-row mt-2">
                     <span class="fw-bold me-5"> <i class="fa-solid fa-thumbs-up pe-2"></i><?= $item->total_like ?: 0 ?></span>
                     <span class="fw-bold me-5"><i class="fa-solid fa-comment pe-2"></i><?= $item->total_comment ?: 0 ?></span>
-                    <span class="fw-bold"><i class="fa-solid fa-users pe-2"></i><?= $item->count_like_share ?: 0 ?> </span>
+                    <span class="fw-bold"><i class="fa-solid fa-users pe-2"></i><?= $item->count_d ?: 0 ?> </span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center flex-row mt-2">
                     <span class="text-muted">Update: <?php echo date('d/m/Y', strtotime($item->craw_date)); ?></span>
-                    <a href="" class="btn btn-primary" style="background-color: #3633DB;">Add Analytis</a>
+                    <a target="_blank" href="<?= $linkDetail ?>" class="btn btn-primary" style="background-color: #3633DB;">Add Analytis</a>
                 </div>
             </div>
         </div>
@@ -176,3 +176,25 @@ if ($typeInfo['name'] != 'Group')
     </div>
     <!--end::Chart widget 30-->
 </div>
+<script>
+    // $('.item-content-read-less').each(function(idx, $element) {
+    //     var height = this.clientHeight;
+    //     console.log(height)
+    //     if (height <= 46) {
+    //         $(this).parent().find('.read_more').addClass('hidden');
+    //     } else {
+    //         $(this).addClass('read-less');
+    //         $(this).parent().find('.read_more').removeClass('hidden');
+    //     }
+    // })
+    // $('.read_more').click(function(e) {
+    //     var content = $('.item-content-read-less');
+    //     if (content.hasClass('read-less')) {
+    //         content.removeClass('read-less');
+    //         $(this).text('Read less');
+    //     } else {
+    //         content.addClass('read-less');
+    //         $(this).text('Read more');
+    //     }
+    // });
+</script>

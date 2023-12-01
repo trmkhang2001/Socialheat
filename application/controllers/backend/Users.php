@@ -79,10 +79,12 @@ class Users extends BackendController
 		$model = BusinessUser::getModel();
 		$data = $this->input->post($model::$fields, TRUE);
 		$id = $this->input->post('id', TRUE);
-		$data['expire_date'] = date($this->input->post('expire_date', TRUE));
 		if ($_POST && $data) {
 			if (!empty($data['password'])) {
 				$data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+			}
+			if ($data['expire_date'] == NULL) {
+				unset($data['expire_date']);
 			}
 			if ($id > 0) {
 				$data['updated_date'] = date('Y-m-d H:i:s');
@@ -93,7 +95,6 @@ class Users extends BackendController
 				$data['status'] = STATUS_ACTIVE;
 				$res = BusinessUser::getInstance()->save($data, TRUE);
 			}
-			// var_dump($res);
 			$this->result = $res;
 			$this->response();
 		}
@@ -109,9 +110,8 @@ class Users extends BackendController
 				'status'       => STATUS_DELETE
 			);
 			$res = BusinessUser::getInstance()->delete($id, $data);
-			if ($res['success']) {
-				$this->index();
-			}
+			$this->result = $res;
+			$this->response();
 		}
 	}
 }

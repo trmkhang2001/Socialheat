@@ -53,7 +53,11 @@ $roles = $params['user_role'];
                                     <select name="role_id" class="form-select">
                                         <option value="">Chọn</option>
                                         <?php foreach ($roles as $role) : ?>
-                                            <option value="<?php echo $role['id'] ?>"><?php echo $role['name'] ?></option>
+                                            <?php $selected = '';
+                                            if ($role['id'] === $item->role_id) {
+                                                $selected = 'selected';
+                                            } ?>
+                                            <option value="<?php echo $role['id'] ?>" <?php echo $selected ?>><?php echo $role['name'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <i class="arrow"></i>
@@ -64,7 +68,7 @@ $roles = $params['user_role'];
                         <div class="mb-3 row my-5">
                             <label class="col-sm-2 control-label fw-bold">Ngày hết hạn</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="expire_date" name="birthday">
+                                <input type="date" class="form-control" id="expire_date" name="expire_date" value="<?= $item->expire_date ? date("yy-m-d", strtotime($item->expire_date)) : 0 ?>">
                             </div>
                         </div>
                         <div class="mb-3 row my-5">
