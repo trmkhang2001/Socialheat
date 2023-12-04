@@ -89,6 +89,8 @@ $roles = $params['user_role'];
                             <!--begin:Menu item-->
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/keywords"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Keyword</span></a><!--end:Menu link-->
                             </div><!--end:Menu item--><!--begin:Menu item-->
+                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/crm"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">CRM Phone</span></a><!--end:Menu link-->
+                            </div>
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/users"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">User
                                         Managment</span></a><!--end:Menu link--></div>
                             <!--end:Menu item--><!--begin:Menu item-->

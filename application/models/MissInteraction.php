@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 class MissInteraction extends MyModel
@@ -8,13 +9,15 @@ class MissInteraction extends MyModel
      * Use singleton pattern
      * @return MissInteraction object
      */
-    static public function getInstance(){
+    static public function getInstance()
+    {
         if (self::$_instance === NULL) {
             self::$_instance = new self();
         }
         return self::$_instance;
     }
-    static public function clearInstance(){
+    static public function clearInstance()
+    {
         self::$_instance = null;
     }
     public static function tableName()
@@ -23,5 +26,4 @@ class MissInteraction extends MyModel
     }
 
     public static $fields = NULL;
-
 }

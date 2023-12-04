@@ -1,46 +1,66 @@
-<div class="card-toolbar">
-    <!--begin::Menu-->
-    <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-        <i class="ki-duotone ki-category fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i></button>
-    <!--begin::Menu 1-->
-    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_6569979459f73" style="">
-        <!--begin::Header-->
-        <div class="px-7 py-5">
-            <div class="fs-5 text-gray-900 fw-bold">Popup User</div>
-        </div>
-        <!--end::Header-->
-        <!--begin::Menu separator-->
-        <div class="separator border-gray-200"></div>
-        <!--end::Menu separator-->
-        <!--begin::Form-->
-        <div class="px-7 py-5">
-            <!--begin::Input group-->
-            <div class="">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>abc</td>
-                            <td>abc</td>
-                            <td>abc</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!--end::Input group-->
+<?php
+?>
+<!-- Modal User  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User Tương Tác</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <!--begin::Actions-->
-            <div class="d-flex justify-content-end">
-                paginations
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <!--begin::Table-->
+                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                        <!--begin::Table head-->
+                        <thead>
+                            <tr class="fw-bold text-muted">
+                                <th>
+                                    NO.
+                                </th>
+                                <th>Avatar</th>
+                                <th>Uid</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>1.</span>
+                                </td>
+                                <td>
+                                    <a href="https://facebook.com/100004882509279" class="symbol symbol-50px me-4" target="_blank">
+                                        <img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/100004882509279/picture?type=large&amp;width=500&amp;height=500&amp;access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
+                                    </a>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-start flex-column">
+                                        <a href="https://facebook.com/100004882509279">
+                                            <span class="text-dark fw-bold text-hover-primary fs-6">100004882509279</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                        <div class="dataTables_paginate paging_simple_numbers" id="kt_ecommerce_report_views_table_paginate">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--end::Actions-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
-        <!--end::Form-->
     </div>
-    <!--end::Menu 1--> <!--end::Menu-->
 </div>

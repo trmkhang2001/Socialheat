@@ -8,21 +8,10 @@
  * @var $userInfo
  *
  */
-$name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietnam", "#suaensure");
 ?>
 <style>
 	.actions ul li {
 		margin-bottom: 10px;
-	}
-
-	.m-content .panel {
-		-webkit-box-shadow: 1px 2px 0 #e5eaee;
-		box-shadow: 1px 2px 0 #e5eaee;
-		padding: 25px;
-	}
-
-	.m-content .text-system {
-		display: block;
 	}
 
 	.m--img-rounded {
@@ -42,16 +31,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 		display: none;
 	}
 
-	/* .list-inline-item {
-		display: inline-block;
-		margin-right: 10px;
-	}
-
-	.list-inline-item:nth-child(4n) {
-		margin-right: 0;
-		display: block;
-	} */
-
 	.table tbody td div {
 		text-align: left;
 	}
@@ -59,7 +38,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 	ul {
 		display: flex;
 		flex-wrap: wrap;
-
 	}
 
 	li {
@@ -78,8 +56,8 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 	}
 </style>
 <!--begin::Content-->
-<div class="content d-flex flex-column flex-row-fluid" id="kt_content">
-	<div class="container-fluid" id="kt_content_container">
+<div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
+	<div class="container-fluid">
 		<!--begin::Container-->
 		<h1 class="mb-7">Interactions</h1>
 		<!--begin::Form filter-->
@@ -161,7 +139,14 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 													<a style="margin-right: 15px;" target="_blank" href="https://facebook.com/<?= $item->uid ?>">
 														<img style="width:40px;" class="m--img-rounded " src="<?= sprintf('https://graph.facebook.com/%s/picture?type=square&access_token=%s', $item->uid, $tokenFb) ?>">
 													</a>
-													<a target="_blank" href="https://facebook.com/<?= $item->uid ?>" class="text-gray-800 text-hover-primary fw-bold"><?= $item->name ?></a>
+													<div class="d-flex flex-column">
+														<a target="_blank" href="https://facebook.com/<?= $item->uid ?>" class="text-gray-800 text-hover-primary fw-bold fs-4"><?= $item->name ?></a>
+														<div class="card-toolbar pt-1">
+															<span class="badge badge-light fw-bold me-auto px-4 py-3 text-color-D2A68D bg-AE7929">
+																<span class="uid"></span><span class="text-limit-length"><?= $item->uid ?></span>
+															</span>
+														</div>
+													</div>
 												</div>
 											</td>
 											<td>
@@ -276,7 +261,6 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 							<!--end::Table-->
 						</div>
 						<!--end::Table container-->
-
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
@@ -285,14 +269,10 @@ $name = array("Ensure Gold", "#ensureGold", "#ensurevietnam", "#ensuregoldvietna
 							</div>
 						</div>
 					</div>
-					<!-- <div class="clearfix my-15">
-					</div> -->
 				</div>
 			</div>
-
 		</div>
 	</div>
-</div>
 </div>
 
 <script>

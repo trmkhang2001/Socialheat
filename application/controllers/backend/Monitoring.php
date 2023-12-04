@@ -1,5 +1,6 @@
 <?php
 
+use app\common\business\BusinessCRM;
 use app\common\utilities\Common;
 use app\common\utilities\GoogleCloudStorage;
 use app\common\utilities\Pagination;
@@ -8,8 +9,10 @@ use app\common\business\BusinessItem;
 use app\common\business\BusinessXpath;
 use app\models\User;
 use app\common\business\BusinessInteraction;
+use app\common\business\BusinessMissInteraction;
 use app\common\business\BusinessSocialItem;
 use app\common\business\BusinessUser;
+use app\models\CRM;
 
 class Monitoring extends BackendController
 {
@@ -64,7 +67,20 @@ class Monitoring extends BackendController
         $this->temp['data']['colorBg'] = $colorBg;
         $this->temp['template'] = 'backend/monitoring/index';
     }
-
+    public function getMissInteraction($item_id, $itemPerPage = ITEM_PER_PAGE_14)
+    {
+        $itemPerPage = ITEM_PER_PAGE_14;
+        $conditions = array();
+        $conditions[] = array(sprintf('i.%s', 'item_id') => $item_id);
+        $page = intval($this->input->get('page', TRUE));
+        $offset = $page ? $itemPerPage * ($page - 1) : 0;
+        $missinteraction = BusinessMissInteraction::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
+        $total = BusinessMissInteraction::getInstance()->getCount($conditions);
+        $pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
+        $data['missinteraction'] = $missinteraction;
+        $data['misspagination'] = $pagination;
+        return $data;
+    }
 
     private function getConditions()
     {
@@ -93,7 +109,6 @@ class Monitoring extends BackendController
 
         return $conditions;
     }
-
     public function detail($postId)
     {
         $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
@@ -105,8 +120,8 @@ class Monitoring extends BackendController
             redirect(site_url('/backend/monitoring/index'));
         }
         $data['content'] = (array)$item;
-        $fileName = "$item->post_id.json";
-        // $fileName = "328271959776006.json";
+        // $fileName = "$item->post_id.json";
+        $fileName = "328271959776006.json";
         $fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
         $profiles = [];
         $page = $this->input->get('page', TRUE);
@@ -117,8 +132,14 @@ class Monitoring extends BackendController
         }
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $count = $itemPerPage + $offset;
+        $crm = BusinessCRM::getInstance()->getAllPhone();
         foreach ($fileContent as $index => $profile) {
             if ($index >= $offset && $index < $count) {
+                if (in_array($profile['phone'], $crm, TRUE)) {
+                    $profile['crm'] = TRUE;
+                } else {
+                    $profile['crm'] = FALSE;
+                }
                 $profiles[] = $profile;
             }
             if ($index > $count) {

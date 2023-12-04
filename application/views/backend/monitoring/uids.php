@@ -203,7 +203,10 @@
 
 							<div class="m-portlet m-portlet--mobile">
 								<div class="m-portlet__head mb-10">
-									<div class="m-portlet__head-tools d-flex justify-content-end">
+									<div class="m-portlet__head-tools d-flex justify-content-between">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											User Tương Tác
+										</button>
 										<?php if (in_array($userInfo['role_id'], [ROLE_ADMIN, ROLE_DOWNLOAD], FALSE)) : ?>
 
 											<a href="/backend/monitoring/downloads/<?= $content['id'] ?>" class="btn btn-secondary m-btn m-btn--custom m-btn--icon m-btn--air btn-export group-export-csv can-export">
@@ -214,7 +217,7 @@
 											</a>
 										<?php endif; ?>
 									</div>
-
+									<?php $this->load->view('/backend/monitoring/popup_user') ?>
 								</div>
 
 								<div class="m-portlet__body">
@@ -274,7 +277,9 @@
 																								<img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $interaction['uid'] ?>/picture?type=large&width=500&height=500&access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
 																							</a>
 																							<a target="_blank" href="https://facebook.com/<?= $interaction['uid'] ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?= $interaction['name'] ?></a>
-
+																							<?php if ($interaction['crm']) { ?>
+																								<span class="ps-3" style="color: red;">(CRM)</span>
+																							<?php } ?>
 																						</div>
 																					</td>
 																					<td>

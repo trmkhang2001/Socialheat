@@ -55,7 +55,6 @@
         display: inline-block;
     }
 </style>
-<!-- Dashboard -->
 <div class="content d-flex flex-column flex-row-fluid p-0" id="kt_wrapper">
     <div class="container-fluid">
         <h1 class="mb-5">Ads Trend</h1>
