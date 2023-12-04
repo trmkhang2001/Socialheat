@@ -118,7 +118,7 @@ $types = $params['types'];
 									<th class="min-w-200px">Name</th>
 									<th class="text-start min-w-100px">Audiences Detail</th>
 									<th class="text-start min-w-100px">Type</th>
-									<th class="text-start min-w-100px">Audience Size</th>
+									<!-- <th class="text-start min-w-100px">Audience Size</th> -->
 									<th class="text-start min-w-100px">Status</th>
 									<?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
 										<th class="text-start min-w-100px">Rating</th>
@@ -149,12 +149,9 @@ $types = $params['types'];
 										</td>
 										<td><a class="btn" style="color: white;background: #0b0044;" target="_blank" href="<?php echo 'https://app.thealita.com/' . $item->social_id ?>">Info</a></td>
 										<td class="fw-bold"><?php echo $type['name'] ?></td>
-										<td class="fw-bold">
+										<!-- <td class="fw-bold">
 											105
-											<?php if ($item->image) : ?>
-												<!-- <img src="<?= site_url($item->image) ?>" height="30" width="auto"> -->
-											<?php endif; ?>
-										</td>
+										</td> -->
 										<td class="text-start pe-0 __container">
 											<div id="wrapper">
 												<div class="clasificacion"><input type="radio"><label>★</label><input checked="" type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label></div>
