@@ -5,14 +5,14 @@ namespace app\models;
 /**
  * @property  $email
  */
-class CRM extends MyModel
+class Crm extends MyModel
 {
 
     static protected $_instance = NULL;
 
     /**
      * Use singleton pattern
-     * @return CRM object
+     * @return Crm object
      */
     public static function getInstance()
     {

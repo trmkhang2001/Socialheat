@@ -4,16 +4,15 @@ namespace app\common\business;
 
 use app\common\components\Upload;
 use app\models\CRM;
-use FFI;
 
-class BusinessCRM implements BusinessInterface
+class BusinessCrm implements BusinessInterface
 {
     static protected $_instance = NULL;
 
     /**
      * Use singleton pattern
      *
-     * @return BusinessCRM object
+     * @return BusinessCrm object
      */
     static public function getInstance()
     {

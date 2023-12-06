@@ -1,6 +1,6 @@
 <?php
 
-use app\common\business\BusinessCRM;
+use app\common\business\BusinessCrm;
 use app\common\utilities\Common;
 use app\common\utilities\GoogleCloudStorage;
 use app\common\utilities\Pagination;
@@ -132,7 +132,7 @@ class Monitoring extends BackendController
         }
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $count = $itemPerPage + $offset;
-        $crm = BusinessCRM::getInstance()->getAllPhone();
+        $crm = BusinessCrm::getInstance()->getAllPhone();
         foreach ($fileContent as $index => $profile) {
             if ($index >= $offset && $index < $count) {
                 if (in_array($profile['phone'], $crm, TRUE)) {
