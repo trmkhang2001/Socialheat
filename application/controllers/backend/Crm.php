@@ -25,7 +25,7 @@ class CRM extends BackendController
         $pagination = Pagination::bootstrap($total, '', $itemPerPage);
         $this->temp['data']['items'] = $items;
         $this->temp['data']['pagination'] = $pagination;
-        $this->temp['template'] = 'backend/CRM/index';
+        $this->temp['template'] = 'backend/crm/index';
         $this->render();
     }
 
