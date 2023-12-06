@@ -96,38 +96,40 @@ $roles = $params['user_role'];
         <div class="col-md-12">
             <div class="panel">
                 <div class="p-5">
-                    <table class="table">
-                        <thead>
-                            <tr class="active fs-3 fw-bold">
-                                <th>Họ tên</th>
-                                <th>Email</th>
-                                <th>Phân quyền</th>
-                                <th>Ngày hết hạn</th>
-                                <th width="170">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($users as $user) :
-                                $role = $roles[$user->role_id]
-                            ?>
-                                <tr>
-                                    <td><?php echo $user->name ?></td>
-                                    <td><?php echo $user->email ?></td>
-                                    <td><?php echo $role['name'] ?></td>
-                                    <td><?php if ($user->expire_date) : $date = date('d/m/Y', strtotime($user->expire_date));
-                                            echo $date;
-                                        endif ?></td>
-                                    <td>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item"><a href="/backend/users/update/<?php echo $user->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a></li>
-                                            <li class="list-inline-item"><a href="/backend/users/delete/<?php echo $user->id ?>" class="btn btn-delete btn-danger"><i class="fa-solid fa-trash"></i></a></li>
-                                        </ul>
-                                    </td>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr class="active fs-3 fw-bold">
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Phân quyền</th>
+                                    <th>Ngày hết hạn</th>
+                                    <th width="170">Thao tác</th>
                                 </tr>
-                            <?php endforeach; ?>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($users as $user) :
+                                    $role = $roles[$user->role_id]
+                                ?>
+                                    <tr>
+                                        <td><?php echo $user->name ?></td>
+                                        <td><?php echo $user->email ?></td>
+                                        <td><?php echo $role['name'] ?></td>
+                                        <td><?php if ($user->expire_date) : $date = date('d/m/Y', strtotime($user->expire_date));
+                                                echo $date;
+                                            endif ?></td>
+                                        <td>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="/backend/users/update/<?php echo $user->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a></li>
+                                                <li class="list-inline-item"><a href="/backend/users/delete/<?php echo $user->id ?>" class="btn btn-delete btn-danger"><i class="fa-solid fa-trash"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

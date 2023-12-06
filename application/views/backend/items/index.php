@@ -100,7 +100,7 @@ $types = $params['types'];
 						<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0 mb-3">
 							Tổng số post: <?= number_format($total) ?>
 						</h1>
-						<div class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
+						<div class="table-responsive table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
 							<table class="table align-middle table-row-dashed fs-6 gy-5">
 								<thead>
 									<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">

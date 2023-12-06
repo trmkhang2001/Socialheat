@@ -111,7 +111,7 @@
 							<?php endif; ?>
 						</div>
 						<!--begin::Table container-->
-						<div class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
+						<div class="table table-responsive table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 p-5">
 							<!--begin::Table-->
 							<table class="table table-row-dashed fs-6 gy-5">
 								<!--begin::Table head-->

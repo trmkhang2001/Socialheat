@@ -111,69 +111,71 @@ $types = $params['types'];
 			<div class="col-md-12">
 				<div class="panel">
 					<div class="d-flex p-5">
-						<table class="table align-middle table-row-dashed fs-6 gy-5">
-							<thead>
-								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-									<th class="w-10px pe-2 w-xxl-50px">No.</th>
-									<th class="min-w-200px">Name</th>
-									<th class="text-start min-w-100px">Audiences Detail</th>
-									<th class="text-start min-w-100px">Type</th>
-									<!-- <th class="text-start min-w-100px">Audience Size</th> -->
-									<th class="text-start min-w-100px">Status</th>
-									<?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
-										<th class="text-start min-w-100px">Rating</th>
-									<?php endif ?>
-								</tr>
-							</thead>
-							<tbody class="fw-semibold text-gray-600">
-								<?php
-								$index = 0;
-								foreach ($items as $item) :
-									$type = $types[$item->type];
-									$status = $listStatus[$item->status];
-									$channelInfo = $channelTypes[$item->channel_type];
-								?>
-									<tr>
-										<td><?= $index ?></td>
-										<td>
-											<a class="me-2" href="">
-												<?php
-												if ($type['name'] === 'Group')
-													$img_link = '/assets/images/avartar_group.png';
-												else
-													$img_link = 'https://graph.facebook.com/' . $item->social_id . '/picture?type=square&access_token=' . FB_TOKEN;
-												?>
-												<img class="rounded" style="width: 42px; height:42px;" src="<?= $img_link ?>" alt="">
-											</a>
-											<a class="text-gray-800 text-hover-primary fw-bold" target="_blank" href="<?php echo $channelInfo['link'] . '/' . $item->social_id ?>"><?php echo $item->name ?></a>
-										</td>
-										<td><a class="btn" style="color: white;background: #0b0044;" target="_blank" href="<?php echo 'https://app.thealita.com/' . $item->social_id ?>">Info</a></td>
-										<td class="fw-bold"><?php echo $type['name'] ?></td>
-										<!-- <td class="fw-bold">
-											105
-										</td> -->
-										<td class="text-start pe-0 __container">
-											<div id="wrapper">
-												<div class="clasificacion"><input type="radio"><label>★</label><input checked="" type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label></div>
-											</div>
-										</td>
+						<div class="table-responsive">
+							<table class="table align-middle table-row-dashed fs-6 gy-5">
+								<thead>
+									<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+										<th class="w-10px pe-2 w-xxl-50px">No.</th>
+										<th class="min-w-200px">Name</th>
+										<th class="text-start min-w-100px">Audiences Detail</th>
+										<th class="text-start min-w-100px">Type</th>
+										<!-- <th class="text-start min-w-100px">Audience Size</th> -->
+										<th class="text-start min-w-100px">Status</th>
 										<?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
-											<td class="actions">
-												<a data-bs-toggle="tooltip" data-bs-placement="top" title="Update" href="/backend/socialItems/update/<?php echo $item->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" href="/backend/socialItems/delete/<?php echo $item->id ?>" class="btn btn-delete btn-danger"><i class="ki-outline ki-trash fa-trash-o"></i></a>
-												<?php if ((int)$item->status ===  STATUS_ACTIVE) : ?>
-													<a data-bs-toggle="tooltip" data-bs-placement="top" title="DeActive" href="/backend/socialItems/deactive/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-pause"></i></a>
-												<?php else : ?>
-													<a data-bs-toggle="tooltip" data-bs-placement="top" title="Active" href="/backend/socialItems/active/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-play"></i></a>
-												<?php endif; ?>
-											</td>
+											<th class="text-start min-w-100px">Rating</th>
 										<?php endif ?>
 									</tr>
-								<?php $index++;
-								endforeach; ?>
+								</thead>
+								<tbody class="fw-semibold text-gray-600">
+									<?php
+									$index = 0;
+									foreach ($items as $item) :
+										$type = $types[$item->type];
+										$status = $listStatus[$item->status];
+										$channelInfo = $channelTypes[$item->channel_type];
+									?>
+										<tr>
+											<td><?= $index ?></td>
+											<td>
+												<a class="me-2" href="">
+													<?php
+													if ($type['name'] === 'Group')
+														$img_link = '/assets/images/avartar_group.png';
+													else
+														$img_link = 'https://graph.facebook.com/' . $item->social_id . '/picture?type=square&access_token=' . FB_TOKEN;
+													?>
+													<img class="rounded" style="width: 42px; height:42px;" src="<?= $img_link ?>" alt="">
+												</a>
+												<a class="text-gray-800 text-hover-primary fw-bold" target="_blank" href="<?php echo $channelInfo['link'] . '/' . $item->social_id ?>"><?php echo $item->name ?></a>
+											</td>
+											<td><a class="btn" style="color: white;background: #0b0044;" target="_blank" href="<?php echo 'https://app.thealita.com/' . $item->social_id ?>">Info</a></td>
+											<td class="fw-bold"><?php echo $type['name'] ?></td>
+											<!-- <td class="fw-bold">
+											105
+										</td> -->
+											<td class="text-start pe-0 __container">
+												<div id="wrapper">
+													<div class="clasificacion"><input type="radio"><label>★</label><input checked="" type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label><input type="radio"><label>★</label></div>
+												</div>
+											</td>
+											<?php if ($userInfo['role_id'] === ROLE_ADMIN) : ?>
+												<td class="actions">
+													<a data-bs-toggle="tooltip" data-bs-placement="top" title="Update" href="/backend/socialItems/update/<?php echo $item->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+													<a data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" href="/backend/socialItems/delete/<?php echo $item->id ?>" class="btn btn-delete btn-danger"><i class="ki-outline ki-trash fa-trash-o"></i></a>
+													<?php if ((int)$item->status ===  STATUS_ACTIVE) : ?>
+														<a data-bs-toggle="tooltip" data-bs-placement="top" title="DeActive" href="/backend/socialItems/deactive/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-pause"></i></a>
+													<?php else : ?>
+														<a data-bs-toggle="tooltip" data-bs-placement="top" title="Active" href="/backend/socialItems/active/<?php echo $item->id ?>" class="btn btn-warning "><i class="fa fa-play"></i></a>
+													<?php endif; ?>
+												</td>
+											<?php endif ?>
+										</tr>
+									<?php $index++;
+									endforeach; ?>
 
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
