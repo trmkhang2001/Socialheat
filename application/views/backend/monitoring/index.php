@@ -49,9 +49,9 @@
         <div class="clearfix form-filter m--margin-bottom-10">
             <?php $this->load->view('/backend/monitoring/_item_filters', ['filters' => $filters]) ?>
         </div>
-    </div>
-    <div class="row clearfix text-center" style="display: block">
-        <?= $pagination ?>
+        <div class="row clearfix text-center" style="display: block">
+            <?= $pagination ?>
+        </div>
     </div>
 </div>
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>

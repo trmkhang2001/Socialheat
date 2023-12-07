@@ -48,98 +48,108 @@
         <!--begin::Container-->
         <div class="container-fluid" id="kt_content_container">
             <!-- begin::Row -->
-            <div class="d-flex justify-content-between mb-5">
-                <div class="card w-50 p-5 me-3">
-                    <div class="d-flex">
-                        <div class="">
-                            <img class="me-3" src="/assets/images/icon-total-mentions.png" alt="">
-                            <!--begin::Section-->
-                        </div>
-                        <div class="">
-                            <!--begin::Follower-->
+            <div class="row mb-xl-10 justify-content-between">
+                <div class="col-xxl me-2 mb-2">
+                    <div class="card p-3">
+                        <div class="d-flex">
                             <div class="">
-                                <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Mentions </span>
+                                <img class="me-3" src="/assets/images/icon-total-mentions.png" alt="">
+                                <!--begin::Section-->
                             </div>
-                            <!--end::Follower-->
-                            <!--begin::Number-->
-                            <span class="fw-bold total_number text-gray-800"><?= number_format($totalMentions) ?></span>
-                            <!--end::Number-->
+                            <div class="">
+                                <!--begin::Follower-->
+                                <div class="">
+                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Mentions </span>
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalMentions) ?></span>
+                                <!--end::Number-->
+                            </div>
                         </div>
                     </div>
                     <!--end::Section-->
                 </div>
-                <div class="card w-50 p-5 me-3">
-                    <div class="d-flex">
-                        <div class="">
-                            <img class="me-3" src="/assets/images/icon-total-audience.png" alt="">
-                            <!--begin::Section-->
-                        </div>
-                        <div class="">
-                            <!--begin::Follower-->
+                <div class="col-xxl me-2 mb-2">
+                    <div class="card p-3">
+                        <div class="d-flex">
                             <div class="">
-                                <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Audience </span>
+                                <img class="me-3" src="/assets/images/icon-total-audience.png" alt="">
+                                <!--begin::Section-->
                             </div>
-                            <!--end::Follower-->
-                            <!--begin::Number-->
-                            <span class="fw-bold total_number text-gray-800"><?= number_format($totalAudience) ?></span>
-                            <!--end::Number-->
+                            <div class="">
+                                <!--begin::Follower-->
+                                <div class="">
+                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Audience </span>
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalAudience) ?></span>
+                                <!--end::Number-->
+                            </div>
                         </div>
                     </div>
                     <!--end::Section-->
                 </div>
-                <div class="card w-50 p-5 me-3">
-                    <div class="d-flex">
-                        <div class="">
-                            <img class="me-3" src="/assets/images/icon-total-keywords.png" alt="">
-                            <!--begin::Section-->
-                        </div>
-                        <div class="">
-                            <!--begin::Follower-->
+                <div class="col-xxl me-2 mb-2">
+                    <div class="card p-3">
+                        <div class="d-flex">
                             <div class="">
-                                <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Keywords </span>
+                                <img class="me-3" src="/assets/images/icon-total-keywords.png" alt="">
+                                <!--begin::Section-->
                             </div>
-                            <!--end::Follower-->
-                            <!--begin::Number-->
-                            <span class="total_number fw-bold text-gray-800"><?= number_format($totalKeyword) ?></span>
-                            <!--end::Number-->
+                            <div class="">
+                                <!--begin::Follower-->
+                                <div class="">
+                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Keywords </span>
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="total_number fw-bold text-gray-800"><?= number_format($totalKeyword) ?></span>
+                                <!--end::Number-->
+                            </div>
                         </div>
                     </div>
                     <!--end::Section-->
                 </div>
-                <div class="card w-50 p-5 me-3">
-                    <div class="d-flex">
-                        <div class="">
-                            <img class="me-3" src="/assets/images/icon-total-user-engage.png" alt="">
-                            <!--begin::Section-->
-                        </div>
-                        <div class="">
-                            <!--begin::Follower-->
+                <div class="col-xxl me-2 mb-2">
+                    <div class="card p-3">
+                        <div class="d-flex">
                             <div class="">
-                                <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total User Engage </span>
+                                <img class="me-3" src="/assets/images/icon-total-user-engage.png" alt="">
+                                <!--begin::Section-->
                             </div>
-                            <!--end::Follower-->
-                            <!--begin::Number-->
-                            <span class="fw-bold total_number text-gray-800"><?= number_format($totalEngage) ?></span>
-                            <!--end::Number-->
+                            <div class="">
+                                <!--begin::Follower-->
+                                <div class="">
+                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total User Engage </span>
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalEngage) ?></span>
+                                <!--end::Number-->
+                            </div>
                         </div>
                     </div>
                     <!--end::Section-->
                 </div>
-                <div class="card w-50 p-5 me-3">
-                    <div class="d-flex">
-                        <div class="icon_total">
-                            <i style="color:#6392e3" class="fa-solid fa-database blue me-3 "></i>
-                            <!--begin::Section-->
-                        </div>
-                        <div class="">
-                            <!--begin::Follower-->
-                            <div class="">
-                                <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Data </span>
+                <div class="col-xxl me-2 mb-2">
+                    <div class="card p-3">
+                        <div class="d-flex">
+                            <div class="icon_total">
+                                <i style="color:#6392e3" class="fa-solid fa-database blue me-3 "></i>
+                                <!--begin::Section-->
                             </div>
-                            <!--end::Follower-->
-                            <!--begin::Number-->
-                            <span class="fw-bold total_number text-gray-800"><?= number_format($totalData) ?></span>
-                            <!--end::Number-->
+                            <div class="">
+                                <!--begin::Follower-->
+                                <div class="">
+                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Data </span>
+                                </div>
+                                <!--end::Follower-->
+                                <!--begin::Number-->
+                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalData) ?></span>
+                                <!--end::Number-->
+                            </div>
                         </div>
                     </div>
                     <!--end::Section-->
