@@ -133,19 +133,27 @@ class BusinessCrm implements BusinessInterface
 
     public function getRange($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = '')
     {
-        $dbObj = Crm::getInstance()->find();
+        // $dbObj = Crm::getInstance()->find();
+        // if ($itemPerPage) {
+        //     $dbObj->limit($itemPerPage);
+        // }
+        // $dbObj = Crm::getInstance()->getConditions($conditions, $dbObj);
+        // $dbObj->offset($offset);
+        // return $dbObj;
+        $modelInstance = self::getModel();
+        /**
+         * @var $dbObj \CI_DB_query_builder
+         */
+        $dbObj = $modelInstance::find(FALSE)->order_by($orderBy);
         if ($itemPerPage) {
             $dbObj->limit($itemPerPage);
         }
-        if ($orderBy) {
-            $dbObj->order_by($orderBy);
-        }
-        $dbObj = Crm::getInstance()->getConditions($conditions, $dbObj);
+        $dbObj = $modelInstance->getConditions($conditions, $dbObj);
         $dbObj->offset($offset);
         return $dbObj;
     }
 
-    public function getRangeCache($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = 'id DESC')
+    public function getRangeCache($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = '')
     {
         $name = 'getRangeCache' . http_build_query($conditions) . $offset . $itemPerPage . $orderBy;
         $dbObj = $this->getRange($conditions, $offset, $itemPerPage, $orderBy);
@@ -159,11 +167,27 @@ class BusinessCrm implements BusinessInterface
         return Crm::queryBuilder($name, $dbObj, TRUE);
     }
 
-    public function getCount($conditions = array())
+    public function getCount($conditions = array(), $alias = '')
     {
-        $dbObj = Crm::getInstance()->find();
-        $dbObj = Crm::getInstance()->getConditions($conditions, $dbObj);
-        return $dbObj->count_all_results();
+        $modelInstance = self::getModel();
+        $nameCache = 'getCount' . http_build_query($conditions);
+        $res = $modelInstance::getCache($nameCache);
+        if ($res) {
+            return $res;
+        }
+        /**
+         * @var $dbObj \CI_DB_query_builder
+         */
+        if ($alias) {
+            $dbObj = $modelInstance::find(FALSE, $alias);
+        } else {
+            $dbObj = $modelInstance::find(FALSE);
+        }
+
+        $dbObj = $modelInstance->getConditions($conditions, $dbObj);
+        $number =   $dbObj->count_all_results();
+        $modelInstance::setCache($nameCache, $number, 60 * 60 * 24 * 30);
+        return  $number;
     }
 
     public function findByConditionsCache($conditions)
@@ -173,16 +197,14 @@ class BusinessCrm implements BusinessInterface
         $res = Crm::queryBuilder($name, $dbObj, FALSE);
         return $res;
     }
-    public function getAllPhone()
+    public function getArrayPhone()
     {
-        $name = 'getAllPhone';
-        $dbObj = Crm::getInstance()->find();
-        $res = array();
-        $dbData = Crm::queryBuilder($name, $dbObj, FALSE);
-        if ($dbData) {
-            foreach ($dbData as $data) {
-                $res[] = $data->phone;
-            }
+        $name = 'getArrayPhone';
+        $model  = self::getModel();
+        $dbObj = $model::find(FALSE);
+        $dataObj = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
+        foreach ($dataObj as $data) {
+            $res[] = $data->phone;
         }
         return $res;
     }

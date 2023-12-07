@@ -271,14 +271,14 @@
 																			 */
 																			foreach ($interactions as $interaction) : ?>
 																				<tr>
-																					<td>
+																					<td class="w-25">
 																						<div class="d-flex align-items-center symbol symbol-50px">
 																							<a href="https://facebook.com/<?= $interaction['uid'] ?>" class="symbol symbol-50px me-4" target="_blank">
 																								<img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $interaction['uid'] ?>/picture?type=large&width=500&height=500&access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
 																							</a>
 																							<a target="_blank" href="https://facebook.com/<?= $interaction['uid'] ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?= $interaction['name'] ?></a>
 																							<?php if ($interaction['crm']) { ?>
-																								<span class="ps-3" style="color: red;">(CRM)</span>
+																								<a class="rounded-pill fw-bold p-2 ms-2" style=" color: #FF5E5E;background: #ffd6cc;">Môi Giới</a>
 																							<?php } ?>
 																						</div>
 																					</td>

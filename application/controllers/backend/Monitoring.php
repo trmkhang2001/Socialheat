@@ -131,7 +131,7 @@ class Monitoring extends BackendController
         }
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $count = $itemPerPage + $offset;
-        $crm = BusinessCrm::getInstance()->getAllPhone();
+        $crm = BusinessCrm::getInstance()->getArrayPhone();
         foreach ($fileContent as $index => $profile) {
             if ($index >= $offset && $index < $count) {
                 if (in_array($profile['phone'], $crm, TRUE)) {

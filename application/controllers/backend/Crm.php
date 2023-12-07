@@ -31,15 +31,7 @@ class CRM extends BackendController
 
     private function getConditions()
     {
-        $modelDbSetting = BusinessCrm::getModel();
-        $filterArr = array('phone');
-        $filterConditions = $this->input->get($filterArr, TRUE);
         $conditions = array();
-        foreach ($filterConditions as $key => $condition) {
-            if ($condition === '0' || $condition) {
-                $conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), $key) => $condition);
-            }
-        }
         return $conditions;
     }
 
@@ -62,8 +54,6 @@ class CRM extends BackendController
             if ($id > 0) {
                 $res = BusinessCrm::getInstance()->update($id, $data, TRUE);
             } else {
-                $data['created_date'] = date('Y-m-d H:i:s');
-                $data['status'] = STATUS_ACTIVE;
                 $res = BusinessCrm::getInstance()->save($data, TRUE);
             }
             $this->result = $res;
