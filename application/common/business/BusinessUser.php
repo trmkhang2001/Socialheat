@@ -7,7 +7,7 @@ use app\models\User;
 class BusinessUser implements BusinessInterface
 {
 	static protected $_instance = NULL;
-
+	static $db;
 	/**
 	 * Use singleton pattern
 	 *
@@ -219,15 +219,5 @@ class BusinessUser implements BusinessInterface
 		$dbObj = User::getInstance()->find()->where_in('role_id', $roleIds);
 		$res = User::queryBuilder($name, $dbObj, FALSE);
 		return $res;
-	}
-	public function register($data = array())
-	{
-		$user = User::getInstance()->getByIdAsArray(array('email' => $data['email']));
-		if ($user) {
-			return false;
-		} else {
-			User::getInstance()->save($data);
-			return true;
-		}
 	}
 }
