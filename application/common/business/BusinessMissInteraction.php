@@ -60,19 +60,20 @@ class BusinessMissInteraction implements BusinessInterface
 
     public function getRange($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = '')
     {
-        $dbObj = MissInteraction::getInstance()->find(FALSE);
+        $modelInstance = self::getModel();
+        /**
+         * @var $dbObj \CI_DB_query_builder
+         */
+        $dbObj = $modelInstance::find(FALSE)->order_by($orderBy);
         if ($itemPerPage) {
             $dbObj->limit($itemPerPage);
         }
-        if ($orderBy) {
-            $dbObj->order_by($orderBy);
-        }
-        $dbObj = MissInteraction::getInstance()->getConditions($conditions, $dbObj);
+        $dbObj = $modelInstance->getConditions($conditions, $dbObj);
         $dbObj->offset($offset);
         return $dbObj;
     }
 
-    public function getRangeCache($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = 'id DESC')
+    public function getRangeCache($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = '')
     {
         $name = 'getRangeCache' . http_build_query($conditions) . $offset . $itemPerPage . $orderBy;
         $dbObj = $this->getRange($conditions, $offset, $itemPerPage, $orderBy);

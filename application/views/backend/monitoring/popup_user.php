@@ -1,4 +1,5 @@
 <?php
+// var_dump($missinteractions);
 ?>
 <!-- Modal User  -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -18,7 +19,7 @@
                                 <th>
                                     NO.
                                 </th>
-                                <th>Avatar</th>
+                                <th>Profile</th>
                                 <th>Uid</th>
                                 <th></th>
                             </tr>
@@ -26,26 +27,30 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody>
-                            <tr>
-                                <td>
-                                    <span>1.</span>
-                                </td>
-                                <td>
-                                    <a href="https://facebook.com/100004882509279" class="symbol symbol-50px me-4" target="_blank">
-                                        <img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/100004882509279/picture?type=large&amp;width=500&amp;height=500&amp;access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
-                                    </a>
-                                </td>
-                                <td>
-                                    <div class="d-flex justify-content-start flex-column">
-                                        <a href="https://facebook.com/100004882509279">
-                                            <span class="text-dark fw-bold text-hover-primary fs-6">100004882509279</span>
+                            <?php $index = 0;
+                            foreach ($missinteractions['miss'] as $miss) {
+                                $index++ ?>
+                                <tr>
+                                    <td>
+                                        <span><?= $index ?>.</span>
+                                    </td>
+                                    <td>
+                                        <a href="https://facebook.com/<?= $miss->uid ?>" class="symbol symbol-50px me-4" target="_blank">
+                                            <img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $miss->uid ?>/picture?type=large&amp;width=500&amp;height=500&amp;access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
                                         </a>
-                                    </div>
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-start flex-column">
+                                            <a href="https://facebook.com/100004882509279" target="_blank">
+                                                <span class="text-dark fw-bold text-hover-primary fs-6"><?= $miss->uid ?></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                         <!--end::Table body-->
                     </table>
@@ -54,6 +59,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                         <div class="dataTables_paginate paging_simple_numbers" id="kt_ecommerce_report_views_table_paginate">
+                            <?= $missinteractions['pagination'] ?>
                         </div>
                     </div>
                 </div>

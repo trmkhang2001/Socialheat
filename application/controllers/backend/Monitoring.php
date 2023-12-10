@@ -13,6 +13,7 @@ use app\common\business\BusinessMissInteraction;
 use app\common\business\BusinessSocialItem;
 use app\common\business\BusinessUser;
 use app\models\CRM;
+use app\models\MissInteraction;
 
 class Monitoring extends BackendController
 {
@@ -67,18 +68,18 @@ class Monitoring extends BackendController
         $this->temp['data']['colorBg'] = $colorBg;
         $this->temp['template'] = 'backend/monitoring/index';
     }
-    public function getMissInteraction($item_id, $itemPerPage = ITEM_PER_PAGE_14)
+    public function getMissInteraction($item_id)
     {
-        $itemPerPage = ITEM_PER_PAGE_14;
-        $conditions = array();
-        $conditions[] = array(sprintf('i.%s', 'item_id') => $item_id);
+        $itemPerPage = ITEM_PER_PAGE_5;
+        $modelDbSetting = BusinessMissInteraction::getModel();
+        $conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), 'item_id') => $item_id);
         $page = intval($this->input->get('page', TRUE));
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $missinteraction = BusinessMissInteraction::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
         $total = BusinessMissInteraction::getInstance()->getCount($conditions);
-        $pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
-        $data['missinteraction'] = $missinteraction;
-        $data['misspagination'] = $pagination;
+        $pagination = Pagination::bootstrap($total, '', $itemPerPage);
+        $data['miss'] = $missinteraction;
+        $data['pagination'] = $pagination;
         return $data;
     }
 
@@ -120,7 +121,8 @@ class Monitoring extends BackendController
             redirect(site_url('/backend/monitoring/index'));
         }
         $data['content'] = (array)$item;
-        $fileName = "$item->post_id.json";
+        $fileName = "328271959776006.json";
+        // $fileName = "$item->post_id.json";
         $fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
         $profiles = [];
         $page = $this->input->get('page', TRUE);
@@ -131,10 +133,12 @@ class Monitoring extends BackendController
         }
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $count = $itemPerPage + $offset;
-        $crm = BusinessCrm::getInstance()->getArrayPhone();
+        $conditions = array();
+        $crm = BusinessCrm::getInstance()->getRangeCache($conditions);
+        $phoneValues = array_column($crm, 'phone');
         foreach ($fileContent as $index => $profile) {
             if ($index >= $offset && $index < $count) {
-                if (in_array($profile['phone'], $crm, TRUE)) {
+                if (in_array($profile['phone'], $phoneValues, TRUE)) {
                     $profile['crm'] = TRUE;
                 } else {
                     $profile['crm'] = FALSE;
@@ -144,7 +148,9 @@ class Monitoring extends BackendController
             if ($index > $count) {
                 break;
             }
-        }
+        };
+        $missinteractions = $this->getMissInteraction($item->id);
+        $data['missinteractions'] = $missinteractions;
         $total['totalMail'] = !empty($item->totalMail) ? $item->totalMail : 0;
         $total['totalLocation'] = !empty($item->totalLocation) ? $item->totalLocation : 0;
         $total['totalRelationship'] = !empty($item->totalRelationship) ? $item->totalRelationship : 0;

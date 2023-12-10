@@ -86,10 +86,6 @@ class BusinessCrm implements BusinessInterface
 
     public function save($data = array(), $runValidation = TRUE)
     {
-        $validation = $this->validateForm($data);
-        if (($validation['validation'])) {
-            return $validation;
-        }
         Crm::getInstance()->save($data);
         $res = array(
             'success' => TRUE,
@@ -122,7 +118,6 @@ class BusinessCrm implements BusinessInterface
 
     public function delete($id, $data)
     {
-        //User::getInstance()->delete($id);
         Crm::getInstance()->delete($id, $data);
         $res = array(
             'success' => TRUE,
@@ -133,13 +128,6 @@ class BusinessCrm implements BusinessInterface
 
     public function getRange($conditions = array(), $offset = 0, $itemPerPage = 0, $orderBy = '')
     {
-        // $dbObj = Crm::getInstance()->find();
-        // if ($itemPerPage) {
-        //     $dbObj->limit($itemPerPage);
-        // }
-        // $dbObj = Crm::getInstance()->getConditions($conditions, $dbObj);
-        // $dbObj->offset($offset);
-        // return $dbObj;
         $modelInstance = self::getModel();
         /**
          * @var $dbObj \CI_DB_query_builder
@@ -195,17 +183,6 @@ class BusinessCrm implements BusinessInterface
         $name = 'findByConditionsCache' . http_build_query($conditions);
         $dbObj = Crm::findByConditions($conditions);
         $res = Crm::queryBuilder($name, $dbObj, FALSE);
-        return $res;
-    }
-    public function getArrayPhone()
-    {
-        $name = 'getArrayPhone';
-        $model  = self::getModel();
-        $dbObj = $model::find(FALSE);
-        $dataObj = $model::queryBuilder($name, $dbObj, FALSE, 24 * 60 * 60 * 7);
-        foreach ($dataObj as $data) {
-            $res[] = $data->phone;
-        }
         return $res;
     }
 }
