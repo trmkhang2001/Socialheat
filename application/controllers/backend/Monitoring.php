@@ -118,8 +118,8 @@ class Monitoring extends BackendController
             redirect(site_url('/backend/monitoring/index'));
         }
         $data['content'] = (array)$item;
-        // $fileName = "328271959776006.json";
-        $fileName = "$item->post_id.json";
+        $fileName = "328271959776006.json";
+        // $fileName = "$item->post_id.json";
         $fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
         $profiles = [];
         $page = $this->input->get('page', TRUE);
@@ -130,22 +130,21 @@ class Monitoring extends BackendController
         }
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $count = $itemPerPage + $offset;
-        $conditions = array();
-        $crm = BusinessCrm::getInstance()->getRangeCache($conditions);
-        $phoneValues = array_column($crm, 'phone');
+        $phone = [];
         foreach ($fileContent as $index => $profile) {
             if ($index >= $offset && $index < $count) {
-                if (in_array($profile['phone'], $phoneValues, TRUE)) {
-                    $profile['crm'] = TRUE;
-                } else {
-                    $profile['crm'] = FALSE;
-                }
                 $profiles[] = $profile;
+                $phone[] = $profile['phone'];
             }
             if ($index > $count) {
                 break;
             }
         };
+        if (empty($phone)) {
+            $crm = [];
+        } else {
+            $crm = BusinessCrm::getInstance()->findByMultiplePhone($phone);
+        }
         $missinteractions = $this->getMissInteraction($item->id);
         $data['missinteractions'] = $missinteractions;
         $total['totalMail'] = !empty($item->totalMail) ? $item->totalMail : 0;
@@ -155,6 +154,7 @@ class Monitoring extends BackendController
         $pagination = Pagination::bootstrap($item->count_d, '', $itemPerPage, 'page', 5);
         $data['interactions'] = $profiles;
         $data['pagination'] = $pagination;
+        $data['crm'] = $crm;
         $this->temp['colorBg'] = $colorBg;
         $this->temp['page_title'] = 'Detail item';
         $this->temp['data'] = $data;

@@ -1,5 +1,3 @@
-<?php
-?>
 <style>
     .btnhidden {
         display: none;
@@ -40,7 +38,7 @@
                                     </td>
                                     <td>
                                         <a href="https://facebook.com/<?= $miss->uid ?>" class="symbol symbol-50px me-4" target="_blank">
-                                            <img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $miss->uid ?>/picture?type=large&amp;width=500&amp;height=500&amp;access_token=2712477385668128|b429aeb53369951d411e1cae8e810640" alt="">
+                                            <img style="width: 40px; height:40px" class="border rounded-pill m--img-rounded m--marginless" src="https://graph.facebook.com/<?= $miss->uid ?>/picture?type=large&amp;width=500&amp;height=500&amp;access_token=<?= FB_TOKEN ?>" alt="">
                                         </a>
                                     </td>
                                     <td>
@@ -64,7 +62,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-back btnhidden">Back</button>
                 <button type="button" class="btn btn-primary btn-next">Next</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-off" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -92,6 +90,9 @@
             $('.btnUserTt').trigger('click');
         }
         // console.log(number_page);
+        $(".btn-off").on("click", function() {
+            window.location = "?page_miss" + number_page;
+        })
         $(".btn-back").on("click", function() {
             number_page--;
             // console.log("back ne", number_page);

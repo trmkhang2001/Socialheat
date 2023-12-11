@@ -185,4 +185,15 @@ class BusinessCrm implements BusinessInterface
         $res = Crm::queryBuilder($name, $dbObj, FALSE);
         return $res;
     }
+    public function findByMultiplePhone($phones)
+    {
+        $name = 'findByMultiplePhone' . http_build_query($phones);
+        $dbObj = Crm::getInstance()->find(FALSE)->where_in('phone', $phones);
+        $dbDatas = Crm::queryBuilder($name, $dbObj, FALSE);
+        $res = [];
+        foreach ($dbDatas as $data) {
+            $res[] = $data->phone;
+        }
+        return $res;
+    }
 }
