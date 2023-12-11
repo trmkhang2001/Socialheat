@@ -118,8 +118,8 @@ class Monitoring extends BackendController
             redirect(site_url('/backend/monitoring/index'));
         }
         $data['content'] = (array)$item;
-        $fileName = "328271959776006.json";
-        // $fileName = "$item->post_id.json";
+        // $fileName = "328271959776006.json";
+        $fileName = "$item->post_id.json";
         $fileContent = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
         $profiles = [];
         $page = $this->input->get('page', TRUE);
