@@ -61,20 +61,6 @@ if ($typeInfo['name'] != 'Group')
     <!--begin::Chart widget 30-->
     <div class="card card-flush h-xl-100">
         <!--begin::Header-->
-        <!-- <div class="card-header pt-7 mb-7">
-            <div class="row">
-                <div class="col-4">
-                    <img class="rounded-circle" style="width: 72px; height: 72px;" src="/assets/images/no_avatar.png" alt="">
-                </div>
-                <div class="col-8">
-                    <div class="align-items-start flex-column">
-                        <a class="fw-bold fs-3"><?= $item->social_name ?></a>
-                        <br>
-                        <span class="rounded text-gray-500 mt-2 fw-semibold fs-6 title_span">Sponspor</span>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <!--end::Header-->
         <!--begin::Body-->
         <div class="card-body d-flex flex-column">

@@ -73,13 +73,10 @@ class Monitoring extends BackendController
         $itemPerPage = ITEM_PER_PAGE_5;
         $modelDbSetting = BusinessMissInteraction::getModel();
         $conditions[] = array(sprintf('%s.%s', $modelDbSetting::tableName(), 'item_id') => $item_id);
-        $page = intval($this->input->get('page', TRUE));
+        $page = intval($this->input->get('page_miss', TRUE));
         $offset = $page ? $itemPerPage * ($page - 1) : 0;
         $missinteraction = BusinessMissInteraction::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
-        $total = BusinessMissInteraction::getInstance()->getCount($conditions);
-        $pagination = Pagination::bootstrap($total, '', $itemPerPage);
         $data['miss'] = $missinteraction;
-        $data['pagination'] = $pagination;
         return $data;
     }
 

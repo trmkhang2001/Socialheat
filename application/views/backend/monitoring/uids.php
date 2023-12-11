@@ -204,7 +204,7 @@
 							<div class="m-portlet m-portlet--mobile">
 								<div class="m-portlet__head mb-10">
 									<div class="m-portlet__head-tools d-flex justify-content-between">
-										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+										<button type="button" class="btn btn-primary btnUserTt" data-bs-toggle="modal" data-bs-target="#exampleModal">
 											User Tương Tác
 										</button>
 										<?php if (in_array($userInfo['role_id'], [ROLE_ADMIN, ROLE_DOWNLOAD], FALSE)) : ?>

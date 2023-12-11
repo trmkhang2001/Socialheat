@@ -1,13 +1,17 @@
 <?php
-// var_dump($missinteractions);
 ?>
+<style>
+    .btnhidden {
+        display: none;
+    }
+</style>
 <!-- Modal User  -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">User Tương Tác</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btnUserTt" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
@@ -56,17 +60,47 @@
                     </table>
                     <!--end::Table-->
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
-                        <div class="dataTables_paginate paging_simple_numbers" id="kt_ecommerce_report_views_table_paginate">
-                            <?= $missinteractions['pagination'] ?>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-back btnhidden">Back</button>
+                <button type="button" class="btn btn-primary btn-next">Next</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var number_page = urlParams.get('page_miss');
+        var show = urlParams.get('show');
+        // console.log(number_page);
+        // console.log(show);
+        var total_miss = <?= json_encode(count($missinteractions['miss'])) ?>;
+        if (number_page == null) {
+            var number_page = 1;
+        } else {
+            var number_page = urlParams.get('page_miss');
+        }
+        if (number_page > 1) {
+            $('.btn-back').removeClass('btnhidden');
+        }
+        if (total_miss < 5) {
+            $('.btn-next').addClass('btnhidden');
+        }
+        if (show == true) {
+            $('.btnUserTt').trigger('click');
+        }
+        // console.log(number_page);
+        $(".btn-back").on("click", function() {
+            number_page--;
+            // console.log("back ne", number_page);
+            window.location.href = "?page_miss=" + number_page + "&show=1";
+        })
+        $(".btn-next").on("click", function() {
+            number_page++;
+            // console.log("next ne", number_page);
+            window.location.href = "?page_miss=" + number_page + "&show=1";
+        })
+    })
+</script>
