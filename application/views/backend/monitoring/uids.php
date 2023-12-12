@@ -218,7 +218,7 @@ $access_token = FB_TOKEN;
 											</a>
 										<?php endif; ?>
 									</div>
-									<?php $this->load->view('/backend/monitoring/popup_user') ?>
+									<?php $this->load->view('/backend/monitoring/popup_user',['missInteractions' => $missInteractions,'pageMissInteractions' => $pageMissInteractions,'itemId' => $content['id']]) ?>
 								</div>
 
 								<div class="m-portlet__body">

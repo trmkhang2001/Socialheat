@@ -14,7 +14,7 @@ $d_count = (int)$item['count_d'];
 if ($count > 0 && $d_count > 0) {
     $ri = number_format(($d_count / $count) * 100, 2);
 }
-$item['from_name'] = word_limiter($item['from_name'], 9, ' ...');
+$item['from_name'] = !empty($item['from_name']) ? word_limiter($item['from_name'], 9, ' ...') : '';
 $item['image_url'] = 'https://storage.googleapis.com/' . $item['image_url'];
 $total_like = (int)$item['total_like'];
 $total_share = (int)$item['total_share'];
