@@ -99,11 +99,16 @@ $keywords = explode(',', $item->keywords);
                         </div>
                     </div>
                 </div>
+                <?php if ($typeInfo['value'] == 2) {
+                    $class_type = 'badge py-3 px-4 fs-3 badge-light-success fw-bold';
+                } else {
+                    $class_type = 'badge py-3 px-4 fs-3 badge-light-primary fw-bold';
+                } ?>
                 <div class="">
-                    <span style="padding: 5px;" class="type_name rounded fw-bold fs-4"><?= $typeInfo['name'] ?></span>
+                    <span style="padding: 5px;" class="<?= $class_type ?>"> <?= $typeInfo['name'] ?></span>
                 </div>
             </div>
-            <div class="d-flex flex-column mt-5 d-flex justify-content-end">
+            <div class=" d-flex flex-column mt-5 d-flex justify-content-end">
                 <div class="d-flex flex-column">
                     <p class="fs-7 fw-bold text text-justify-betwen item-content-read-less _items-post-content content-item" style="margin-bottom:0;overflow: hidden;word-break: break-word;font-size: 13px; color:#5E6278;">
                         <?= html_entity_decode($item->content) ?></p>
@@ -155,7 +160,7 @@ $keywords = explode(',', $item->keywords);
                 <div class="item p-3 <?= $class ?>">
                     <span class="img"><img src="/assets/images/share_icon.png"></span><br>
                     <div class="number fs-1 p-3 mt-3"><?= $item->total_share ?: 0 ?></div><br>
-                    <span class="text-title"><?= $channel_type === CHANNEL_TYPE_TWITTER ? 'Retweet' : 'Share' ?></span>
+                    <span class="text-title"><?= $channel_type === CHANNEL_TYPE_TWITTER ? 'Retweet' : 'SHARE' ?></span>
                 </div>
                 <?php if ($item->channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
                     <div class="item p-3 <?= $class ?> ">

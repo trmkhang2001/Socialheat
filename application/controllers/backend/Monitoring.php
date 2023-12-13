@@ -15,7 +15,8 @@ use app\common\business\BusinessUser;
 use app\models\CRM;
 use app\models\MissInteraction;
 
-class Monitoring extends BackendController {
+class Monitoring extends BackendController
+{
 	public function index()
 	{
 		$itemPerPage = ITEM_PER_PAGE_14;
@@ -34,17 +35,13 @@ class Monitoring extends BackendController {
 		$offset = $page ? $itemPerPage * ($page - 1) : 0;
 		$sort_by = (int)$this->input->get('sort_by', TRUE);
 		$orderBy = 'i.id DESC';
-		if ($sort_by === 1)
-		{
+		if ($sort_by === 1) {
 			$orderBy = 'i.count_d ASC';
-		} elseif ($sort_by === 2)
-		{
+		} elseif ($sort_by === 2) {
 			$orderBy = 'i.count_d DESC';
-		} elseif ($sort_by === 3)
-		{
+		} elseif ($sort_by === 3) {
 			$orderBy = 'i.count ASC';
-		} elseif ($sort_by === 4)
-		{
+		} elseif ($sort_by === 4) {
 			$orderBy = 'i.count DESC';
 		}
 		$items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage, $orderBy);
@@ -89,27 +86,19 @@ class Monitoring extends BackendController {
 		$this->temp['data']['filters'] = $filterConditions;
 		$this->temp['filters'] = $filterConditions;
 		$conditions = array();
-		foreach ($filterConditions as $key => $condition)
-		{
-			if ($condition)
-			{
-				if ($key === 'keyword')
-				{
-					foreach ($condition as $item)
-					{
+		foreach ($filterConditions as $key => $condition) {
+			if ($condition) {
+				if ($key === 'keyword') {
+					foreach ($condition as $item) {
 						$conditions[0][] = $this->getSimpleSearchCondition('i.keywords', $item);
 					}
-				} elseif ($key === 'q')
-				{
+				} elseif ($key === 'q') {
 					$conditions[0][] = $this->getSimpleSearchCondition('i.content', $condition);
-				} elseif ($key === 'to_date')
-				{
+				} elseif ($key === 'to_date') {
 					$conditions[] = array(sprintf('%s', 'i.craw_date <') => $condition . " 23:59:50");
-				} elseif ($key === 'from_date')
-				{
+				} elseif ($key === 'from_date') {
 					$conditions[] = array(sprintf('%s', 'i.craw_date >') => $condition . " 00:00:00");
-				} else
-				{
+				} else {
 					$conditions[] = array(sprintf('i.%s', $key) => $condition);
 				}
 			}
@@ -122,12 +111,10 @@ class Monitoring extends BackendController {
 	{
 		$colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
 		$item = BusinessItem::getInstance()->findByPostId($postId);
-		if (($item->channel_type && $item->channel_type !== CHANNEL_TYPE_FACEBOOK) || ! $item)
-		{
+		if (($item->channel_type && $item->channel_type !== CHANNEL_TYPE_FACEBOOK) || !$item) {
 			show_404('Post id không tồn tại');
 		}
-		if (empty($item))
-		{
+		if (empty($item)) {
 			redirect(site_url('/backend/monitoring/index'));
 		}
 		$data['content'] = (array)$item;
@@ -138,33 +125,32 @@ class Monitoring extends BackendController {
 		$page = $this->input->get('page', TRUE);
 		$limit = $this->input->get('limit', TRUE);
 		$itemPerPage = ITEM_PER_PAGE_10;
-		if ($limit)
-		{
+		if ($limit) {
 			$itemPerPage = $limit;
 		}
 		$offset = $page ? $itemPerPage * ($page - 1) : 0;
 		$count = $itemPerPage + $offset;
 		$phone = [];
-		foreach ($fileContent as $index => $profile)
-		{
-			if ($index >= $offset && $index < $count)
-			{
+		$crm = [];
+		foreach ($fileContent as $index => $profile) {
+			if ($index >= $offset && $index < $count) {
 				$profiles[] = $profile;
 				$phone[] = $profile['phone'];
 			}
-			if ($index > $count)
-			{
+			if ($index > $count) {
 				break;
 			}
 		}
-		$crm = BusinessCrm::getInstance()->findByMultiplePhone($phone);
+		if (!empty($phone)) {
+			$crm = BusinessCrm::getInstance()->findByMultiplePhone($phone);
+		}
 		$missInteractions = $this->_getMissInteraction($item->id);
 		$data['missInteractions'] = $missInteractions['missInteractions'];
 		$data['pageMissInteractions'] = $missInteractions['pagination'];
-		$total['totalMail'] = ! empty($item->totalMail) ? $item->totalMail : 0;
-		$total['totalLocation'] = ! empty($item->totalLocation) ? $item->totalLocation : 0;
-		$total['totalRelationship'] = ! empty($item->totalRelationship) ? $item->totalRelationship : 0;
-		$charts = ! empty($item->charts) ? json_decode($item->charts, TRUE) : [];
+		$total['totalMail'] = !empty($item->totalMail) ? $item->totalMail : 0;
+		$total['totalLocation'] = !empty($item->totalLocation) ? $item->totalLocation : 0;
+		$total['totalRelationship'] = !empty($item->totalRelationship) ? $item->totalRelationship : 0;
+		$charts = !empty($item->charts) ? json_decode($item->charts, TRUE) : [];
 		$pagination = Pagination::bootstrap($item->count_d, '', $itemPerPage, 'page', 5);
 		$data['interactions'] = $profiles;
 		$data['pagination'] = $pagination;
@@ -182,21 +168,18 @@ class Monitoring extends BackendController {
 	public function downloads($id)
 	{
 		$user = $this->userInfo;
-		if ($user['role_id'] !== ROLE_ADMIN && $user['role_id'] !== ROLE_DOWNLOAD)
-		{
+		if ($user['role_id'] !== ROLE_ADMIN && $user['role_id'] !== ROLE_DOWNLOAD) {
 			$this->response(['status' => FALSE, 'msg' => 'Permission denied']);
 		}
 		$item = BusinessItem::getInstance()->findOne($id);
-		if ($item)
-		{
+		if ($item) {
 			$fileName = "$item->post_id.json";
 			$interactions = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
 			$filePath = 'downloads/' . sprintf('SocialHeat-%s.csv', time());
 			$out = fopen($filePath, 'wb');
 			fwrite($out, "\xEF\xBB\xBF");       // Write UTF-8 BOM
 			fputcsv($out, ['Social Profile URL', 'Name', 'Gender', 'Phone', 'Email', 'Location', 'Relationship']);
-			foreach ($interactions as $interaction)
-			{
+			foreach ($interactions as $interaction) {
 				fputcsv(
 					$out,
 					[
@@ -227,15 +210,16 @@ class Monitoring extends BackendController {
 		}
 	}
 
-	public function getItemMissInteraction($itemId){
+	public function getItemMissInteraction($itemId)
+	{
 		$missInteractions = $this->_getMissInteraction($itemId);
 		$res = [
 			'error' => ''
 		];
-		if($missInteractions['missInteractions']){
-			$html = $this->load->view('/backend/monitoring/_miss_item_interactions' ,[
+		if ($missInteractions['missInteractions']) {
+			$html = $this->load->view('/backend/monitoring/_miss_item_interactions', [
 				'missInteractions' => $missInteractions['missInteractions']
-			],TRUE);
+			], TRUE);
 			$res['html'] = $html;
 		}
 		$res['pagination'] = $missInteractions['pagination'];
