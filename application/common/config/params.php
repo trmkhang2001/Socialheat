@@ -103,7 +103,10 @@ define('COMMENT_REPORT_STATUS_PENDING', '0');
 define('COMMENT_REPORT_STATUS_SUCCESS', '1');
 define('COMMENT_REPORT_STATUS_ERROR', '2');
 
-
+//rate brand
+define('POSITIVE', '1');
+define('NEGATIVE', '2');
+define('NEUTRAL', '3');
 
 const BUCKET_NAME_ADSSPY = 'thealita';
 const API_USER_INFO_URL = 'https://api.datalytis.com/';
