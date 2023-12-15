@@ -15,3 +15,20 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
+<Files ~ "\.(jpg|jpeg|png|gif)$">
+   order deny,allow
+   allow from all
+</Files>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+<FilesMatch "\.(json)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+RedirectMatch 404 ^/\.git
+RedirectMatch 404 ^/composer\.(json|lock|phar)$
