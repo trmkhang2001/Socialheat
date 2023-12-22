@@ -24,6 +24,7 @@ class Brand extends MyModel
     {
         return 'brand';
     }
-
-    public static $fields = NULL;
+    public static $fields = array(
+        'item_id', 'keywords', 'rate', 'created_date',
+    );
 }

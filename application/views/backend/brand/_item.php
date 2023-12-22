@@ -151,42 +151,41 @@ foreach ($keywords as $index => $keyword) :
                     <div class="col-xxl-4">
                         <div class="d-flex justify-content-between text-center interaction visible-xl visible-lg hidden-xs hidden-sm hidden-md p-5">
                             <div class="item p-2 d-flex align-items-center">
-                                <?php $none = true;
-                                foreach ($brands as $brand) {
-                                    if ($item->id == $brand->item_id && $keyword == $brand->keywords) {
-                                        $none = false;
-                                        if ($brand->rate === POSITIVE) {
-                                ?>
-                                            <div class="number fs-1 p-3 mt-3 text-primary">POSITIVE</div>
-                                        <?php
-                                            break;
-                                        } elseif ($brand->rate === NEGATIVE) {
-                                        ?>
-                                            <div class="number fs-1 p-3 mt-3 text-danger">NEGATIVE</div>
-                                        <?php
-                                            break;
-                                        } elseif ($brand->rate === NEUTRAL) { ?>
-                                            <div class="number fs-1 p-3 mt-3 text-warning">NEUTRAL</div>
-                                    <?php
-                                            break;
-                                        }
-                                    } else {
-                                        $none = true;
-                                    }
-                                }
-                                if ($none) {
+                                <div class="d-flex flex-column">
+                                    <?php if ($item->rate && $item->rate == POSITIVE) {
                                     ?>
-                                    <div class="number fs-1 p-3 mt-3 text-info">UNKNOWN</div>
-                                <?php
-                                } ?>
+                                        <span class="symbol mb-5"><img src="/assets/images/positive.png" alt=""></span>
+                                        <span class="text-title fs-1 fw-bold text-primary">POSITIVE</span>
+                                    <?php
+                                    } ?>
+                                    <?php if ($item->rate && $item->rate == NEGATIVE) {
+                                    ?>
+                                        <span class="symbol mb-5"><img src="/assets/images/negative.png" alt=""></span>
+                                        <span class="text-title fs-1 fw-bold text-danger">NEGATIVE</span>
+                                    <?php
+                                    } ?>
+                                    <?php if ($item->rate && $item->rate == NEUTRAL) {
+                                    ?>
+                                        <span class="symbol mb-5"><img src="/assets/images/neutral.png" alt=""></span>
+                                        <span class="text-title fs-1 fw-bold text-info">NEUTRAL</span>
+                                    <?php
+                                    } ?>
+                                    <?php if ($item->rate && $item->rate == UNKNOWN) {
+                                    ?>
+                                        <span class="text-title fs-1 fw-bold text-warning">UNKNOWN</span>
+                                    <?php
+                                    } ?>
+                                </div>
                             </div>
                             <div class=""></div>
                             <div class="item p-2 <?= $class ?> ">
+                                <span class="img"><img src="/assets/images/share_icon.png"></span>
                                 <div class="number fs-1 p-3 mt-3 "><?= ($item->total_like + $item->total_comment + $item->total_share) ?: 0 ?></div><br>
                                 <span class="text-title fs-1 fw-bold text-success">ENGAGE</span>
                             </div>
                             <?php if ($item->channel_type === CHANNEL_TYPE_FACEBOOK) : ?>
                                 <div class="item p-2 <?= $class ?> ">
+                                    <span class="img"><img src="/assets/images/like_share_icon.png"></span>
                                     <div class="number fs-1 p-3 mt-3"><?= $item->count_d ?: 0 ?></div><br>
                                     <span class="text-title fs-1 fw-bold text-success">DATA</span>
                                 </div>

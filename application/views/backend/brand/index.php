@@ -50,9 +50,24 @@
         <div class="clearfix form-filter m--margin-bottom-10">
             <?php $this->load->view('/backend/brand/_item_filters', ['filters' => $filters]) ?>
         </div>
-        <div class="row clearfix text-center" style="display: block">
-            <?= $pagination ?>
-        </div>
+        <?php
+        if ($this->session->flashdata('error')) {
+            $error = $this->session->flashdata('error');
+        ?>
+            <div class="card my-5 pe-5">
+                <div class="d-flex justify-content-center p-5">
+                    <span class="fs-1 fw-bold text-danger"><?= $error ?></span>
+                </div>
+            </div>
+        <?php
+        } else {
+        ?>
+            <div class="row clearfix text-center" style="display: block">
+                <?= $pagination ?>
+            </div>
+        <?php
+        }
+        ?>
     </div>
 </div>
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>

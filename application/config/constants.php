@@ -88,5 +88,10 @@ define('ENABLE_QUERY_LOGS', TRUE);
 
 define('API_KEY_DAT_XANH', '880776db-89f5-data-8e18-675a56ce70c4');
 define('API_URL_DAT_XANH', 'http://data.nhadatmarketing.com/submit');
+define('API_URL_CHATGPT', 'https://api.openai.com/v1/chat/completions');
+//key api old
+// define('OPENAI_API_KEY', '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');
+//key api new
+define('OPENAI_API_KEY', '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');
 
 // define('JSON_THROW_ON_ERROR', 4194304);

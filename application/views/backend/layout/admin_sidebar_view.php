@@ -41,7 +41,7 @@ $roles = $params['user_role'];
                 <!-- end -->
                 <!--begin:Menu item Brand Heath-->
                 <div class="menu-item">
-                    <a href="/backend/brand" class="menu-link">
+                    <a href="/backend/BrandHeath" class="menu-link">
                         <!--begin:Menu link--><span class="menu-icon"><i class="fa-brands fa-slack fs-1"></i></span><span class="menu-title">Brand Health</span><!--end:Menu link--><!--begin:Menu sub-->
                     </a>
                 </div>

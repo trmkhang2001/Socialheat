@@ -58,7 +58,6 @@ class Dashboards extends BackendController
 		$interactions = BusinessItem::getInstance()->getTotalInteractionByType();
 		$params = $this->config->config['params'];
 		$charts = [];
-
 		if ($interactions) {
 			$types = $params['types'];
 			foreach ($interactions as $interaction) {

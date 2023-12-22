@@ -13,10 +13,11 @@ use app\common\business\BusinessInteraction;
 use app\common\business\BusinessMissInteraction;
 use app\common\business\BusinessSocialItem;
 use app\common\business\BusinessUser;
+use app\models\Brand;
 use app\models\CRM;
 use app\models\MissInteraction;
 
-class Brand extends BackendController
+class BrandHeath extends BackendController
 {
     public function index()
     {
@@ -46,19 +47,31 @@ class Brand extends BackendController
             $orderBy = 'i.count DESC';
         }
         $items = BusinessItem::getInstance()->getRangeCache($conditions, $offset, $itemPerPage, $orderBy);
-        $item_id = [];
+        $new_items = [];
         foreach ($items as $item) {
-            $item_id[] = $item->id;
+            $keywords = explode(',', $item->keywords);
+            foreach ($keywords as $keyword) {
+                $item->keyword = $keyword;
+                $item->rate = BusinessBrand::getInstance()->findRateByKeywordItemId($item->keyword, $item->id);
+                if (isset($item->rate['error'])) {
+                    $this->session->set_flashdata('error', $item->rate['message']);
+                    $this->session->keep_flashdata('error');
+                    break;
+                } else {
+                    $new_items[] = $item;
+                }
+            }
+            if (isset($item->rate['error'])) {
+                break;
+            }
         }
-        $brands = BusinessBrand::getInstance()->findBrandByMultipleItemId($item_id);
         $total = BusinessItem::getInstance()->getCount($conditions);
         $pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 5);
         $channelTypes = $this->config->config['params']['channel_types'];
         $this->temp['user'] = User::getAuthSession();
         $colorBg = ['#ffd6cc', '#ccf2ff', '#ccffee', '#ffffcc', '#ffd6cc'];
         $this->temp['page_title'] = 'Items list';
-        $this->temp['data']['brands'] = $brands;
-        $this->temp['data']['items'] = $items;
+        $this->temp['data']['items'] = $new_items;
         $this->temp['data']['total'] = $total;
         $this->temp['data']['filters']['sort_by'] = $sort_by;
         $this->temp['data']['keywordColors'] = [];

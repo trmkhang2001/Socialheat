@@ -104,6 +104,7 @@ define('COMMENT_REPORT_STATUS_SUCCESS', '1');
 define('COMMENT_REPORT_STATUS_ERROR', '2');
 
 //rate brand
+define('UNKNOWN', '0');
 define('POSITIVE', '1');
 define('NEGATIVE', '2');
 define('NEUTRAL', '3');
