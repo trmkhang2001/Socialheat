@@ -34,55 +34,6 @@ $roles = $params['user_role'];
                 <!-- end -->
                 <!--begin:Menu item Monitoring-->
                 <div class="menu-item">
-                    <a href="/backend/monitoring" class="menu-link">
-                        <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-graph-up fs-2"></i></span><span class="menu-title">Monitoring</span><!--end:Menu link--><!--begin:Menu sub-->
-                    </a>
-                </div>
-                <!-- end -->
-                <!--begin:Menu item Brand Heath-->
-                <div class="menu-item">
-                    <a href="/backend/BrandHeath" class="menu-link">
-                        <!--begin:Menu link--><span class="menu-icon"><i class="fa-brands fa-slack fs-1"></i></span><span class="menu-title">Brand Health</span><!--end:Menu link--><!--begin:Menu sub-->
-                    </a>
-                </div>
-                <!-- end -->
-                <!-- begin:Menu item Keyword Brand -->
-                <div class="menu-item">
-                    <a href="/backend/KeywordBrand" class="menu-link">
-                        <!--begin:Menu link--><span class="menu-icon"><i class="fa-solid fa-list"></i></span><span class="menu-title">Keyword Brand</span><!--end:Menu link--><!--begin:Menu sub-->
-                    </a>
-                </div>
-                <!-- end -->
-                <!--begin:Menu item Interaction-->
-                <div class="menu-item">
-                    <a href="/backend/interactions" class="menu-link">
-                        <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-like fs-1"></i></span><span class="menu-title">Interaction</span><!--end:Menu link--><!--begin:Menu sub-->
-                    </a>
-                </div>
-                <!-- end -->
-                <!-- begin::Menu item Ads -->
-                <div class="menu-item">
-                    <a href="/backend/trending" class="menu-link">
-                        <!--begin:Menu link--><span class="menu-icon"><i class="fa-brands fa-buysellads fs-1"></i></span><span class="menu-title">Ads</span><!--end:Menu link--><!--begin:Menu sub-->
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a href="/backend/socialItems/clients" class="menu-link">
-                        <!--begin:Menu link--><span class="menu-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g opacity="0.35">
-                                    <path d="M20 14C21.1046 14 22 13.1046 22 12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12C18 13.1046 18.8954 14 20 14Z" stroke="#0B0044" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M20 6C21.1046 6 22 5.10457 22 4C22 2.89543 21.1046 2 20 2C18.8954 2 18 2.89543 18 4C18 5.10457 18.8954 6 20 6Z" stroke="#0B0044" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M20 22C21.1046 22 22 21.1046 22 20C22 18.8954 21.1046 18 20 18C18.8954 18 18 18.8954 18 20C18 21.1046 18.8954 22 20 22Z" stroke="#0B0044" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M4 14C5.10457 14 6 13.1046 6 12C6 10.8954 5.10457 10 4 10C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14Z" stroke="#0B0044" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M6 12H18" stroke="#0B0044" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M18 4H14C12 4 11 5 11 7V17C11 19 12 20 14 20H18" stroke="#0B0044" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </g>
-                            </svg></span><span class="menu-title">Social Audience</span><!--end:Menu link--><!--begin:Menu sub-->
-                    </a>
-                </div>
-                <!-- end::Menu item Ads -->
-                <!--begin:Menu item Monitoring-->
-                <div class="menu-item">
                     <a href="/backend/profile" class="menu-link">
                         <!--begin:Menu link--><span class="menu-icon"><i class="ki-outline ki-user fs-3"></i></span><span class="menu-title">Profile</span><!--end:Menu link--><!--begin:Menu sub-->
                     </a>
@@ -91,27 +42,9 @@ $roles = $params['user_role'];
                     <!-- end -->
                     <div data-kt-menu-trigger="click" class="menu-item mb-3 hover showing"><!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-address-book fs-2"></i></span><span class="menu-title" style="color: var(--bs-gray-700);">Admin</span><span class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/socialItems"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Social Audience</span></a><!--end:Menu link--></div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/items"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Items List</span></a><!--end:Menu link--></div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/groupKeys"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Add Group</span></a><!--end:Menu link--></div>
-                            <!--end:Menu item--><!--begin:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/keywords"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Keyword</span></a><!--end:Menu link-->
-                            </div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/crm"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">CRM Phone</span></a><!--end:Menu link-->
-                            </div>
                             <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/users"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">User
                                         Managment</span></a><!--end:Menu link--></div>
                             <!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/xpath"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Xpath</span></a><!--end:Menu link-->
-                            </div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href="/backend/xpath/token"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title hover-menu-item-text text-gray-600">Config</span></a><!--end:Menu link-->
-                            </div><!--end:Menu item-->
                         </div><!--end:Menu sub-->
                     </div>
                 <?php endif ?>

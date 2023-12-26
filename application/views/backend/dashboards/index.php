@@ -1,13 +1,6 @@
 <?php
 
 /**
- * @var $totalMentions
- * @var $topKeywords
- * @var $totalKeyword
- * @var $totalAudience
- * @var $totalMentions
- * @var $totalEngage
- * @var $totalData
  */
 ?>
 <style>
@@ -59,11 +52,11 @@
                             <div class="">
                                 <!--begin::Follower-->
                                 <div class="">
-                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Mentions </span>
+                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Users </span>
                                 </div>
                                 <!--end::Follower-->
                                 <!--begin::Number-->
-                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalMentions) ?></span>
+                                <span class="fw-bold total_number text-gray-800"><?= number_format($user_total) ?></span>
                                 <!--end::Number-->
                             </div>
                         </div>
@@ -80,74 +73,11 @@
                             <div class="">
                                 <!--begin::Follower-->
                                 <div class="">
-                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Audience </span>
+                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total App </span>
                                 </div>
                                 <!--end::Follower-->
                                 <!--begin::Number-->
-                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalAudience) ?></span>
-                                <!--end::Number-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Section-->
-                </div>
-                <div class="col-xxl me-2 mb-2">
-                    <div class="card p-3">
-                        <div class="d-flex">
-                            <div class="">
-                                <img class="me-3" src="/assets/images/icon-total-keywords.png" alt="">
-                                <!--begin::Section-->
-                            </div>
-                            <div class="">
-                                <!--begin::Follower-->
-                                <div class="">
-                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Keywords </span>
-                                </div>
-                                <!--end::Follower-->
-                                <!--begin::Number-->
-                                <span class="total_number fw-bold text-gray-800"><?= number_format($totalKeyword) ?></span>
-                                <!--end::Number-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Section-->
-                </div>
-                <div class="col-xxl me-2 mb-2">
-                    <div class="card p-3">
-                        <div class="d-flex">
-                            <div class="">
-                                <img class="me-3" src="/assets/images/icon-total-user-engage.png" alt="">
-                                <!--begin::Section-->
-                            </div>
-                            <div class="">
-                                <!--begin::Follower-->
-                                <div class="">
-                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total User Engage </span>
-                                </div>
-                                <!--end::Follower-->
-                                <!--begin::Number-->
-                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalEngage) ?></span>
-                                <!--end::Number-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Section-->
-                </div>
-                <div class="col-xxl me-2 mb-2">
-                    <div class="card p-3">
-                        <div class="d-flex">
-                            <div class="icon_total">
-                                <i style="color:#6392e3" class="fa-solid fa-database blue me-3 "></i>
-                                <!--begin::Section-->
-                            </div>
-                            <div class="">
-                                <!--begin::Follower-->
-                                <div class="">
-                                    <span class="fw-bold fs-6 text-gray-500 fw-bold"> Total Data </span>
-                                </div>
-                                <!--end::Follower-->
-                                <!--begin::Number-->
-                                <span class="fw-bold total_number text-gray-800"><?= number_format($totalData) ?></span>
+                                <span class="fw-bold total_number text-gray-800"><?= number_format($app_total) ?></span>
                                 <!--end::Number-->
                             </div>
                         </div>
@@ -166,8 +96,8 @@
                         <div class="card-header">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Tương tác theo ngày</span>
-                                <span class="text-gray-400 mt-1 fw-bold fs-6">Số lượng bài post và user</span>
+                                <span class="card-label fw-bold text-gray-800">Lượng sử dụng app</span>
+                                <span class="text-gray-400 mt-1 fw-bold fs-6">Số lượng bài user và app</span>
                             </h3>
                             <!--end::Title-->
                         </div>
@@ -195,7 +125,7 @@
                         <div class="card-header">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Tương tác</span>
+                                <span class="card-label fw-bold text-gray-800">Mức độ sử dụng app</span>
                             </h3>
                             <!--end::Title-->
                         </div>
@@ -211,75 +141,6 @@
                 <!--end::Col-->
             </div>
             <!--end::Row-->
-            <!-- begin::Row -->
-            <!--begin::Tables Widget 9-->
-            <div class="card mb-5 mb-xl-10">
-                <!--begin::Header-->
-                <div class="card-header border-0 pt-5">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Top 10 KeyWord of the week</span>
-                    </h3>
-                </div>
-                <!--end::Header-->
-                <!--begin::Body-->
-                <div class="card-body py-3">
-                    <!--begin::Table container-->
-                    <div class="table-responsive">
-                        <!--begin::Table-->
-                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                            <!--begin::Table head-->
-                            <thead>
-                                <tr class="fw-bold text-muted">
-                                    <th class="w-25px">
-                                        NO.
-                                    </th>
-                                    <th class="min-w-500px">Keywords Name</th>
-                                    <th class="min-w-150px">Post</th>
-                                    <th class="min-w-150px">Engage</th>
-                                    <th class="min-w-150px">Data</th>
-                                </tr>
-                            </thead>
-                            <!--end::Table head-->
-                            <!--begin::Table body-->
-                            <tbody>
-                                <?php
-
-                                foreach ($topKeywords as $index =>  $keyword) :
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <span><?php echo number_format($index + 1) ?>.</span>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-start flex-column">
-                                                <a href="/backend/monitoring">
-                                                    <span class="text-dark fw-bold text-hover-primary fs-6"><?php echo $keyword->keywords ?></span>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="text-dark fw-bold text-hover-primary d-block"><?php echo number_format($keyword->number_keyword) ?></span>
-
-                                        </td>
-                                        <td>
-                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($keyword->total_engage) ?></span>
-                                        </td>
-                                        <td>
-                                            <span class="text-muted me-2 fs--7 fw-bold "><?php echo number_format($keyword->total_data ?? 0) ?></span>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                            <!--end::Table body-->
-                        </table>
-                        <!--end::Table-->
-                    </div>
-                    <!--end::Table container-->
-                </div>
-                <!--begin::Body-->
-            </div>
-            <!--end::Tables Widget 9-->
-            <!-- end::Row -->
         </div>
         <!--end::Container-->
     </div>

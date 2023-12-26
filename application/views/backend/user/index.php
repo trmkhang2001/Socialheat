@@ -102,22 +102,29 @@ $roles = $params['user_role'];
                                 <tr class="active fs-3 fw-bold">
                                     <th>Họ tên</th>
                                     <th>Email</th>
-                                    <th>Phân quyền</th>
-                                    <th>Ngày hết hạn</th>
+                                    <th>Key</th>
+                                    <th>App Name</th>
                                     <th width="170">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($users as $user) :
-                                    $role = $roles[$user->role_id]
+                                    $app_name = null;
+                                    if ($user->app_id)
+                                        foreach ($apps as $app) {
+                                            if ($user->app_id == $app->id)
+                                                $app_name = $app->app_name;
+                                        }
                                 ?>
                                     <tr>
                                         <td><?php echo $user->name ?></td>
                                         <td><?php echo $user->email ?></td>
-                                        <td><?php echo $role['name'] ?></td>
-                                        <td><?php if ($user->expire_date) : $date = date('d/m/Y', strtotime($user->expire_date));
-                                                echo $date;
-                                            endif ?></td>
+                                        <td><span class="fw-bold badge badge-blue px-4 showData" data-decode="<?= $user->key ?>">
+                                                <span class="svg-icon svg-icon-5 svg-icon-success ms-n1 me-1" style="color: #5c98ff;">
+                                                    <i class="fa-solid fa-eye fa-beat me-2" style="color: #5c98ff;"></i>Show
+                                                </span>
+                                            </span></td>
+                                        <td><?php echo $app_name ?></td>
                                         <td>
                                             <ul class="list-inline">
                                                 <li class="list-inline-item"><a href="/backend/users/update/<?php echo $user->id ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a></li>

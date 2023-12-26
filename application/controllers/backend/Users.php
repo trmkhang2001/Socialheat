@@ -1,5 +1,6 @@
 <?php
 
+use app\common\business\BusinessApp;
 use app\common\utilities\Common;
 use app\common\business\BusinessUser;
 use app\common\utilities\Pagination;
@@ -15,8 +16,10 @@ class Users extends BackendController
 		$offset = $page ? $itemPerPage * ($page - 1) : 0;
 		$users = BusinessUser::getInstance()->getRangeCache($conditions, $offset, $itemPerPage);
 		$total = BusinessUser::getInstance()->getCount($conditions);
+		$apps = BusinessApp::getInstance()->getRangeCache();
 		$pagination = Pagination::bootstrap($total, '', $itemPerPage, 'page', 3);
 		$this->setBreadcrumbs('Danh sách nhân viên', 'Quản lý');
+		$this->temp['data']['apps'] = $apps;
 		$this->temp['data']['users'] = $users;
 		$this->temp['data']['pagination'] = $pagination;
 		$this->temp['template'] = 'backend/user/index';
