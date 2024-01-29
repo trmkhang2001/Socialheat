@@ -46,6 +46,7 @@ class RoleRight extends MyModel
 				'dashboards/index',
 				'monitoring/index',
 				'monitoring/detail',
+				'monitoring/downloads',
 				'interactions/index',
 				'trending/index',
 				// 'socialitems/index',

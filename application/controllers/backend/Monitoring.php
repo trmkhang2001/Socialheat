@@ -175,6 +175,7 @@ class Monitoring extends BackendController
 		if ($item) {
 			$fileName = "$item->post_id.json";
 			$interactions = GoogleCloudStorage::getDataFileJson($fileName, BUCKET_NAME_ADSSPY);
+			\app\common\components\Upload::mkdirs('downloads');
 			$filePath = 'downloads/' . sprintf('SocialHeat-%s.csv', time());
 			$out = fopen($filePath, 'wb');
 			fwrite($out, "\xEF\xBB\xBF");       // Write UTF-8 BOM
